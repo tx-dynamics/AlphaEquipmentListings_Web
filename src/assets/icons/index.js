@@ -1,0 +1,5 @@
+export { default as authImage } from './authImage.png'
+export { default as logo } from './logo.png'
+export { default as apple } from './apple.png'
+export { default as facebook } from './facebook.png'
+export { default as google } from './google.png'
