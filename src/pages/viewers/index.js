@@ -1,3 +1,6 @@
 export { default as SignIn } from './signIn/SignIn'
 export { default as SignUp } from './signUp/SignUp'
-export { default as OtpScreen } from './otpScreen/otpScreen'
+export { default as OtpScreen } from './otpScreen/OtpScreen'
+export { default as ForgotPassword } from './forgotPassword/ForgotPassword'
+export { default as CreatePassword } from './createPassword/CreatePassword'
+export { default as HomePage } from './homePage/HomePage'

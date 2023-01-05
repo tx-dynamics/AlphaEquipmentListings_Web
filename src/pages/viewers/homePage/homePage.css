@@ -1,0 +1,75 @@
+.alpha-home_page-main_container {
+    display: flex;
+    flex-direction: column;
+    background-color: #F0F0F0;
+    height: 100vh;
+}
+
+.alpha-home_page-container {
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+}
+
+.alpha-home_page-container img {
+    height: 35rem;
+    width: 100%;
+}
+
+.alpha-home_page-auction_top_view {
+    margin-top: 5rem;
+    background-color: #fff;
+    padding-top: 4rem;
+    padding-left: 9rem;
+    padding-bottom: 1rem;
+    padding-right: 9rem;
+}
+
+.alpha-home_page-auction_heading_view {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 2rem;
+}
+
+.alpha-home_page-auction_heading_view h2 {
+    font-family: lato;
+    font-weight: 800;
+    font-size: 3.2rem;
+    line-height: 4rem;
+    color: #F18805;
+}
+
+.alpha-home_page-auction_heading_view div {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 11.3rem;
+    height: 3.9rem;
+    border: 1px solid #F18805;
+    border-radius: 1rem;
+    cursor: pointer;
+}
+
+.alpha-home_page-auction_heading_view h3 {
+    font-family: lato;
+    font-weight: 400;
+    font-size: 1.8rem;
+    line-height: 2rem;
+    color: #F18805;
+}
+
+.alpha_home-page-grid_view {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -3rem;
+}
+
+.alpha_home-page-grid_view_categories {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -2rem;
+    margin-bottom: 1rem;
+}

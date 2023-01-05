@@ -1,2 +1,8 @@
 export { default as TextInput } from './textInput/TextInput'
 export { default as Button } from './button/Button'
+export { default as BlogView } from './blogView/BlogView'
+export { default as NavBar } from './navBar/NavBar'
+export { default as DashboardAuctionView } from './dashboardAuctionView/DashboardAuctionView'
+export { default as DashboardCategoriesView } from './dashboardCategoriesView/DashboardCategoriesView'
+export { default as DashboardSparePartView } from './dashboardSparePartView/DashboardSparePartView'
+export { default as Footer } from './footer/Footer'

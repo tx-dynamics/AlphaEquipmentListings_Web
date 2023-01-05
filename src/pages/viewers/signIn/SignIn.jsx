@@ -21,7 +21,6 @@ export default function SignIn() {
     }
   ]
 
-
   return (
     <div className="alpa-auth-container">
       <div className="alpha-signin-image_view">
@@ -35,14 +34,14 @@ export default function SignIn() {
           <h1>Sign IN</h1>
           <TextInput placeholder={'Enter your user name'} title={'User Name'} />
           <TextInput placeholder={'Enter your password'} title={'Password'} />
-          <div className="alpha-signin-forgot_password_view">
+          <div onClick={() => navigate('/forgotpassword')} className="alpha-signin-forgot_password_view">
             <h3>
               Forget Password? {" "}
               <span style={{ color: '#F18805' }}>Reset Password</span>
             </h3>
           </div>
           <div className="alpha-signin-button-view">
-            <Button>SIGN IN</Button>
+            <Button onClick={() => navigate('/homepage', { replace: true })}>SIGN IN</Button >
           </div>
           <div className="alpha-signin-or_view">
             <h3>OR</h3>

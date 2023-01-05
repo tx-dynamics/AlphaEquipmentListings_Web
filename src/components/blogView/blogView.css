@@ -1,0 +1,51 @@
+.alpha-blog_view {
+  display: flex;
+  background-color: #444444;
+  padding-left: 9.3rem;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  padding-right: 10rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.alpha_phone_email_view {
+  display: flex;
+  align-items: center;
+}
+
+.alpha_phone_email_view div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-right: 3rem;
+}
+
+.alpha_phone_email_view img {
+  width: 2rem;
+  height: 2rem;
+  margin-right: 0.8rem;
+}
+
+.alpha_phone_email_view p {
+  font-family: lato;
+  font-weight: 400;
+  font-size: 1.5rem;
+  line-height: 2.3rem;
+  color: #FFFFFF;
+}
+
+.alpha_contact_us_view {
+  display: flex;
+  align-items: center;
+}
+
+.alpha_contact_us_view p {
+  font-family: lato;
+  font-weight: 400;
+  font-size: 1.5rem;
+  line-height: 2.3rem;
+  color: #FFFFFF;
+  padding-left: 3rem;
+  cursor: pointer;
+}

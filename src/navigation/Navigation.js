@@ -1,14 +1,14 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import * as Viewers from "../pages/viewers";
+import AuthStack from "./authStack/AuthStack";
 // import * as Admin from "../pages/admin";
 
 const Navigation = () => {
   return (
     <Routes>
-      <Route path="/" element={<Viewers.SignIn />} />
-      <Route path="/signup" element={<Viewers.SignUp />} />
-      <Route path="/otpscreen" element={<Viewers.OtpScreen />} />
+      <Route path="/" element={<AuthStack />} />
+      <Route path="/homepage" element={<Viewers.HomePage />} />
 
       {/* <Route path="/" element={<Viewers.HomePage />} />
       <Route path="/about" element={<Viewers.AboutUs />} />

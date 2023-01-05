@@ -1,13 +1,20 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { authImage, logo } from "../../../assets/icons";
 import { Button } from "../../../components";
 import OtpInput from "react18-otp-input";
 import './otpScreen.css'
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function OtpScreen() {
-  const [otp, setOtp] = useState("");
   const navigate = useNavigate();
+  const [otp, setOtp] = useState("");
+  const { state } = useLocation();
+
+  const onClickVerify = () => {
+    state?.screen === 'forgotpassword' ?
+      navigate('/createpassword') :
+      navigate('homepage', { replace: true })
+  }
 
   return (
     <div className="alpa-auth-container">
@@ -32,7 +39,7 @@ export default function OtpScreen() {
           />
         </div>
         <div className='alpha-otp_screen-button_view'>
-          <Button>VERIFY</Button>
+          <Button onClick={() => onClickVerify()}>VERIFY</Button>
         </div>
         <div className="alpha-otp_screen-send_again_view">
           <h3>
