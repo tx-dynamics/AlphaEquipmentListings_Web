@@ -48,15 +48,15 @@
 
 .alpha-footer_social_top_view img {
   cursor: pointer;
-  width: 37.5px;
-  height: 37.5px;
+  width: 37.5px !important;
+  height: 37.5px !important;
   border-radius: 20px;
   margin-right: 33px;
 }
 
 .alpha-footer_dropdown_view {
-  height: 38px;
-  width: 211px;
+  height: 38px !important;
+  width: 211px !important;
   padding-left: 15px;
   padding-right: 15px;
   display: flex;
@@ -76,8 +76,8 @@
 }
 
 .alpha-footer_dropdown_text_view img {
-  width: 19.5px;
-  height: 19.5px;
+  width: 19.5px !important;
+  height: 19.5px !important;
   margin-right: 10.5px;
 }
 
@@ -100,4 +100,87 @@
   width: 201px !important;
   height: 12px !important;
   align-self: center;
+}
+
+@media screen and (max-width: 450px) {
+  .alpha_footer_main_container {
+    padding-left: 8rem;
+    padding-right: 8rem;
+  }
+
+  .alpha_footer_row_view h2 {
+    font-size: 1.4rem;
+    line-height: 1.8rem;
+
+  }
+
+  .alpha_footer_row_view h3 {
+    font-size: 1.2rem;
+    line-height: 2rem;
+  }
+
+  .alpha-footer_social_top_view img {
+    width: 3.2rem !important;
+    height: 3.2rem !important;
+  }
+
+  .alpha-footer_dropdown_text_view img {
+    width: 1.5rem !important;
+    height: 1.5rem !important;
+  }
+
+  .alpha-footer_dropdown_text_view p {
+    font-size: 1.4rem;
+    line-height: 1.8rem;
+  }
+
+  .alpha-footer_dropdown_view {
+    height: 32px !important;
+    width: 180px !important;
+  }
+
+  .alpha_footer_arrow_down {
+    width: 12px !important;
+    height: 8px !important;
+  }
+
+  .alpha-footer_copy_right {
+    width: 190px !important;
+    height: 10px !important;
+  }
+}
+
+@media screen and (max-width: 350px) {
+
+  .alpha-footer_social_top_view img {
+    width: 3rem !important;
+    height: 3rem !important;
+    margin-right: 25px;
+
+  }
+
+  .alpha-footer_dropdown_text_view img {
+    width: 1.3rem !important;
+    height: 1.3rem !important;
+  }
+
+  .alpha-footer_dropdown_text_view p {
+    font-size: 1.2rem;
+    line-height: 1.5rem;
+  }
+
+  .alpha-footer_dropdown_view {
+    height: 30px !important;
+    width: 175px !important;
+  }
+
+  .alpha_footer_arrow_down {
+    width: 10px !important;
+    height: 8px !important;
+  }
+
+  .alpha-footer_copy_right {
+    width: 190px !important;
+    height: 10px !important;
+  }
 }

@@ -101,3 +101,89 @@
   line-height: 2.2rem;
   color: #858585;
 }
+
+@media screen and (max-width: 485px) {
+  .alpha_home-page-grid_inner_view h1 {
+    font-size: 2rem;
+    line-height: 2.8rem;
+  }
+
+  .alpha_home-page-grid_inner_view h2 {
+    font-size: 1.6rem;
+    line-height: 1.7rem;
+  }
+
+  .alpha-home_page_auction_distance_view h3 {
+    font-size: 1.6rem;
+    line-height: 1.8rem;
+  }
+
+  .alpha-home_page_auction_km_view h4 {
+    font-size: 1.4rem;
+    line-height: 1.4rem;
+  }
+
+  .alpha-home_page_auction_km_view img {
+    width: 2.2rem !important;
+    height: 2.3rem !important;
+  }
+
+  .alpha-home_page_auction_online_view h3 {
+    font-size: 1.4rem;
+    line-height: 1.8rem;
+  }
+
+
+  .alpha-home_page_auction_online_view h4 {
+    font-size: 1.4rem;
+    line-height: 1.8rem;
+  }
+
+  .alpha-home_page_auction_distance_view h5 {
+    font-size: 1.6rem;
+    line-height: 1.8rem;
+  }
+}
+
+@media screen and (max-width: 405px) {
+  .alpha_home-page-grid_inner_view h1 {
+    font-size: 1.6rem;
+    line-height: 2.4rem;
+  }
+
+  .alpha_home-page-grid_inner_view h2 {
+    font-size: 1.2rem;
+    line-height: 1.3rem;
+  }
+
+  .alpha-home_page_auction_distance_view h3 {
+    font-size: 1.2rem;
+    line-height: 1.4rem;
+  }
+
+  .alpha-home_page_auction_km_view h4 {
+    font-size: 1rem;
+    line-height: 1rem;
+  }
+
+  .alpha-home_page_auction_km_view img {
+    width: 2.1rem !important;
+    height: 2.2rem !important;
+  }
+
+  .alpha-home_page_auction_online_view h3 {
+    font-size: 1rem;
+    line-height: 1.4rem;
+  }
+
+
+  .alpha-home_page_auction_online_view h4 {
+    font-size: 1rem;
+    line-height: 1.4rem;
+  }
+
+  .alpha-home_page_auction_distance_view h5 {
+    font-size: 1.2rem;
+    line-height: 1.2rem;
+  }
+}

@@ -49,3 +49,10 @@
   padding-left: 3rem;
   cursor: pointer;
 }
+
+@media screen and (max-width: 940px) {
+  .alpha-blog_view {
+    display: none;
+  }
+
+}

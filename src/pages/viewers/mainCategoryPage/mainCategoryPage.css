@@ -1,0 +1,413 @@
+.alpha-main_cat_page_top_container {
+    padding-top: 5rem;
+    padding-left: 9rem;
+    padding-right: 9rem;
+    padding-bottom: 4rem;
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(255, 255, 255);
+}
+
+.alpha-main_cat_page_filter_top_view {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    border-radius: 5px;
+    width: 318px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+}
+
+.alpha-main_cat_page_filter_title_view {
+    height: 69px;
+    width: 100%;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    display: flex;
+    background-color: #F18805;
+    align-items: center;
+    justify-content: center;
+}
+
+.alpha-main_cat_page_filter_title_view h1 {
+    font-family: lato;
+    font-weight: 600;
+    font-size: 23px;
+    padding-left: 68px;
+    padding-right: 68px;
+    line-height: 29px;
+    color: #FFFFFF;
+}
+
+
+.alpha-main_cat_page_filter_and_items_view {
+    height: 954px;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    overflow: scroll;
+}
+
+.alpha-main_cat_page_filter_items_top_view {
+    display: flex;
+    /* align-items: flex-start; */
+    flex-direction: column;
+    width: 100%;
+}
+
+.alpha-main_cat_page_filter_items_view {
+    display: flex;
+    flex-direction: row;
+
+    padding: 16px 20px 20px 16px
+}
+
+.alpha-main_cat_page_filter_items_view h2 {
+    font-family: lato;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 24px;
+    color: #000000;
+}
+
+.alpha-main_cat_page_filter_items_view h3 {
+    font-family: lato;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 24px;
+    color: #000000;
+}
+
+.alpha-main_cat_page_filter_item_divider {
+    border-bottom: 1px solid #E6E6E6;
+}
+
+.alpha-main_cat_page_item_top_view {
+    position: relative;
+    margin-left: 3rem;
+    height: 1023px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #E6E6E6;
+    border-radius: 5px;
+    width: 100%;
+    padding: 3rem 3rem 0rem 3rem;
+}
+
+.alpha-main_cat_page_heading_and_search_view {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.alpha-main_cat_page_heading_and_search_view h1 {
+    font-family: lato;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 36px;
+    color: #F18805;
+}
+
+.alpha-main_cat_page_search_view {
+    width: 328px;
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-left: 13px;
+    justify-content: space-between;
+    background: #FFFFFF;
+    border: 1px solid #CCCCCC;
+    border-radius: 5px;
+}
+
+.alpha-main_cat_page_search_view input {
+    outline: none;
+    flex: 1;
+    padding-right: 10px;
+    border: none;
+    font-family: lato;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    color: #BFC0BE;
+}
+
+.alpha-main_cat_page_search_view div {
+    width: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background: #F18805;
+    cursor: pointer;
+}
+
+.alpha-main_cat_page_search_view img {
+    width: 20px;
+    height: 20px;
+    object-fit: cover;
+}
+
+.alpha-main_cat_page_items_top_view {
+    display: flex;
+    flex-wrap: wrap;
+    overflow: scroll;
+    margin-top: 30px;
+    margin-right: -32px;
+    height: 87%;
+}
+
+.alpha-main_cat_page_see_all_view {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 26px;
+    padding-top: 5px;
+}
+
+.alpha-main_cat_page_see_all_view div {
+    display: flex;
+    width: 199px;
+    height: 47px;
+    background: #F18805;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.alpha-main_cat_page_see_all_view h2 {
+    font-family: lato;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 24px;
+    color: #FFFFFF;
+}
+
+.alpha-main_cat_page_description_top_view {
+    display: flex;
+    flex-direction: column;
+    padding-top: 50px;
+    padding-left: 90px;
+    padding-right: 90px;
+    padding-bottom: 50px;
+    background-color: #F7F7F7
+}
+
+.alpha-main_cat_page_description_top_view h1 {
+    font-family: lato;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 36px;
+    color: #F18805;
+    padding-bottom: 6px;
+}
+
+.alpha-main_cat_page_description_top_view h2 {
+    font-family: lato;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 40px;
+    color: #3F3F3F;
+    padding-top: 18px;
+    padding-bottom: 12px;
+}
+
+.alpha-main_cat_page_description_top_view h3 {
+    font-family: lato;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 30px;
+    color: #404040;
+    padding-top: 4px;
+    padding-bottom: 8px;
+
+}
+
+.alpha-main_cat_page_description_top_view h4 {
+    font-family: lato;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 32px;
+    color: #000000;
+    padding-bottom: 12px;
+}
+
+.alpha-main_cat_page_drawer_top_view {
+    display: flex;
+    transition: all 0.3s;
+    flex-direction: column;
+    position: absolute;
+    background-color: white;
+    overflow: scroll;
+    left: 0;
+    top: 0;
+}
+
+.alpha-main_cat_page_drawer_icon_view {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+}
+
+.alpha-main_cat_page_drawer_icon_view img {
+    display: none;
+    width: 20px;
+    height: 20px;
+    object-fit: cover;
+    margin-right: 10px;
+    cursor: pointer;
+
+}
+
+.alpha-drawer_close_icon {
+    position: absolute;
+    left: 12px;
+
+}
+
+.alpha-drawer_close_icon img {
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+
+
+}
+
+@media screen and (max-width: 1150px) {
+    .alpha-main_cat_page_items_top_view {
+        justify-content: center;
+    }
+
+    .alpha-main_cat_page_heading_and_search_view h1 {
+        font-size: 26px;
+        line-height: 30px;
+    }
+
+    .alpha-main_cat_page_search_view {
+        width: 250px;
+        height: 35px;
+    }
+
+    .alpha-main_cat_page_search_view input {
+        font-size: 14px;
+        line-height: 18px;
+
+    }
+
+    .alpha-main_cat_page_search_view div {
+        width: 40px;
+        height: 35px;
+
+    }
+
+    .alpha-main_cat_page_search_view img {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .alpha-main_cat_page_filter_top_view {
+        width: 270px;
+    }
+
+    .alpha-main_cat_page_filter_title_view {
+        height: 50px;
+
+    }
+
+    .alpha-main_cat_page_filter_title_view h1 {
+
+        font-size: 18px;
+        line-height: 22px;
+    }
+}
+
+@media screen and (max-width: 952px) {
+    .alpha-main_cat_page_heading_and_search_view h1 {
+        font-size: 22px;
+        line-height: 26px;
+    }
+
+    .alpha-main_cat_page_search_view {
+        width: 200px;
+        height: 35px;
+    }
+
+    .alpha-main_cat_page_search_view input {
+        font-size: 12px;
+        line-height: 16px;
+
+    }
+
+    .alpha-main_cat_page_search_view div {
+        width: 40px;
+        height: 35px;
+
+    }
+
+    .alpha-main_cat_page_search_view img {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+@media screen and (max-width: 875px) {
+    .alpha-main_cat_page_heading_and_search_view {
+        flex-wrap: wrap;
+    }
+
+    .alpha-main_cat_page_search_view {
+        margin-top: 20px;
+    }
+}
+
+@media screen and (max-width: 730px) {
+    .alpha-main_cat_page_top_container {
+        padding-top: 3rem;
+        padding-left: 5rem;
+        padding-right: 5rem;
+    }
+
+    .alpha-main_cat_page_description_top_view h1 {
+        font-size: 28px;
+        line-height: 32px;
+    }
+
+    .alpha-main_cat_page_description_top_view h2 {
+        font-size: 20px;
+        line-height: 36px;
+    }
+
+    .alpha-main_cat_page_description_top_view h3 {
+        font-size: 16px;
+        line-height: 26px;
+    }
+
+    .alpha-main_cat_page_description_top_view h4 {
+        font-size: 14px;
+        line-height: 28px;
+    }
+}
+
+@media screen and (max-width: 685px) {
+    .alpha-main_cat_page_filter_top_view {
+        display: none;
+    }
+
+    .alpha-main_cat_page_drawer_icon_view img {
+        display: flex;
+    }
+}
+
+@media screen and (max-width: 444px) {
+    .alpha-main_cat_page_top_container {
+        padding-left: 0rem;
+        padding-right: 2rem;
+    }
+
+}
