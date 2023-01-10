@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { arrowDown, arrowDownBlack, close, distance, drawerIcon, dummyFour, menu, search, searchWhite } from "../../../assets/icons";
 import { BlogView, DashboardCategoriesView, Footer, NavBar } from "../../../components";
 import './productListingPage.css'
 
 export default function ProductListingPage() {
+  const navigate = useNavigate()
   const [value, setValue] = useState(-1000)
   const filterItemArray = [
     {
@@ -134,7 +136,7 @@ export default function ProductListingPage() {
             <div className="alpha-pro_list_page_divider" />
             {productsArray.map((item, index) => {
               return (
-                <div key={index}>
+                <div key={index} onClick={() => navigate('/productdetailpage')}>
                   <div className="alpha-pro_list_page_item_view">
                     <div className="alpha-pro_list_page_item_image_view">
                       <img src={dummyFour} />

@@ -1,0 +1,411 @@
+.alpha_detail_page_container {
+    overflow: scroll;
+}
+
+.alpha_image_slider_top_view {
+    margin: 5rem 9rem 0rem 9rem;
+}
+
+.each-slide-effect {
+    height: 419px;
+    display: flex;
+    justify-content: center;
+    background-color: black;
+}
+
+.each-slide-effect img {
+    height: 100%;
+    width: 552px;
+    object-fit: cover;
+}
+
+.alpha_detail_page_data_top_container {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+    margin: 0rem 9rem 5rem 9rem;
+    box-sizing: border-box;
+    padding: 3.3rem 4rem 0rem 4rem;
+    background: #FFFFFF;
+    border: 1px solid #DBDBDB;
+}
+
+.alpha_detail_page_data_container {
+    width: 67.5%;
+}
+
+.alpha_detail_page_data_container h1 {
+    font-family: lato;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 30px;
+    color: #000000;
+    padding-bottom: 27px;
+}
+
+.alpha-detail_page-location_data_view {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.alpha-detail_page-location_view {
+    display: flex;
+    flex-direction: column;
+    margin-right: 4rem;
+}
+
+
+.alpha-detail_page-location_icon_view img {
+    width: 24px;
+    height: 24px;
+}
+
+.alpha-detail_page-located_text_view {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+}
+
+.alpha-detail_page-located_text_view p {
+    font-family: lato;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #767676;
+    padding-right: 90px;
+}
+
+.alpha-detail_page-located_text_view img {
+    width: 25px;
+    height: 25px;
+    margin-right: 3px;
+}
+
+.alpha-detail_page-located_text_view h6 {
+    font-family: lato;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 18px;
+    color: #101010;
+    margin-top: 10px;
+}
+
+.alpha-detail_page-location_text_view {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.alpha-detail_page-location_text_view img {
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+}
+
+.alpha-detail_page-location_text_view h5 {
+    font-family: lato;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+    color: #3F3F3F;
+}
+
+.alpha-detail_page-hours_view_divider {
+    border-left: 1px solid #CCCCCC;
+    height: 109px;
+
+}
+
+.alpha-detail_page-hours_top_view {
+    display: flex;
+    flex-direction: column;
+    margin-left: 35px;
+}
+
+.alpha-detail_page-hours_top_view img {
+    width: 24px;
+    height: 24px;
+    margin-right: 94px;
+}
+
+.alpha-detail_page-hours_top_view h2 {
+    font-family: lato;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #767676;
+    padding-top: 6px;
+}
+
+.alpha-detail_page-hours_top_view h3 {
+    font-family: lato;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+    padding-top: 10px;
+    color: #3F3F3F;
+}
+
+.alpha-detail_page-detailed_info_top_view {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 13px;
+}
+
+.alpha-detail_page-detailed_info_top_view h1 {
+    font-family: lato;
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 30px;
+    color: #000000;
+    padding-bottom: 20px;
+}
+
+.alpha-detail_page-detailed_info_feature_text_top_view {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    margin-bottom: 17px;
+}
+
+.alpha-detail_page-detailed_info_feature_text_top_view h2 {
+    font-family: lato;
+    width: 17%;
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 25px;
+    /* margin-top: 5px; */
+    color: #000000;
+
+}
+
+.alpha-detail_page-detailed_info_feature_text_top_view h3 {
+    font-family: lato;
+    width: 100%;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 30px;
+    color: #3F3F3F;
+}
+
+.alpha-detail_page-detailed_info_divider {
+    border-top: 1px solid #CCCCCC;
+}
+
+.alpha-detail_page-features_top_view {
+    padding-top: 3rem;
+}
+
+.alpha-detail_page-features_title_view {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.alpha-detail_page-features_title_view h2 {
+    font-family: lato;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 30px;
+    color: #000000;
+    padding-right: 2rem;
+}
+
+.alpha-detail_page-features_title_view img {
+    width: 2.4rem;
+    height: 2.4rem;
+    margin-right: 4px;
+}
+
+.alpha-detail_page-features_title_view h3 {
+    font-family: lato;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 22px;
+    text-decoration-line: underline;
+    color: #F18805;
+}
+
+.alpha-detail_page-features_images_top_view {
+    display: flex;
+    flex-direction: row;
+    padding-top: 2rem;
+    align-items: center;
+
+}
+
+.alpha-detail_page-features_images_view {
+    display: flex;
+    width: 90%;
+    overflow: scroll;
+    margin-bottom: 3rem;
+}
+
+.alpha-detail_page-features_images_view img {
+    width: 124px;
+    height: 95px;
+    border-radius: 5px;
+    margin-right: 2rem;
+}
+
+.alpha-detail_page-features_images_next_view img {
+    width: 16px;
+    height: 16px;
+    /* margin-left: 2rem; */
+}
+
+.alpha_detail_page_about_top_view {
+    display: flex;
+    flex-direction: column;
+    padding: 0rem 9rem 2.6rem 9rem;
+}
+
+.alpha_detail_page_about_top_view h1 {
+    font-family: lato;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 36px;
+    color: #F18805;
+    padding-bottom: 3rem;
+}
+
+.alpha_detail_page_about_top_view h2 {
+    font-family: lato;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 40px;
+    color: #3F3F3F;
+    padding-bottom: 1.2rem;
+}
+
+.alpha_detail_page_about_top_view h3 {
+    font-family: lato;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 30px;
+    color: #404040;
+    padding-bottom: 0.8rem;
+    padding-top: 0.4rem;
+}
+
+.alpha_detail_page_about_top_view h4 {
+    font-family: lato;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 32px;
+    color: #000000;
+    padding-bottom: 2.4rem;
+}
+
+
+
+
+.alpha_detail_page_price_top_view {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    border-radius: 5px;
+    margin-left: 2rem;
+    background-color: white;
+    border: 1px solid rgba(219, 219, 219, 0.1);
+    box-shadow: 0px 0px 19px 1px rgba(0, 0, 0, 0.1);
+
+}
+
+.alpha_detail_page_price_top_view h1 {
+    font-family: lato;
+    font-weight: 700;
+    font-size: 44px;
+    line-height: 44px;
+    color: #F18805;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.9rem;
+}
+
+.alpha_detail_page_price_view_title_view {
+    background-color: #F18805;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    align-items: center;
+    display: flex;
+    padding-left: 5.1rem;
+    height: 58px;
+    width: 100%;
+}
+
+.alpha_detail_page_price_view_title_view h2 {
+    font-family: lato;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 26px;
+    color: #FFFFFF;
+
+}
+
+.alpha_detail_page_price_view_share_view {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1.6rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.alpha_detail_page_price_view_share_view h2 {
+    font-family: lato;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+    color: #3F3F3F;
+}
+
+.alpha_detail_page_price_view_share_view img {
+    width: 3rem;
+    height: 3rem;
+}
+
+.alpha_detail_page_price_view_button_view {
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+    height: 4.8rem;
+    width: 90%;
+    border-radius: 1rem;
+    align-self: center;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #F18805;
+}
+
+.alpha_detail_page_price_view_button_view h2 {
+    font-family: lato;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 16px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+
+}
+
+.alpha_detail_page_price_top_view p {
+    font-family: lato;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    color: #767676;
+    padding: 0rem 1rem 2rem 1rem;
+}
+
+@media screen and (max-width: 1314px) {
+    .alpha_detail_page_price_top_view {
+        display: none
+    }
+
+    .alpha_detail_page_data_container {
+        width: 100%;
+    }
+}
