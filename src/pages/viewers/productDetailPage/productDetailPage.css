@@ -113,6 +113,7 @@
 }
 
 .alpha-detail_page-hours_view_divider {
+    display: flex;
     border-left: 1px solid #CCCCCC;
     height: 109px;
 
@@ -232,15 +233,16 @@
     display: flex;
     flex-direction: row;
     padding-top: 2rem;
+    margin-bottom: 3rem;
     align-items: center;
 
 }
 
 .alpha-detail_page-features_images_view {
     display: flex;
-    width: 90%;
+    /* width: 50%; */
     overflow: scroll;
-    margin-bottom: 3rem;
+    /* margin-bottom: 3rem; */
 }
 
 .alpha-detail_page-features_images_view img {
@@ -253,7 +255,7 @@
 .alpha-detail_page-features_images_next_view img {
     width: 16px;
     height: 16px;
-    /* margin-left: 2rem; */
+    margin-left: 2rem;
 }
 
 .alpha_detail_page_about_top_view {
@@ -299,9 +301,6 @@
     padding-bottom: 2.4rem;
 }
 
-
-
-
 .alpha_detail_page_price_top_view {
     display: flex;
     flex-direction: column;
@@ -311,7 +310,6 @@
     background-color: white;
     border: 1px solid rgba(219, 219, 219, 0.1);
     box-shadow: 0px 0px 19px 1px rgba(0, 0, 0, 0.1);
-
 }
 
 .alpha_detail_page_price_top_view h1 {
@@ -400,12 +398,412 @@
     padding: 0rem 1rem 2rem 1rem;
 }
 
+.alpha_detail_page_price_view_location_view {
+    box-sizing: border-box;
+    height: 81px;
+    border: 1px solid #CCCCCC;
+    margin-left: 10px;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 20px;
+    padding-left: 15px;
+    padding-right: 10px;
+}
+
+.alpha_detail_page_price_view_location_view img {
+    width: 24px;
+    height: 24px;
+    margin-right: 5px;
+}
+
+.alpha_detail_page_price_view_location_view h4 {
+    font-family: lato;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #3F3F3F;
+}
+
+.alpha_detail_page_price_view_header {
+    display: flex;
+    height: 58px;
+    flex-direction: row;
+    align-items: center;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border: 1px solid #F18805
+}
+
+.alpha_detail_page_price_view_header_item_info {
+    display: flex;
+    height: 100%;
+    background-color: red;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    border-top-left-radius: 5px;
+    cursor: pointer;
+}
+
+.alpha_detail_page_price_view_header_item_info_text {
+    font-family: lato;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 26px;
+    color: #FFFFFF;
+}
+
+
+.alpha_detail_page_price_view_header_item_info_text_two {
+    font-family: lato;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 18px;
+    color: #000000;
+}
+
+
 @media screen and (max-width: 1314px) {
-    .alpha_detail_page_price_top_view {
-        display: none
+    .alpha_detail_page_price_top_view h1 {
+        font-size: 30px;
+        line-height: 30px;
     }
 
+    .alpha_detail_page_price_view_title_view h2 {
+        font-size: 18px;
+        line-height: 22px;
+    }
+
+    .alpha-detail_page-detailed_info_feature_text_top_view {
+        flex-wrap: wrap;
+    }
+
+    .alpha_detail_page_price_view_share_view h2 {
+        font-size: 12px;
+        line-height: 20px;
+    }
+
+    .alpha_detail_page_price_view_share_view img {
+        width: 2rem;
+        height: 2rem;
+    }
+
+    .alpha_detail_page_price_view_button_view h2 {
+        font-size: 14px;
+        line-height: 14px;
+    }
+
+    .alpha_detail_page_price_top_view p {
+        font-size: 10px;
+        line-height: 16px;
+    }
+}
+
+@media screen and (max-width: 1128px) {
+    .alpha_detail_page_price_view_location_view img {
+        width: 22px;
+        height: 22px;
+    }
+
+    .alpha_detail_page_price_view_location_view h4 {
+
+        font-size: 12px;
+        line-height: 20px;
+    }
+
+    .alpha_detail_page_data_container h1 {
+        font-size: 28px;
+        line-height: 26px;
+        padding-bottom: 10px;
+    }
+
+    .alpha-detail_page-located_text_view p {
+        font-size: 12px;
+        line-height: 20px;
+    }
+
+    .alpha-detail_page-located_text_view img {
+        width: 21px;
+        height: 21px;
+    }
+
+    .alpha-detail_page-located_text_view h6 {
+
+        font-size: 16px;
+        line-height: 14px;
+
+    }
+
+    .alpha-detail_page-location_text_view img {
+        width: 12px;
+        height: 12px;
+    }
+
+    .alpha-detail_page-location_text_view h5 {
+
+        font-size: 12px;
+        line-height: 20px;
+    }
+
+    .alpha-detail_page-hours_top_view img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .alpha-detail_page-hours_top_view h2 {
+
+        font-size: 12px;
+        line-height: 20px;
+    }
+
+    .alpha-detail_page-hours_top_view h3 {
+        font-size: 12px;
+        line-height: 20px;
+    }
+
+    .alpha-detail_page-detailed_info_top_view h1 {
+        font-size: 24px;
+        line-height: 36px;
+    }
+
+    .alpha-detail_page-detailed_info_feature_text_top_view h2 {
+        width: 100%;
+        font-size: 18px;
+        line-height: 21px;
+
+    }
+
+    .alpha-detail_page-detailed_info_feature_text_top_view h3 {
+
+        font-size: 16px;
+        line-height: 26px;
+    }
+
+    .alpha-detail_page-features_title_view h2 {
+        font-size: 24px;
+        line-height: 26px;
+
+    }
+
+    .alpha-detail_page-features_title_view img {
+        width: 2rem;
+        height: 2rem;
+    }
+
+    .alpha-detail_page-features_title_view h3 {
+
+        font-size: 12px;
+        line-height: 18px;
+    }
+
+    .alpha_detail_page_about_top_view h1 {
+        font-size: 28px;
+        line-height: 32px;
+    }
+
+    .alpha_detail_page_about_top_view h2 {
+        font-size: 20px;
+        line-height: 36px;
+    }
+
+    .alpha_detail_page_about_top_view h3 {
+        font-size: 16px;
+        line-height: 26px;
+    }
+
+    .alpha_detail_page_about_top_view h4 {
+        font-size: 14px;
+        line-height: 28px;
+    }
+}
+
+@media screen and (max-width: 946px) {
     .alpha_detail_page_data_container {
         width: 100%;
     }
+
+    .alpha_detail_page_data_top_container {
+        flex-wrap: wrap;
+    }
+
+    .alpha_detail_page_price_top_view {
+        margin-bottom: 3rem;
+    }
+}
+
+@media screen and (max-width: 732px) {
+    .each-slide-effect {
+        height: 219px;
+    }
+
+    .each-slide-effect img {
+        height: 100%;
+        width: 352px;
+    }
+
+    .alpha_detail_page_data_container h1 {
+        font-size: 24px;
+        line-height: 22px;
+    }
+
+    .alpha-detail_page-location_data_view {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .alpha-detail_page-hours_top_view {
+        margin-left: 0px;
+        margin-top: 20px;
+    }
+
+    .alpha-detail_page-hours_view_divider {
+        display: none;
+    }
+
+    .alpha-detail_page-features_title_view h2 {
+        font-size: 20px;
+        line-height: 22px;
+
+    }
+
+    .alpha-detail_page-features_title_view img {
+        width: 1.8rem;
+        height: 1.8rem;
+    }
+
+    .alpha-detail_page-features_title_view h3 {
+        font-size: 10px;
+        line-height: 16px;
+    }
+
+    .alpha_image_slider_top_view {
+        margin: 5rem 5rem 0rem 5rem;
+    }
+
+    .alpha_detail_page_data_top_container {
+
+        margin: 0rem 5rem 5rem 5rem;
+
+    }
+
+    .alpha_detail_page_about_top_view {
+        padding: 0rem 5rem 2.6rem 5rem;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .alpha_detail_page_price_top_view p {
+        display: none;
+    }
+
+    .alpha-detail_page-located_text_view {
+        align-items: center;
+    }
+
+    .alpha-detail_page-located_text_view img {
+        display: none;
+    }
+
+    .alpha-detail_page-located_text_view h6 {
+        margin-top: 0px;
+    }
+
+    .alpha_detail_page_data_container h1 {
+        font-size: 20px;
+        line-height: 18px;
+    }
+
+    .alpha-detail_page-detailed_info_top_view h1 {
+        font-size: 20px;
+        line-height: 32px;
+    }
+
+    .alpha-detail_page-detailed_info_feature_text_top_view h2 {
+        font-size: 14px;
+        line-height: 17px;
+    }
+
+    .alpha-detail_page-detailed_info_feature_text_top_view h3 {
+        font-size: 12px;
+        line-height: 22px;
+    }
+
+    .alpha-detail_page-features_title_view h2 {
+        font-size: 16px;
+        line-height: 18px;
+    }
+
+    .alpha-detail_page-features_images_view img {
+        width: 100px;
+        height: 70px;
+        border-radius: 4px;
+        margin-right: 1rem;
+    }
+
+    .alpha_detail_page_about_top_view h1 {
+        font-size: 22px;
+        line-height: 24px;
+    }
+
+    .alpha_detail_page_about_top_view h2 {
+        font-size: 16px;
+        line-height: 32px;
+    }
+
+    .alpha_detail_page_about_top_view h3 {
+        font-size: 12px;
+        line-height: 22px;
+    }
+
+    .alpha_detail_page_about_top_view h4 {
+        font-size: 12px;
+        line-height: 24px;
+    }
+
+    .alpha-detail_page-located_text_view p {
+        padding-right: 50px;
+    }
+}
+
+@media screen and (max-width: 434px) {
+    .alpha_detail_page_price_view_location_view img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .alpha_detail_page_price_view_location_view h4 {
+        font-size: 10px;
+        line-height: 18px;
+    }
+
+    .each-slide-effect {
+        height: 150px;
+    }
+
+    .each-slide-effect img {
+        height: 100%;
+        width: 252px;
+    }
+
+    .alpha-detail_page-features_title_view img {
+        display: none;
+    }
+
+    .alpha_image_slider_top_view {
+        margin: 3rem 3rem 0rem 3rem;
+    }
+
+    .alpha_detail_page_data_top_container {
+
+        margin: 0rem 3rem 3rem 3rem;
+
+    }
+
+    .alpha_detail_page_about_top_view {
+        padding: 0rem 3rem 2.6rem 3rem;
+    }
+
 }

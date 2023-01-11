@@ -34,11 +34,11 @@ export default function NavBar() {
 
                 </div>
                 <div className="alpha-navbar-nav_items_top_view">
-                    <h3 onClick={() => navigate('/maincategorypage')}>Category</h3>
-                    <h3>Auction</h3>
-                    <h3>Spare Parts</h3>
+                    <h3 onClick={() => navigate('/maincategorypage', { state: { screen: 'category' } })}>Category</h3>
+                    <h3 onClick={() => navigate('/productlistingpage', { state: { screen: 'auction' } })}>Auction</h3>
+                    <h3 onClick={() => navigate('/maincategorypage', { state: { screen: 'spareparts' } })}>Spare Parts</h3>
                     <h3>Financing</h3>
-                    <h3>Rented</h3>
+                    <h3 onClick={() => navigate('/maincategorypage', { state: { screen: 'rented' } })}>Rented</h3>
                     <h3>Calculator</h3>
                 </div>
             </div>
@@ -62,11 +62,11 @@ export default function NavBar() {
                         <input placeholder='Search your query' />
                         <img src={search} />
                     </div>
-                    <h3 onClick={() => navigate('/maincategorypage')}>Category</h3>
-                    <h3>Auction</h3>
-                    <h3>Spare Parts</h3>
+                    <h3 onClick={() => navigate('/maincategorypage', { state: { screen: 'category' } })}>Category</h3>
+                    <h3 onClick={() => navigate('/productlistingpage', { state: { screen: 'auction' } })}>Auction</h3>
+                    <h3 onClick={() => navigate('/maincategorypage', { state: { screen: 'spareparts' } })}>Spare Parts</h3>
                     <h3>Financing</h3>
-                    <h3>Rented</h3>
+                    <h3 onClick={() => navigate('/maincategorypage', { state: { screen: 'rented' } })}>Rented</h3>
                     <h3>Calculator</h3>
                     <h3 onClick={() => setMarginLeft(-300)} style={{ color: 'red' }}>Close</h3>
                     <div className="alpha-navbar-menu_login_view">

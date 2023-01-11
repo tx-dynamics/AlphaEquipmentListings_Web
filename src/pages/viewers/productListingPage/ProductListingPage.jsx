@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { arrowDown, arrowDownBlack, close, distance, drawerIcon, dummyFour, menu, search, searchWhite } from "../../../assets/icons";
 import { BlogView, DashboardCategoriesView, Footer, NavBar } from "../../../components";
 import './productListingPage.css'
@@ -7,46 +7,40 @@ import './productListingPage.css'
 export default function ProductListingPage() {
   const navigate = useNavigate()
   const [value, setValue] = useState(-1000)
+  const { state } = useLocation();
+
   const filterItemArray = [
     {
       id: 1,
       title: 'Region',
-      count: ' (142)'
     },
     {
       id: 2,
       title: 'Type',
-      count: ' (142)'
     },
     {
       id: 3,
       title: 'Auction',
-      count: ' (123)'
     },
     {
       id: 4,
       title: 'Make',
-      count: ' (123)'
     },
     {
       id: 5,
       title: 'Model',
-      count: ' (123)'
     },
     {
       id: 6,
       title: 'Year',
-      count: ' (123)'
     },
     {
       id: 7,
       title: 'Price',
-      count: ' (123)'
     },
     {
       id: 8,
       title: 'Services',
-      count: ' (123)'
     },
 
   ]
@@ -80,7 +74,7 @@ export default function ProductListingPage() {
   ]
 
   return (
-    <div className="alpha-pro_list_page-main_container">
+    < div className="alpha-pro_list_page-main_container" >
       <BlogView />
       <NavBar />
       <div className="alpha-home_page-container">
@@ -129,14 +123,14 @@ export default function ProductListingPage() {
             <div className="alpha-pro_list_page_heading_and_search_view">
               <div className="alpha-pro_list_page_drawer_icon_view">
                 <img src={menu} onClick={() => setValue(0)} />
-                <h2>Tamder Roller</h2>
+                <h2>{state?.screen === 'auction' ? 'Auction' : 'Tamder Roller'}</h2>
               </div>
               <h3>Showing 346 results for</h3>
             </div>
             <div className="alpha-pro_list_page_divider" />
             {productsArray.map((item, index) => {
               return (
-                <div key={index} onClick={() => navigate('/productdetailpage')}>
+                <div key={index} onClick={() => navigate('/productdetailpage', { state: { screen: state?.screen } })}>
                   <div className="alpha-pro_list_page_item_view">
                     <div className="alpha-pro_list_page_item_image_view">
                       <img src={dummyFour} />
@@ -154,7 +148,10 @@ export default function ProductListingPage() {
                         </div>
                       </div>
                       <h5>Catalogue Notes: <span style={{ fontWeight: 400 }}>Lorem ipsum dolor amuet, conse ctetur adipi scing elit. Vivamus at bibendum ante</span></h5>
-                      <p>Price: $8600</p>
+                      <div className="alpha-home-page-spare_part_price_distance_view">
+                        <p>{state?.screen === 'auction' ? 'Online Auction' : 'Price: $8600'}</p>
+                        <h6>Highest Bid:<span style={{ fontWeight: 700 }}> $5000</span></h6>
+                      </div>
                     </div>
                   </div>
                   <div className="alpha-pro_list_page_divider" />
@@ -170,6 +167,6 @@ export default function ProductListingPage() {
         </div>
         <Footer />
       </div>
-    </div>
+    </div >
   );
 }

@@ -185,6 +185,14 @@
     color: #F18805;
 }
 
+.alpha-pro_list_page_item_detail_view h6 {
+    font-family: lato;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+    color: #F18805;
+}
+
 
 .alpha-pro_list_page-dis_and_km_top_view {
     display: flex;
@@ -292,6 +300,11 @@
     .alpha-pro_list_page_item_detail_view p {
         font-size: 1.8rem;
         line-height: 1.8rem;
+    }
+
+    .alpha-pro_list_page_item_detail_view h6 {
+        font-size: 14px;
+        line-height: 20px;
     }
 
     .alpha-pro_list_page-dis_view h3 {
@@ -415,6 +428,11 @@
     .alpha-pro_list_page_item_detail_view p {
         font-size: 1.4rem;
         line-height: 1.4rem;
+    }
+
+    .alpha-pro_list_page_item_detail_view h6 {
+        font-size: 14px;
+        line-height: 20px;
     }
 
     .alpha-pro_list_page-dis_view h3 {

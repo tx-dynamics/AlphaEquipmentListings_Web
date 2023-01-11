@@ -5,8 +5,11 @@ import './productDetailPage.css'
 import { Slide } from 'react-slideshow-image';
 import 'react-slideshow-image/dist/styles.css';
 import { Swiper, SwiperSlide } from "swiper/react";
+import { useLocation } from "react-router-dom";
 
 export default function ProductDetailPage() {
+  const { state } = useLocation()
+  const [bidView, setBidView] = useState(false)
   const imageArray = [
     dummyFour, dummyOne, dummyThree
   ];
@@ -15,37 +18,48 @@ export default function ProductDetailPage() {
       id: 1,
       title: 'General Appearanceine',
       images: [dummyFour, dummyOne, dummyThree, dummyFour, dummyOne,],
-      extraData: true
+      extraData: true,
+      show: true
     },
     {
       id: 2,
       title: 'Engine',
       images: [dummyFour, dummyOne, dummyThree, dummyFour, dummyOne,],
-      extraData: false
+      extraData: false,
+      show: state?.screen === 'spareparts' ? false : true
+
     },
     {
       id: 3,
       title: 'Drivetrain',
       images: [dummyFour, dummyOne, dummyThree, dummyFour, dummyOne,],
-      extraData: false
+      extraData: false,
+      show: state?.screen === 'spareparts' ? false : true
+
     },
     {
       id: 4,
       title: 'Control Station',
       images: [dummyFour, dummyOne, dummyThree, dummyFour, dummyOne,],
-      extraData: false
+      extraData: false,
+      show: state?.screen === 'spareparts' ? false : true
+
     },
     {
       id: 5,
       title: 'Body Configuration',
       images: [dummyFour, dummyOne, dummyThree, dummyFour, dummyOne,],
-      extraData: false
+      extraData: false,
+      show: state?.screen === 'spareparts' ? false : true
+
     },
     {
       id: 6,
       title: 'Undercarriage',
       images: [dummyFour, dummyOne, dummyThree, dummyFour, dummyOne,],
-      extraData: false
+      extraData: false,
+      show: state?.screen === 'spareparts' ? false : true
+
     }
   ]
   return (
@@ -82,18 +96,28 @@ export default function ProductDetailPage() {
                   <h5>Lethbridge County, AB, CAN</h5>
                 </div>
               </div>
-              <div className="alpha-detail_page-hours_view_divider" />
-              <div className="alpha-detail_page-hours_top_view" >
-                <img src={hour} />
-                <h2>Hours</h2>
-                <h3>4,465 hrs</h3>
-              </div>
-              <div className="alpha-detail_page-hours_view_divider" />
-              <div className="alpha-detail_page-hours_top_view" >
-                <img src={sNumber} />
-                <h2>Serial number</h2>
-                <h3>JEE0139930</h3>
-              </div>
+              {state?.screen !== 'spareparts' ?
+                <>
+                  <>
+                    <div className="alpha-detail_page-hours_view_divider" />
+                    <div className="alpha-detail_page-hours_top_view" >
+                      <img src={hour} />
+                      <h2>Hours</h2>
+                      <h3>4,465 hrs</h3>
+                    </div>
+                  </>
+                  <>
+                    <div className="alpha-detail_page-hours_view_divider" />
+                    <div className="alpha-detail_page-hours_top_view" >
+                      <img src={sNumber} />
+                      <h2>Serial number</h2>
+                      <h3>JEE0139930</h3>
+                    </div>
+                  </>
+                </> :
+                null
+              }
+
             </div>
             <div className="alpha-detail_page-detailed_info_top_view">
               <h1>Detailed Information</h1>
@@ -110,7 +134,7 @@ export default function ProductDetailPage() {
                 <h3>Sed iaculis ut lorem et interdum. Sed eu interdum dui, ac consectetur purus. Sed ac leo tincidunt, vestibulum augue in, viverra elit. Vivamus tristique, leo interdum fermentum ultrices, sem quam varius tellus</h3>
               </div>
             </div>
-            {featuresArray.map((item, index) => {
+            {featuresArray.filter((item) => item.show).map((item, index) => {
               return (
                 <div key={index}>
                   <div className="alpha-detail_page-detailed_info_divider" />
@@ -122,9 +146,9 @@ export default function ProductDetailPage() {
                     </div>
                     <div className="alpha-detail_page-features_images_top_view">
                       <div className="alpha-detail_page-features_images_view" >
-                        {item.images.map((item) => {
+                        {item.images.map((data, index) => {
                           return (
-                            <img key={item} src={item} />
+                            <img style={{ marginRight: index === item.images.length - 1 ? -20 : 20 }} key={data} src={data} />
                           )
                         })}
                       </div>
@@ -149,19 +173,40 @@ export default function ProductDetailPage() {
               )
             })}
           </div>
-          <div className="alpha_detail_page_price_top_view">
+          {/* <div className="alpha_detail_page_price_top_view">
             <div className="alpha_detail_page_price_view_title_view">
               <h2>Item Info</h2>
             </div>
             <div className="alpha_detail_page_price_view_share_view">
-              <h2>Price</h2>
+              <h2>{state?.screen === 'spareparts' ? 'Per day' : 'Price'}</h2>
               <img src={share} />
             </div>
             <h1>$82,000</h1>
             <div className="alpha_detail_page_price_view_button_view">
-              <h2>Pay</h2>
+              <h2>{state?.screen === 'spareparts' ? 'Request For Rent' : 'Pay'}</h2>
             </div>
+            {state?.screen === 'rented' &&
+              <div className="alpha_detail_page_price_view_location_view">
+                <img src={pinLocation} />
+                <h4>Location:<span style={{ color: '#005B99' }}> Australia National Unreserved Auction, AUS</span></h4>
+              </div>
+            }
             <p>Donec non tristique ex. Maecenas malesuada, nulla efficitur eleifend rutrum, risus quam consectetur ante, non fringilla libero nisi nec lectus. Morbi lectus ex, ultrices eget lobortis ut, dignissim a tortor. Donec sodales ante mi, id laoreet magna sodales vitae. </p>
+          </div> */}
+          <div className="alpha_detail_page_price_top_view">
+            <div className="alpha_detail_page_price_view_header">
+              <div onClick={() => setBidView(!bidView)} className="alpha_detail_page_price_view_header_item_info" style={{ backgroundColor: !bidView ? '#F18805' : 'white' }}>
+                <h2 className={!bidView ? "alpha_detail_page_price_view_header_item_info_text" : "alpha_detail_page_price_view_header_item_info_text_two"}>
+                  Item Info
+                </h2>
+              </div>
+              <div onClick={() => setBidView(!bidView)} className="alpha_detail_page_price_view_header_item_info" style={{ borderTopRightRadius: 5, borderTopLeftRadius: 0, backgroundColor: bidView ? '#F18805' : 'white' }}>
+                <h2 className={bidView ? "alpha_detail_page_price_view_header_item_info_text" : "alpha_detail_page_price_view_header_item_info_text_two"}>
+                  Bids (29 bids)
+                </h2>
+              </div>
+            </div>
+            <h2>hello</h2>
           </div>
         </div>
         <div className="alpha_detail_page_about_top_view">

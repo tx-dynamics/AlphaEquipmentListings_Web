@@ -4,7 +4,7 @@ import './dashboardSparePartView.css'
 
 export default function DashboardSparePartView(props) {
     return (
-        <div key={props.index} className="alpha_home-page-spare_parts_top_view">
+        <div key={props.index} onClick={props.onClick} className="alpha_home-page-spare_parts_top_view" style={props.style}>
             <img src={dummyThree} alt={''} className='alpha-home-page-spare_part_image_style' />
             <div className="alpha-home-page-spare_part_detail_view">
                 <h2>Wheel Hub Seal Kits Truck </h2>
