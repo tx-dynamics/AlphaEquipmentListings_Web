@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { arrowDown, arrowDownBlack, close, distance, drawerIcon, dummyFour, dummyOne, dummyThree, dummyTwo, images, flag, hour, menu, pinLocation, search, searchWhite, sNumber, nextDoubleArrow, share } from "../../../assets/icons";
-import { BlogView, DashboardCategoriesView, Footer, NavBar } from "../../../components";
+import { arrowDown, arrowDownBlack, close, distance, drawerIcon, dummyFour, dummyOne, dummyThree, dummyTwo, images, flag, hour, menu, pinLocation, search, searchWhite, sNumber, nextDoubleArrow, share, plus, minus, clock } from "../../../assets/icons";
+import { BlogView, Button, DashboardCategoriesView, Footer, NavBar } from "../../../components";
 import './productDetailPage.css'
 import { Slide } from 'react-slideshow-image';
 import 'react-slideshow-image/dist/styles.css';
@@ -8,6 +8,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { useLocation } from "react-router-dom";
 
 export default function ProductDetailPage() {
+  const [bidValue, setBidValue] = useState(82000)
+
   const { state } = useLocation()
   const [bidView, setBidView] = useState(false)
   const imageArray = [
@@ -62,6 +64,32 @@ export default function ProductDetailPage() {
 
     }
   ]
+  const bidsPriceArray = [
+    {
+      id: 1,
+      price: '$72,000',
+    },
+    {
+      id: 2,
+      price: '$73,000',
+    },
+    {
+      id: 3,
+      price: '$80,000',
+    },
+    {
+      id: 4,
+      price: '$80,000 High Bid',
+    },
+  ]
+  const increamentOrDecrement = (type) => {
+    let minValue = bidValue
+    type === 1 ?
+      setBidValue(minValue - 100)
+      :
+      setBidValue(minValue + 100)
+  }
+
   return (
     <div className="alpha-pro_list_page-main_container">
       <BlogView />
@@ -173,41 +201,97 @@ export default function ProductDetailPage() {
               )
             })}
           </div>
-          {/* <div className="alpha_detail_page_price_top_view">
-            <div className="alpha_detail_page_price_view_title_view">
-              <h2>Item Info</h2>
-            </div>
-            <div className="alpha_detail_page_price_view_share_view">
-              <h2>{state?.screen === 'spareparts' ? 'Per day' : 'Price'}</h2>
-              <img src={share} />
-            </div>
-            <h1>$82,000</h1>
-            <div className="alpha_detail_page_price_view_button_view">
-              <h2>{state?.screen === 'spareparts' ? 'Request For Rent' : 'Pay'}</h2>
-            </div>
-            {state?.screen === 'rented' &&
-              <div className="alpha_detail_page_price_view_location_view">
-                <img src={pinLocation} />
-                <h4>Location:<span style={{ color: '#005B99' }}> Australia National Unreserved Auction, AUS</span></h4>
+          {state?.screen === 'auction' ?
+            <div className="alpha_detail_page_price_top_view">
+              <div className="alpha_detail_page_price_view_header">
+                <div onClick={() => setBidView(!bidView)} className="alpha_detail_page_price_view_header_item_info" style={{ backgroundColor: !bidView ? '#F18805' : 'white' }}>
+                  <h2 className={!bidView ? "alpha_detail_page_price_view_header_item_info_text" : "alpha_detail_page_price_view_header_item_info_text_two"}>
+                    Item Info
+                  </h2>
+                </div>
+                <div onClick={() => setBidView(!bidView)} className="alpha_detail_page_price_view_header_item_info" style={{ borderTopRightRadius: 5, borderTopLeftRadius: 0, backgroundColor: bidView ? '#F18805' : 'white' }}>
+                  <h2 className={bidView ? "alpha_detail_page_price_view_header_item_info_text" : "alpha_detail_page_price_view_header_item_info_text_two"}>
+                    Bids (29 bids)
+                  </h2>
+                </div>
               </div>
-            }
-            <p>Donec non tristique ex. Maecenas malesuada, nulla efficitur eleifend rutrum, risus quam consectetur ante, non fringilla libero nisi nec lectus. Morbi lectus ex, ultrices eget lobortis ut, dignissim a tortor. Donec sodales ante mi, id laoreet magna sodales vitae. </p>
-          </div> */}
-          <div className="alpha_detail_page_price_top_view">
-            <div className="alpha_detail_page_price_view_header">
-              <div onClick={() => setBidView(!bidView)} className="alpha_detail_page_price_view_header_item_info" style={{ backgroundColor: !bidView ? '#F18805' : 'white' }}>
-                <h2 className={!bidView ? "alpha_detail_page_price_view_header_item_info_text" : "alpha_detail_page_price_view_header_item_info_text_two"}>
-                  Item Info
-                </h2>
-              </div>
-              <div onClick={() => setBidView(!bidView)} className="alpha_detail_page_price_view_header_item_info" style={{ borderTopRightRadius: 5, borderTopLeftRadius: 0, backgroundColor: bidView ? '#F18805' : 'white' }}>
-                <h2 className={bidView ? "alpha_detail_page_price_view_header_item_info_text" : "alpha_detail_page_price_view_header_item_info_text_two"}>
-                  Bids (29 bids)
-                </h2>
-              </div>
+              {!bidView ?
+                <div>
+                  <div className="alpha_detail_page_price_view_share_view">
+                    <h2>High Bid</h2>
+                    <img src={share} />
+                  </div>
+                  <h1>$82,000</h1>
+                  <div style={{ alignSelf: 'center', marginLeft: 20 }} className="alpha_detail_page_price_view_button_view">
+                    <h2>Place Bid</h2>
+                  </div>
+                  <div className="alpha_detail_page_price_view_box_close_date_view">
+                    <img src={clock} />
+                    <h5>Closes:<span style={{ fontWeight: 700 }}> Dec 1, 5:05:30 AM</span></h5>
+                  </div>
+                  <div className="alpha_detail_page_price_view_location_view">
+                    <img src={pinLocation} />
+                    <h4>Timed Auction:<span style={{ color: '#005B99' }}> Australia National Unreserved Auction, AUS</span></h4>
+                  </div>
+                  <p>Donec non tristique ex. Maecenas malesuada, nulla efficitur eleifend rutrum, risus quam consectetur ante, non fringilla libero nisi nec lectus. Morbi lectus ex, ultrices eget lobortis ut, dignissim a tortor. Donec sodales ante mi, id laoreet magna sodales vitae. </p>
+
+                </div>
+                :
+                <div>
+                  <div className="alpha_detail_page_price_view_bid_list_view">
+                    {bidsPriceArray.map((item) => {
+                      return (
+                        <div key={item.id} className="alpha_detail_page_price_view_bid_list_item_view">
+                          <div>
+                            <h2>{item.price}</h2>
+                          </div>
+                        </div>
+                      )
+                    })}
+                  </div>
+                  <h3>Closes:<span style={{ fontWeight: 700 }}>Dec 1, 5:05:30 AM</span> </h3>
+                  <div className="alpha_detail_page_price_view_bid_list_price_large_view">
+                    <h2>$</h2>
+                    <h3>${bidValue}</h3>
+                  </div>
+                  <div className="alpha_detail_page_price_view_bid_list_buttons_view">
+                    <div onClick={() => increamentOrDecrement(1)}>
+                      <img src={minus} />
+                    </div>
+                    <div onClick={() => increamentOrDecrement(2)}>
+                      <img src={plus} />
+                    </div>
+                  </div>
+                  <div className="alpha_detail_page_price_view_bid_list_button">
+                    <h2>Place Bid</h2>
+                  </div>
+                </div>
+              }
             </div>
-            <h2>hello</h2>
-          </div>
+            :
+
+            <div className="alpha_detail_page_price_top_view">
+              <div className="alpha_detail_page_price_view_title_view">
+                <h2>Item Info</h2>
+              </div>
+              <div className="alpha_detail_page_price_view_share_view">
+                <h2>{state?.screen === 'spareparts' ? 'Per day' : 'Price'}</h2>
+                <img src={share} />
+              </div>
+              <h1>$82,000</h1>
+              <div className="alpha_detail_page_price_view_button_view">
+                <h2>{state?.screen === 'spareparts' ? 'Request For Rent' : 'Pay'}</h2>
+              </div>
+              {state?.screen === 'rented' &&
+                <div className="alpha_detail_page_price_view_location_view">
+                  <img src={pinLocation} />
+                  <h4>Location:<span style={{ color: '#005B99' }}> Australia National Unreserved Auction, AUS</span></h4>
+                </div>
+              }
+              <p>Donec non tristique ex. Maecenas malesuada, nulla efficitur eleifend rutrum, risus quam consectetur ante, non fringilla libero nisi nec lectus. Morbi lectus ex, ultrices eget lobortis ut, dignissim a tortor. Donec sodales ante mi, id laoreet magna sodales vitae. </p>
+            </div>
+          }
+
         </div>
         <div className="alpha_detail_page_about_top_view">
           <h1>About Alpha Equipment Listings.</h1>

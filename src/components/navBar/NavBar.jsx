@@ -2,10 +2,18 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { logo, filterIcon, drawerIcon, search } from '../../assets/icons'
 import './navBar.css'
+import { useDispatch, useSelector } from "react-redux";
+import { activeTab } from '../../redux/activeTabSlice';
 
 export default function NavBar() {
+    const disPatch = useDispatch();
+    const data = useSelector((data) => data.activeTab.value,);
     const navigate = useNavigate();
     const [marginLeft, setMarginLeft] = useState(-300)
+    const onClick = (type, value) => {
+        disPatch(activeTab(value))
+        navigate(type, { state: { screen: value } })
+    }
 
     return (
         <div className="alpha-navbar-main_container">
@@ -34,12 +42,12 @@ export default function NavBar() {
 
                 </div>
                 <div className="alpha-navbar-nav_items_top_view">
-                    <h3 onClick={() => navigate('/maincategorypage', { state: { screen: 'category' } })}>Category</h3>
-                    <h3 onClick={() => navigate('/productlistingpage', { state: { screen: 'auction' } })}>Auction</h3>
-                    <h3 onClick={() => navigate('/maincategorypage', { state: { screen: 'spareparts' } })}>Spare Parts</h3>
-                    <h3>Financing</h3>
-                    <h3 onClick={() => navigate('/maincategorypage', { state: { screen: 'rented' } })}>Rented</h3>
-                    <h3>Calculator</h3>
+                    <h3 style={{ color: data === 'category' ? '#F18805' : ' #303030' }} onClick={() => onClick('/productlistingpage', 'category')}>Category</h3>
+                    <h3 style={{ color: data === 'auction' ? '#F18805' : ' #303030' }} onClick={() => onClick('/productlistingpage', 'auction')}>Auction</h3>
+                    <h3 style={{ color: data === 'spareparts' ? '#F18805' : ' #303030' }} onClick={() => onClick('/maincategorypage', 'spareparts')}>Spare Parts</h3>
+                    <h3 style={{ color: data === 'financing' ? '#F18805' : ' #303030' }} onClick={() => onClick('/financing', 'financing')}>Financing</h3>
+                    <h3 style={{ color: data === 'rented' ? '#F18805' : ' #303030' }} onClick={() => onClick('/maincategorypage', 'rented')}>Rented</h3>
+                    <h3 style={{ color: data === 'calculator' ? '#F18805' : ' #303030' }} onClick={() => onClick('/calculator', 'calculator')}>Calculator</h3>
                 </div>
             </div>
 
@@ -62,12 +70,12 @@ export default function NavBar() {
                         <input placeholder='Search your query' />
                         <img src={search} />
                     </div>
-                    <h3 onClick={() => navigate('/maincategorypage', { state: { screen: 'category' } })}>Category</h3>
-                    <h3 onClick={() => navigate('/productlistingpage', { state: { screen: 'auction' } })}>Auction</h3>
-                    <h3 onClick={() => navigate('/maincategorypage', { state: { screen: 'spareparts' } })}>Spare Parts</h3>
-                    <h3>Financing</h3>
-                    <h3 onClick={() => navigate('/maincategorypage', { state: { screen: 'rented' } })}>Rented</h3>
-                    <h3>Calculator</h3>
+                    <h3 style={{ color: data === 'category' ? '#F18805' : ' #303030' }} onClick={() => onClick('/productlistingpage', 'category')}>Category</h3>
+                    <h3 style={{ color: data === 'auction' ? '#F18805' : ' #303030' }} onClick={() => onClick('/productlistingpage', 'auction')}>Auction</h3>
+                    <h3 style={{ color: data === 'spareparts' ? '#F18805' : ' #303030' }} onClick={() => onClick('/maincategorypage', 'spareparts')}>Spare Parts</h3>
+                    <h3 style={{ color: data === 'financing' ? '#F18805' : ' #303030' }} onClick={() => onClick('/financing', 'financing')}>Financing</h3>
+                    <h3 style={{ color: data === 'rented' ? '#F18805' : ' #303030' }} onClick={() => onClick('/maincategorypage', 'rented')}>Rented</h3>
+                    <h3 style={{ color: data === 'calculator' ? '#F18805' : ' #303030' }} onClick={() => onClick('/calculator', 'calculator')}>Calculator</h3>
                     <h3 onClick={() => setMarginLeft(-300)} style={{ color: 'red' }}>Close</h3>
                     <div className="alpha-navbar-menu_login_view">
                         <div>

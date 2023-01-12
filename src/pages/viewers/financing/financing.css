@@ -1,0 +1,217 @@
+.alpha-financing-top_container {
+    display: flex;
+    flex-direction: column;
+    margin: 5rem 9rem 5rem 9rem;
+    box-sizing: border-box;
+    padding: 4rem;
+    background: #FFFFFF;
+    border: 1px solid #DBDBDB;
+}
+
+.alpha-financing-detail_container {
+    display: flex;
+    flex-direction: column;
+}
+
+.alpha-financing-detail_container h1 {
+    font-family: lato;
+    font-weight: 600;
+    font-size: 3.2rem;
+    line-height: 3.2rem;
+    color: #F18805;
+    padding-bottom: 2rem;
+}
+
+.alpha-financing-detail_container h2 {
+    font-family: lato;
+    font-weight: 600;
+    font-size: 2.4rem;
+    line-height: 3.2rem;
+    color: #F18805;
+    padding-top: 0.8rem;
+    padding-bottom: 2rem;
+}
+
+.alpha-financing-detail_container h3 {
+    font-family: lato;
+    font-weight: 400;
+    font-size: 1.8rem;
+    line-height: 2.5rem;
+    color: #000000;
+    padding-bottom: 1.2rem;
+}
+
+.alpha-financing-services_top_view {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 0.8rem;
+}
+
+.alpha-financing-services_top_view div {
+    display: flex;
+    flex-direction: column;
+    width: 35rem;
+    align-items: center;
+    margin-bottom: 4rem;
+}
+
+.alpha-financing-services_top_view h3 {
+    font-family: lato;
+    font-weight: 700;
+    font-size: 1.8rem;
+    line-height: 2.4rem;
+    color: #000000;
+    padding-top: 1.6rem;
+    padding-bottom: 1rem;
+}
+
+.alpha-financing-services_top_view h4 {
+    font-family: lato;
+    font-weight: 400;
+    font-size: 1.6rem;
+    line-height: 2rem;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #000000;
+}
+
+.alpha-financing-services_image_one {
+    width: 6rem;
+    height: 6rem;
+    object-fit: cover;
+}
+
+.alpha-financing-services_image_two {
+    width: 6.8rem;
+    height: 6rem;
+    object-fit: cover;
+}
+
+.alpha-financing-services_image_three {
+    width: 8.8rem;
+    height: 6rem;
+    object-fit: cover;
+}
+
+.alpha-financing-services_image_four {
+    width: 5.6rem;
+    height: 6rem;
+    object-fit: cover;
+}
+
+.alpha-financing-services_image_five {
+    width: 4rem;
+    height: 6rem;
+    object-fit: cover;
+}
+
+.alpha-financing-margin_left {
+    display: flex;
+    margin-left: 15rem;
+}
+
+.alpha-financing-margin_right {
+    display: flex;
+    margin-right: 15rem;
+}
+
+.alpha-financing-steps_title_view {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+}
+
+.alpha-financing-steps_title_view h2 {
+    font-family: lato;
+    font-weight: 600;
+    font-size: 3.2rem;
+    line-height: 2.5rem;
+    color: #F18805;
+    padding-bottom: 2rem;
+}
+
+.alpha-financing-steps_title_view h3 {
+    font-family: lato;
+    font-weight: 400;
+    font-size: 1.9rem;
+    line-height: 2.5rem;
+    color: #272727;
+}
+
+.alpha-financing-inputs_top_view {
+    display: flex;
+    margin-top: 4rem;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 14.2rem;
+    padding-right: 14.2rem;
+}
+
+.alpha-financing-inputs_top_view div {
+    margin-bottom: 1.6rem;
+    margin-right: 0.5rem;
+}
+
+.alpha-financing-terms_view {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: -2rem;
+    padding-left: 14rem;
+    cursor: pointer;
+}
+
+.alpha-financing-terms_view img {
+    width: 2.3rem;
+    height: 2.3rem;
+    margin-right: 0.4rem;
+}
+
+.alpha-financing-terms_view h2 {
+    font-family: lato;
+    font-weight: 400;
+    font-size: 1.8rem;
+    line-height: 2rem;
+    color: #707070;
+}
+
+.alpha-financing-inputs_view_button {
+    display: flex;
+    margin-top: 5.2rem;
+    justify-content: center;
+}
+
+.alpha-financing-inputs_view_button div {
+    width: 34.3rem;
+    height: 4.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #F18805;
+    border-radius: 1rem;
+}
+
+.alpha-financing-inputs_view_button h2 {
+    font-family: lato;
+    font-weight: 600;
+    font-size: 1.6rem;
+    line-height: 1.6rem;
+    color: #FFFFFF;
+}
+
+@media screen and (max-width: 1312px) {
+    .alpha-financing-margin_left {
+        margin-left: 0;
+    }
+
+    .alpha-financing-margin_right {
+        margin-right: 0;
+    }
+}
