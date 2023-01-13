@@ -34,7 +34,9 @@ export default function SignIn() {
           <h1>Sign IN</h1>
           <TextInput placeholder={'Enter your user name'} title={'User Name'} />
           <TextInput placeholder={'Enter your password'} title={'Password'} />
-          <div onClick={() => navigate('/forgotpassword')} className="alpha-signin-forgot_password_view">
+          <div
+            // onClick={() => navigate('/forgotpassword')}
+            className="alpha-signin-forgot_password_view">
             <h3>
               Forget Password? {" "}
               <span style={{ color: '#F18805' }}>Reset Password</span>

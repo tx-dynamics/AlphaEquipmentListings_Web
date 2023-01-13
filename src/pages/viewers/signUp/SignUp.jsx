@@ -37,7 +37,10 @@ export default function SignUp() {
           <TextInput placeholder={'Enter your password'} title={'Password'} />
           <TextInput placeholder={'Enter your password'} title={'Confirm Password'} />
           <div className="alpha-signin-button-view">
-            <Button onClick={() => navigate('/otpscreen', { state: { screen: 'signup' } })}>SIGN UP</Button>
+            <Button
+              onClick={() => navigate('/homepage', { replace: true })}
+            // onClick={() => navigate('/otpscreen', { state: { screen: 'signup' } })}
+            >SIGN UP</Button>
           </div>
           <div className="alpha-signin-or_view">
             <h3>OR</h3>

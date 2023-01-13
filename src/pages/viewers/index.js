@@ -8,4 +8,4 @@ export { default as ProductListingPage } from './productListingPage/ProductListi
 export { default as ProductDetailPage } from './productDetailPage/ProductDetailPage'
 export { default as Calculator } from './calculator/Calculator'
 export { default as Financing } from './financing/Financing'
-export { default as OtpScreen } from './otpScreen/OtpScreen'
+// export { default as OtpScreen } from './otpScreen/OtpScreen'
