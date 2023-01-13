@@ -1,0 +1,35 @@
+.alpha-financing-finance_step_four_des_view {
+    display: flex;
+    width: 60%;
+}
+
+.alpha-financing-finance_step_four_des_view h3 {
+    font-family: lato;
+    font-weight: 400;
+    font-size: 1.6rem;
+    line-height: 2.2rem;
+    color: #707070;
+
+}
+
+@media screen and (max-width: 500px) {
+    .alpha-financing-finance_step_four_des_view {
+        width: 80% !important;
+    }
+
+    .alpha-financing-finance_step_four_des_view h3 {
+        font-size: 1.4rem;
+        line-height: 2rem;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .alpha-financing-finance_step_four_des_view {
+        width: 100% !important;
+    }
+
+    .alpha-financing-finance_step_four_des_view h3 {
+        font-size: 1.2rem;
+        line-height: 1.8rem;
+    }
+}

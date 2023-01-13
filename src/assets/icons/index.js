@@ -46,4 +46,5 @@ export { default as financingFive } from './financingFive.png'
 export { default as financingLogo } from './financingLogo.png'
 export { default as check } from './check.png'
 export { default as unCheck } from './unCheck.png'
+export { default as dotedTick } from './dotedTick.png'
 

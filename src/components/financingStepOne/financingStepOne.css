@@ -1,0 +1,178 @@
+.alpha-financing-finance_step_one_top_view {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.alpha-financing-finance_step_one_view {
+  display: flex;
+  width: 53%;
+  flex-direction: column;
+  flex: 1;
+  height: 100%;
+}
+
+.alpha-financing-finance_step_one_view h1 {
+  font-family: lato;
+  font-weight: 700;
+  font-size: 2.4rem;
+  line-height: 2.5rem;
+  color: #F18805;
+  padding-bottom: 1.4rem;
+}
+
+.alpha-financing-radia_view_top_view {
+  display: flex;
+  flex-direction: column;
+}
+
+.alpha-financing-radia_view_top_view h2 {
+  padding-top: 1rem;
+  padding-bottom: 1.6rem;
+  font-family: lato;
+  font-weight: 600;
+  font-size: 1.8rem;
+  line-height: 2.5rem;
+  color: #272727;
+}
+
+.alpha-financing-radia_view_image_top_view {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 1.4rem;
+}
+
+.alpha-financing-radia_view_image_top_view div {
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 1rem;
+  border: 2px solid #F18805;
+  /* background-color: #F18805; */
+  margin-right: 0.8rem;
+}
+
+.alpha-financing-radia_view_image_top_view h3 {
+  font-family: lato;
+  font-weight: 400;
+  font-size: 1.8rem;
+  line-height: 2.4rem;
+  color: #484848;
+}
+
+
+.alpha-financing-finance_step_one_image_view {
+  display: flex;
+  width: 47%;
+  height: 100%;
+  margin-top: 4.5rem;
+}
+
+.alpha-financing-finance_step_one_image_view img {
+  width: 80%;
+  height: 80%;
+  object-fit: cover;
+}
+
+.alpha-financing-step_one_inputs_top_view {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.alpha-financing-finance_step_one_button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2.6rem;
+}
+
+.alpha-financing-finance_step_one_button div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34.3rem;
+  height: 4.8rem;
+  background: #F18805;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.alpha-financing-finance_step_one_button h2 {
+  font-family: lato;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 16px;
+  text-transform: uppercase;
+  color: #FFFFFF;
+}
+
+@media screen and (max-width: 700px) {
+  .alpha-financing-finance_step_one_image_view {
+    display: none;
+  }
+
+  .alpha-financing-finance_step_one_view {
+    width: 53%;
+  }
+}
+
+@media screen and (max-width: 560px) {
+  .alpha-financing-finance_step_one_view h1 {
+    font-size: 2.2rem;
+    line-height: 2.2rem;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .alpha-financing-finance_step_one_view h1 {
+    font-size: 2rem;
+    line-height: 2rem;
+  }
+
+  .alpha-financing-radia_view_top_view h2 {
+    font-size: 1.6rem;
+    line-height: 2.2rem;
+
+  }
+
+  .alpha-financing-radia_view_image_top_view div {
+    width: 1.4rem;
+    height: 1.4rem;
+  }
+
+  .alpha-financing-radia_view_image_top_view h3 {
+    font-size: 1.6rem;
+    line-height: 2.2rem;
+  }
+
+  .alpha-financing-finance_step_one_button h2 {
+
+    font-size: 14px;
+    line-height: 14px;
+
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .alpha-financing-finance_step_one_view h1 {
+    font-size: 1.6rem;
+    line-height: 1.6rem;
+  }
+
+  .alpha-financing-radia_view_top_view h2 {
+    font-size: 1.4rem;
+    line-height: 2rem;
+
+  }
+
+  .alpha-financing-radia_view_image_top_view div {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+
+  .alpha-financing-radia_view_image_top_view h3 {
+    font-size: 1.4rem;
+    line-height: 2rem;
+  }
+}

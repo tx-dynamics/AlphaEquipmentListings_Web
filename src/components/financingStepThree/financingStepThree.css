@@ -1,0 +1,74 @@
+.alpha-financing-finance_step_three_same_as_view {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  width: 55%;
+  cursor: pointer;
+}
+
+.alpha-financing-finance_step_three_same_as_view img {
+  width: 2.3rem;
+  height: 2.3rem;
+  object-fit: cover;
+  margin-right: 0.4rem;
+}
+
+.alpha-financing-finance_step_three_same_as_view h2 {
+  font-family: lato;
+  font-weight: 400;
+  font-size: 1.8rem;
+  line-height: 2rem;
+  color: #707070;
+}
+
+.alpha-financing-finance_step_three_physical_text {
+  display: flex;
+  padding-top: 4rem;
+  padding-bottom: 1.5rem;
+
+}
+
+.alpha-financing-finance_step_three_physical_text h2 {
+  font-family: lato;
+  font-weight: 700;
+  font-size: 1.8rem;
+  line-height: 2.5rem;
+  color: #F18805;
+}
+
+
+@media screen and (max-width: 572px) {
+  .alpha-financing-finance_step_three_same_as_view {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .alpha-financing-finance_step_three_same_as_view img {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .alpha-financing-finance_step_three_same_as_view h2 {
+    font-size: 1.4rem;
+    line-height: 1.6rem;
+  }
+
+  .alpha-financing-finance_step_three_physical_text h2 {
+    font-size: 1.4rem;
+    line-height: 2rem;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .alpha-financing-finance_step_three_same_as_view img {
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+
+  .alpha-financing-finance_step_three_same_as_view h2 {
+    font-size: 1.2rem;
+    line-height: 1.4rem;
+  }
+
+}
