@@ -13,3 +13,6 @@ export { default as FinancingStepThree } from './financingStepThree/FinancingSte
 export { default as FinancingStepFour } from './financingStepFour/FinancingStepFour'
 export { default as FinancingStepFive } from './financingStepFive/FinancingStepFive'
 export { default as SubmitModel } from './submitModel/SubmitModel'
+export { default as MembershipModel } from './membershipModel/MembershipModel'
+export { default as PaymentModel } from './paymentModel/PaymentModel'
+export { default as ConnectCardModel } from './connectCardModel/ConnectCardModel'

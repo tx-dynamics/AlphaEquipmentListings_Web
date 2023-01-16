@@ -1,0 +1,256 @@
+.alpha-membership_model_top_view {
+  display: flex;
+  width: 46.8rem;
+  background: #FFFFFF;
+  border-radius: 1.8rem;
+  flex-direction: column;
+}
+
+.alpha-membership_cross_view {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1.6rem 2.6rem 0rem 0rem;
+}
+
+.alpha-membership_cross_view img {
+  width: 2.7rem;
+  height: 2.7rem;
+  cursor: pointer;
+}
+
+.alpha-membership_title_view {
+  display: flex;
+  align-items: center;
+  margin-top: -0.5rem;
+  flex-direction: column;
+  padding-left: 3rem;
+  padding-right: 3rem;
+}
+
+.alpha-membership_title_view h2 {
+  font-family: lato;
+  font-weight: 600;
+  font-size: 2.4rem;
+  line-height: 3.4rem;
+  text-transform: capitalize;
+  color: #000000;
+}
+
+.alpha-membership_title_view h3 {
+  font-family: lato;
+  font-weight: 400;
+  font-size: 1.8rem;
+  line-height: 2.2rem;
+  color: #000000;
+  padding-top: 4rem;
+  padding-bottom: 1.6rem;
+}
+
+.alpha-membership_services_view {
+  display: flex;
+  width: 80%;
+  margin-bottom: 1.6rem;
+  background: #FEF3E6;
+  border-radius: 5px;
+  padding: 1rem 1.2rem 1rem 0.8rem;
+  align-self: center;
+}
+
+.alpha-membership_services_view img {
+  width: 4rem;
+  height: 4.2rem;
+  margin-right: 0.8rem;
+}
+
+.alpha-membership_services_view div {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+
+}
+
+.alpha-membership_services_view h2 {
+  font-family: lato;
+  font-weight: 700;
+  font-size: 1.8rem;
+  line-height: 2.5rem;
+  color: #F18805;
+  padding-bottom: 0.6rem;
+
+}
+
+.alpha-membership_services_view h4 {
+  font-family: lato;
+  font-weight: 350;
+  font-size: 1.4rem;
+  line-height: 1.9rem;
+  color: #272727;
+}
+
+.alpha-membership_button_view {
+  display: flex;
+  width: 75%;
+  height: 4.8rem;
+  margin-top: 1.4rem;
+  margin-bottom: 3rem;
+  align-items: center;
+  justify-content: center;
+  background: #F18805;
+  border-radius: 1rem;
+  cursor: pointer;
+  align-self: center;
+}
+
+.alpha-membership_button_view h5 {
+  font-family: lato;
+  font-weight: 700;
+  font-size: 1.8rem;
+  line-height: 1.6rem;
+  text-transform: uppercase;
+  color: #FFFFFF;
+}
+
+.alpha-membership_charges_view {
+  width: 36.5rem;
+  background: #FEF3E6;
+  border: 2px solid #FEF3E6;
+  border-radius: 5px;
+  align-self: center;
+  margin-bottom: 2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.alpha-membership_charges_view h2 {
+  font-family: lato;
+  font-weight: 700;
+  font-size: 1.6rem;
+  line-height: 2.5rem;
+  align-self: flex-start;
+  color: #F18805;
+  padding: 0.5rem 0rem 0.5rem 1.2rem;
+}
+
+.alpha-membership_charges_view div {
+  background-color: white;
+  width: 99%;
+  display: flex;
+  height: 75%;
+  margin-bottom: 0.2rem;
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+  flex-direction: column;
+  align-items: center;
+}
+
+.alpha-membership_charges_view h3 {
+  font-family: lato;
+  font-weight: 700;
+  font-size: 2.2rem;
+  line-height: 2.5rem;
+  color: #F18805;
+  padding-top: 2rem;
+  padding-bottom: 0.8rem;
+}
+
+.alpha-membership_charges_view h4 {
+  font-family: lato;
+  font-weight: 350;
+  font-size: 1.4rem;
+  line-height: 1.9rem;
+  color: #272727;
+  padding-bottom: 2rem;
+  padding-left: 1.2rem;
+  padding-right: 1.2rem;
+}
+
+@media screen and (max-width:650px) {
+  .alpha-membership_model_top_view {
+    width: 35rem;
+  }
+
+  .alpha-membership_cross_view img {
+    width: 2.4rem;
+    height: 2.4rem;
+  }
+
+  .alpha-membership_title_view h2 {
+    font-size: 2rem;
+    line-height: 3rem;
+  }
+
+  .alpha-membership_title_view h3 {
+    font-size: 1.4rem;
+    line-height: 1.8rem;
+  }
+
+  .alpha-membership_services_view img {
+    width: 3.5rem;
+    height: 2.7rem;
+  }
+
+  .alpha-membership_services_view h2 {
+    font-size: 1.4rem;
+    line-height: 2.1rem;
+  }
+
+  .alpha-membership_services_view h4 {
+    font-size: 1.2rem;
+    line-height: 1.7rem;
+  }
+
+  .alpha-membership_button_view h5 {
+    font-size: 1.4rem;
+    line-height: 1.2rem;
+  }
+
+  .alpha-membership_charges_view {
+    width: 30rem;
+  }
+
+  .alpha-membership_charges_view h2 {
+    font-size: 1.2rem;
+    line-height: 2rem;
+  }
+
+
+  .alpha-membership_charges_view h3 {
+    font-size: 1.8rem;
+    line-height: 2.1rem;
+  }
+
+  .alpha-membership_charges_view h4 {
+
+    font-size: 1.2rem;
+    line-height: 1.7rem;
+
+  }
+}
+
+@media screen and (max-width:400px) {
+  .alpha-membership_model_top_view {
+    width: 28rem;
+  }
+
+  .alpha-membership_cross_view img {
+    width: 2.2rem;
+    height: 2.2rem;
+  }
+
+  .alpha-membership_title_view h2 {
+    font-size: 1.8rem;
+    line-height: 2.8rem;
+  }
+
+  .alpha-membership_title_view h3 {
+    font-size: 1.4rem;
+    line-height: 1.8rem;
+    padding-top: 1rem;
+  }
+
+  .alpha-membership_charges_view {
+    width: 25rem;
+  }
+}

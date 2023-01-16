@@ -47,4 +47,18 @@ export { default as financingLogo } from './financingLogo.png'
 export { default as check } from './check.png'
 export { default as unCheck } from './unCheck.png'
 export { default as dotedTick } from './dotedTick.png'
+export { default as allWeek } from './allWeek.png'
+export { default as applePay } from './applePay.png'
+export { default as best } from './best.png'
+export { default as creditCard } from './creditCard.png'
+export { default as finance } from './finance.png'
+export { default as googlePay } from './googlePay.png'
+export { default as samsungPay } from './samsungPay.png'
+export { default as trusted } from './trusted.png'
+export { default as wallet } from './wallet.png'
+export { default as crossCircle } from './crossCircle.png'
+export { default as crossCircleWhite } from './crossCircleWhite.png'
+export { default as dotedCross } from './dotedCross.png'
+
+
 

@@ -1,0 +1,207 @@
+.alpha-payment_model_top_view {
+  display: flex;
+  width: 48rem;
+  flex-direction: column;
+  background: #FFFFFF;
+  border-radius: 8px;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.alpha-payment_model_header_view {
+  display: flex;
+  height: 6.9rem;
+  background-color: #F18805;
+  border-top-left-radius: 8px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border-top-right-radius: 8px;
+  padding-right: 2.4rem;
+}
+
+.alpha-payment_model_header_view h2 {
+  font-family: lato;
+  font-weight: 700;
+  font-size: 2.4rem;
+  line-height: 2.9rem;
+  color: #FFFFFF;
+  margin-left: 5rem;
+}
+
+.alpha-payment_model_header_view img {
+  width: 2.7rem;
+  height: 2.7rem;
+}
+
+.alpha-payment_model_payment_title_view {
+  display: flex;
+  padding-top: 3rem;
+  padding-left: 3rem;
+  padding-right: 3rem;
+  flex-direction: column;
+}
+
+.alpha-payment_model_payment_title_view h2 {
+  font-family: lato;
+  font-weight: 700;
+  font-size: 2.2rem;
+  line-height: 2.5rem;
+  color: #F18805;
+  padding-bottom: 0.8rem;
+}
+
+.alpha-payment_model_payment_title_view h3 {
+  font-family: lato;
+  font-weight: 350;
+  font-size: 1.4rem;
+  line-height: 2.2rem;
+  color: #272727;
+  padding-bottom: 2rem;
+}
+
+.alpha-payment_model_payment_options_view {
+  width: 36.5rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.6rem 2rem;
+  align-self: center;
+  background: #FFFFFF;
+  box-shadow: 0px 0px 15px rgba(57, 61, 72, 0.1);
+  border-radius: 3.5rem;
+  margin-bottom: 1.6rem;
+  cursor: pointer;
+}
+
+.alpha-payment_model_payment_options_title_view {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.alpha-payment_model_payment_options_title_view img {
+  width: 2.8rem;
+  margin-right: 1.5rem;
+  height: 2.8rem;
+}
+
+.alpha-payment_model_payment_options_title_view h3 {
+  font-family: lato;
+  font-weight: 500;
+  font-size: 1.6rem;
+  line-height: 1.9rem;
+  text-transform: capitalize;
+  color: #333333;
+}
+
+.alpha-payment_model_payment_options_select_view {
+  width: 1.4rem;
+  height: 1.4rem;
+  border: 1px solid #F18805;
+  border-radius: 1rem;
+}
+
+.alpha-payment_model_button_view {
+  display: flex;
+  width: 72%;
+  height: 4.8rem;
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+  align-items: center;
+  justify-content: center;
+  background: #F18805;
+  border-radius: 1rem;
+  cursor: pointer;
+  align-self: center;
+}
+
+.alpha-payment_model_button_view h5 {
+  font-family: lato;
+  font-weight: 600;
+  font-size: 1.6rem;
+  line-height: 1.6rem;
+  text-transform: uppercase;
+  color: #FFFFFF;
+}
+
+@media screen and (max-width:600px) {
+  .alpha-payment_model_top_view {
+    width: 42rem;
+  }
+
+  .alpha-payment_model_header_view {
+    height: 4.9rem;
+  }
+
+  .alpha-payment_model_header_view h2 {
+    font-size: 2rem;
+    line-height: 2.5rem;
+  }
+
+  .alpha-payment_model_header_view img {
+    width: 2.3rem;
+    height: 2.3rem;
+  }
+
+  .alpha-payment_model_payment_title_view {
+    padding-top: 2rem;
+  }
+
+  .alpha-payment_model_payment_title_view h2 {
+    font-size: 1.8rem;
+    line-height: 2.1rem;
+  }
+
+  .alpha-payment_model_payment_title_view h3 {
+    font-size: 1.2rem;
+    line-height: 2rem;
+    margin-bottom: 0rem;
+  }
+
+  .alpha-payment_model_payment_options_view {
+    width: 30rem;
+  }
+
+  .alpha-payment_model_payment_options_title_view img {
+    width: 2.4rem;
+    height: 2.4rem;
+  }
+
+  .alpha-payment_model_payment_options_title_view h3 {
+    font-size: 1.2rem;
+    line-height: 1.5rem;
+  }
+
+  .alpha-payment_model_payment_options_select_view {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+
+  .alpha-payment_model_button_view h5 {
+    font-size: 1.2rem;
+    line-height: 1.4rem;
+  }
+}
+
+@media screen and (max-width:470px) {
+  .alpha-payment_model_top_view {
+    width: 35rem;
+  }
+
+  .alpha-payment_model_payment_options_view {
+    width: 25rem;
+  }
+
+}
+
+@media screen and (max-width:370px) {
+  .alpha-payment_model_top_view {
+    width: 30rem;
+  }
+
+  .alpha-payment_model_payment_options_view {
+    width: 20rem;
+  }
+}

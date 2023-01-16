@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { landingPageBanner } from '../../../assets/icons'
-import { BlogView, DashboardAuctionView, DashboardCategoriesView, DashboardSparePartView, Footer, NavBar } from "../../../components";
+import { BlogView, ConnectCardModel, DashboardAuctionView, DashboardCategoriesView, DashboardSparePartView, Footer, MembershipModel, NavBar, PaymentModel } from "../../../components";
 import './homePage.css'
 
 export default function HomePage() {
+  const [chargesView, setChargesView] = useState(false)
+  const [membershipModel, setMembershipModel] = useState(false)
   const auctionArray = [
     {
       id: 1
@@ -118,6 +120,10 @@ export default function HomePage() {
     <div className="alpha-home_page-main_container">
       <BlogView />
       <NavBar />
+      <ConnectCardModel />
+      {/* <PaymentModel onClick={(value) => console.log(value)} /> */}
+      {membershipModel && <MembershipModel chargesView={chargesView} onClick={() => !chargesView ? setChargesView(true) : setMembershipModel(false)} />
+      }
       <div className="alpha-home_page-container">
         <img src={landingPageBanner} alt={'Banner'} />
         <div className="alpha-home_page-auction_top_view">
