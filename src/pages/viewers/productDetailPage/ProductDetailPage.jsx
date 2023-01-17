@@ -1,13 +1,22 @@
 import React, { useState } from "react";
-import { arrowDown, arrowDownBlack, close, distance, drawerIcon, dummyFour, dummyOne, dummyThree, dummyTwo, images, flag, hour, menu, pinLocation, search, searchWhite, sNumber, nextDoubleArrow, share, plus, minus, clock } from "../../../assets/icons";
-import { BlogView, Button, DashboardCategoriesView, Footer, NavBar } from "../../../components";
+import { distance, dummyFour, dummyOne, dummyThree, images, flag, hour, pinLocation, sNumber, nextDoubleArrow, share, plus, minus, clock, dotedTick, dotedCross } from "../../../assets/icons";
+import { BlogView, ConnectCardModel, Footer, NavBar, PaymentModel, OtpModel, BookingModel, ReviewModel, SubmitModel } from "../../../components";
 import './productDetailPage.css'
 import { Slide } from 'react-slideshow-image';
 import 'react-slideshow-image/dist/styles.css';
-import { Swiper, SwiperSlide } from "swiper/react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { activeTab } from "../../../redux/activeTabSlice";
 
 export default function ProductDetailPage() {
+  const navigate = useNavigate()
+  const disPatch = useDispatch();
+  const [bookingModel, setBookingModel] = useState(false)
+  const [reviewModel, setReviewModel] = useState(false)
+  const [paymentModel, setPaymentModel] = useState(false)
+  const [connectCard, setConnectCard] = useState(false)
+  const [successfullModel, setSuccessfullModel] = useState(false)
+  const [otpModel, setOtpModel] = useState(false)
   const [bidValue, setBidValue] = useState(82000)
 
   const { state } = useLocation()
@@ -94,9 +103,16 @@ export default function ProductDetailPage() {
     <div className="alpha-pro_list_page-main_container">
       <BlogView />
       <NavBar />
+      {bookingModel && <BookingModel onClickClose={() => setBookingModel(false)} onClick={() => [setPaymentModel(true), setBookingModel(false)]} />}
+      {paymentModel && <PaymentModel onClickClose={() => setPaymentModel(false)} onClick={(value) => value.id === 1 ? [setReviewModel(true), setPaymentModel(false)] : value.id === 2 ? [setConnectCard(true), setPaymentModel(false)] : value.id === 3 ? [setPaymentModel(false), [navigate('/financing', 'financing'), disPatch(activeTab('financing'))]] : [setReviewModel(true), setPaymentModel(false)]} />}
+      {reviewModel && <ReviewModel onClickClose={() => [setReviewModel(false)]} onClick={() => [setOtpModel(true), setReviewModel(false)]} />}
+      {connectCard && <ConnectCardModel onClick={() => [setReviewModel(true), setConnectCard(false)]} onClickClose={() => [setConnectCard(false)]} />}
+      {otpModel && <OtpModel onClick={() => [setSuccessfullModel(true), setOtpModel(false)]} onClickClose={() => [setOtpModel(false)]} />}
+      {successfullModel && <SubmitModel onClick={() => setSuccessfullModel(false)} icon={dotedTick} button title={'Congratulations!'} des={'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque mattis fringilla eros, sit amet auctor justo accumsan et.'} />}
+      {/* {successfullModel && <SubmitModel try onClick={() => setSuccessfullModel(false)} onClickTry={() => [setPaymentModel(true), setSuccessfullModel(false)]} icon={dotedCross} button title={'Opps !'} des={'Something went Wrong'} />} */}
       <div className="alpha_detail_page_container">
         <div className="alpha_image_slider_top_view">
-          <Slide transitionDuration={300} infinite={false}>
+          <Slide autoplay={false} transitionDuration={300} infinite={false}>
             {imageArray.map((item) => {
               return (
                 <div key={item} className="each-slide-effect">
@@ -222,7 +238,7 @@ export default function ProductDetailPage() {
                     <img src={share} />
                   </div>
                   <h1>$82,000</h1>
-                  <div style={{ alignSelf: 'center', marginLeft: 20 }} className="alpha_detail_page_price_view_button_view">
+                  <div onClick={() => setBidView(!bidView)} style={{ alignSelf: 'center', marginLeft: 20 }} className="alpha_detail_page_price_view_button_view">
                     <h2>Place Bid</h2>
                   </div>
                   <div className="alpha_detail_page_price_view_box_close_date_view">
@@ -262,8 +278,8 @@ export default function ProductDetailPage() {
                       <img src={plus} />
                     </div>
                   </div>
-                  <div className="alpha_detail_page_price_view_bid_list_button">
-                    <h2>Place Bid</h2>
+                  <div onClick={() => setPaymentModel(true)} className="alpha_detail_page_price_view_bid_list_button">
+                    <h2 >Place Bid</h2>
                   </div>
                 </div>
               }
@@ -279,8 +295,8 @@ export default function ProductDetailPage() {
                 <img src={share} />
               </div>
               <h1>$82,000</h1>
-              <div className="alpha_detail_page_price_view_button_view">
-                <h2>{state?.screen === 'spareparts' ? 'Request For Rent' : 'Pay'}</h2>
+              <div onClick={() => state?.screen === 'rented' ? setBookingModel(true) : setPaymentModel(true)} className="alpha_detail_page_price_view_button_view">
+                <h2>{state?.screen === 'rented' ? 'Request For Rent' : 'Pay'}</h2>
               </div>
               {state?.screen === 'rented' &&
                 <div className="alpha_detail_page_price_view_location_view">
@@ -303,6 +319,7 @@ export default function ProductDetailPage() {
         </div>
         <Footer />
       </div>
+
     </div>
 
   );

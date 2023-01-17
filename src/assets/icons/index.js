@@ -59,6 +59,9 @@ export { default as wallet } from './wallet.png'
 export { default as crossCircle } from './crossCircle.png'
 export { default as crossCircleWhite } from './crossCircleWhite.png'
 export { default as dotedCross } from './dotedCross.png'
-
+export { default as user } from './user.png'
+export { default as deleteIcon } from './delete.png'
+export { default as changePassword } from './changePassword.png'
+export { default as danger } from './danger.png'
 
 

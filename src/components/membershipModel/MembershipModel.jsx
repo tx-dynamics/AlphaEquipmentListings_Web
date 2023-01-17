@@ -44,7 +44,7 @@ export default function MembershipModel(props) {
         <div className="alpha-financing-model_top_view">
             <div className='alpha-membership_model_top_view'>
                 <div className="alpha-membership_cross_view">
-                    <img src={crossCircle} />
+                    <img onClick={props.onClickClose} src={crossCircle} />
                 </div>
                 <div className="alpha-membership_title_view">
                     <h2>Unlock Your Membership</h2>

@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { crossCircleWhite, wallet, creditCard, finance, googlePay, applePay, samsungPay } from '../../assets/icons'
 import './paymentModel.css'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function PaymentModel(props) {
     const [selectedpPaymentType, setSelectedPaymentType] = useState({ id: 0 })
@@ -39,11 +41,12 @@ export default function PaymentModel(props) {
 
     return (
         <div className="alpha-financing-model_top_view">
+            <ToastContainer />
             <div className='alpha-payment_model_top_view'>
                 <div className='alpha-payment_model_header_view'>
                     <div></div>
                     <h2>Payment Method</h2>
-                    <img src={crossCircleWhite} />
+                    <img onClick={props.onClickClose} src={crossCircleWhite} />
                 </div>
                 <div className='alpha-payment_model_payment_title_view'>
                     <h2>Select Payment Method</h2>
@@ -60,7 +63,12 @@ export default function PaymentModel(props) {
                         </div>
                     )
                 })}
-                <div onClick={() => props.onClick(selectedpPaymentType)} className='alpha-payment_model_button_view'>
+                <div onClick={() =>
+                    selectedpPaymentType.id === 0 ?
+                        toast.error("Please select value", { style: { fontSize: 14 } })
+                        :
+                        props.onClick(selectedpPaymentType)
+                } className='alpha-payment_model_button_view'>
                     <h5 >Confirm</h5>
                 </div>
             </div>

@@ -13,6 +13,7 @@
     "react-router-dom": "^6.4.3",
     "react-scripts": "5.0.1",
     "react-slideshow-image": "^4.1.1",
+    "react-toastify": "^9.1.1",
     "react18-otp-input": "^1.0.3",
     "redux-persist": "^6.0.0",
     "swiper": "^8.4.5",

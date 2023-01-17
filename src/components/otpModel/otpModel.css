@@ -1,0 +1,50 @@
+.alpha-otp_modal-otp_view {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 11rem;
+  padding-right: 11rem;
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+}
+
+.alpha-otp_screen-modal_style {
+  box-sizing: border-box;
+  font-size: 2.5rem;
+  font-family: lato;
+  font-weight: 400;
+  color: #000;
+  border: 1px solid #D9D9D9;
+  background-color: #D9D9D9;
+  width: 5rem !important;
+  height: 5rem;
+  border-radius: 1rem;
+  border: 1px solid #d9d9d9;
+}
+
+.alpha-otp_modal-otp_container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+}
+
+@media screen and (max-width:600px) {
+  .alpha-otp_modal-otp_view {
+    padding-left: 8rem;
+    padding-right: 8rem;
+  }
+}
+
+@media screen and (max-width:470px) {
+  .alpha-otp_screen-modal_style {
+    font-size: 2.2rem;
+    width: 4rem !important;
+    height: 4rem;
+  }
+
+  .alpha-otp_modal-otp_view {
+    padding-left: 5rem;
+    padding-right: 5rem;
+  }
+}

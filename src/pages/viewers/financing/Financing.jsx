@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { check, completed, emptyCircle, financingFive, financingFour, financingOne, financingThree, financingTwo, inprogress, unCheck } from "../../../assets/icons";
+import { check, completed, dotedTick, emptyCircle, financingFive, financingFour, financingOne, financingThree, financingTwo, inprogress, unCheck } from "../../../assets/icons";
 import { BlogView, FinancingStepFive, FinancingStepFour, FinancingStepOne, FinancingStepThree, FinancingStepTwo, Footer, NavBar, SubmitModel, TextInput, TextInputTwo } from "../../../components";
 import './financing.css'
 
@@ -231,7 +231,7 @@ export default function Financing() {
 
         <Footer />
       </div>
-      {showModel && <SubmitModel onClick={() => onComplete()} />}
+      {showModel && <SubmitModel icon={dotedTick} title={'Application SUBMITTED'} des={'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque mattis fringilla eros, sit amet auctor justo accumsan et.'} onClick={() => onComplete()} />}
     </div>
   );
 }

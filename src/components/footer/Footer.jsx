@@ -1,8 +1,10 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import { copyRightText, globe, footerFacebook, footerInsta, footerTwitter, arrowDown } from '../../assets/icons'
 import './footer.css'
 
 export default function Footer() {
+    const navigate = useNavigate()
     return (
         <div className="alpha_footer_main_container">
             <div className="alpha-footer_container">
@@ -10,7 +12,7 @@ export default function Footer() {
                     <h2>COMPANY</h2>
                     <h3>About Alpha Equipment Listings</h3>
                     <h3>Blog</h3>
-                    <h3>Ipsum posuere</h3>
+                    <h3 onClick={() => navigate('/profile')}>Profile</h3>
                     <h3>Lorem Ipsum facilisis</h3>
 
                 </div>

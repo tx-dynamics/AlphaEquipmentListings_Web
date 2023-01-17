@@ -18,6 +18,7 @@ const Navigation = () => {
       <Route path="/productdetailpage" element={<Viewers.ProductDetailPage />} />
       <Route path="/calculator" element={<Viewers.Calculator />} />
       <Route path="/financing" element={<Viewers.Financing />} />
+      <Route path="/profile" element={<Viewers.Profile />} />
 
       {/* <Route path="/" element={<Viewers.HomePage />} />
       <Route path="/about" element={<Viewers.AboutUs />} />

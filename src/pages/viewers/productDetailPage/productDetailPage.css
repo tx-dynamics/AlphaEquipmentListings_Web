@@ -4,6 +4,8 @@
 
 .alpha_image_slider_top_view {
     margin: 5rem 9rem 0rem 9rem;
+    position: relative;
+    z-index: 1;
 }
 
 .each-slide-effect {
@@ -580,6 +582,7 @@
     background: #F18805;
     height: 48px;
     border-radius: 10px;
+    cursor: pointer;
 }
 
 .alpha_detail_page_price_view_bid_list_button h2 {

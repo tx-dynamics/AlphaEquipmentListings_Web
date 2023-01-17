@@ -1,0 +1,126 @@
+.alpha-booking_model_inputs_top_view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.alpha-booking_model_amount_view {
+  display: flex;
+  flex-direction: column;
+  margin-top: 0.6rem;
+  padding-right: 6.8rem;
+  padding-left: 6.8rem;
+}
+
+.alpha-booking_model_amount_view h1 {
+  font-family: lato;
+  font-weight: 600;
+  font-size: 1.8rem;
+  line-height: 1.9rem;
+  color: #000000;
+}
+
+.alpha-booking_model_per_day_view {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.6rem 2rem 0rem 2rem;
+
+}
+
+.alpha-booking_model_per_day_view h2 {
+  font-family: lato;
+  font-weight: 500;
+  font-size: 1.8rem;
+  line-height: 2.2rem;
+  text-transform: capitalize;
+  color: #666666;
+}
+
+.alpha-booking_model_per_day_view h3 {
+  font-family: lato;
+  font-weight: 400;
+  font-size: 1.6rem;
+  line-height: 1.9rem;
+  color: #333333;
+}
+
+.alpha-booking_model_divider {
+  display: flex;
+  border-bottom: 1px solid #E0E0E0;
+  margin-right: 2rem;
+  margin-left: 2rem;
+  margin-top: 1.1rem;
+}
+
+.alpha-booking_model_per_day_view h4 {
+  font-family: lato;
+  font-weight: 700;
+  font-size: 1.8rem;
+  line-height: 2.2rem;
+  text-transform: capitalize;
+  color: #F18805;
+}
+
+.alpha-booking_model_per_day_view h5 {
+  font-family: lato;
+  font-weight: 700;
+  font-size: 1.6rem;
+  line-height: 1.9rem;
+  color: #F18805;
+}
+
+@media screen and (max-width:600px) {
+  .alpha-booking_model_amount_view h1 {
+    font-size: 1.6rem;
+    line-height: 1.7rem;
+  }
+
+  .alpha-booking_model_per_day_view h2 {
+    font-size: 1.6rem;
+    line-height: 2rem;
+  }
+
+  .alpha-booking_model_per_day_view h3 {
+    font-size: 1.4rem;
+    line-height: 1.7rem;
+  }
+
+  .alpha-booking_model_per_day_view h4 {
+    font-size: 1.6rem;
+    line-height: 2rem;
+  }
+
+  .alpha-booking_model_per_day_view h5 {
+    font-size: 1.4rem;
+    line-height: 1.7rem;
+  }
+}
+
+@media screen and (max-width:470px) {
+  .alpha-booking_model_amount_view h1 {
+    font-size: 1.4rem;
+    line-height: 1.5rem;
+  }
+
+  .alpha-booking_model_per_day_view h2 {
+    font-size: 1.4rem;
+    line-height: 1.8rem;
+  }
+
+  .alpha-booking_model_per_day_view h3 {
+    font-size: 1.2rem;
+    line-height: 1.5rem;
+  }
+
+  .alpha-booking_model_per_day_view h4 {
+    font-size: 1.4rem;
+    line-height: 1.8rem;
+  }
+
+  .alpha-booking_model_per_day_view h5 {
+    font-size: 1.2rem;
+    line-height: 1.5rem;
+  }
+}

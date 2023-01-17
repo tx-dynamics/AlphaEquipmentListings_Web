@@ -1,11 +1,21 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { landingPageBanner } from '../../../assets/icons'
-import { BlogView, ConnectCardModel, DashboardAuctionView, DashboardCategoriesView, DashboardSparePartView, Footer, MembershipModel, NavBar, PaymentModel } from "../../../components";
+import { BlogView, ConnectCardModel, DashboardAuctionView, DashboardCategoriesView, DashboardSparePartView, Footer, MembershipModel, NavBar, OtpModel, PaymentModel } from "../../../components";
+import { activeTab } from "../../../redux/activeTabSlice";
 import './homePage.css'
 
 export default function HomePage() {
+  const navigate = useNavigate()
+  const disPatch = useDispatch();
+
+  const [membershipModel, setMembershipModel] = useState(true)
   const [chargesView, setChargesView] = useState(false)
-  const [membershipModel, setMembershipModel] = useState(false)
+  const [paymentModel, setPaymentModel] = useState(false)
+  const [connectCard, setConnectCard] = useState(false)
+  const [otpModel, setOtpModel] = useState(false)
+
   const auctionArray = [
     {
       id: 1
@@ -120,10 +130,10 @@ export default function HomePage() {
     <div className="alpha-home_page-main_container">
       <BlogView />
       <NavBar />
-      <ConnectCardModel />
-      {/* <PaymentModel onClick={(value) => console.log(value)} /> */}
-      {membershipModel && <MembershipModel chargesView={chargesView} onClick={() => !chargesView ? setChargesView(true) : setMembershipModel(false)} />
-      }
+      {otpModel && <OtpModel onClick={() => setOtpModel(false)} onClickClose={() => [setOtpModel(false)]} />}
+      {connectCard && <ConnectCardModel onClick={() => [setOtpModel(true), setConnectCard(false)]} onClickClose={() => [setConnectCard(false)]} />}
+      {paymentModel && <PaymentModel onClickClose={() => setPaymentModel(false)} onClick={(value) => value.id === 1 ? [setPaymentModel(false), setOtpModel(true)] : value.id === 2 ? [setConnectCard(true), setPaymentModel(false)] : value.id === 3 ? [setPaymentModel(false), [navigate('/financing', 'financing'), disPatch(activeTab('financing'))]] : setPaymentModel(false)} />}
+      {membershipModel && <MembershipModel chargesView={chargesView} onClickClose={() => setMembershipModel(false)} onClick={() => !chargesView ? setChargesView(true) : [setPaymentModel(true), setMembershipModel(false)]} />}
       <div className="alpha-home_page-container">
         <img src={landingPageBanner} alt={'Banner'} />
         <div className="alpha-home_page-auction_top_view">

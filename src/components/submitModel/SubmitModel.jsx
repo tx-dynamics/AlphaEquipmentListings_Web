@@ -4,11 +4,19 @@ import './submitModel.css'
 
 export default function SubmitModel(props) {
     return (
-        <div onClick={() => props.onClick()} className="alpha-financing-model_top_view">
+        <div onClick={props.onClick} className="alpha-financing-model_top_view">
             <div className="alpha-financing-model_view">
-                <img src={dotedTick} />
-                <h1>Application SUBMITTED</h1>
-                <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque mattis fringilla eros, sit amet auctor justo accumsan et.</h2>
+                <img src={props.icon} />
+                <h1>{props.title}</h1>
+                <h2>{props.des}</h2>
+                {props.button &&
+                    <div onClick={props.onClick} className='alpha-financing-model_button_view'>
+                        <h3 >Back to Home</h3>
+                    </div>
+                }
+                {props.try &&
+                    <h4 onClick={props.onClickTry}>Try Again</h4>
+                }
             </div>
         </div>
     )

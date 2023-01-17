@@ -18,7 +18,7 @@ export default function NavBar() {
     return (
         <div className="alpha-navbar-main_container">
             <div className="alpha-navbar-logo_view">
-                <img src={logo} alt={'logo'} />
+                <img onClick={() => onClick('/homepage', '')} src={logo} alt={'logo'} />
             </div>
             <div className="alpha-navbar-detail_view">
                 <div className="alpha-navbar-search_top_view">
