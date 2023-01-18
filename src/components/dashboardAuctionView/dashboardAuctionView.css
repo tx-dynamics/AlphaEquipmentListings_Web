@@ -8,6 +8,7 @@
   border-radius: 1rem;
   flex-direction: column;
   padding: 1.6rem;
+  cursor: pointer;
 }
 
 .alpha_home-page-grid_inner_view_image {

@@ -139,6 +139,41 @@
   color: #FFFFFF;
 }
 
+.alpha-navbar-profile_top_view {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.alpha-navbar-notification_view img {
+  width: 3rem;
+  height: 3rem;
+  object-fit: cover;
+  margin-right: 2.5rem;
+  cursor: pointer;
+}
+
+.alpha-navbar-profile_view {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.alpha-navbar-profile_view img {
+  width: 4rem;
+  height: 4rem;
+  object-fit: cover;
+  border-radius: 2rem;
+  cursor: pointer;
+}
+
+
+.alpha-navbar-profile_drawer_view {
+  display: none;
+  flex-direction: row;
+  align-items: center;
+}
+
 .alpha-navbar-nav_items_top_view {
   display: flex;
   flex-direction: row;
@@ -286,6 +321,17 @@
 }
 
 @media screen and (max-width: 745px) {
+  .alpha-navbar-notification_view img {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .alpha-navbar-profile_view img {
+    width: 3rem;
+    height: 3rem;
+
+  }
+
   .alpha-navbar-drawer_logo img {
     width: 12rem;
     height: 5rem;
@@ -317,6 +363,16 @@
 }
 
 @media screen and (max-width: 608px) {
+  .alpha-navbar-profile_drawer_view {
+    display: flex;
+    margin-bottom: 2rem;
+    align-self: center;
+  }
+
+  .alpha-navbar-profile_top_view {
+    display: none;
+  }
+
   .alpha-navbar-login_buttons_view {
     display: none;
   }

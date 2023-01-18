@@ -1,0 +1,67 @@
+.alpha-input_custom_container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2rem;
+}
+
+.alpha-input_custom_container p {
+    font-family: lato;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.8rem;
+    line-height: 2.5rem;
+    padding-bottom: 0;
+    color: #444444;
+}
+
+.alpha-input_custom_container_input {
+    margin-top: 0.8rem;
+    width: 100%;
+    background-color: #F8F8F8;
+    border-radius: 0.3rem;
+    border: 1px solid #EAEAEA;
+    padding-left: 1.2rem;
+    padding-right: 1.2rem;
+    display: flex;
+    align-items: center;
+}
+
+.alpha-input_custom_container_input input {
+    width: 100% !important;
+    display: flex;
+    height: 4.6rem;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    font-family: lato;
+    font-weight: 400;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    color: #000000;
+}
+
+.alpha-input_custom_container_input textarea {
+    padding-top: 1.2rem;
+    padding-bottom: 1.2rem;
+    resize: none;
+    height: 21.4rem !important;
+    width: 100% !important;
+    display: flex;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    font-family: lato;
+    font-weight: 400;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    color: #000000;
+}
+
+
+@media screen and (max-width: 360px) {
+
+    .alpha-input_container_input {
+        width: 25rem;
+    }
+
+}

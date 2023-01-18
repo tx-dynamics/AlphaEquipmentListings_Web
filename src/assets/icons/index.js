@@ -63,5 +63,12 @@ export { default as user } from './user.png'
 export { default as deleteIcon } from './delete.png'
 export { default as changePassword } from './changePassword.png'
 export { default as danger } from './danger.png'
-
+export { default as addBlack } from './addBlack.png'
+export { default as arrowDownGrey } from './arrowDownGrey.png'
+export { default as messageIcon } from './messageIcon.png'
+export { default as notification } from './notification.png'
+export { default as walletBg } from './walletBg.png'
+export { default as walletIcon } from './walletIcon.png'
+export { default as graphImage } from './graphImage.png'
+export { default as minusBlack } from './minusBlack.png'
 

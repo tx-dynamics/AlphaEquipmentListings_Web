@@ -19,6 +19,10 @@ const Navigation = () => {
       <Route path="/calculator" element={<Viewers.Calculator />} />
       <Route path="/financing" element={<Viewers.Financing />} />
       <Route path="/profile" element={<Viewers.Profile />} />
+      <Route path="/wallet" element={<Viewers.Wallet />} />
+      <Route path="/faqs" element={<Viewers.Faqs />} />
+      <Route path="/blogpage" element={<Viewers.BlogPage />} />
+      <Route path="/blogdetailpage" element={<Viewers.BlogDetailPage />} />
 
       {/* <Route path="/" element={<Viewers.HomePage />} />
       <Route path="/about" element={<Viewers.AboutUs />} />

@@ -1,11 +1,14 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { apple, authImage, facebook, google, logo } from "../../../assets/icons";
 import { Button, TextInput } from "../../../components";
+import { activeTab } from "../../../redux/activeTabSlice";
 import "./signIn.css";
 
 export default function SignIn() {
   const navigate = useNavigate();
+  const disPatch = useDispatch();
   const socialArray = [
     {
       id: 1,
@@ -20,6 +23,11 @@ export default function SignIn() {
       icon: apple
     }
   ]
+
+  const onClick = (type, value) => {
+    disPatch(activeTab(value))
+    navigate(type, { replace: true })
+  }
 
   return (
     <div className="alpa-auth-container">
@@ -43,7 +51,7 @@ export default function SignIn() {
             </h3>
           </div>
           <div className="alpha-signin-button-view">
-            <Button onClick={() => navigate('/homepage', { replace: true })}>SIGN IN</Button >
+            <Button onClick={() => onClick('/homepage', 'homepage')}>SIGN IN</Button >
           </div>
           <div className="alpha-signin-or_view">
             <h3>OR</h3>

@@ -126,6 +126,11 @@ export default function HomePage() {
     },
   ]
 
+  const onClick = (type, value) => {
+    disPatch(activeTab(value))
+    navigate(type, { state: { screen: value } })
+  }
+
   return (
     <div className="alpha-home_page-main_container">
       <BlogView />
@@ -139,14 +144,14 @@ export default function HomePage() {
         <div className="alpha-home_page-auction_top_view">
           <div className="alpha-home_page-auction_heading_view">
             <h2>Auction</h2>
-            <div>
+            <div onClick={() => onClick('/productlistingpage', 'auction')}>
               <h3>View All</h3>
             </div>
           </div>
           <div className="alpha_home-page-grid_view">
             {auctionArray.map((item, index) => {
               return (
-                <DashboardAuctionView type={1} index={index} />
+                <DashboardAuctionView onClick={() => onClick('/productdetailpage', 'auction')} type={1} index={index} />
               )
             })}
           </div>
@@ -155,14 +160,14 @@ export default function HomePage() {
         <div className="alpha-home_page-auction_top_view">
           <div className="alpha-home_page-auction_heading_view">
             <h2>Categories</h2>
-            <div>
+            <div onClick={() => onClick('/productlistingpage', 'category')}>
               <h3>View All</h3>
             </div>
           </div>
           <div className="alpha_home-page-grid_view_categories">
             {categoriesArray.map((item, index) => {
               return (
-                <DashboardCategoriesView item={item} index={index} />
+                <DashboardCategoriesView onClick={() => onClick('/productdetailpage', 'category')} item={item} index={index} />
               )
             })}
           </div>
@@ -171,14 +176,14 @@ export default function HomePage() {
         <div className="alpha-home_page-auction_top_view">
           <div className="alpha-home_page-auction_heading_view">
             <h2>Spare Parts</h2>
-            <div>
+            <div onClick={() => onClick('/maincategorypage', 'spareparts')}>
               <h3>View All</h3>
             </div>
           </div>
           <div className="alpha_home-page-grid_view_categories">
             {sparePartsArray.map((item, index) => {
               return (
-                <DashboardSparePartView index={index} />
+                <DashboardSparePartView onClick={() => onClick('/productdetailpage', 'spareparts')} index={index} />
               )
             })}
           </div>
@@ -187,14 +192,14 @@ export default function HomePage() {
         <div className="alpha-home_page-auction_top_view">
           <div className="alpha-home_page-auction_heading_view">
             <h2>Rented Machinery</h2>
-            <div>
+            <div onClick={() => onClick('/maincategorypage', 'rented')}>
               <h3>View All</h3>
             </div>
           </div>
           <div className="alpha_home-page-grid_view">
             {auctionArray.map((item, index) => {
               return (
-                <DashboardAuctionView type={2} index={index} />
+                <DashboardAuctionView onClick={() => onClick('/productdetailpage', 'rented')} type={2} index={index} />
               )
             })}
           </div>

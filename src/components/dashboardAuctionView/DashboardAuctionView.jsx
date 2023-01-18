@@ -4,7 +4,7 @@ import './dashboardAuctionView.css'
 
 export default function DashboardAuctionView(props) {
     return (
-        <div key={props.index} className="alpha_home-page-grid_inner_view">
+        <div key={props.index} onClick={props.onClick} className="alpha_home-page-grid_inner_view">
             <img src={dummyOne} alt={''} className="alpha_home-page-grid_inner_view_image" />
             <h1>2018 Prinoth Panther T67 Crawler Carrier</h1>
             <h2>Location: Lorem ipsum dolor sit amet</h2>

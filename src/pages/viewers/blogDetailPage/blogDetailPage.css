@@ -1,0 +1,134 @@
+.alpha-blogdetailpage_blogs_grid_view {
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+}
+
+.alpha-blogdetailpage_prodoct_top_view {
+    display: flex;
+    width: 97%;
+    flex-direction: column;
+    background: #FFFFFF;
+    margin-bottom: 4rem;
+    box-shadow: 0px 0px 5px 0.3px rgba(0, 0, 0, 0.1);
+}
+
+.alpha-blogdetailpage_prodoct_top_view h1 {
+    font-family: lato;
+    font-weight: 600;
+    font-size: 3.2rem;
+    line-height: 4rem;
+    padding-top: 2rem;
+    padding-left: 2rem;
+    padding-bottom: 1.2rem;
+    color: #F18805;
+}
+
+.alpha-blogdetailpage_prodoct_top_view p {
+    font-family: lato;
+    font-weight: 400;
+    font-size: 1.6rem;
+    line-height: 2rem;
+    color: #888888;
+    padding-left: 2rem;
+    padding-bottom: 2rem;
+}
+
+.alpha-blogdetailpage_prodoct_img img {
+    width: 100%;
+    height: 36.6rem;
+    object-fit: cover;
+}
+
+.alpha-blogdetailpage_image_detail {
+    display: flex;
+    padding: 2rem;
+    flex-direction: column;
+}
+
+.alpha-blogdetailpage_image_detail h2 {
+    font-family: lato;
+    font-weight: 400;
+    font-size: 1.8rem;
+    line-height: 2.5rem;
+    color: #101010;
+    padding-bottom: 1.2rem;
+}
+
+.alpha-blogdetailpage_image_detail h3 {
+    font-family: lato;
+    font-weight: 600;
+    font-size: 2rem;
+    line-height: 2.5rem;
+    padding-top: 0.8rem;
+    padding-bottom: 1.6rem;
+    color: #101010;
+}
+
+.alpha-blogdetailpage_image_detail img {
+    width: 47.5rem;
+    height: 29.9rem;
+    margin-top: 0.4rem;
+    margin-bottom: 2rem;
+    object-fit: cover;
+    align-self: center;
+}
+
+.alpha-blogdetailpage_image_detail h4 {
+    font-family: lato;
+    font-weight: 600;
+    font-size: 1.8rem;
+    line-height: 2.5rem;
+    color: #101010;
+}
+
+.alpha-blogdetailpage_leave_reply_top_view {
+    display: flex;
+    width: 97%;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 5px 0.3px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    flex-direction: column;
+    margin-bottom: 2rem;
+}
+
+.alpha-blogdetailpage_leave_reply_top_view h1 {
+    font-family: lato;
+    font-weight: 600;
+    font-size: 2.2rem;
+    line-height: 2.8rem;
+    color: #F18805;
+    padding-bottom: 1.2rem;
+}
+
+.alpha-blogdetailpage_leave_reply_top_view p {
+    font-family: lato;
+    font-weight: 400;
+    font-size: 1.6rem;
+    line-height: 2.5rem;
+    color: #444444;
+    padding-bottom: 1.2rem;
+}
+
+.alpha-blogdetailpage_leave_reply_button_view {
+    display: flex;
+    margin-top: 2rem;
+}
+
+.alpha-blogdetailpage_leave_reply_button_view div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 3.7rem;
+    width: 15.1rem;
+    background: #E87511;
+    border-radius: 3px;
+}
+
+.alpha-blogdetailpage_leave_reply_button_view h5 {
+    font-family: lato;
+    font-weight: 600;
+    font-size: 1.8rem;
+    line-height: 2.5rem;
+    color: #FFFFFF;
+}
