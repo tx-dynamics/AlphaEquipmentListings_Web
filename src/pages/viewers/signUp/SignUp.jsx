@@ -38,7 +38,9 @@ export default function SignUp() {
           <TextInput placeholder={'Enter your password'} title={'Confirm Password'} />
           <div className="alpha-signin-button-view">
             <Button
-              onClick={() => navigate('/homepage', { replace: true })}
+              onClick={() => navigate('/dashboard', { replace: true })}
+            // onClick={() => navigate('/homepage', { replace: true })}
+
             // onClick={() => navigate('/otpscreen', { state: { screen: 'signup' } })}
             >SIGN UP</Button>
           </div>

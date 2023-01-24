@@ -51,7 +51,10 @@ export default function SignIn() {
             </h3>
           </div>
           <div className="alpha-signin-button-view">
-            <Button onClick={() => onClick('/homepage', 'homepage')}>SIGN IN</Button >
+            <Button
+              onClick={() => onClick('/dashboard', 'dashboard')}
+            // onClick={() => onClick('/homepage', 'homepage')}
+            >SIGN IN</Button >
           </div>
           <div className="alpha-signin-or_view">
             <h3>OR</h3>

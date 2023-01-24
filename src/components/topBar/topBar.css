@@ -1,0 +1,147 @@
+.alpha-dashboard-top_bar_container {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 3.2rem 2rem;
+    background-color: #FFFFFF;
+}
+
+.alpha-side_bar_top_container_two {
+    display: flex;
+    flex-direction: column;
+    width: 28rem;
+    height: 100%;
+    background-color: #EFEFEF;
+}
+
+
+.alpha-dashboard-top_bar_title_view {
+    display: flex;
+    flex-direction: column;
+}
+
+.alpha-dashboard-top_bar_title_view h2 {
+    font-family: lato;
+    font-weight: 700;
+    font-size: 2.4rem;
+    line-height: 2.9rem;
+    color: #000000;
+}
+
+.alpha-dashboard-top_bar_title_view h3 {
+    font-family: lato;
+    font-weight: 500;
+    font-size: 1.6rem;
+    line-height: 1.9rem;
+    padding-top: 0.4rem;
+    color: #7C7C7C;
+}
+
+.alpha-dashboard-top_bar_profile_top_view {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.alpha-dashboard-top_bar_profile_top_view h4 {
+    font-family: lato;
+    font-weight: 500;
+    font-size: 1.8rem;
+    line-height: 2.7rem;
+    color: #000000;
+    padding-left: 4rem;
+    padding-right: 1rem;
+}
+
+.alpha-dashboard-top_bar_notification_view img {
+    width: 4rem;
+    height: 4rem;
+    object-fit: cover;
+}
+
+.alpha-dashboard-top_bar_profile_view img {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 2rem;
+    object-fit: cover;
+}
+
+.alpha-dashboard-top_bar_drawer_view {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.alpha-dashboard-top_bar_drawer_view img {
+    width: 5rem;
+    height: 5rem;
+    margin-right: 2rem;
+    object-fit: cover;
+    cursor: pointer;
+    display: none;
+}
+
+.alpha-dashboard-top_bar_side_bar_view {
+    display: none;
+    position: absolute;
+    height: 100%;
+    transition: 0.3s all;
+}
+
+@media screen and (max-width:1300px) {
+    .alpha-dashboard-top_bar_side_bar_view {
+        display: flex;
+    }
+
+    .alpha-dashboard-top_bar_drawer_view img {
+        display: flex;
+    }
+}
+
+@media screen and (max-width:530px) {
+    .alpha-dashboard-top_bar_title_view h2 {
+        font-size: 2rem;
+        line-height: 2.5rem;
+    }
+
+    .alpha-dashboard-top_bar_title_view h3 {
+        font-size: 1.2rem;
+        line-height: 1.5rem;
+    }
+
+    .alpha-dashboard-top_bar_profile_top_view h4 {
+        font-size: 1.4rem;
+        line-height: 2.3rem;
+        padding-left: 1rem;
+
+    }
+
+    .alpha-dashboard-top_bar_notification_view img {
+        width: 3rem;
+        height: 3rem;
+    }
+
+    .alpha-dashboard-top_bar_profile_view img {
+        width: 3rem;
+        height: 3rem;
+    }
+
+    .alpha-dashboard-top_bar_drawer_view img {
+        width: 4rem;
+        height: 4rem;
+    }
+}
+
+@media screen and (max-width:400px) {
+    .alpha-dashboard-top_bar_container {
+        flex-wrap: wrap;
+        padding: 2rem 2rem;
+    }
+
+    .alpha-dashboard-top_bar_profile_top_view {
+        margin-top: 1rem;
+        margin-left: 5.2rem;
+        margin-bottom: -1rem;
+    }
+}

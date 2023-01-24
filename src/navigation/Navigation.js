@@ -1,6 +1,8 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import * as Viewers from "../pages/viewers";
+import * as Admin from "../pages/admin";
+
 import AuthStack from "./authStack/AuthStack";
 // import * as Admin from "../pages/admin";
 
@@ -23,6 +25,14 @@ const Navigation = () => {
       <Route path="/faqs" element={<Viewers.Faqs />} />
       <Route path="/blogpage" element={<Viewers.BlogPage />} />
       <Route path="/blogdetailpage" element={<Viewers.BlogDetailPage />} />
+      <Route path="/chatpagebuyer" element={<Viewers.ChatPageBuyer />} />
+
+
+
+
+
+      <Route path="/dashboard" element={<Admin.Dashboard />} />
+
 
       {/* <Route path="/" element={<Viewers.HomePage />} />
       <Route path="/about" element={<Viewers.AboutUs />} />

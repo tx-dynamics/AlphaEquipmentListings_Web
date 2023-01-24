@@ -47,7 +47,7 @@ export default function BlogDetailPage() {
               <h1>Alpha Equipment Listings</h1>
             </div>
           </div>
-          <div className="alpha-blogpage_blogs_top_view">
+          <div className="alpha-blogdetailpage_blogs_top_view">
             <div className="alpha-blogdetailpage_blogs_grid_view">
               <div className="alpha-blogdetailpage_prodoct_top_view">
                 <h1>Minimizing Risk When Buying Used Equipment</h1>

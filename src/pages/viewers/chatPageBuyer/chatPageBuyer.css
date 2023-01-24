@@ -1,0 +1,430 @@
+.alpha-chat_buyer_top_container {
+    display: flex;
+    box-sizing: border-box;
+    height: 588px;
+    margin: 3rem 9rem;
+    background: #FFFFFF;
+    border: 1px solid #E0DFDC;
+    border-radius: 15px;
+    flex-direction: row;
+}
+
+.alpha_chat_buyer_divider {
+    border-left: 1px solid #E0DFDC;
+    height: 100%;
+    display: flex;
+}
+
+.alpha_chat_buyer_divider_horizontal {
+    border-bottom: 1px solid #E0DFDC;
+    width: 100%;
+}
+
+.alpha-chat_buyer-user_list-top_view {
+    display: flex;
+    height: 100%;
+    flex-direction: row;
+    width: 41rem;
+}
+
+.alpha-chat_buyer-user_list_view {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    width: 100%;
+}
+
+.alpha-chat_buyer-list_header_view {
+    display: flex;
+    padding: 1.2rem 3rem;
+}
+
+.alpha-chat_buyer-list_header_view h1 {
+    font-family: lato;
+    font-weight: 700;
+    font-size: 2.2rem;
+    line-height: 3.3rem;
+    color: #000000;
+}
+
+.alpha_chat_buyer_user_list_view {
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+}
+
+.alpha_chat_buyer_user_list_view::-webkit-scrollbar {
+    width: 0 !important;
+}
+
+.alpha_chat_buyer_user_list_item_view {
+    display: flex;
+    flex-direction: row;
+    padding: 1.2rem 1.2rem 1.2rem 2rem;
+    align-items: flex-start;
+    cursor: pointer;
+}
+
+.alpha_chat_buyer_user_list_item_image_view {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin-right: 1.3rem;
+}
+
+.alpha_chat_buyer_user_list_item_image_view img {
+    width: 4.4rem !important;
+    height: 4.4rem !important;
+    border-radius: 3rem;
+}
+
+.alpha_chat_buyer_user_list_item_image_view div {
+    width: 0.6rem;
+    height: 0.6rem;
+    border-radius: 1rem;
+    background-color: #14FF00;
+    border: 0.5px solid #EEF3F8;
+    position: absolute;
+    bottom: 0.3rem;
+    right: 0.3rem;
+}
+
+.alpha_chat_buyer_user_list_item_name_view {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.alpha_chat_buyer_user_list_item_name_view h2 {
+    font-family: lato;
+    font-weight: 400;
+    font-size: 1.6rem;
+    line-height: 2.4rem;
+    color: #363636;
+}
+
+.alpha_chat_buyer_user_list_item_name_view h3 {
+    font-family: lato;
+    font-weight: 350;
+    font-size: 1.4rem;
+    line-height: 2.1rem;
+    color: #828282;
+}
+
+.alpha_chat_buyer_user_list_item_time_view {
+    display: flex;
+    margin-top: 0.4rem;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.alpha_chat_buyer_user_list_item_time_view h4 {
+    font-family: lato;
+    font-weight: 400;
+    font-size: 1.1rem;
+    line-height: 1.6rem;
+    color: #858585;
+}
+
+.alpha_chat_buyer_user_list_item_time_view div {
+    width: 1.6rem;
+    height: 1.6rem;
+    border-radius: 1rem;
+    background-color: #EB0000;
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.alpha_chat_buyer_user_list_item_time_view h5 {
+    font-family: lato;
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    color: #FFFFFF;
+}
+
+.alpha_chat_buyer_chat_detail_top_view {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    position: relative;
+}
+
+.alpha_chat_buyer_chat_detail_header_view {
+    display: flex;
+    padding: 1.2rem 3rem;
+}
+
+.alpha_chat_buyer_chat_detail_header_view h1 {
+    font-family: lato;
+    font-weight: 600;
+    font-size: 2.2rem;
+    line-height: 3.3rem;
+    color: #000000;
+}
+
+.alpha_chat_buyer_chat_detail_messages_view {
+    display: flex;
+    width: 100%;
+    flex: 1;
+    overflow: scroll;
+    flex-direction: column;
+    padding: 2rem;
+}
+
+.alpha_chat_buyer-chat_detail_message_view_one {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.alpha_chat_buyer-chat_detail_message_view_one img {
+    width: 3rem !important;
+    height: 3rem !important;
+    border-radius: 2rem;
+    margin-right: 0.7rem;
+}
+
+.alpha_chat_buyer-chat_detail_message_view_one div {
+    display: flex;
+    background: #E3E3E3;
+    border-radius: 5px;
+    padding: 1rem 1rem 1rem 1.2rem;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 15rem;
+}
+
+.alpha_chat_buyer-chat_detail_message_view_one h2 {
+    font-family: lato;
+    font-weight: 400;
+    font-size: 1.4rem;
+    line-height: 1.6px;
+    text-align: center;
+    color: #545454;
+}
+
+.alpha_chat_buyer-chat_detail_message_view_one h3 {
+    font-family: lato;
+    font-weight: 300;
+    font-size: 0.8rem;
+    line-height: 0.9rem;
+    text-align: center;
+    color: #858585;
+}
+
+.alpha_chat_buyer-chat_detail_message_view_two {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-end;
+    margin-bottom: 1rem;
+}
+
+.alpha_chat_buyer-chat_detail_message_view_two img {
+    width: 3rem !important;
+    height: 3rem !important;
+    border-radius: 2rem;
+    margin-left: 0.7rem;
+}
+
+.alpha_chat_buyer-chat_detail_message_view_two div {
+    display: flex;
+    background: #E3E3E3;
+    border-radius: 5px;
+    padding: 1rem 1rem 1rem 1.2rem;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 15rem;
+}
+
+.alpha_chat_buyer-chat_detail_message_view_two h2 {
+    font-family: lato;
+    font-weight: 400;
+    font-size: 1.4rem;
+    line-height: 1.6px;
+    text-align: center;
+    color: #545454;
+}
+
+.alpha_chat_buyer-chat_detail_message_view_two h3 {
+    font-family: lato;
+    font-weight: 300;
+    font-size: 0.8rem;
+    line-height: 0.9rem;
+    text-align: center;
+    color: #858585;
+}
+
+.alpha_chat_buyer_chat_detail_send_area_top_view {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    height: 6.8rem;
+    background: rgba(106, 112, 126, 0.1);
+    border-top: 1px solid #C7C7C7;
+    padding: 0.9rem 0rem 0.9rem 1.2rem;
+}
+
+.alpha_chat_buyer_send_area_circle_view {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3.2rem !important;
+    height: 3.2rem !important;
+    border-radius: 2rem;
+    background-color: #4482FF;
+    margin-right: 1.2rem;
+    cursor: pointer;
+}
+
+.alpha_chat_buyer_send_area_circle_view img {
+    width: 1.8rem !important;
+    height: 1.8rem !important;
+    object-fit: cover;
+}
+
+.alpha_chat_buyer_chat_detail_input_top_view {
+    display: flex;
+    flex: 1;
+}
+
+.alpha_chat_buyer_chat_detail_input_top_view input {
+    border: none;
+    outline: none;
+    height: 5rem;
+    flex: 1;
+    border-radius: 0.6rem;
+    padding: 1rem 1.2rem;
+    font-family: lato;
+    font-weight: 400;
+    font-size: 1.3rem;
+    line-height: 3rem;
+    color: #000000;
+    margin-right: 1.8rem;
+}
+
+.alpha_chat_buyer_drawer_view {
+    display: flex;
+    height: 100%;
+    flex-direction: row;
+    background-color: white;
+    transition: 0.3s all;
+    position: absolute;
+    border-radius: 15px;
+}
+
+.alpha-chat_buyer-user_list-top_view_drawer {
+    display: none;
+    height: 100%;
+    flex-direction: row;
+    width: 30rem;
+}
+
+
+@media screen and (max-width:820px) {
+    .alpha-chat_buyer-user_list-top_view {
+        display: none;
+    }
+
+    .alpha-chat_buyer-user_list-top_view_drawer {
+        display: flex;
+    }
+
+}
+
+@media screen and (max-width:514px) {
+    .alpha-chat_buyer_top_container {
+        margin: 3rem 5rem;
+    }
+}
+
+@media screen and (max-width:450px) {
+    .alpha-chat_buyer-list_header_view h1 {
+        font-size: 1.8rem;
+        line-height: 2.8rem;
+    }
+
+    .alpha_chat_buyer_user_list_item_image_view img {
+        width: 4rem;
+        height: 4rem;
+    }
+
+    .alpha_chat_buyer_user_list_item_name_view h2 {
+        font-size: 1.4rem;
+        line-height: 2.2rem;
+    }
+
+    .alpha_chat_buyer_user_list_item_name_view h3 {
+        font-size: 1.2rem;
+        line-height: 1.9rem;
+    }
+
+    .alpha-chat_buyer-user_list-top_view_drawer {
+        width: 25rem;
+    }
+
+    .alpha_chat_buyer_chat_detail_header_view h1 {
+        font-size: 1.8rem;
+        line-height: 2.8rem;
+    }
+
+    .alpha_chat_buyer-chat_detail_message_view_one img {
+        width: 2.6rem;
+        height: 2.6rem;
+    }
+
+    .alpha_chat_buyer-chat_detail_message_view_one h2 {
+        font-size: 1.2rem;
+        line-height: 1.4px;
+    }
+
+    .alpha_chat_buyer-chat_detail_message_view_two img {
+        width: 2.6rem;
+        height: 2.6rem;
+    }
+
+    .alpha_chat_buyer-chat_detail_message_view_two h2 {
+        font-size: 1.2rem;
+        line-height: 1.4px;
+    }
+
+    .alpha_chat_buyer_chat_detail_send_area_top_view {
+        height: 5rem;
+    }
+
+    .alpha_chat_buyer_send_area_circle_view {
+        width: 2.8rem !important;
+        height: 2.8rem !important;
+    }
+
+    .alpha_chat_buyer_send_area_circle_view img {
+        width: 1.4rem;
+        height: 1.4rem;
+    }
+
+    .alpha_chat_buyer_chat_detail_input_top_view input {
+        height: 3.5rem;
+        font-size: 1.2rem;
+        line-height: 2.6rem;
+    }
+}
+
+@media screen and (max-width:400px) {
+    .alpha-chat_buyer_top_container {
+        margin: 3rem 3rem;
+    }
+}
+
+@media screen and (max-width:366px) {
+    .alpha_chat_buyer_chat_detail_input_top_view input {
+        width: 12rem;
+        flex: 0;
+    }
+}

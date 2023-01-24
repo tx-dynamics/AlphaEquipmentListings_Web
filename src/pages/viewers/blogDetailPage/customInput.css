@@ -58,10 +58,40 @@
 }
 
 
-@media screen and (max-width: 360px) {
 
-    .alpha-input_container_input {
-        width: 25rem;
+@media screen and (max-width:626px) {
+    .alpha-input_custom_container p {
+        font-size: 1.6rem;
+        line-height: 2.3rem;
     }
 
+    .alpha-input_custom_container_input input {
+        font-size: 1.3rem;
+        line-height: 1.8rem;
+        height: 3.6rem;
+    }
+
+    .alpha-input_custom_container_input textarea {
+        height: 15.4rem !important;
+        font-size: 1.3rem;
+        line-height: 1.8rem;
+    }
+}
+
+@media screen and (max-width:450px) {
+    .alpha-input_custom_container p {
+        font-size: 1.4rem;
+        line-height: 2.1rem;
+    }
+
+    .alpha-input_custom_container_input input {
+        font-size: 1.2rem;
+        line-height: 1.6rem;
+    }
+
+    .alpha-input_custom_container_input textarea {
+        height: 13.4rem !important;
+        font-size: 1.2rem;
+        line-height: 1.6rem;
+    }
 }

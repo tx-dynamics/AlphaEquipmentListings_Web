@@ -13,7 +13,8 @@ export default function OtpScreen() {
   const onClickVerify = () => {
     state?.screen === 'forgotpassword' ?
       navigate('/createpassword') :
-      navigate('/homepage', { replace: true })
+      navigate('/dashboard', { replace: true })
+    // navigate('/homepage', { replace: true })
   }
 
   return (

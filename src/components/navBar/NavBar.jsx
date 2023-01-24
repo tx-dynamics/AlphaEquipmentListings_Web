@@ -43,7 +43,7 @@ export default function NavBar() {
                         <div className='alpha-navbar-notification_view'>
                             <img src={notification} />
                         </div>
-                        <div className='alpha-navbar-notification_view'>
+                        <div onClick={() => onClick('/chatpagebuyer', 'chatpagebuyer')} className='alpha-navbar-notification_view'>
                             <img src={messageIcon} />
                         </div>
                         <div onClick={() => onClick('/profile', 'profile')} className='alpha-navbar-profile_view'>
@@ -79,7 +79,7 @@ export default function NavBar() {
                     <div className='alpha-navbar-notification_view'>
                         <img src={notification} />
                     </div>
-                    <div className='alpha-navbar-notification_view'>
+                    <div onClick={() => onClick('/chatpagebuyer', 'chatpagebuyer')} className='alpha-navbar-notification_view'>
                         <img src={messageIcon} />
                     </div>
                     <div onClick={() => onClick('/profile', 'profile')} className='alpha-navbar-profile_view'>
