@@ -5,7 +5,7 @@ import './topBar.css'
 
 export default function TopBar() {
     const navigate = useNavigate();
-    const [barValue, setBarValue] = useState(0)
+    const [barValue, setBarValue] = useState(-500)
     const [showDropdowm, setShowDropdown] = useState(false)
     const sideBarItemsArray = [
         {

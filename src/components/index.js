@@ -25,3 +25,5 @@ export { default as CreatePasswordModel } from './createPasswordModel/CreatePass
 export { default as DeleteAccountModel } from './deleteAccountModel/DeleteAccountModel'
 export { default as SideBar } from './sideBar/SideBar'
 export { default as TopBar } from './topBar/TopBar'
+export { default as SearchView } from './searchView/SearchView'
+export { default as DeleteProductModel } from './deleteProductModel/DeleteProductModel'

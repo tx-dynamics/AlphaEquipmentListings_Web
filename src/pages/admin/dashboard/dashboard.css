@@ -17,8 +17,128 @@
     flex-direction: column;
     margin: 2.4rem 2.4rem 0rem 2.4rem;
     background-color: white;
+    padding: 2rem 0rem 2rem 2rem;
 }
 
 .alpha-dashboard-container::-webkit-scrollbar {
     width: 0 !important;
+}
+
+.alpha-dashboard-top_title_view h1 {
+    font-family: lato;
+    font-weight: 600;
+    font-size: 2.4rem;
+    line-height: 3rem;
+    color: #000000;
+    padding-bottom: 2rem;
+    padding-right: 2rem;
+}
+
+.alpha-dashboard-mini_graphs_top_view {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.alpha-dashboard-mini_graph_view {
+    display: flex;
+    width: 34.3rem;
+    height: 126px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 12px 1px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    margin-right: 2rem;
+    margin-bottom: 2rem;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.alpha-dashboard-avrg_revenue_view {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 1rem 2rem 1.6rem;
+}
+
+.alpha-dashboard-avrg_revenue_view h2 {
+    font-family: lato;
+    font-weight: 800;
+    font-size: 1.4rem;
+    line-height: 1.7rem;
+    color: #000000;
+    padding-bottom: 0.8rem;
+}
+
+.alpha-dashboard-avrg_revenue_view h1 {
+    font-family: lato;
+    font-weight: 800;
+    font-size: 2.4rem;
+    line-height: 131.9%;
+    color: #F18805;
+}
+
+.alpha-dashboard-trends_up-top_view {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.alpha-dashboard-trends_up_view {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 6rem;
+    height: 2.6rem;
+    background: #A9FFA7;
+    border-radius: 4px;
+    margin-top: 0.4rem;
+    margin-right: 1.2rem;
+}
+
+.alpha-dashboard-trends_up_view img {
+    width: 1.6rem;
+    height: 1.6rem;
+    object-fit: cover;
+}
+
+.alpha-dashboard-trends_up_view h3 {
+    font-family: lato;
+    font-weight: 400;
+    font-size: 1.2rem;
+    line-height: 1.8rem;
+    padding-left: 0.4rem;
+    color: #037400;
+}
+
+.alpha-dashboard-avrg_revenue_view h3 {
+    font-family: lato;
+    font-weight: 400;
+    font-size: 1.4rem;
+    line-height: 2.1rem;
+    color: #7C7C7C;
+}
+
+.alpha-dashboard-mini_graphs-chart_view {
+    display: flex;
+    padding: 1rem 2rem 1rem 1rem;
+}
+
+.alpha-dashboard-avrg_revenue_view h4 {
+    font-family: lato;
+    font-weight: 700;
+    font-size: 1.4rem;
+    line-height: 131.9%;
+    color: #2E2E48;
+    padding-bottom: 0.8rem;
+}
+
+.alpha-dashboard-avrg_revenue_view h5 {
+    font-family: lato;
+    font-weight: 500;
+    font-size: 1.4rem;
+    line-height: 131.9%;
+    color: #2E2E48;
+    padding-top: 0.8rem;
 }

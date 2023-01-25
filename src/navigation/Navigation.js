@@ -32,6 +32,8 @@ const Navigation = () => {
 
 
       <Route path="/dashboard" element={<Admin.Dashboard />} />
+      <Route path="/shop" element={<Admin.Shop />} />
+      <Route path="/myshop" element={<Admin.MyShop />} />
 
 
       {/* <Route path="/" element={<Viewers.HomePage />} />

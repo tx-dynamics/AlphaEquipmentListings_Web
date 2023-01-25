@@ -1,0 +1,109 @@
+.alpha_my_Shop-add_product_button_view {
+    display: flex;
+    margin-right: 2rem;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 1.6rem;
+    background: #F18805;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.alpha_my_Shop-add_product_button_view h5 {
+    font-family: lato;
+    font-weight: 400;
+    font-size: 1.6rem;
+    line-height: 1.8rem;
+    color: #FFFFFF;
+}
+
+.alpha-my_shop-table_data_new_view {
+    width: 4.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2rem;
+    background: #26D1A0;
+    border-radius: 2.3rem;
+    margin-right: 10.3rem;
+}
+
+.alpha-my_shop-table_data_new_view h6 {
+    font-family: lato;
+    font-weight: 500;
+    font-size: 1.2rem;
+    line-height: 1.6rem;
+    color: #FFFFFF;
+}
+
+.alpha-my_shop-table_data_edit_view {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.alpha-my_shop-table_data_edit_view h5 {
+    font-family: lato;
+    font-weight: 400;
+    font-size: 1.5rem;
+    line-height: 1.8rem;
+    color: #4482FF;
+    padding-right: 2.4rem;
+    cursor: pointer;
+}
+
+.alpha-my_shop_empty_div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.alpha-my_shop_empty_div h2 {
+    font-family: lato;
+    font-weight: 400;
+    font-size: 1.8rem;
+    line-height: 2.2rem;
+    color: #ADADAD;
+}
+
+
+table {
+    border-collapse: collapse;
+    /* width: 100%; */
+    margin-left: 2rem;
+    margin-right: 2rem;
+}
+
+thead {
+    background-color: #F5F9FA;
+
+    /* padding-left: 5rem; */
+}
+
+
+th {
+    /* background-color: #F5F9FA; */
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    font-family: lato;
+    font-weight: 700;
+    font-size: 1.6rem;
+    line-height: 2.4rem;
+    text-align: left;
+    color: #282E3D;
+}
+
+td {
+    box-sizing: border-box;
+    padding-top: 1.8rem;
+    padding-bottom: 1.8rem;
+    background-color: rgb(255, 255, 255);
+    font-family: lato;
+    font-weight: 400;
+    font-size: 1.5rem;
+    line-height: 1.8rem;
+    color: #282E3D;
+    border-bottom: 1px solid #EEEEF1;
+    /* padding-left: 0rem; */
+}

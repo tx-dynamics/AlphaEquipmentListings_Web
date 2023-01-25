@@ -19,6 +19,8 @@ export default function SideBar(props) {
         {
             id: 1,
             title: 'Dashboard',
+            value: 'dashboard',
+            route: '/dashboard',
             iconOne: dashboard,
             iconTwo: dashboardTheme,
             dropdown: false
@@ -26,6 +28,8 @@ export default function SideBar(props) {
         {
             id: 2,
             title: 'Shop',
+            value: 'shop',
+            route: '/shop',
             iconOne: shop,
             iconTwo: shopTheme,
             dropdown: false
@@ -33,6 +37,8 @@ export default function SideBar(props) {
         {
             id: 3,
             title: 'Wallet',
+            value: 'wallet',
+            route: '/wallet',
             iconOne: walletDark,
             iconTwo: walletTheme,
             dropdown: false
@@ -40,6 +46,8 @@ export default function SideBar(props) {
         {
             id: 4,
             title: 'Request',
+            value: 'request',
+            route: '/request',
             iconOne: request,
             iconTwo: requestTheme,
             dropdown: true
@@ -47,6 +55,8 @@ export default function SideBar(props) {
         {
             id: 5,
             title: 'Payment History',
+            value: 'paymenthistory',
+            route: '/paymenthistory',
             iconOne: paymentHistory,
             iconTwo: paymentHistoryTheme,
             dropdown: false
@@ -54,6 +64,8 @@ export default function SideBar(props) {
         {
             id: 6,
             title: 'Orders Status',
+            value: 'orderstatus',
+            route: '/orderstatus',
             iconOne: orderStatus,
             iconTwo: orderStatusTheme,
             dropdown: false
@@ -61,6 +73,8 @@ export default function SideBar(props) {
         {
             id: 7,
             title: 'Chat',
+            route: '/chat',
+            value: 'chat',
             iconOne: messageIcon,
             iconTwo: messagerTheme,
             dropdown: false
@@ -77,10 +91,26 @@ export default function SideBar(props) {
                     {sideBarItemsArray.map((item) => {
                         return (
                             <div>
-                                <div className="alpha-side_bar-items_container" key={item.id} >
-                                    <img src={item.iconOne} />
-                                    <div className="alpha-side_bar-items_title_view ">
-                                        <h2>{item.title}</h2>
+                                <div onClick={() => onClick(item.route, item.value)} className="alpha-side_bar-items_container" key={item.id} >
+                                    <img src={item.value === data ? item.iconTwo :
+                                        item.value === data ? item.iconTwo :
+                                            item.value === data ? item.iconTwo :
+                                                item.value === data ? item.iconTwo :
+                                                    item.value === data ? item.iconTwo :
+                                                        item.value === data ? item.iconTwo :
+                                                            item.value === data ? item.iconTwo :
+                                                                item.iconOne} />
+                                    <div className="alpha-side_bar-items_title_view">
+                                        <h2 style={{
+                                            color: item.value === data ? '#F18805' :
+                                                item.value === data ? '#F18805' :
+                                                    item.value === data ? '#F18805' :
+                                                        item.value === data ? '#F18805' :
+                                                            item.value === data ? '#F18805' :
+                                                                item.value === data ? '#F18805' :
+                                                                    item.value === data ? '#F18805' :
+                                                                        '#767582'
+                                        }}>{item.title}</h2>
                                         {item.dropdown &&
                                             <img className={showDropdowm ? "alpha_side_bar_rotate" : null} onClick={() => setShowDropdown(!showDropdowm)} src={arrowDownGrey} />
                                         }

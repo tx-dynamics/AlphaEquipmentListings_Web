@@ -1,0 +1,178 @@
+.alpha-shop-container {
+    display: flex;
+    overflow: scroll;
+    flex-direction: column;
+    margin: 2.4rem 2.4rem 0 2.4rem;
+    background-color: white;
+}
+
+.alpha-shop-title_view {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.alpha-shop-title_view h1 {
+    font-family: lato;
+    font-weight: 700;
+    font-size: 2.4rem;
+    line-height: 3rem;
+    color: #282E3D;
+    padding: 2rem;
+}
+
+.alpha-shop_dividers_top_view {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.alpha-shop_divider_one {
+    border-bottom: 1px solid #EEEEF1;
+    width: 2rem;
+}
+
+.alpha-shop_divider_two {
+    border-bottom: 1px solid #18162F;
+    width: 13rem;
+}
+
+.alpha-shop_divider_three {
+    border-bottom: 1px solid #EEEEF1;
+    width: 100%;
+}
+
+.alpha-shop-shop_detail_title_view {
+    padding-left: 2rem;
+    padding-right: 2rem;
+
+}
+
+.alpha-shop-shop_detail_title_view h1 {
+    font-family: lato;
+    font-weight: 700;
+    font-size: 2.4rem;
+    line-height: 3rem;
+    color: #F18805;
+    padding-bottom: 1.2rem;
+}
+
+.alpha-shop-shop_detail_title_view h2 {
+    font-family: lato;
+    font-weight: 400;
+    font-size: 1.8rem;
+    line-height: 2.5rem;
+    color: #272727;
+    padding-bottom: 2rem;
+}
+
+.alpha-shop-shop_detail_image_view {
+    display: flex;
+    justify-content: center;
+}
+
+.alpha-shop-shop_detail_image_view img {
+    width: 45%;
+    height: 45%;
+    object-fit: cover;
+}
+
+.alpha-shop-shop_detail_button_view {
+    display: flex;
+    align-items: center;
+    align-self: center;
+    justify-content: center;
+    width: 34.3rem;
+    padding-top: 1.6rem;
+    padding-bottom: 1.6rem;
+    background: #F18805;
+    border-radius: 10px;
+    margin-top: 15px;
+    margin-bottom: 3rem;
+    cursor: pointer;
+}
+
+.alpha-shop-shop_detail_button_view h2 {
+    font-family: lato;
+    font-weight: 700;
+    font-size: 1.8rem;
+    line-height: 1.6rem;
+    text-transform: uppercase;
+    color: #FFFFFF;
+}
+
+.alpha-shop-shop_detail_profile_pic_top_view {
+    display: flex;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    flex-direction: column;
+}
+
+.alpha-shop-shop_detail_profile_pic_top_view h1 {
+    font-family: lato;
+    font-weight: 700;
+    font-size: 2rem;
+    line-height: 2.4rem;
+    color: #282E3D;
+}
+
+@media screen and (max-width:600px) {
+    .alpha-shop-title_view h1 {
+        font-size: 2rem;
+        line-height: 2.6rem;
+    }
+
+    .alpha-shop-shop_detail_title_view h1 {
+        font-size: 2rem;
+        line-height: 2.6rem;
+    }
+
+    .alpha-shop-shop_detail_title_view h2 {
+        font-size: 1.4rem;
+        line-height: 2.1rem;
+    }
+
+    .alpha-shop-shop_detail_button_view {
+        width: 30.3rem;
+        padding-top: 1.4rem;
+        padding-bottom: 1.4rem;
+    }
+
+    .alpha-shop-shop_detail_button_view h2 {
+        font-size: 1.4rem;
+        line-height: 1.2rem;
+
+    }
+}
+
+@media screen and (max-width:400px) {
+    .alpha-shop-title_view h1 {
+        font-size: 1.8rem;
+        line-height: 2.4rem;
+    }
+
+    .alpha-shop-shop_detail_title_view h1 {
+        font-size: 1.8rem;
+        line-height: 2.4rem;
+    }
+
+    .alpha-shop-shop_detail_title_view h2 {
+        font-size: 1.2rem;
+        line-height: 1.9rem;
+    }
+
+    .alpha-shop-shop_detail_button_view {
+        width: 22.3rem;
+        padding-top: 1.2rem;
+        padding-bottom: 1.2rem;
+    }
+
+    .alpha-shop-shop_detail_button_view h2 {
+        font-size: 1.2rem;
+        line-height: 1rem;
+
+    }
+}
