@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { allWeek, best, crossCircle, trusted } from '../../assets/icons'
 import './membershipModel.css'
-import { Button } from '../../components'
 
 export default function MembershipModel(props) {
     const [selectedCharges, setSelectedCharges] = useState({ id: 0 })
@@ -44,7 +43,7 @@ export default function MembershipModel(props) {
         <div className="alpha-financing-model_top_view">
             <div className='alpha-membership_model_top_view'>
                 <div className="alpha-membership_cross_view">
-                    <img onClick={props.onClickClose} src={crossCircle} />
+                    <img onClick={props.onClickClose} src={crossCircle} alt={''} />
                 </div>
                 <div className="alpha-membership_title_view">
                     <h2>Unlock Your Membership</h2>
@@ -66,7 +65,7 @@ export default function MembershipModel(props) {
                     (serviceArray.map((item) => {
                         return (
                             <div key={item.id} className='alpha-membership_services_view'>
-                                <img src={item.icon} />
+                                <img src={item.icon} alt={''} />
                                 <div>
                                     <h2>{item.title}</h2>
                                     <h4>{item.des}</h4>

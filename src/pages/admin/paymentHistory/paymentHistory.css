@@ -1,0 +1,109 @@
+.alpha_payment_history_table_view table {
+    border-collapse: collapse;
+    margin-left: 2rem;
+    margin-top: 2rem;
+    width: 96%;
+}
+
+.alpha_payment_history_table_view thead {
+    background-color: #F5F9FA;
+}
+
+
+.alpha_payment_history_table_view th {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    font-family: lato;
+    font-weight: 700;
+    font-size: 1.6rem;
+    line-height: 2.4rem;
+    text-align: left;
+    color: #282E3D;
+}
+
+.alpha_payment_history_table_view td {
+    box-sizing: border-box;
+    padding-top: 1.8rem;
+    padding-bottom: 1.8rem;
+    background-color: rgb(255, 255, 255);
+    font-family: lato;
+    font-weight: 400;
+    font-size: 1.5rem;
+    line-height: 1.8rem;
+    color: #282E3D;
+    border-bottom: 1px solid #EEEEF1;
+}
+
+.alpha_payment_history_padding_left {
+    padding-left: 3rem;
+}
+
+
+@media screen and (max-width:850px) {
+    .alpha_payment_history_padding_left {
+        padding-left: 0rem;
+    }
+
+    .alpha_payment_history_table_view table {
+        width: 92%;
+    }
+
+    .alpha_payment_history_table_view table thead {
+        display: none;
+    }
+
+    .alpha_payment_history_table_view table tr {
+        border-bottom: 3px solid #ddd;
+        display: block;
+        margin-bottom: .625em;
+    }
+
+    .alpha_payment_history_table_view table td {
+        border-bottom: 1px solid #ddd;
+        display: block;
+        text-align: right;
+        font-family: lato;
+        font-weight: 400;
+        font-size: 1.5rem;
+        line-height: 1.8rem;
+        color: #282E3D;
+    }
+
+    .alpha_payment_history_table_view td {
+        font-size: 22px;
+    }
+
+    table td::before {
+        content: attr(data-label);
+        float: left;
+        font-family: lato;
+        font-weight: 600;
+        font-size: 1.6rem;
+        line-height: 2.4rem;
+        color: #282E3D;
+    }
+
+    .alpha_payment_history_table_view table td:last-child {
+        border-bottom: 0;
+    }
+}
+
+@media screen and (max-width:570px) {
+    .alpha_payment_history_table_view table {
+        width: 92%;
+    }
+}
+
+@media screen and (max-width:500px) {
+    .alpha_payment_history_table_view table td {
+        font-size: 1.2rem;
+        line-height: 1.6rem;
+    }
+
+}
+
+@media screen and (max-width:415px) {
+    .alpha_payment_history_table_view table {
+        width: 90%;
+    }
+}

@@ -25,7 +25,6 @@
     height: 2rem;
     background: #26D1A0;
     border-radius: 2.3rem;
-    margin-right: 10.3rem;
 }
 
 .alpha-my_shop-table_data_new_view h6 {
@@ -34,7 +33,9 @@
     font-size: 1.2rem;
     line-height: 1.6rem;
     color: #FFFFFF;
+    display: flex;
 }
+
 
 .alpha-my_shop-table_data_edit_view {
     display: flex;
@@ -67,23 +68,19 @@
     color: #ADADAD;
 }
 
-
-table {
+.alpha_my_shop_table_view table {
     border-collapse: collapse;
-    /* width: 100%; */
     margin-left: 2rem;
     margin-right: 2rem;
+    width: 100%;
 }
 
-thead {
+.alpha_my_shop_table_view thead {
     background-color: #F5F9FA;
-
-    /* padding-left: 5rem; */
 }
 
 
-th {
-    /* background-color: #F5F9FA; */
+.alpha_my_shop_table_view th {
     padding-top: 1rem;
     padding-bottom: 1rem;
     font-family: lato;
@@ -94,7 +91,7 @@ th {
     color: #282E3D;
 }
 
-td {
+.alpha_my_shop_table_view td {
     box-sizing: border-box;
     padding-top: 1.8rem;
     padding-bottom: 1.8rem;
@@ -104,6 +101,118 @@ td {
     font-size: 1.5rem;
     line-height: 1.8rem;
     color: #282E3D;
+
     border-bottom: 1px solid #EEEEF1;
-    /* padding-left: 0rem; */
+}
+
+.alpha_my_shop_title_style {
+    max-width: 20rem;
+}
+
+@media screen and (max-width:850px) {
+    .alpha_my_shop_title_style {
+        max-width: 100%;
+    }
+
+    .alpha_my_shop_table_view table {
+        width: 92%;
+    }
+
+    .alpha_my_shop_table_view table thead {
+        display: none;
+    }
+
+    .alpha_my_shop_table_view table tr {
+        border-bottom: 3px solid #ddd;
+        display: block;
+        margin-bottom: .625em;
+    }
+
+    .alpha_my_shop_table_view table td {
+        border-bottom: 1px solid #ddd;
+        display: block;
+        text-align: right;
+        font-family: lato;
+        font-weight: 400;
+        font-size: 1.5rem;
+        line-height: 1.8rem;
+        color: #282E3D;
+    }
+
+    .alpha-my_shop-table_data_new_view {
+        display: inline-flex;
+
+    }
+
+    .alpha-my_shop-table_data_edit_view {
+        display: inline-flex
+    }
+
+
+    .alpha_my_shop_table_view td {
+        font-size: 22px;
+    }
+
+    table td::before {
+        content: attr(data-label);
+        float: left;
+        font-family: lato;
+        font-weight: 600;
+        font-size: 1.6rem;
+        line-height: 2.4rem;
+        color: #282E3D;
+    }
+
+    .alpha_my_shop_table_view table td:last-child {
+        border-bottom: 0;
+    }
+
+    .alpha-my_shop-table_data_edit_view h5 {
+        padding-right: 0rem;
+        padding-left: 2.4rem;
+    }
+}
+
+@media screen and (max-width:734px) {
+    .alpha_my_Shop-add_product_button_view {
+        margin-bottom: 2rem;
+        margin-left: 2rem;
+    }
+}
+
+@media screen and (max-width:600px) {
+    .alpha_my_Shop-add_product_button_view {
+
+        padding: 1rem 1rem
+    }
+
+    .alpha_my_Shop-add_product_button_view h5 {
+
+        font-size: 1.4rem;
+        line-height: 1.6rem;
+    }
+}
+
+@media screen and (max-width:570px) {
+    .alpha_my_shop_table_view table {
+        width: 92%;
+    }
+}
+
+@media screen and (max-width:500px) {
+    .alpha_my_shop_table_view table td {
+        font-size: 1.2rem;
+        line-height: 1.6rem;
+    }
+
+    .alpha-my_shop-table_data_edit_view h5 {
+        font-size: 1.2rem;
+        line-height: 1.6rem;
+    }
+}
+
+@media screen and (max-width:415px) {
+    .alpha_my_shop_table_view table {
+        width: 90%;
+    }
 }

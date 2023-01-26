@@ -1,0 +1,85 @@
+.alpha-input_custom_container_two {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2rem;
+    width: 100%;
+}
+
+.alpha-input_custom_container_two p {
+    font-family: lato;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.8rem;
+    line-height: 2.5rem;
+    padding-bottom: 0;
+    color: #444444;
+}
+
+.alpha-input_custom_container_input_two {
+    margin-top: 0.8rem;
+    width: 100%;
+    background-color: #F8F8F8;
+    border-radius: 1rem;
+    border: 1px solid #EAEAEA;
+    padding-left: 1.2rem;
+    padding-right: 1.2rem;
+    display: flex;
+    align-items: center;
+}
+
+
+.alpha-input_custom_container_input_two textarea {
+    padding-top: 1.2rem;
+    padding-bottom: 1.2rem;
+    resize: none;
+    height: 8rem !important;
+    width: 100% !important;
+    display: flex;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    font-family: lato;
+    font-weight: 400;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    color: #000000;
+}
+
+
+
+@media screen and (max-width:626px) {
+    .alpha-input_custom_container_two p {
+        font-size: 1.6rem;
+        line-height: 2.3rem;
+    }
+
+    .alpha-input_custom_container_input_two input {
+        font-size: 1.3rem;
+        line-height: 1.8rem;
+        height: 3.6rem;
+    }
+
+    .alpha-input_custom_container_input_two textarea {
+        height: 15.4rem !important;
+        font-size: 1.3rem;
+        line-height: 1.8rem;
+    }
+}
+
+@media screen and (max-width:450px) {
+    .alpha-input_custom_container_two p {
+        font-size: 1.4rem;
+        line-height: 2.1rem;
+    }
+
+    .alpha-input_custom_container_input_two input {
+        font-size: 1.2rem;
+        line-height: 1.6rem;
+    }
+
+    .alpha-input_custom_container_input_two textarea {
+        height: 13.4rem !important;
+        font-size: 1.2rem;
+        line-height: 1.6rem;
+    }
+}

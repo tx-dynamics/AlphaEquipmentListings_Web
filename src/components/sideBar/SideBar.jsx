@@ -7,7 +7,7 @@ import { activeTab } from '../../redux/activeTabSlice';
 
 export default function SideBar(props) {
     const disPatch = useDispatch();
-    const [showDropdowm, setShowDropdown] = useState(false)
+    const [showDropdown, setShowDropdown] = useState(true)
     const data = useSelector((data) => data.activeTab.value,);
     const navigate = useNavigate();
     const onClick = (type, value) => {
@@ -20,6 +20,8 @@ export default function SideBar(props) {
             id: 1,
             title: 'Dashboard',
             value: 'dashboard',
+            value2: '',
+            value3: '',
             route: '/dashboard',
             iconOne: dashboard,
             iconTwo: dashboardTheme,
@@ -30,6 +32,8 @@ export default function SideBar(props) {
             title: 'Shop',
             value: 'shop',
             route: '/shop',
+            value2: '',
+            value3: '',
             iconOne: shop,
             iconTwo: shopTheme,
             dropdown: false
@@ -39,6 +43,8 @@ export default function SideBar(props) {
             title: 'Wallet',
             value: 'wallet',
             route: '/wallet',
+            value2: '',
+            value3: '',
             iconOne: walletDark,
             iconTwo: walletTheme,
             dropdown: false
@@ -46,8 +52,10 @@ export default function SideBar(props) {
         {
             id: 4,
             title: 'Request',
-            value: 'request',
-            route: '/request',
+            value: 'requestrent',
+            value2: 'requestbuy',
+            value3: 'requestauction',
+            route: '/rentrequest',
             iconOne: request,
             iconTwo: requestTheme,
             dropdown: true
@@ -57,6 +65,8 @@ export default function SideBar(props) {
             title: 'Payment History',
             value: 'paymenthistory',
             route: '/paymenthistory',
+            value2: '',
+            value3: '',
             iconOne: paymentHistory,
             iconTwo: paymentHistoryTheme,
             dropdown: false
@@ -66,6 +76,8 @@ export default function SideBar(props) {
             title: 'Orders Status',
             value: 'orderstatus',
             route: '/orderstatus',
+            value2: '',
+            value3: '',
             iconOne: orderStatus,
             iconTwo: orderStatusTheme,
             dropdown: false
@@ -75,6 +87,8 @@ export default function SideBar(props) {
             title: 'Chat',
             route: '/chat',
             value: 'chat',
+            value2: '',
+            value3: '',
             iconOne: messageIcon,
             iconTwo: messagerTheme,
             dropdown: false
@@ -91,36 +105,23 @@ export default function SideBar(props) {
                     {sideBarItemsArray.map((item) => {
                         return (
                             <div>
-                                <div onClick={() => onClick(item.route, item.value)} className="alpha-side_bar-items_container" key={item.id} >
-                                    <img src={item.value === data ? item.iconTwo :
-                                        item.value === data ? item.iconTwo :
-                                            item.value === data ? item.iconTwo :
-                                                item.value === data ? item.iconTwo :
-                                                    item.value === data ? item.iconTwo :
-                                                        item.value === data ? item.iconTwo :
-                                                            item.value === data ? item.iconTwo :
-                                                                item.iconOne} />
+                                <div className="alpha-side_bar-items_container" key={item.id} >
+                                    <img onClick={() => onClick(item.route, item.value)} src={item.value === data ? item.iconTwo :
+                                        item.value === data ? item.iconTwo : item.value2 === data ? item.iconTwo : item.value3 === data ? item.iconTwo : item.iconOne} />
                                     <div className="alpha-side_bar-items_title_view">
-                                        <h2 style={{
-                                            color: item.value === data ? '#F18805' :
-                                                item.value === data ? '#F18805' :
-                                                    item.value === data ? '#F18805' :
-                                                        item.value === data ? '#F18805' :
-                                                            item.value === data ? '#F18805' :
-                                                                item.value === data ? '#F18805' :
-                                                                    item.value === data ? '#F18805' :
-                                                                        '#767582'
+                                        <h2 onClick={() => onClick(item.route, item.value)} style={{
+                                            color: item.value === data ? '#F18805' : item.value2 === data ? '#F18805' : item.value3 === data ? '#F18805' : '#767582'
                                         }}>{item.title}</h2>
                                         {item.dropdown &&
-                                            <img className={showDropdowm ? "alpha_side_bar_rotate" : null} onClick={() => setShowDropdown(!showDropdowm)} src={arrowDownGrey} />
+                                            <img className={showDropdown ? "alpha_side_bar_rotate" : null} onClick={() => setShowDropdown(!showDropdown)} src={arrowDownGrey} />
                                         }
                                     </div>
                                 </div>
-                                {item.dropdown && showDropdowm &&
+                                {item.dropdown && showDropdown &&
                                     <div className="alpha-side_bar-dropdown_items_div">
-                                        <h5>Rent</h5>
-                                        <h5>Buy</h5>
-                                        <h5>Auction</h5>
+                                        <h5 onClick={() => onClick('/rentrequest', 'requestrent')} style={{ color: data === 'requestrent' ? '#F18805' : '#767582' }}>Rent</h5>
+                                        <h5 onClick={() => onClick('/buyrequest', 'requestbuy')} style={{ color: data === 'requestbuy' ? '#F18805' : '#767582' }}>Buy</h5>
+                                        <h5 onClick={() => onClick('/auctionrequest', 'requestauction')} style={{ color: data === 'requestauction' ? '#F18805' : '#767582' }}>Auction</h5>
                                     </div>
                                 }
                             </div>

@@ -3,7 +3,6 @@ import { Routes, Route } from "react-router-dom";
 import * as Viewers from "../pages/viewers";
 import * as Admin from "../pages/admin";
 
-import AuthStack from "./authStack/AuthStack";
 // import * as Admin from "../pages/admin";
 
 const Navigation = () => {
@@ -34,6 +33,14 @@ const Navigation = () => {
       <Route path="/dashboard" element={<Admin.Dashboard />} />
       <Route path="/shop" element={<Admin.Shop />} />
       <Route path="/myshop" element={<Admin.MyShop />} />
+      <Route path="/paymenthistory" element={<Admin.PaymentHistory />} />
+      <Route path="/orderstatus" element={<Admin.OrderStatus />} />
+      <Route path="/rentrequest" element={<Admin.RentRequest />} />
+      <Route path="/buyrequest" element={<Admin.BuyRequest />} />
+      <Route path="/auctionrequest" element={<Admin.AuctionRequest />} />
+      <Route path="/rentrequestdetail" element={<Admin.RentRequestDetail />} />
+      <Route path="/buyrequestdetail" element={<Admin.BuyRequestDetail />} />
+      <Route path="/auctionrequestdetail" element={<Admin.AuctionRequestDetail />} />
 
 
       {/* <Route path="/" element={<Viewers.HomePage />} />

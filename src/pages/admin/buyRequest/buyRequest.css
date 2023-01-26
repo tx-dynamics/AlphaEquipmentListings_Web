@@ -1,0 +1,9 @@
+.alpha_buy_req_title_style {
+    max-width: 10rem;
+}
+
+@media screen and (max-width:850px) {
+    .alpha_buy_req_title_style {
+        max-width: 100%;
+    }
+}

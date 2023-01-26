@@ -4,6 +4,8 @@
   width: 28rem;
   height: 100%;
   background-color: #EFEFEF;
+  position: relative;
+  z-index: 999px;
 }
 
 .alpha-side_bar-logo_container {

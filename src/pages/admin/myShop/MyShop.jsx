@@ -12,7 +12,7 @@ export default function MyShop() {
       condition: 'New',
       inStock: 3,
       price: '200$',
-      type: 'Machine'
+      type: 'Machine',
     },
     {
       id: 2,
@@ -20,7 +20,7 @@ export default function MyShop() {
       condition: 'Used',
       inStock: 3,
       price: '-',
-      type: 'Machine'
+      type: 'Machine',
     },
     {
       id: 3,
@@ -28,7 +28,7 @@ export default function MyShop() {
       condition: 'New',
       inStock: 3,
       price: '200$',
-      type: 'Spare Parts'
+      type: 'Spare Parts',
     },
     {
       id: 4,
@@ -36,7 +36,7 @@ export default function MyShop() {
       condition: 'Used',
       inStock: 3,
       price: '200$',
-      type: 'Machine'
+      type: 'Machine',
     },
     {
       id: 5,
@@ -44,7 +44,7 @@ export default function MyShop() {
       condition: 'Used',
       inStock: 3,
       price: '-',
-      type: 'Machine'
+      type: 'Machine',
     },
     {
       id: 6,
@@ -52,7 +52,7 @@ export default function MyShop() {
       condition: 'New',
       inStock: 3,
       price: '200$',
-      type: 'Spare Parts'
+      type: 'Spare Parts',
     },
     {
       id: 7,
@@ -60,7 +60,7 @@ export default function MyShop() {
       condition: 'Used',
       inStock: 3,
       price: '200$',
-      type: 'Machine'
+      type: 'Machine',
     },
     {
       id: 8,
@@ -68,7 +68,7 @@ export default function MyShop() {
       condition: 'New',
       inStock: 3,
       price: '200$',
-      type: 'Machine'
+      type: 'Machine',
     },
 
     {
@@ -77,7 +77,7 @@ export default function MyShop() {
       condition: 'New',
       inStock: 3,
       price: '-',
-      type: 'Spare Parts'
+      type: 'Spare Parts',
     },
     {
       id: 10,
@@ -85,7 +85,7 @@ export default function MyShop() {
       condition: 'New',
       inStock: 3,
       price: '200$',
-      type: 'Spare Parts'
+      type: 'Spare Parts',
     },
   ])
 
@@ -115,41 +115,48 @@ export default function MyShop() {
             <div className="alpha-shop_divider_two" />
             <div className="alpha-shop_divider_three" />
           </div>
+
           {myProductsArray.length > 0 ?
-            <table>
-              <thead>
-                <tr>
-                  <th></th>
-                  <th>Name</th>
-                  <th>Condition</th>
-                  <th>In Stock</th>
-                  <th>Price</th>
-                  <th>Type</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              {myProductsArray.map((item) => {
-                return (
-                  <tbody key={item.id}>
-                    <tr>
-                      <td style={{ width: 50 }}>-{item.id}</td>
-                      <td style={{ width: 370 }}>{item.title}</td>
-                      <td style={{ width: 100 }}> <div style={{ backgroundColor: item.condition === 'Used' ? '#0096CC' : '#26D1A0', }} className="alpha-my_shop-table_data_new_view">
-                        <h6> {item.condition}</h6>
-                      </div>
-                      </td>
-                      <td style={{ width: 120 }} >{item.inStock}</td>
-                      <td style={{ width: 100 }}>{item.price}</td>
-                      <td style={{ width: 150 }} >{item.type}</td>
-                      <td><div className="alpha-my_shop-table_data_edit_view">
-                        <h5 >Edit</h5>
-                        <h5 onClick={() => [setShowDeleteModel(true), setSelectedId(item)]}>Delete</h5>
-                      </div></td>
-                    </tr>
-                  </tbody>
-                )
-              })}
-            </table>
+            <div className="alpha_my_shop_table_view" style={{ overflowX: 'hidden' }}>
+              <table>
+                <thead>
+                  <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Condition</th>
+                    <th scope="col">In Stock</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody >
+
+                  {myProductsArray.map((item) => {
+                    return (
+                      <tr>
+                        <td data-label={''} >-{item.id}</td>
+                        <td data-label={'Name'} className={'alpha_my_shop_title_style'}>{item.title}</td>
+                        <td data-label={'Condition'}> <div className="alpha-my_shop-table_data_new_view">
+                          <h6>{item.condition}</h6>
+                        </div>
+                        </td>
+                        <td data-label={'In Stock'} >{item.inStock}</td>
+                        <td data-label={'Price'} >{item.price}</td>
+                        <td data-label={'Type'} >{item.type}</td>
+                        <td data-label={'Action'}><div className="alpha-my_shop-table_data_edit_view">
+                          <h5>Edit</h5>
+                          <h5
+                            onClick={() => [setShowDeleteModel(true), setSelectedId(item)]}>
+                            Delete</h5>
+                        </div></td>
+                      </tr>
+                    )
+                  })}
+                </tbody>
+
+              </table>
+            </div>
             :
             <div className="alpha-my_shop_empty_div">
               <h2>You don’t have any product.</h2>
