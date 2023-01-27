@@ -38,6 +38,33 @@ export default function PaymentModel(props) {
             icon: samsungPay
         }
     ]
+    const paymentTypesArrayTwo = [
+        {
+            id: 1,
+            title: 'Online Wallet',
+            icon: wallet
+        },
+        {
+            id: 2,
+            title: 'Credit Card',
+            icon: creditCard
+        },
+        {
+            id: 4,
+            title: 'Google pay',
+            icon: googlePay
+        },
+        {
+            id: 5,
+            title: 'Apple pay',
+            icon: applePay
+        },
+        {
+            id: 6,
+            title: 'Samsung',
+            icon: samsungPay
+        }
+    ]
 
     return (
         <div className="alpha-financing-model_top_view">
@@ -52,17 +79,31 @@ export default function PaymentModel(props) {
                     <h2>Select Payment Method</h2>
                     <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pretium orci vel ante posuere, et pharetra magna consectetur.</h3>
                 </div>
-                {paymentTypesArray.map((item) => {
-                    return (
-                        <div onClick={() => setSelectedPaymentType(item)} key={item.id} className='alpha-payment_model_payment_options_view'>
-                            <div className='alpha-payment_model_payment_options_title_view'>
-                                <img src={item.icon} />
-                                <h3>{item.title}</h3>
+                {props.admin ?
+                    (paymentTypesArrayTwo.map((item) => {
+                        return (
+                            <div onClick={() => setSelectedPaymentType(item)} key={item.id} className='alpha-payment_model_payment_options_view'>
+                                <div className='alpha-payment_model_payment_options_title_view'>
+                                    <img src={item.icon} />
+                                    <h3>{item.title}</h3>
+                                </div>
+                                <div style={{ backgroundColor: item.id === selectedpPaymentType.id ? '#F18805' : 'transparent' }} className='alpha-payment_model_payment_options_select_view' />
                             </div>
-                            <div style={{ backgroundColor: item.id === selectedpPaymentType.id ? '#F18805' : 'transparent' }} className='alpha-payment_model_payment_options_select_view' />
-                        </div>
-                    )
-                })}
+                        )
+                    }))
+                    :
+                    (paymentTypesArray.map((item) => {
+                        return (
+                            <div onClick={() => setSelectedPaymentType(item)} key={item.id} className='alpha-payment_model_payment_options_view'>
+                                <div className='alpha-payment_model_payment_options_title_view'>
+                                    <img src={item.icon} />
+                                    <h3>{item.title}</h3>
+                                </div>
+                                <div style={{ backgroundColor: item.id === selectedpPaymentType.id ? '#F18805' : 'transparent' }} className='alpha-payment_model_payment_options_select_view' />
+                            </div>
+                        )
+                    }))
+                }
                 <div onClick={() =>
                     selectedpPaymentType.id === 0 ?
                         toast.error("Please select value", { style: { fontSize: 14 } })

@@ -1,9 +1,16 @@
 import React from "react";
 import { useState } from "react";
-import { DeleteProductModel, SearchView, SideBar, TopBar } from "../../../components";
+import { useNavigate } from "react-router-dom";
+import { DeleteProductModel, MembershipModel, PaymentModel, SearchView, SideBar, TopBar } from "../../../components";
 import './myShop.css'
 export default function MyShop() {
+  const navigate = useNavigate()
   const [showDeleteModel, setShowDeleteModel] = useState(false)
+  const [membershipModel, setMembershipModel] = useState(true)
+  const [chargesView, setChargesView] = useState(false)
+  const [secondPlan, setSecondPlan] = useState(false)
+  const [paymentModel, setPaymentModel] = useState(false)
+
   const [selectedId, setSelectedId] = useState({ id: 0 })
   const [myProductsArray, setMyProductArray] = useState([
     {
@@ -99,6 +106,8 @@ export default function MyShop() {
   return (
     <div className="alpha-dashboard-main_container">
       <SideBar />
+      {paymentModel && <PaymentModel admin onClick={() => setPaymentModel(false)} onClickClose={() => setPaymentModel(false)} />}
+      {membershipModel && <MembershipModel admin={true} secondPlan={secondPlan} chargesView={chargesView} onClick={() => [secondPlan ? [setMembershipModel(false), setPaymentModel(true)] : chargesView ? setSecondPlan(true) : setChargesView(!chargesView)]} onClickClose={() => setMembershipModel(false)} />}
       {showDeleteModel && <DeleteProductModel onClick={() => deleteProduct()} onClickCancel={() => [setSelectedId({ id: 0 }), setShowDeleteModel(false)]} />}
       <div className="alpha-dashboard-top_bar_main_container">
         <TopBar />
@@ -106,7 +115,7 @@ export default function MyShop() {
           <div className="alpha-shop-title_view">
             <h1>Your Shop</h1>
             <SearchView />
-            <div className="alpha_my_Shop-add_product_button_view">
+            <div onClick={() => navigate('/addproduct')} className="alpha_my_Shop-add_product_button_view">
               <h5>+ Add Product</h5>
             </div>
           </div>

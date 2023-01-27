@@ -41,7 +41,7 @@ const Navigation = () => {
       <Route path="/rentrequestdetail" element={<Admin.RentRequestDetail />} />
       <Route path="/buyrequestdetail" element={<Admin.BuyRequestDetail />} />
       <Route path="/auctionrequestdetail" element={<Admin.AuctionRequestDetail />} />
-
+      <Route path="/addproduct" element={<Admin.AddProduct />} />
 
       {/* <Route path="/" element={<Viewers.HomePage />} />
       <Route path="/about" element={<Viewers.AboutUs />} />

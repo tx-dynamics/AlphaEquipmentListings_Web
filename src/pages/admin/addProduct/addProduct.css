@@ -1,0 +1,53 @@
+.alpha_add_product_des_view {
+    display: flex;
+    padding-left: 4rem;
+    padding-right: 4rem;
+}
+
+.alpha_add_product_des_view p {
+    font-family: lato;
+    font-weight: 350;
+    font-size: 1.8rem;
+    line-height: 2.2rem;
+    color: #272727;
+}
+
+.alpha_add_product_steps_count_view {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 3.1rem 4rem 1rem 4rem;
+}
+
+.alpha-add_product-steps {
+    display: flex;
+    align-items: center;
+}
+
+.alpha-add_product-steps img {
+    width: 3.2rem;
+    height: 3.2rem;
+    object-fit: cover;
+}
+
+.alpha-add_product-steps div {
+    display: flex;
+    width: 3.8rem;
+    border-bottom: 2px solid #D1D5DB;
+}
+
+.alpha_add_product_steps_des_view {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.alpha_add_product_steps_des_view h5 {
+    font-family: lato;
+    font-weight: 700;
+    font-size: 1.8rem;
+    line-height: 2.2rem;
+    color: #272727;
+    padding-bottom: 3rem;
+}
