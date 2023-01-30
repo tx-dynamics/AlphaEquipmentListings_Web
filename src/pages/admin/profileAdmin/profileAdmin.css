@@ -1,0 +1,31 @@
+.alpha-profile_divider_two {
+    border-bottom: 1px solid #18162F;
+    width: 18rem;
+}
+
+.alpha_admin_profile_save_button {
+    display: flex;
+    justify-content: center;
+    height: 15vh;
+}
+
+.alpha_admin_profile_save_button div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34.3rem;
+    height: 4.8rem;
+    background: #F18805;
+    border-radius: 10px;
+    margin-top: 1rem;
+    cursor: pointer;
+}
+
+.alpha_admin_profile_save_button h2 {
+    font-family: lato;
+    font-weight: 700;
+    font-size: 1.8rem;
+    line-height: 1.6rem;
+    text-transform: uppercase;
+    color: #FFFFFF;
+}

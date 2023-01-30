@@ -51,3 +51,65 @@
     color: #272727;
     padding-bottom: 3rem;
 }
+
+.alpha_custom_style_for_add_product {
+    height: 100vh;
+}
+
+.alpha_save_button_view {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 10.7rem;
+    height: 3.6rem;
+    background: #F18805;
+    border-radius: 5px;
+    margin-right: 2rem;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+.alpha_save_button_view h4 {
+    font-family: lato;
+    font-weight: 400;
+    font-size: 1.6rem;
+    line-height: 1.8rem;
+    color: #FFFFFF;
+}
+
+@media screen and (max-width:600px) {
+    .alpha_add_product_des_view p {
+        font-size: 1.6rem;
+        line-height: 2rem;
+    }
+}
+
+@media screen and (max-width:400px) {
+    .alpha_add_product_des_view p {
+        font-size: 1.4rem;
+        line-height: 1.8rem;
+    }
+
+    .alpha-add_product-steps img {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+
+    .alpha-add_product-steps div {
+        width: 3rem;
+    }
+
+    .alpha_add_product_steps_des_view h5 {
+        font-size: 1.6rem;
+        line-height: 2rem;
+    }
+}
+
+@media screen and (max-width:320px) {
+    .alpha_save_button_view {
+        margin-left: 2rem;
+        margin-bottom: 2rem;
+        margin-top: 0rem;
+
+    }
+}

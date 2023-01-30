@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { arrowDownGrey, dashboard, dashboardTheme, logo, logout, messageIcon, messagerTheme, orderStatus, orderStatusTheme, paymentHistory, paymentHistoryTheme, profile, request, requestTheme, shop, shopTheme, walletDark, walletTheme } from "../../assets/icons";
+import { arrowDownGrey, dashboard, dashboardTheme, logo, logout, messageIcon, messagerTheme, orderStatus, orderStatusTheme, paymentHistory, paymentHistoryTheme, profile, profileTheme, request, requestTheme, shop, shopTheme, walletDark, walletTheme } from "../../assets/icons";
 import './sideBar.css'
 import { useDispatch, useSelector } from "react-redux";
 import { activeTab } from '../../redux/activeTabSlice';
@@ -129,9 +129,9 @@ export default function SideBar(props) {
                     })}
                 </div>
                 <div className="alpha-side_bar_bottom_items_view">
-                    <div className="alpha-side_bar-items_container"  >
-                        <img src={profile} />
-                        <h2>Profile</h2>
+                    <div onClick={() => onClick('/profileadmin', 'profileadmin')} className="alpha-side_bar-items_container"  >
+                        <img src={data === 'profileadmin' ? profileTheme : profile} />
+                        <h2 style={{ color: data === 'profileadmin' ? '#F18805' : '#767582' }}>Profile</h2>
                     </div>
                 </div>
                 <div className="alpha-side_bar-divider"></div>

@@ -115,7 +115,7 @@ export default function MyShop() {
           <div className="alpha-shop-title_view">
             <h1>Your Shop</h1>
             <SearchView />
-            <div onClick={() => navigate('/addproduct')} className="alpha_my_Shop-add_product_button_view">
+            <div onClick={() => navigate('/addproduct', { state: { screen: 'add' } })} className="alpha_my_Shop-add_product_button_view">
               <h5>+ Add Product</h5>
             </div>
           </div>
@@ -154,7 +154,7 @@ export default function MyShop() {
                         <td data-label={'Price'} >{item.price}</td>
                         <td data-label={'Type'} >{item.type}</td>
                         <td data-label={'Action'}><div className="alpha-my_shop-table_data_edit_view">
-                          <h5>Edit</h5>
+                          <h5 onClick={() => navigate('/addproduct', { state: { screen: 'edit' } })}>Edit</h5>
                           <h5
                             onClick={() => [setShowDeleteModel(true), setSelectedId(item)]}>
                             Delete</h5>
