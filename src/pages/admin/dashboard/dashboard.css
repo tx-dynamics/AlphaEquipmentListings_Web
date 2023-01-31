@@ -247,8 +247,6 @@
     margin-top: 2rem;
     height: 330px;
     margin-right: 2rem;
-
-
     background: #FFFFFF;
     box-shadow: 0px 0px 12px 1px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
@@ -263,4 +261,55 @@
     padding-top: 1.6rem;
     padding-right: 2rem;
     padding-left: 2rem;
+}
+
+
+@media screen and (max-width:1165px) {
+    .alpha_dashboard-row {
+        flex-wrap: wrap;
+    }
+
+    .alpha-dashboard-main_grah_top_view {
+        width: 100%;
+        margin-right: 2rem;
+    }
+
+    .alpha-dashboard_progress_bars_top_view {
+        margin-top: 2rem;
+        margin-left: 0;
+
+    }
+}
+
+@media screen and (max-width:500px) {
+    .alpha-dashboard_payment_history_top_view p {
+        font-size: 2rem;
+        line-height: 2.6rem;
+    }
+}
+
+@media screen and (max-width:450px) {
+    .alpha-dashboard-top_title_view h1 {
+        font-size: 2rem;
+        line-height: 2.6rem;
+    }
+
+    .alpha-dashboard-avrg_revenue_view h1 {
+        font-size: 2rem;
+    }
+
+    .alpha-dashboard-main_graph_title_top_view h2 {
+        font-size: 1.4rem;
+    }
+
+    .alpha-dashboard-main_graph_filter_view h3 {
+        font-size: 1.2rem;
+        line-height: 100%;
+    }
+
+    .alpha-dashboard-mini_graphs-chart_view {
+        display: none;
+    }
+
+
 }
