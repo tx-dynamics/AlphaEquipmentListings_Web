@@ -1,16 +1,24 @@
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { drawerIcon, dummyFour, notificationTheme, arrowDownGrey, crossCircle, dashboard, dashboardTheme, logo, logout, messageIcon, messagerTheme, orderStatus, orderStatusTheme, paymentHistory, paymentHistoryTheme, profile, request, requestTheme, shop, shopTheme, walletDark, walletTheme } from "../../assets/icons";
+import { drawerIcon, dummyFour, notificationTheme, arrowDownGrey, crossCircle, dashboard, dashboardTheme, logo, logout, messageIcon, messagerTheme, orderStatus, orderStatusTheme, paymentHistory, paymentHistoryTheme, profile, request, requestTheme, shop, shopTheme, walletDark, walletTheme, profileTheme } from "../../assets/icons";
+import { activeTab } from '../../redux/activeTabSlice';
 import './topBar.css'
 
 export default function TopBar() {
     const navigate = useNavigate();
+    const disPatch = useDispatch();
+
     const [barValue, setBarValue] = useState(-500)
     const [showDropdowm, setShowDropdown] = useState(false)
     const sideBarItemsArray = [
         {
             id: 1,
             title: 'Dashboard',
+            value: 'dashboard',
+            value2: '',
+            value3: '',
+            route: '/dashboard',
             iconOne: dashboard,
             iconTwo: dashboardTheme,
             dropdown: false
@@ -18,6 +26,10 @@ export default function TopBar() {
         {
             id: 2,
             title: 'Shop',
+            value: 'shop',
+            route: '/shop',
+            value2: '',
+            value3: '',
             iconOne: shop,
             iconTwo: shopTheme,
             dropdown: false
@@ -25,6 +37,10 @@ export default function TopBar() {
         {
             id: 3,
             title: 'Wallet',
+            value: 'walletadmin',
+            route: '/walletadmin',
+            value2: '',
+            value3: '',
             iconOne: walletDark,
             iconTwo: walletTheme,
             dropdown: false
@@ -32,6 +48,10 @@ export default function TopBar() {
         {
             id: 4,
             title: 'Request',
+            value: 'requestrent',
+            value2: 'requestbuy',
+            value3: 'requestauction',
+            route: '/rentrequest',
             iconOne: request,
             iconTwo: requestTheme,
             dropdown: true
@@ -39,6 +59,10 @@ export default function TopBar() {
         {
             id: 5,
             title: 'Payment History',
+            value: 'paymenthistory',
+            route: '/paymenthistory',
+            value2: '',
+            value3: '',
             iconOne: paymentHistory,
             iconTwo: paymentHistoryTheme,
             dropdown: false
@@ -46,6 +70,10 @@ export default function TopBar() {
         {
             id: 6,
             title: 'Orders Status',
+            value: 'orderstatus',
+            route: '/orderstatus',
+            value2: '',
+            value3: '',
             iconOne: orderStatus,
             iconTwo: orderStatusTheme,
             dropdown: false
@@ -53,17 +81,25 @@ export default function TopBar() {
         {
             id: 7,
             title: 'Chat',
+            route: '/chatadmin',
+            value: 'chatadmin',
+            value2: '',
+            value3: '',
             iconOne: messageIcon,
             iconTwo: messagerTheme,
             dropdown: false
         }
     ]
-
+    const data = useSelector((data) => data.activeTab.value,);
+    const onClick = (type, value) => {
+        disPatch(activeTab(value))
+        navigate(type, { state: { screen: value } })
+    }
     return (
-        <div>
-            <div className='alpha-dashboard-top_bar_side_bar_view' style={{ left: barValue }}>
+        <div >
+            <div className='alpha-dashboard-top_bar_side_bar_view' style={{ left: barValue, }}>
                 <div className="alpha-side_bar_container" >
-                    <div className="alpha-side_bar_top_container_two">
+                    <div className="alpha-side_bar_top_container_two" style={{ position: 'relative', zIndex: 999 }}>
                         <div className='alpha-side_bar_cross_view'>
                             <img onClick={() => setBarValue(-500)} src={crossCircle} />
                         </div>
@@ -75,9 +111,11 @@ export default function TopBar() {
                                 return (
                                     <div>
                                         <div className="alpha-side_bar-items_container" key={item.id} >
-                                            <img src={item.iconOne} />
-                                            <div className="alpha-side_bar-items_title_view ">
-                                                <h2>{item.title}</h2>
+                                            <img onClick={() => onClick(item.route, item.value)} src={item.value === data ? item.iconTwo :
+                                                item.value === data ? item.iconTwo : item.value2 === data ? item.iconTwo : item.value3 === data ? item.iconTwo : item.iconOne} />                                            <div className="alpha-side_bar-items_title_view ">
+                                                <h2 onClick={() => onClick(item.route, item.value)} style={{
+                                                    color: item.value === data ? '#F18805' : item.value2 === data ? '#F18805' : item.value3 === data ? '#F18805' : '#767582'
+                                                }}>{item.title}</h2>
                                                 {item.dropdown &&
                                                     <img className={showDropdowm ? "alpha_side_bar_rotate" : null} onClick={() => setShowDropdown(!showDropdowm)} src={arrowDownGrey} />
                                                 }
@@ -85,9 +123,9 @@ export default function TopBar() {
                                         </div>
                                         {item.dropdown && showDropdowm &&
                                             <div className="alpha-side_bar-dropdown_items_div">
-                                                <h5>Rent</h5>
-                                                <h5>Buy</h5>
-                                                <h5>Auction</h5>
+                                                <h5 onClick={() => onClick('/rentrequest', 'requestrent')} style={{ color: data === 'requestrent' ? '#F18805' : '#767582' }}>Rent</h5>
+                                                <h5 onClick={() => onClick('/buyrequest', 'requestbuy')} style={{ color: data === 'requestbuy' ? '#F18805' : '#767582' }}>Buy</h5>
+                                                <h5 onClick={() => onClick('/auctionrequest', 'requestauction')} style={{ color: data === 'requestauction' ? '#F18805' : '#767582' }}>Auction</h5>
                                             </div>
                                         }
                                     </div>
@@ -95,14 +133,14 @@ export default function TopBar() {
                             })}
                         </div>
                         <div className="alpha-side_bar_bottom_items_view">
-                            <div className="alpha-side_bar-items_container"  >
-                                <img src={profile} />
-                                <h2>Profile</h2>
+                            <div onClick={() => onClick('/profileadmin', 'profileadmin')} className="alpha-side_bar-items_container"  >
+                                <img src={data === 'profileadmin' ? profileTheme : profile} />
+                                <h2 style={{ color: data === 'profileadmin' ? '#F18805' : '#767582' }}>Profile</h2>
                             </div>
                         </div>
                         <div className="alpha-side_bar-divider"></div>
                         <div className="alpha-side_bar_bottom_items_view">
-                            <div className="alpha-side_bar-items_container"  >
+                            <div onClick={() => navigate('/', { replace: true })} className="alpha-side_bar-items_container"  >
                                 <img src={logout} />
                                 <h2>Logout</h2>
                             </div>

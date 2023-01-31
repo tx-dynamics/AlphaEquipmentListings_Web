@@ -41,8 +41,8 @@ export default function SideBar(props) {
         {
             id: 3,
             title: 'Wallet',
-            value: 'wallet',
-            route: '/wallet',
+            value: 'walletadmin',
+            route: '/walletadmin',
             value2: '',
             value3: '',
             iconOne: walletDark,
@@ -85,8 +85,8 @@ export default function SideBar(props) {
         {
             id: 7,
             title: 'Chat',
-            route: '/chat',
-            value: 'chat',
+            route: '/chatadmin',
+            value: 'chatadmin',
             value2: '',
             value3: '',
             iconOne: messageIcon,
@@ -136,7 +136,7 @@ export default function SideBar(props) {
                 </div>
                 <div className="alpha-side_bar-divider"></div>
                 <div className="alpha-side_bar_bottom_items_view">
-                    <div className="alpha-side_bar-items_container"  >
+                    <div onClick={() => navigate('/', { replace: true })} className="alpha-side_bar-items_container"  >
                         <img src={logout} />
                         <h2>Logout</h2>
                     </div>

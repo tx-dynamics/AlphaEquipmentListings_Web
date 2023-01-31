@@ -1,0 +1,145 @@
+.alpha-wallet_admin_top_container {
+    display: flex;
+    flex-direction: column;
+}
+
+.alpha-wallet_admin_top_container h1 {
+    font-family: lato;
+    font-weight: 700;
+    font-size: 2.4rem;
+    line-height: 3rem;
+    padding: 2.4rem 2rem 2rem 2rem;
+    color: #000000;
+}
+
+.alpha-wallet_admin_total_bal_top_view {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    padding-left: 2rem;
+    padding-bottom: 1rem;
+    padding-right: 2rem;
+}
+
+.alpha-wallet_admin_total_bal_view {
+    display: flex;
+    flex-direction: column;
+    width: 16.5rem;
+    height: 12.6rem;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 12px 1px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    margin-right: 3.3rem;
+    padding-top: 2rem;
+    padding-left: 1.6rem;
+}
+
+.alpha-wallet_admin_total_bal_view h2 {
+    font-family: lato;
+    font-weight: 700;
+    font-size: 1.6rem;
+    line-height: 1.9rem;
+    color: #000000;
+    padding-bottom: 1.6rem;
+}
+
+.alpha-wallet_admin_total_bal_view h3 {
+    font-family: lato;
+    font-weight: 800;
+    font-size: 3.4rem;
+    line-height: 131.9%;
+    color: #F18805;
+}
+
+.alpha-wallet_admin_cash_with_button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 2rem;
+    background: #FD7E14;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.alpha-wallet_admin_cash_with_button h2 {
+    font-family: lato;
+    font-weight: 500;
+    font-size: 1.4rem;
+    line-height: 2rem;
+    color: #FFFFFF;
+}
+
+.alpha-wallet_admin_top_container p {
+    font-family: lato;
+    font-weight: 600;
+    font-size: 2.2rem;
+    line-height: 3rem;
+    color: #121212;
+    padding-left: 2rem;
+}
+
+.alpha_wallet_id_style {
+    width: 7rem;
+}
+
+.alpha-wallet_empty_div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50vh;
+}
+
+.alpha-wallet_empty_div h2 {
+    font-family: lato;
+    font-weight: 400;
+    font-size: 1.8rem;
+    line-height: 2.2rem;
+    color: #ADADAD;
+}
+
+@media screen and (max-width:850px) {
+    .alpha_wallet_id_style {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width:450px) {
+    .alpha-wallet_admin_top_container h1 {
+        font-size: 2rem;
+        line-height: 2.6rem;
+    }
+
+    .alpha-wallet_admin_total_bal_view {
+        width: 14.5rem;
+        height: 10.6rem;
+        border-radius: 4px;
+        margin-right: 2.3rem;
+    }
+
+    .alpha-wallet_admin_total_bal_view h2 {
+        font-size: 1.4rem;
+        line-height: 1.7rem;
+    }
+
+    .alpha-wallet_admin_total_bal_view h3 {
+        font-size: 3rem;
+        line-height: 131.9%;
+    }
+
+    .alpha-wallet_admin_cash_with_button h2 {
+        font-size: 1.2rem;
+        line-height: 1.8rem;
+    }
+
+    .alpha-wallet_admin_top_container p {
+        font-size: 2rem;
+        line-height: 2.8rem;
+    }
+}
+
+@media screen and (max-width:386px) {
+    .alpha-wallet_admin_cash_with_button {
+        margin-top: 1rem;
+    }
+}

@@ -142,3 +142,125 @@
     color: #2E2E48;
     padding-top: 0.8rem;
 }
+
+.alpha-dashboard-main_grah_top_view {
+    display: flex;
+    flex-direction: column;
+    width: 72.5rem;
+    height: 33rem;
+    border-radius: 10px;
+    box-shadow: 0px 0px 12px 1px rgba(0, 0, 0, 0.1);
+}
+
+.alpha-dashboard-main_graph_title_top_view {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem 2rem;
+}
+
+.alpha-dashboard-main_graph_title_top_view h2 {
+    font-family: lato;
+    font-weight: 700;
+    font-size: 1.8rem;
+    line-height: 100%;
+    color: #000000;
+}
+
+.alpha-dashboard-main_graph_filter_view {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-right: 0.4rem;
+}
+
+.alpha-dashboard-main_graph_filter_view h3 {
+    font-family: lato;
+    font-weight: 400;
+    font-size: 1.4rem;
+    line-height: 100%;
+    color: #030303;
+    padding-left: 1.6rem;
+    cursor: pointer;
+}
+
+.alpha_dashboard-row {
+    flex-direction: row;
+    display: flex;
+}
+
+.alpha-dashboard_progress_bars_top_view {
+    display: flex;
+    flex-direction: column;
+    margin-left: 2rem;
+    margin-right: 2.5rem;
+    width: 32.5rem;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 12px 1px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    padding: 1.7rem 1.8rem 0rem 1.6rem;
+
+}
+
+.alpha-dashboard_progress_bar_view {
+    margin-bottom: 1.3rem;
+}
+
+.alpha-dashboard_progress_bars_top_view h1 {
+    font-family: lato;
+    font-weight: 700;
+    font-size: 1.8rem;
+    line-height: 131.9%;
+    color: #2E2E48;
+    padding-bottom: 1.9rem;
+
+}
+
+.alpha-dashboard-progress_bar_title_view {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 0.8rem;
+}
+
+.alpha-dashboard-progress_bar_title_view h3 {
+    font-family: lato;
+    font-weight: 600;
+    font-size: 1.4rem;
+    line-height: 131.9%;
+    color: #2E2E48;
+}
+
+.alpha-dashboard-progress_bar_title_view h4 {
+    font-family: lato;
+    font-weight: 700;
+    font-size: 1.4rem;
+    line-height: 131.9%;
+    color: #2E2E48;
+}
+
+.alpha-dashboard_payment_history_top_view {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+    height: 330px;
+    margin-right: 2rem;
+
+
+    background: #FFFFFF;
+    box-shadow: 0px 0px 12px 1px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+.alpha-dashboard_payment_history_top_view p {
+    font-family: lato;
+    font-weight: 700;
+    font-size: 2.4rem;
+    line-height: 3rem;
+    color: #000000;
+    padding-top: 1.6rem;
+    padding-right: 2rem;
+    padding-left: 2rem;
+}

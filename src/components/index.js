@@ -34,3 +34,4 @@ export { default as TextInputAdminFinance } from './textInputAdminFinance/TextIn
 export { default as FinancingStepTwoAdmin } from './financingStepTwoAdmin/FinancingStepTwoAdmin'
 export { default as FinancingStepThreeAdmin } from './financingStepThreeAdmin/FinancingStepThreeAdmin'
 export { default as FinancingStepFourAdmin } from './financingStepFourAdmin/FinancingStepFourAdmin'
+export { default as CashWithdrawModel } from './cashWithdrawModel/CashWithdrawModel'

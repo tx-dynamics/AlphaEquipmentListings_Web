@@ -1,0 +1,13 @@
+.alpha-card_modal_inputs_view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 0rem;
+}
+
+@media screen and (max-width:600px) {
+  .alpha-card_modal_inputs_view {
+    display: none;
+  }
+
+}

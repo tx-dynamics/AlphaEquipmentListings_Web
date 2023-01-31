@@ -11,3 +11,5 @@ export { default as BuyRequestDetail } from './buyRequestDetail/BuyRequestDetail
 export { default as AuctionRequestDetail } from './auctionRequestDetail/AuctionRequestDetail'
 export { default as AddProduct } from './addProduct/AddProduct'
 export { default as ProfileAdmin } from './profileAdmin/ProfileAdmin'
+export { default as ChatAdmin } from './chatAdmin/ChatAdmin'
+export { default as WalletAdmin } from './walletAdmin/WalletAdmin'
