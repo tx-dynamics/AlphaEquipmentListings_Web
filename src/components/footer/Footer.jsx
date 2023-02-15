@@ -19,7 +19,7 @@ export default function Footer() {
                 <div className="alpha_footer_row_view">
                     <h2>COMPANY</h2>
                     <h3>About Alpha Equipment Listings</h3>
-                    <h3>Blog</h3>
+                    <h3 onClick={() => onClick('/blogpage', 'blogpage')}>Blog</h3>
                     <h3 onClick={() => onClick('/profile', 'profile')}>Profile</h3>
                     <h3 onClick={() => onClick('/wallet', 'wallet')}>Wallet</h3>
 

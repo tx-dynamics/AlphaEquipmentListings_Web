@@ -86,7 +86,7 @@ export default function Wallet() {
                   return (
                     <div key={item.id}>
                       <div className="alpha-wallet-transaction_history_view">
-                        <h2>-{item.id}</h2>
+                        <h2>{item.id}-</h2>
                         <h3>{item.name}</h3>
                         <h4>{item.amount}</h4>
                         <h4>{item.date}</h4>

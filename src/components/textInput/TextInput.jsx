@@ -1,5 +1,5 @@
 import React from 'react'
-import { arrowDown, arrowDownBlack } from '../../assets/icons'
+import { arrowDown, arrowDownBlack, show } from '../../assets/icons'
 import './textInput.css'
 
 const TextInput = (props) => {
@@ -11,6 +11,10 @@ const TextInput = (props) => {
                 {props.type === 'dropdown' &&
                     <img alt='' onClick={props.onClickDropDown} src={arrowDownBlack} />
                 }
+                {props.eye &&
+                    <img alt='' onClick={props.onClickEye} src={props.eyeIcon} />
+                }
+
 
             </div>
             {props.dropDownValue &&

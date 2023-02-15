@@ -14,8 +14,8 @@ export default function OtpModel(props) {
                     <img onClick={props.onClickClose} src={crossCircleWhite} />
                 </div>
                 <div className='alpha-payment_model_payment_title_view'>
-                    <h2>Enter Pin Code</h2>
-                    <h3>Enter Your Card Pin to confirm Payment.</h3>
+                    <h2>Enter OTP Code</h2>
+                    <h3>We have sent a verification code to your email.</h3>
                 </div>
                 <div className="alpha-otp_modal-otp_view">
                     <OtpInput

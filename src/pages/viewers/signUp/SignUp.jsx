@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { apple, authImage, facebook, google, logo } from "../../../assets/icons";
+import { apple, authImage, facebook, google, hide, logo, show } from "../../../assets/icons";
 import { Button, TextInput } from "../../../components";
 
 export default function SignUp() {
+  const [showPassword, setShowPassword] = useState(false)
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+
   const navigate = useNavigate();
   const socialArray = [
     {
@@ -31,11 +34,11 @@ export default function SignUp() {
       </div>
       <div className="alpha-signin-detail_view">
         <div>
-          <h1>Create an Account</h1>
+          <h1 style={{ paddingBottom: 40 }}>Create an Account</h1>
           <TextInput placeholder={'Enter your user name'} title={'User Name'} />
           <TextInput placeholder={'Enter your email'} title={'Email'} />
-          <TextInput placeholder={'Enter your password'} title={'Password'} />
-          <TextInput placeholder={'Enter your password'} title={'Confirm Password'} />
+          <TextInput onClickEye={() => setShowPassword(!showPassword)} type={!showPassword ? 'password' : 'text'} eye eyeIcon={showPassword ? show : hide} placeholder={'Enter your password'} title={'Password'} />
+          <TextInput onClickEye={() => setShowConfirmPassword(!showConfirmPassword)} type={!showConfirmPassword ? 'password' : 'text'} eye eyeIcon={showConfirmPassword ? show : hide} placeholder={'Enter your password'} title={'Confirm Password'} />
           <div className="alpha-signin-button-view">
             <Button
               // onClick={() => navigate('/dashboard', { replace: true })}

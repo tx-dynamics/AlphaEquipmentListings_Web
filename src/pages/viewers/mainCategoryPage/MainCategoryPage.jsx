@@ -11,7 +11,7 @@ export default function MainCategoryPage() {
   const filterItemArray = [
     {
       id: 1,
-      title: 'All Terrain Vehicles',
+      title: 'All Terrain Vehicles ',
       count: ' (142)'
     },
     {
@@ -215,7 +215,7 @@ export default function MainCategoryPage() {
                   return (
                     <div key={index} className="alpha-main_cat_page_filter_items_top_view">
                       <div className="alpha-main_cat_page_filter_items_view">
-                        <h2>{item.title}</h2>
+                        <h2 >{item.title}</h2>&nbsp;&nbsp;
                         <h3>{item.count}</h3>
                       </div>
                       <div className="alpha-main_cat_page_filter_item_divider" />
@@ -225,7 +225,7 @@ export default function MainCategoryPage() {
               </div>
             </div>
           }
-          <div className="alpha-main_cat_page_item_top_view" >
+          <div className="alpha-main_cat_page_item_top_view" style={{ marginLeft: state?.screen === 'spareparts' && 0 }}>
             {state?.screen === 'spareparts' ?
               <div className="alpha-main_cat_page_drawer_top_view" style={{ left: value }}>
                 <div className="alpha-main_cat_page_filter_title_view">

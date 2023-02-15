@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { apple, authImage, facebook, google, logo } from "../../../assets/icons";
+import { apple, authImage, facebook, google, hide, logo, show } from "../../../assets/icons";
 import { Button, TextInput } from "../../../components";
 import { activeTab } from "../../../redux/activeTabSlice";
 import "./signIn.css";
 
 export default function SignIn() {
+  const [showPassword, setShowPassword] = useState(false)
   const navigate = useNavigate();
   const disPatch = useDispatch();
   const socialArray = [
@@ -41,7 +42,7 @@ export default function SignIn() {
         <div>
           <h1>Sign IN</h1>
           <TextInput placeholder={'Enter your user name'} title={'User Name'} />
-          <TextInput placeholder={'Enter your password'} title={'Password'} />
+          <TextInput onClickEye={() => setShowPassword(!showPassword)} type={!showPassword ? 'password' : 'text'} eye eyeIcon={showPassword ? show : hide} placeholder={'Enter your password'} title={'Password'} />
           <div
             // onClick={() => navigate('/forgotpassword')}
             className="alpha-signin-forgot_password_view">

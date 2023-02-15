@@ -16,6 +16,7 @@
 .alpha-input_container_input {
   margin-right: -15px;
   margin-top: 0.6rem;
+  flex-direction: row !important;
   width: 34rem;
   background-color: rgba(217, 217, 217, 0.1);
   border-radius: 1rem;
