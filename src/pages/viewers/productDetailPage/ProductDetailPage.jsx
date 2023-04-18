@@ -6,7 +6,7 @@ import { Slide } from 'react-slideshow-image';
 import 'react-slideshow-image/dist/styles.css';
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { activeTab } from "../../../redux/activeTabSlice";
+import { activeTab } from "../../../redux/Slices/activeTabSlice";
 
 export default function ProductDetailPage() {
   const navigate = useNavigate()

@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { landingPageBanner } from '../../../assets/icons'
 import { BlogView, ConnectCardModel, DashboardAuctionView, DashboardCategoriesView, DashboardSparePartView, Footer, MembershipModel, NavBar, OtpModel, PaymentModel } from "../../../components";
-import { activeTab } from "../../../redux/activeTabSlice";
 import './homePage.css'
+import { activeTab } from "../../../redux/Slices/activeTabSlice";
+import { store } from "../../../redux/store";
+import { userData } from "../../../redux/Slices/userDataSlice";
 
 export default function HomePage() {
   const navigate = useNavigate()
@@ -130,6 +132,12 @@ export default function HomePage() {
     disPatch(activeTab(value))
     navigate(type, { state: { screen: value } })
   }
+
+
+  useEffect(() => {
+    const user = store.getState().userData.userData
+    user?.accountType === 'seller' && disPatch(userData(null))
+  }, [])
 
   return (
     <div className="alpha-home_page-main_container">

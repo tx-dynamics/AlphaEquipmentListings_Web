@@ -1,19 +1,21 @@
-import React from "react";
-import { Routes, Route } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import * as Viewers from "../pages/viewers";
 import * as Admin from "../pages/admin";
+import { store } from "../redux/store";
+import PrivateRoute from "./protected-route";
 
 // import * as Admin from "../pages/admin";
 
 const Navigation = () => {
   return (
     <Routes>
-      <Route path="/" element={<Viewers.SignIn />} />
+      <Route path="/" element={<Viewers.HomePage />} />
+      <Route path="/signin" element={<Viewers.SignIn />} />
       <Route path="/signup" element={<Viewers.SignUp />} />
-      {/* <Route path="/otpscreen" element={<Viewers.OtpScreen />} /> */}
-      {/* <Route path="/forgotpassword" element={<Viewers.ForgotPassword />} /> */}
-      {/* <Route path="/createpassword" element={<Viewers.CreatePassword />} /> */}
-      <Route path="/homepage" element={<Viewers.HomePage />} />
+      <Route path="/otpscreen" element={<Viewers.OtpScreen />} />
+      <Route path="/forgotpassword" element={<Viewers.ForgotPassword />} />
+      <Route path="/createpassword" element={<Viewers.CreatePassword />} />
       <Route path="/maincategorypage" element={<Viewers.MainCategoryPage />} />
       <Route path="/productlistingpage" element={<Viewers.ProductListingPage />} />
       <Route path="/productdetailpage" element={<Viewers.ProductDetailPage />} />
@@ -26,47 +28,22 @@ const Navigation = () => {
       <Route path="/blogdetailpage" element={<Viewers.BlogDetailPage />} />
       <Route path="/chatpagebuyer" element={<Viewers.ChatPageBuyer />} />
 
-
-
-
-
-      <Route path="/dashboard" element={<Admin.Dashboard />} />
-      <Route path="/shop" element={<Admin.Shop />} />
-      <Route path="/myshop" element={<Admin.MyShop />} />
-      <Route path="/paymenthistory" element={<Admin.PaymentHistory />} />
-      <Route path="/orderstatus" element={<Admin.OrderStatus />} />
-      <Route path="/rentrequest" element={<Admin.RentRequest />} />
-      <Route path="/buyrequest" element={<Admin.BuyRequest />} />
-      <Route path="/auctionrequest" element={<Admin.AuctionRequest />} />
-      <Route path="/rentrequestdetail" element={<Admin.RentRequestDetail />} />
-      <Route path="/buyrequestdetail" element={<Admin.BuyRequestDetail />} />
-      <Route path="/auctionrequestdetail" element={<Admin.AuctionRequestDetail />} />
-      <Route path="/addproduct" element={<Admin.AddProduct />} />
-      <Route path="/profileadmin" element={<Admin.ProfileAdmin />} />
-      <Route path="/chatadmin" element={<Admin.ChatAdmin />} />
-      <Route path="/walletadmin" element={<Admin.WalletAdmin />} />
-
-      {/* <Route path="/" element={<Viewers.HomePage />} />
-      <Route path="/about" element={<Viewers.AboutUs />} />
-      <Route path="/contactUs" element={<Viewers.ContactUs />} />
-      <Route path="/signUp" element={<Viewers.SignUp />} />
-      <Route path="/signIn" element={<Viewers.SignIn />} />
-      <Route path="/fillOutForm" element={<Viewers.FillOutForm />} />
-      <Route path="/createProfile" element={<Viewers.CreateProfile />} />
-      <Route
-        path="/registrationPending"
-        element={<Viewers.RegistrationPending />}
-      />
-      <Route
-        path="/registrationSuccessfull"
-        element={<Viewers.RegistrationSuccessfull />}
-      />
-      <Route path="/forgotPassword" element={<Viewers.ForgotPassword />} />
-      <Route path="/confirmPassword" element={<Viewers.ConfirmPassword />} />
-      <Route path="/verifyEmail" element={<Viewers.VerifyEmail />} />
-      <Route path="/" element={<PrivateRoute />}>
-        <Route path="dashboard/*" element={<Admin.Layout />} />
-      </Route> */}
+      <Route path="/shop" element={<PrivateRoute><Admin.Shop /></PrivateRoute>} />
+      <Route path="/myshop" element={<PrivateRoute><Admin.MyShop /></PrivateRoute>} />
+      <Route path="/paymenthistory" element={<PrivateRoute><Admin.PaymentHistory /></PrivateRoute>} />
+      <Route path="/orderstatus" element={<PrivateRoute><Admin.OrderStatus /></PrivateRoute>} />
+      <Route path="/rentrequest" element={<PrivateRoute><Admin.RentRequest /></PrivateRoute>} />
+      <Route path="/buyrequest" element={<PrivateRoute><Admin.BuyRequest /></PrivateRoute>} />
+      <Route path="/auctionrequest" element={<PrivateRoute><Admin.AuctionRequest /></PrivateRoute>} />
+      <Route path="/rentrequestdetail" element={<PrivateRoute><Admin.RentRequestDetail /></PrivateRoute>} />
+      <Route path="/buyrequestdetail" element={<PrivateRoute><Admin.BuyRequestDetail /></PrivateRoute>} />
+      <Route path="/auctionrequestdetail" element={<PrivateRoute><Admin.AuctionRequestDetail /></PrivateRoute>} />
+      <Route path="/addproduct" element={<PrivateRoute><Admin.AddProduct /></PrivateRoute>} />
+      <Route path="/profileadmin" element={<PrivateRoute><Admin.ProfileAdmin /></PrivateRoute>} />
+      <Route path="/chatadmin" element={<PrivateRoute><Admin.ChatAdmin /></PrivateRoute>} />
+      <Route path="/walletadmin" element={<PrivateRoute><Admin.WalletAdmin /></PrivateRoute>} />
+      <Route path="/dashboard" element={<PrivateRoute><Admin.Dashboard /></PrivateRoute>} />
+      <Route path="*" element={<Viewers.PageNotFound />} />
     </Routes>
   );
 };

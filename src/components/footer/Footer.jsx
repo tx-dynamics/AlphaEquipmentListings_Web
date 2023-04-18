@@ -2,8 +2,8 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { copyRightText, globe, footerFacebook, footerInsta, footerTwitter, arrowDown } from '../../assets/icons'
-import { activeTab } from '../../redux/activeTabSlice'
 import './footer.css'
+import { activeTab } from '../../redux/Slices/activeTabSlice'
 
 export default function Footer() {
     const navigate = useNavigate()

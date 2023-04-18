@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { trendUp } from "../../../assets/icons";
 import { SideBar, TopBar } from "../../../components";
 import './dashboard.css'
 import ReactApexChart from 'react-apexcharts'
 import { Line, Circle } from "rc-progress";
 import { useState } from "react";
+import { useNavigate } from 'react-router-dom'
 export default function Dashboard() {
+  const navigate = useNavigate()
   const [rangeValue, setRangeValue] = useState(undefined)
   const paymentHistoryArray = [
     {
@@ -144,11 +146,11 @@ export default function Dashboard() {
     data: [0, 80, 40, 50, 90, 70, 0]
   }]
 
-
   var mianGraphSeries = [{
     name: 'series1',
     data: [33, 35, 31, 36, 32, 33, 32, 33, 35, 31, 36, 32, 33, 32, 33, 35, 31, 36, 32, 33, 32, 33, 35, 31, 36, 32, 33, 32, 33, 35, 31, 36, 32, 33,]
   }]
+
   // var mianGraphSeries = [{
   //   name: 'series1',
   //   data: [
@@ -216,6 +218,7 @@ export default function Dashboard() {
       show: false,
     },
   }
+
 
 
   return (

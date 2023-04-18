@@ -35,3 +35,4 @@ export { default as FinancingStepTwoAdmin } from './financingStepTwoAdmin/Financ
 export { default as FinancingStepThreeAdmin } from './financingStepThreeAdmin/FinancingStepThreeAdmin'
 export { default as FinancingStepFourAdmin } from './financingStepFourAdmin/FinancingStepFourAdmin'
 export { default as CashWithdrawModel } from './cashWithdrawModel/CashWithdrawModel'
+export { default as Loader } from './loader/Loader'

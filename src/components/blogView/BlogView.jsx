@@ -2,8 +2,8 @@ import React from 'react'
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { mail, phone } from '../../assets/icons'
-import { activeTab } from '../../redux/activeTabSlice';
 import './blogView.css'
+import { activeTab } from '../../redux/Slices/activeTabSlice';
 
 export default function BlogView() {
     const disPatch = useDispatch();

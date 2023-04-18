@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { drawerIcon, dummyFour, notificationTheme, arrowDownGrey, crossCircle, dashboard, dashboardTheme, logo, logout, messageIcon, messagerTheme, orderStatus, orderStatusTheme, paymentHistory, paymentHistoryTheme, profile, request, requestTheme, shop, shopTheme, walletDark, walletTheme, profileTheme } from "../../assets/icons";
-import { activeTab } from '../../redux/activeTabSlice';
+import { activeTab } from '../../redux/Slices/activeTabSlice'
 import './topBar.css'
 
 export default function TopBar() {

@@ -13,6 +13,16 @@
   color: #0E191E;
 }
 
+.alpha-input_container h5 {
+  font-family: lato;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  color: #ff3333;
+  padding-top: 0.5rem;
+}
+
+
 .alpha-input_container_input {
   margin-right: -15px;
   margin-top: 0.6rem;
@@ -80,7 +90,6 @@
 
 
 @media screen and (max-width: 360px) {
-
   .alpha-input_container_input {
     width: 25rem;
   }

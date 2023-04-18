@@ -1,5 +1,5 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { activeTabSlice } from './'
+import { activeTabSlice, userDataSlice } from './Slices'
 
 import {
   persistReducer,
@@ -18,18 +18,19 @@ const persistConfig = {
   storage: localStorage,
 };
 const reducer = combineReducers({
-  activeTab: activeTabSlice
+  activeTab: activeTabSlice,
+  userData: userDataSlice
 })
 const persistedReducer = persistReducer(persistConfig, reducer);
-const configureAppStore = () => {
-  return configureStore({
-    reducer: persistedReducer,
-    middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware({
-        serializableCheck: {
-          ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-        },
-      }).concat([]),
-  });
-};
-export default configureAppStore;
+export const store = configureStore({
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      immutableCheck: { warnAfter: 128 },
+      serializableCheck: {
+        warnAfter: 128,
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+
+      },
+    }),
+})

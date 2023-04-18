@@ -17,6 +17,11 @@ const TextInput = (props) => {
 
 
             </div>
+            {props?.errorText ?
+                <h5>{props.errorText}</h5>
+                :
+                null
+            }
             {props.dropDownValue &&
                 <div className='alpha-dropdown_container' style={props.dropDownStyle}>
                     {props.dropDownArray?.map((item) => {

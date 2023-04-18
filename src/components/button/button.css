@@ -10,6 +10,19 @@
   cursor: pointer;
 }
 
+.button_container_disable {
+  display: flex;
+  width: 34rem;
+  height: 5.1rem;
+  background-color: #DFDFDF;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  cursor: pointer;
+}
+
+.button_container_disable,
 .button_container p {
   font-family: lato;
   font-weight: 700;
@@ -23,6 +36,11 @@
 
 @media screen and (max-width: 480px) {
   .button_container {
+    width: 20.2rem;
+    height: 4.1rem;
+  }
+
+  .button_container_disable {
     width: 20.2rem;
     height: 4.1rem;
   }

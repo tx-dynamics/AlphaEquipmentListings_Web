@@ -1,15 +1,25 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { useSnackbar } from 'react-simple-snackbar'
+import { DeviceUUID } from 'device-uuid';
+
 import { apple, authImage, facebook, google, hide, logo, show } from "../../../assets/icons";
-import { Button, TextInput } from "../../../components";
-import { activeTab } from "../../../redux/activeTabSlice";
+import { Button, Loader, TextInput } from "../../../components";
+import { api } from '../../../network/Environment'
+import { accessToken, refreshToken, userData } from "../../../redux/Slices/userDataSlice";
+import { Method, callApi } from "../../../network/NetworkManger";
+import { snakbarOptions } from '../../../globalData'
 import "./signIn.css";
 
 export default function SignIn() {
-  const [showPassword, setShowPassword] = useState(false)
   const navigate = useNavigate();
-  const disPatch = useDispatch();
+  const dispatch = useDispatch()
+  const [showPassword, setShowPassword] = useState(false)
+  const [showMessage, hideMessage] = useSnackbar(snakbarOptions)
+  const [isLoading, setIsLoading] = useState(false)
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
   const socialArray = [
     {
       id: 1,
@@ -25,13 +35,48 @@ export default function SignIn() {
     }
   ]
 
-  const onClick = (type, value) => {
-    disPatch(activeTab(value))
-    navigate(type, { replace: true })
+  const onClickSignin = async () => {
+    try {
+      setIsLoading(true);
+      const endPoint = api.login;
+      const data = {
+        email: email,
+        password: password,
+        device: {
+          id: new DeviceUUID().get(),
+          deviceToken: 'xyz'
+        },
+      };
+      await callApi(Method.POST, endPoint, data,
+        res => {
+          if (res?.status === 200) {
+            setIsLoading(false)
+            showMessage(res.message)
+            dispatch(userData(res.data?.user));
+            dispatch(accessToken(res?.data?.token));
+            dispatch(refreshToken(res?.data?.refreshToken));
+            res?.data?.user?.accountType === 'seller' ?
+              navigate('/dashboard', { replace: true })
+              :
+              navigate('/', { replace: true })
+          }
+          else {
+            setIsLoading(false)
+            showMessage(res.message)
+          }
+        },
+        err => {
+          showMessage(err.message)
+          setIsLoading(false);
+        });
+    } catch (error) {
+      setIsLoading(false);
+    }
   }
 
   return (
     <div className="alpa-auth-container">
+      <Loader loading={isLoading} />
       <div className="alpha-signin-image_view">
         <div className="alpha-signin-image-logo_view">
           <img src={logo} alt='logo' className='alpha-signin-image_logo_style' />
@@ -41,10 +86,10 @@ export default function SignIn() {
       <div className="alpha-signin-detail_view">
         <div>
           <h1>Sign IN</h1>
-          <TextInput placeholder={'Enter your user name'} title={'User Name'} />
-          <TextInput onClickEye={() => setShowPassword(!showPassword)} type={!showPassword ? 'password' : 'text'} eye eyeIcon={showPassword ? show : hide} placeholder={'Enter your password'} title={'Password'} />
+          <TextInput onChange={(e) => setEmail(e.target.value)} placeholder={'Enter your email'} title={'Email'} />
+          <TextInput onChange={(e) => setPassword(e.target.value)} onClickEye={() => setShowPassword(!showPassword)} type={!showPassword ? 'password' : 'text'} eye eyeIcon={showPassword ? show : hide} placeholder={'Enter your password'} title={'Password'} />
           <div
-            // onClick={() => navigate('/forgotpassword')}
+            onClick={() => navigate('/forgotpassword')}
             className="alpha-signin-forgot_password_view">
             <h3>
               Forget Password? {" "}
@@ -53,8 +98,7 @@ export default function SignIn() {
           </div>
           <div className="alpha-signin-button-view">
             <Button
-              onClick={() => onClick('/dashboard', 'dashboard')}
-            // onClick={() => onClick('/homepage', 'homepage')}
+              onClick={() => onClickSignin()}
             >SIGN IN</Button >
           </div>
           <div className="alpha-signin-or_view">
@@ -80,6 +124,6 @@ export default function SignIn() {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 }

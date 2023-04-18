@@ -1,0 +1,37 @@
+.alpha-signup-radio_view_top_view {
+    display: flex;
+    flex-direction: column;
+}
+
+.alpha-signup-radio_view_top_view h5 {
+    padding-bottom: 1.6rem;
+    font-family: lato;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 16px;
+    color: #0E191E;
+}
+
+.alpha-signup-radio_view_image_top_view {
+    display: flex;
+    flex-direction: row !important;
+    align-items: center;
+    margin-bottom: 1.4rem;
+    margin-right: 2rem;
+}
+
+.alpha-signup-radio_view_image_top_view div {
+    width: 1.6rem;
+    height: 1.6rem;
+    border-radius: 1rem;
+    border: 2px solid #F18805;
+    margin-right: 0.8rem;
+}
+
+.alpha-signup-radio_view_image_top_view h3 {
+    font-family: lato;
+    font-weight: 400;
+    font-size: 1.8rem;
+    line-height: 2.4rem;
+    color: #484848;
+}

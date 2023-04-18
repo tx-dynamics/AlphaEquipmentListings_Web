@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { arrowDownGrey, dashboard, dashboardTheme, logo, logout, messageIcon, messagerTheme, orderStatus, orderStatusTheme, paymentHistory, paymentHistoryTheme, profile, profileTheme, request, requestTheme, shop, shopTheme, walletDark, walletTheme } from "../../assets/icons";
 import './sideBar.css'
 import { useDispatch, useSelector } from "react-redux";
-import { activeTab } from '../../redux/activeTabSlice';
+import { activeTab } from '../../redux/Slices/activeTabSlice'
+import { userData } from '../../redux/Slices/userDataSlice';
 
 export default function SideBar(props) {
     const disPatch = useDispatch();
@@ -136,7 +137,7 @@ export default function SideBar(props) {
                 </div>
                 <div className="alpha-side_bar-divider"></div>
                 <div className="alpha-side_bar_bottom_items_view">
-                    <div onClick={() => navigate('/', { replace: true })} className="alpha-side_bar-items_container"  >
+                    <div onClick={() => disPatch(userData(null))} className="alpha-side_bar-items_container"  >
                         <img src={logout} />
                         <h2>Logout</h2>
                     </div>
