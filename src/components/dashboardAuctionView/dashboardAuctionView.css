@@ -37,8 +37,9 @@
 .alpha-home_page_auction_distance_view {
   margin-top: 1.1rem;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
+  flex: 1;
 }
 
 .alpha-home_page_auction_distance_view h3 {
@@ -74,8 +75,9 @@
 .alpha-home_page_auction_online_view {
   margin-top: 0.9rem;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
+  flex: 1;
 }
 
 .alpha-home_page_auction_online_view h3 {

@@ -74,19 +74,16 @@ export const callApi = async (
                     },
                 }),
             };
-
             await fetch(`${BASE_URL}user/refresh/${refreshToken}`, fetchObject)
                 .then(async res => {
                     let resJson = await res.json();
                     store.dispatch(accessToken(resJson.data.accessToken));
-
                     callApi(
                         method,
                         endPoint,
                         bodyParams,
                         onSuccess,
                         onError,
-
                     );
                 })
                 .catch(err => console.log('error refresh token=> ', err));
@@ -97,7 +94,6 @@ export const callApi = async (
         }
     } catch (error) {
         onError(error);
-        // RedSnackbar('Network request failed');
     }
 
 };

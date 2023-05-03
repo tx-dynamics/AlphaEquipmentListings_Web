@@ -1,5 +1,5 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { activeTabSlice, userDataSlice } from './Slices'
+import { activeTabSlice, userDataSlice, buyerDashboardSlice } from './Slices'
 
 import {
   persistReducer,
@@ -19,7 +19,8 @@ const persistConfig = {
 };
 const reducer = combineReducers({
   activeTab: activeTabSlice,
-  userData: userDataSlice
+  userData: userDataSlice,
+  buyerDashboard: buyerDashboardSlice
 })
 const persistedReducer = persistReducer(persistConfig, reducer);
 export const store = configureStore({

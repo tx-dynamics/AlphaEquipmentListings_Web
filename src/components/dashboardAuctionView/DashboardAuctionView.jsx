@@ -1,27 +1,40 @@
 import React from 'react'
-import { dummyOne, distance } from '../../assets/icons'
+import { distance } from '../../assets/icons'
+import { diffBtwTwoDates, getDistanceFromLatLonInKm } from '../../helpingMethods'
+import { store } from '../../redux/store'
 import './dashboardAuctionView.css'
 
 export default function DashboardAuctionView(props) {
+    const { item } = props
+    const timeDiff = diffBtwTwoDates(new Date(), new Date(item?.auctionEndDate)).includes('-')
+    const lastDate = new Date(item?.auctionEndDate)
+    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+    ];
+
     return (
         <div key={props.index} onClick={props.onClick} className="alpha_home-page-grid_inner_view">
-            <img src={dummyOne} alt={''} className="alpha_home-page-grid_inner_view_image" />
-            <h1>2018 Prinoth Panther T67 Crawler Carrier</h1>
-            <h2>Location: Lorem ipsum dolor sit amet</h2>
+            <img src={item?.images[0]} alt={''} className="alpha_home-page-grid_inner_view_image" />
+            <h1>{item?.productName}</h1>
+            <h2>Location: {item?.location?.address}</h2>
             <div className="alpha-home_page_auction_distance_view">
-                <h3>Meter: 3456hrs</h3>
+                <h3>Meter: {item?.odometer}</h3>
                 {props.type === 2 &&
-                    <h5>80$/Day</h5>
+                    <h5>{item?.price}$/Day</h5>
                 }
                 <div className="alpha-home_page_auction_km_view">
                     <img alt={''} src={distance} />
-                    <h4>4.3 km</h4>
+                    <h4>{getDistanceFromLatLonInKm(item?.location?.coordinates[1], item?.location?.coordinates[0], store.getState().userData.userLocation.lat, store.getState().userData.userLocation.long)} km</h4>
                 </div>
             </div>
             {props.type === 1 &&
                 <div className="alpha-home_page_auction_online_view">
                     <h3>Online Auction</h3>
-                    <h4>Last Date:<span style={{ color: '#000' }}> Dec 05, 2022</span></h4>
+                    {timeDiff ?
+                        <h4>Auction expired</h4>
+                        :
+                        <h4>Last Date:<span style={{ color: '#000' }}> {monthNames[lastDate.getMonth()]} {lastDate?.getDate() + ',' + ' ' + lastDate?.getFullYear()}</span></h4>
+                    }
                 </div>
             }
         </div>

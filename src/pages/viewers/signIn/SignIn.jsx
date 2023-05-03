@@ -78,7 +78,7 @@ export default function SignIn() {
     <div className="alpa-auth-container">
       <Loader loading={isLoading} />
       <div className="alpha-signin-image_view">
-        <div className="alpha-signin-image-logo_view">
+        <div onClick={() => navigate('/')} className="alpha-signin-image-logo_view">
           <img src={logo} alt='logo' className='alpha-signin-image_logo_style' />
         </div>
         <img src={authImage} alt='authImage' className='alpha-signin-image_stlye' />

@@ -1,37 +1,5 @@
-import { decode } from 'base64-arraybuffer'
-import { S3 } from 'aws-sdk'
-// var fs = require('react-native-fs');
-
-
-export const uploadImageOnS3 = async (file, successPath) => {
-    const s3bucket = new S3({
-        region: 'us-east-2',
-        accessKeyId: 'AKIASZQZ2QP4ZJHAHNS5',
-        secretAccessKey: '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',
-        Bucket: "alpha-equipment-bucket",
-        signatureVersion: 'v4',
-    });
-    let contentType = 'image/jpeg';
-    let contentDeposition = 'inline;filename="' + file.name + '"';
-    // const base64 = await fs.readFile(file.path, 'base64');
-    const arrayBuffer = decode(base64);
-    s3bucket.createBucket(async () => {
-        const params = {
-            Bucket: "alpha-equipment-bucket",
-            Key: file.name,
-            Body: arrayBuffer,
-            ContentDisposition: contentDeposition,
-            ContentType: contentType,
-        };
-        await s3bucket.upload(params).promise()
-            .then((data) => {
-                successPath(data.Location)
-            })
-            .catch((err) => {
-                console.log(err)
-            })
-    });
-}
+import { dummyFour } from "../assets/icons";
+import { store } from "../redux/store";
 
 export const combineDateAndTime = (date, time) => {
     const mins = ("0" + time.getMinutes()).slice(-2);
@@ -103,4 +71,48 @@ export const formatAMPM = (date) => {
     minutes = minutes < 10 ? '0' + minutes : minutes;
     var strTime = hours + ':' + minutes + ' ' + ampm;
     return strTime
+}
+
+
+export const uploadAwsImage = file => {
+    // let token = store.getState().userData.accessToken;
+    // var myHeaders = new Headers();
+    // myHeaders.append("Authorization", token);
+    // console.log(myHeaders);
+    // return
+
+    var formdata = new FormData();
+    formdata.append("file", file,);
+
+    var requestOptions = {
+        method: 'POST',
+        body: formdata,
+        redirect: 'follow'
+    };
+
+    fetch("http://ec2-18-189-194-242.us-east-2.compute.amazonaws.com/user/upload", requestOptions)
+        .then(response => response.text())
+        .then(result => console.log(result, '------'))
+        .catch(error => console.log('error', error));
+
+    // var formdata = new FormData();
+    // formdata.append("file", file);
+    // var requestOptions = {
+    //     method: 'POST',
+    //     // headers: myHeaders,
+    //     body: formdata,
+    //     redirect: 'follow'
+    // };
+    // console.log(requestOptions.body);
+    // return
+
+    // return
+    // fetch("http://ec2-18-189-194-242.us-east-2.compute.amazonaws.com/user/upload", requestOptions)
+    //     .then(response => response.json())
+    //     .then(data => {
+    //         const url = data.data.url
+    //         console.log(url, '-0-0-0-')
+    //         // cb(url)
+    //     })
+    //     .catch(error => console.log('error', error));
 }

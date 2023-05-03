@@ -5,11 +5,17 @@ import './navBar.css'
 import { useDispatch, useSelector } from "react-redux";
 import { activeTab } from '../../redux/Slices/activeTabSlice'
 import { accessToken, refreshToken, userData } from '../../redux/Slices/userDataSlice';
+import { store } from '../../redux/store';
+import { useSnackbar } from 'react-simple-snackbar';
+import { snakbarOptions } from '../../globalData';
 
 export default function NavBar() {
     const disPatch = useDispatch();
     const data = useSelector((data) => data.activeTab.value,);
     const user = useSelector((data) => data.userData.userData);
+    const dashboardData = store.getState().buyerDashboard.dashboardData
+    const [showMessage, hideMessage] = useSnackbar(snakbarOptions)
+
     const navigate = useNavigate();
     const [marginLeft, setMarginLeft] = useState(-300)
     const onClick = (type, value) => {
@@ -64,11 +70,11 @@ export default function NavBar() {
 
                 </div>
                 <div className="alpha-navbar-nav_items_top_view">
-                    <h3 style={{ color: data === 'category' ? '#F18805' : ' #303030' }} onClick={() => onClick('/productlistingpage', 'category')}>Category</h3>
-                    <h3 style={{ color: data === 'auction' ? '#F18805' : ' #303030' }} onClick={() => onClick('/productlistingpage', 'auction')}>Auction</h3>
-                    <h3 style={{ color: data === 'spareparts' ? '#F18805' : ' #303030' }} onClick={() => onClick('/maincategorypage', 'spareparts')}>Spare Parts</h3>
+                    <h3 style={{ color: data === 'category' ? '#F18805' : ' #303030' }} onClick={() => dashboardData?.categories?.length > 0 ? onClick('/productlistingpage', 'category') : showMessage('No categories found')}>Category</h3>
+                    <h3 style={{ color: data === 'auction' ? '#F18805' : ' #303030' }} onClick={() => dashboardData?.productsForAuction?.length > 0 ? onClick('/productlistingpage', 'auction') : showMessage('No auctions found')}>Auction</h3>
+                    <h3 style={{ color: data === 'spareparts' ? '#F18805' : ' #303030' }} onClick={() => dashboardData?.productsSpareParts?.length > 0 ? onClick('/maincategorypage', 'spareparts') : showMessage('No spare parts found')}>Spare Parts</h3>
                     <h3 style={{ color: data === 'financing' ? '#F18805' : ' #303030' }} onClick={() => onClick('/financing', 'financing')}>Financing</h3>
-                    <h3 style={{ color: data === 'rented' ? '#F18805' : ' #303030' }} onClick={() => onClick('/maincategorypage', 'rented')}>Rented</h3>
+                    <h3 style={{ color: data === 'rented' ? '#F18805' : ' #303030' }} onClick={() => dashboardData?.productsForRent?.length > 0 ? onClick('/maincategorypage', 'rented') : showMessage('No rentable machinaries found')}>Rented</h3>
                     <h3 style={{ color: data === 'calculator' ? '#F18805' : ' #303030' }} onClick={() => onClick('/calculator', 'calculator')}>Calculator</h3>
                 </div>
             </div>
@@ -120,11 +126,11 @@ export default function NavBar() {
                         <input placeholder='Search your query' />
                         <img src={search} />
                     </div>
-                    <h3 style={{ color: data === 'category' ? '#F18805' : ' #303030' }} onClick={() => onClick('/productlistingpage', 'category')}>Category</h3>
-                    <h3 style={{ color: data === 'auction' ? '#F18805' : ' #303030' }} onClick={() => onClick('/productlistingpage', 'auction')}>Auction</h3>
-                    <h3 style={{ color: data === 'spareparts' ? '#F18805' : ' #303030' }} onClick={() => onClick('/maincategorypage', 'spareparts')}>Spare Parts</h3>
+                    <h3 style={{ color: data === 'category' ? '#F18805' : ' #303030' }} onClick={() => dashboardData?.categories?.length > 0 ? onClick('/productlistingpage', 'category') : showMessage('No categories found')}>Category</h3>
+                    <h3 style={{ color: data === 'auction' ? '#F18805' : ' #303030' }} onClick={() => dashboardData?.productsForAuction?.length > 0 ? onClick('/productlistingpage', 'auction') : showMessage('No auctions found')}>Auction</h3>
+                    <h3 style={{ color: data === 'spareparts' ? '#F18805' : ' #303030' }} onClick={() => dashboardData?.productsSpareParts?.length > 0 ? onClick('/maincategorypage', 'spareparts') : showMessage('No spare parts found')}>Spare Parts</h3>
                     <h3 style={{ color: data === 'financing' ? '#F18805' : ' #303030' }} onClick={() => onClick('/financing', 'financing')}>Financing</h3>
-                    <h3 style={{ color: data === 'rented' ? '#F18805' : ' #303030' }} onClick={() => onClick('/maincategorypage', 'rented')}>Rented</h3>
+                    <h3 style={{ color: data === 'rented' ? '#F18805' : ' #303030' }} onClick={() => dashboardData?.productsForRent?.length > 0 ? onClick('/maincategorypage', 'rented') : showMessage('No rentable machinaries found')}>Rented</h3>
                     <h3 style={{ color: data === 'calculator' ? '#F18805' : ' #303030' }} onClick={() => onClick('/calculator', 'calculator')}>Calculator</h3>
                     <h3 onClick={() => setMarginLeft(-300)} style={{ color: 'red' }}>Close</h3>
                     {!user &&

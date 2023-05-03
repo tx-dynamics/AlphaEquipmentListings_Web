@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { arrowDownBlack, close, menu, searchWhite } from "../../../assets/icons";
 import { BlogView, DashboardCategoriesView, DashboardSparePartView, Footer, NavBar } from "../../../components";
 import './mainCategoryPage.css'
+import { diffBtwTwoDates } from "../../../helpingMethods";
 
 export default function MainCategoryPage() {
   const navigate = useNavigate()
@@ -181,6 +182,7 @@ export default function MainCategoryPage() {
   ]
 
   return (
+    console.log(state),
     <div className="alpha-home_page-main_container">
       <BlogView />
       <NavBar />
@@ -247,7 +249,8 @@ export default function MainCategoryPage() {
                     )
                   })}
                 </div>
-              </div> :
+              </div>
+              :
               <div className="alpha-main_cat_page_drawer_top_view" style={{ left: value }}>
                 <div className="alpha-main_cat_page_filter_title_view">
                   <div className='alpha-drawer_close_icon' >
@@ -283,20 +286,21 @@ export default function MainCategoryPage() {
               </div>
             </div>
             <div className="alpha-main_cat_page_items_top_view">
-              {categoriesArray.map((item, index) => {
+              {state?.data?.subCategories?.map((item, index) => {
                 return (
                   state?.screen === 'spareparts' ?
-                    <DashboardSparePartView onClick={() => navigate('/productdetailpage', { state: { screen: state?.screen } })} style={{ width: 270 }} index={index} />
+                    <DashboardSparePartView item={item} onClick={() => navigate('/productdetailpage', { state: { screen: state?.screen, data: item }, })} style={{ width: 270 }} index={index} />
                     :
-                    <DashboardCategoriesView onClick={() => navigate('/productlistingpage', { state: { screen: state?.screen } })} titleStyle={{ fontSize: 18 }} containerStyle={{ width: 264, height: 256, marginRight: 30, marginBottom: 30 }} item={item} index={index} />
+                    <DashboardCategoriesView type={2} item={item} onClick={() => navigate('/productlistingpage', { state: { screen: state?.screen, data: item } })} titleStyle={{ fontSize: 18 }} containerStyle={{ width: 264, height: 256, marginRight: 30, marginBottom: 30 }} index={index} />
                 )
               })}
             </div>
-            <div className="alpha-main_cat_page_see_all_view">
+
+            {/* <div className="alpha-main_cat_page_see_all_view">
               <div>
                 <h2>See All 14606 Items</h2>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="alpha-main_cat_page_description_top_view">

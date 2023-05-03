@@ -3,6 +3,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { arrowDown, arrowDownBlack, close, distance, drawerIcon, dummyFour, menu, search, searchWhite } from "../../../assets/icons";
 import { BlogView, DashboardCategoriesView, Footer, NavBar } from "../../../components";
 import './productListingPage.css'
+import { diffBtwTwoDates, getDistanceFromLatLonInKm } from "../../../helpingMethods";
+import { store } from "../../../redux/store";
 
 export default function ProductListingPage() {
   const navigate = useNavigate()
@@ -45,35 +47,9 @@ export default function ProductListingPage() {
 
   ]
 
-  const productsArray = [
-    {
-      id: 1,
-    },
-    {
-      id: 2,
-    },
-    {
-      id: 3,
-    },
-    {
-      id: 4,
-    },
-    {
-      id: 5,
-    },
-    {
-      id: 6,
-    },
-    {
-      id: 7,
-    },
-    {
-      id: 8,
-    },
-
-  ]
 
   return (
+    console.log(state),
     < div className="alpha-pro_list_page-main_container" >
       <BlogView />
       <NavBar />
@@ -123,46 +99,95 @@ export default function ProductListingPage() {
             <div className="alpha-pro_list_page_heading_and_search_view">
               <div className="alpha-pro_list_page_drawer_icon_view">
                 <img src={menu} onClick={() => setValue(0)} />
-                <h2>{state?.screen === 'auction' ? 'Auction' : 'Tamder Roller'}</h2>
+                <h2>{state?.screen === 'auction' ? 'Auction' : `Products`}</h2>
               </div>
-              <h3>Showing 346 results for</h3>
+              <h3>Showing {state?.data?.products?.length} results for</h3>
             </div>
             <div className="alpha-pro_list_page_divider" />
-            {productsArray.map((item, index) => {
-              return (
-                <div key={index} onClick={() => navigate('/productdetailpage', { state: { screen: state?.screen } })}>
-                  <div className="alpha-pro_list_page_item_view">
-                    <div className="alpha-pro_list_page_item_image_view">
-                      <img src={dummyFour} />
-                    </div>
-                    <div className="alpha-pro_list_page_item_detail_view">
-                      <h1>2016 Wacker Neuson RD12A Double Drum Roller</h1>
-                      <h2>Location: <span style={{ fontWeight: 500 }}>Lorem ipsum dolor sit amet ipsum dolor sit</span></h2>
-                      <div className="alpha-pro_list_page-dis_and_km_top_view">
-                        <div className="alpha-pro_list_page-dis_view">
-                          <h3>Hours Meter: 300h</h3>
+            {state?.screen == 'category' ?
+              (state?.data?.products?.map((item, index) => {
+                const timeDiff = diffBtwTwoDates(new Date(), new Date(item?.auctionEndDate)).includes('-')
+                return (
+                  <div key={index} onClick={() => navigate('/productdetailpage', { state: { screen: state?.screen, data: item } })}>
+                    <div className="alpha-pro_list_page_item_view">
+                      <div className="alpha-pro_list_page_item_image_view">
+                        <img src={item?.images[0]} />
+                      </div>
+                      <div className="alpha-pro_list_page_item_detail_view">
+                        <h1>{item?.productName}</h1>
+                        <h2>Location: <span style={{ fontWeight: 500 }}>{item?.location?.address}</span></h2>
+                        <div className="alpha-pro_list_page-dis_and_km_top_view">
+                          <div className="alpha-pro_list_page-dis_view">
+                            <h3>Mileage: {item?.Mileage}</h3>
+                          </div>
+                          <div className="alpha-pro_list_page-dis_view">
+                            <img src={distance} />
+                            <h4>{getDistanceFromLatLonInKm(item?.location?.coordinates[1], item?.location?.coordinates[0], store.getState().userData.userLocation.lat, store.getState().userData.userLocation.long)} km</h4>
+                          </div>
                         </div>
-                        <div className="alpha-pro_list_page-dis_view">
-                          <img src={distance} />
-                          <h4>4.3 km</h4>
+                        <h5>Catalogue Notes: <span style={{ fontWeight: 400 }}>{item?.catelougeNote}</span></h5>
+                        <div className="alpha-home-page-spare_part_price_distance_view">
+                          <p>{item?.select === 'Auction' ? 'Online Auction' : `Price: $${item?.price}`}</p>
+                          {item?.select === 'Auction' &&
+                            (timeDiff ?
+                              <h6><span style={{ fontWeight: 700 }}>Autcion Expired</span></h6>
+                              :
+                              <h6>Highest Bid:<span style={{ fontWeight: 700 }}> ${item?.highestBid?.amount} </span></h6>
+
+                            )
+                          }
                         </div>
                       </div>
-                      <h5>Catalogue Notes: <span style={{ fontWeight: 400 }}>Lorem ipsum dolor amuet, conse ctetur adipi scing elit. Vivamus at bibendum ante</span></h5>
-                      <div className="alpha-home-page-spare_part_price_distance_view">
-                        <p>{state?.screen === 'auction' ? 'Online Auction' : 'Price: $8600'}</p>
-                        <h6>Highest Bid:<span style={{ fontWeight: 700 }}> $5000</span></h6>
-                      </div>
                     </div>
+                    <div className="alpha-pro_list_page_divider" />
                   </div>
-                  <div className="alpha-pro_list_page_divider" />
-                </div>
-              )
-            })}
-            <div className="alpha-pro_list_page_see_all_view">
+                )
+              }))
+              :
+              (state?.data?.map((item, index) => {
+                const timeDiff = diffBtwTwoDates(new Date(), new Date(item?.auctionEndDate)).includes('-')
+                return (
+                  <div key={index} onClick={() => navigate('/productdetailpage', { state: { screen: state?.screen, data: item } })}>
+                    <div className="alpha-pro_list_page_item_view">
+                      <div className="alpha-pro_list_page_item_image_view">
+                        <img src={item?.images[0]} />
+                      </div>
+                      <div className="alpha-pro_list_page_item_detail_view">
+                        <h1>{item?.productName}</h1>
+                        <h2>Location: <span style={{ fontWeight: 500 }}>{item?.location?.address}</span></h2>
+                        <div className="alpha-pro_list_page-dis_and_km_top_view">
+                          <div className="alpha-pro_list_page-dis_view">
+                            <h3>Mileage: {item?.Mileage}</h3>
+                          </div>
+                          <div className="alpha-pro_list_page-dis_view">
+                            <img src={distance} />
+                            <h4>{getDistanceFromLatLonInKm(item?.location?.coordinates[1], item?.location?.coordinates[0], store.getState().userData.userLocation.lat, store.getState().userData.userLocation.long)} km</h4>
+                          </div>
+                        </div>
+                        <h5>Catalogue Notes: <span style={{ fontWeight: 400 }}>{item?.catelougeNote}</span></h5>
+                        <div className="alpha-home-page-spare_part_price_distance_view">
+                          <p>{item?.select === 'Auction' ? 'Online Auction' : `Price: $${item?.price}`}</p>
+                          {item?.select === 'Auction' &&
+                            (timeDiff ?
+                              <h6><span style={{ fontWeight: 700 }}>Autcion Expired</span></h6>
+                              :
+                              <h6>Highest Bid:<span style={{ fontWeight: 700 }}> ${item?.highestBid?.amount} </span></h6>
+
+                            )
+                          }
+                        </div>
+                      </div>
+                    </div>
+                    <div className="alpha-pro_list_page_divider" />
+                  </div>
+                )
+              }))
+            }
+            {/* <div className="alpha-pro_list_page_see_all_view">
               <div>
                 <h2>See All 14606 Items</h2>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
         <Footer />

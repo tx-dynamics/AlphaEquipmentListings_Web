@@ -17,6 +17,16 @@
 }
 
 .alpha-home_page-auction_top_view {
+    margin-bottom: 5rem;
+    background-color: #fff;
+    padding-top: 4rem;
+    padding-left: 9rem;
+    padding-bottom: 1rem;
+    padding-right: 9rem;
+}
+
+.alpha-home_page-auction_top_view_two {
+    margin-bottom: 5rem;
     margin-top: 5rem;
     background-color: #fff;
     padding-top: 4rem;
@@ -74,6 +84,31 @@
     margin-bottom: 1rem;
 }
 
+.alpha_home_page_no_data {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.alpha_home_page_no_data h2 {
+    font-family: lato;
+    font-weight: 400;
+    font-size: 1.6rem;
+    line-height: 1.2rem;
+    color: #F18805;
+    padding-bottom: 2rem;
+}
+
+.alpha_home_page_no_data h3 {
+    font-family: lato;
+    font-weight: 400;
+    font-size: 1.6rem;
+    line-height: 1.2rem;
+    color: #F18805;
+    padding-bottom: 1rem;
+}
+
 
 @media screen and (max-width: 1439px) {
     .alpha_home-page-grid_view {
@@ -88,6 +123,11 @@
 
 @media screen and (max-width: 835px) {
     .alpha-home_page-auction_top_view {
+        margin-bottom: 3rem;
+    }
+
+    .alpha-home_page-auction_top_view_two {
+        margin-bottom: 3rem;
         margin-top: 3rem;
     }
 }

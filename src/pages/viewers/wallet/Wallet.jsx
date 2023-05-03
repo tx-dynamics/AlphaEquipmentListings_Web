@@ -1,48 +1,55 @@
 import React, { useState } from "react";
 import { walletIcon } from "../../../assets/icons";
-import { BlogView, ConnectCardModel, Footer, NavBar, } from "../../../components";
+import { BlogView, ConnectCardModel, Footer, Loader, NavBar, } from "../../../components";
 import './wallet.css'
+import { store } from '../../../redux/store'
+import { useSnackbar } from "react-simple-snackbar";
+import { snakbarOptions } from "../../../globalData";
+import { api } from "../../../network/Environment";
+import { Method, callApi } from "../../../network/NetworkManger";
 
 export default function Wallet() {
+  const user = store.getState().userData.userData
+  const [showMessage, hideMessage] = useSnackbar(snakbarOptions)
+  const [isLoading, setIsLoading] = useState(false)
   const [connectCardModel, setConnectCardModel] = useState(false);
   const [cardActive, setCardActive] = useState(false);
-  const transationArray = [
-    {
-      id: 1,
-      name: 'User Name',
-      amount: '500$',
-      date: '20-11-2022'
-    },
-    {
-      id: 2,
-      name: 'User Name',
-      amount: '500$',
-      date: '20-11-2022'
-    },
-    {
-      id: 3,
-      name: 'User Name',
-      amount: '500$',
-      date: '20-11-2022'
-    },
-    {
-      id: 4,
-      name: 'User Name',
-      amount: '500$',
-      date: '20-11-2022'
-    },
-    {
-      id: 5,
-      name: 'User Name',
-      amount: '500$',
-      date: '20-11-2022'
-    },
-  ]
+  const [transationHistory, setTransactionHistory] = useState([])
+
+  React.useEffect(() => {
+    getWalletDetail()
+  }, []);
+
+  const getWalletDetail = async () => {
+    setIsLoading(true)
+    try {
+      const endPoint = api.getWallet + `?userType=buyer`;
+      await callApi(Method.GET, endPoint, null,
+        res => {
+          if (res?.status === 200) {
+            setIsLoading(false)
+            setTransactionHistory(res?.data?.transactionHistory)
+          }
+          else {
+            setIsLoading(false)
+            showMessage(res?.message)
+          }
+        },
+        err => {
+          showMessage(err.message)
+          setIsLoading(false);
+        });
+    } catch (error) {
+      setIsLoading(false);
+      console.log(error);
+    }
+  }
 
   return (
     <div className="alpha-home_page-main_container">
       <BlogView />
       <NavBar />
+      <Loader loading={isLoading} />
       {connectCardModel && <ConnectCardModel onClick={() => [setCardActive(true), setConnectCardModel(false)]} onClickClose={() => setConnectCardModel(false)} />}
       <div className="alpha_detail_page_container">
         <div className="alpha-profile_outer_container">
@@ -58,7 +65,7 @@ export default function Wallet() {
                     <p>Connect</p>
                   </div>
                   <h1>Balance</h1>
-                  <h2>3500<br />USD</h2>
+                  <h2>{user?.balance}<br />USD</h2>
                   <div className="alpha-wallet-detail_topup_top_view">
                     <div>
                       <h3>Top up</h3>
@@ -72,37 +79,36 @@ export default function Wallet() {
                 </div>
               </div>
             </div>
-            {cardActive ?
-              <div>
-                <div className="alpha-wallet-transaction_history_top_view">
-                  <h1>Transaction History</h1>
-                  <div className="alpha-wallet-transaction_sub_title_top_view">
-                    <h2>User Name</h2>
-                    <h3>Amount</h3>
-                    <h3>Day</h3>
-                  </div>
+            <div>
+              <div className="alpha-wallet-transaction_history_top_view">
+                <h1>Transaction History</h1>
+                <div className="alpha-wallet-transaction_sub_title_top_view">
+                  <h2>User Name</h2>
+                  <h3>Amount</h3>
+                  <h3>Day</h3>
                 </div>
-                {transationArray.map((item) => {
-                  return (
-                    <div key={item.id}>
-                      <div className="alpha-wallet-transaction_history_view">
-                        <h2>{item.id}-</h2>
-                        <h3>{item.name}</h3>
-                        <h4>{item.amount}</h4>
-                        <h4>{item.date}</h4>
-                      </div>
-                      <div className="alpha-wallet-transation_divider" />
-                    </div>
-                  )
-                })}
               </div>
-              :
+              {transationHistory.map((item, index) => {
+                return (
+                  <div key={index}>
+                    <div className="alpha-wallet-transaction_history_view">
+                      <h2>{item.id}-</h2>
+                      <h3>{item.name}</h3>
+                      <h4>{item.amount}</h4>
+                      <h4>{item.date}</h4>
+                    </div>
+                    <div className="alpha-wallet-transation_divider" />
+                  </div>
+                )
+              })}
+            </div>
+            {/* :
               <div className="alpha-wallet-button_view">
                 <div onClick={() => setConnectCardModel(true)}>
                   <h3>Connect Card</h3>
                 </div>
               </div>
-            }
+            } */}
           </div>
         </div>
         <Footer />

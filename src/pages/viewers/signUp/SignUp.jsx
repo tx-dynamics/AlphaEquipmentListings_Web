@@ -90,7 +90,7 @@ export default function SignUp() {
     <div className="alpa-auth-container">
       <Loader loading={isLoading} />
       <div className="alpha-signin-image_view">
-        <div className="alpha-signin-image-logo_view">
+        <div onClick={() => navigate('/')} className="alpha-signin-image-logo_view">
           <img src={logo} alt='logo' className='alpha-signin-image_logo_style' />
         </div>
         <img src={authImage} alt='authImage' className='alpha-signin-image_stlye' />
@@ -104,7 +104,7 @@ export default function SignUp() {
           <TextInput errorText={confirmPasswordValue} onChange={(e) => setConfirmPassword(e.target.value)} onClickEye={() => setShowConfirmPassword(!showConfirmPassword)} type={!showConfirmPassword ? 'password' : 'text'} eye eyeIcon={showConfirmPassword ? show : hide} placeholder={'Enter your password'} title={'Confirm Password'} />
           <div className="alpha-signup-radio_view_top_view">
             <h5>Select Account Type</h5>
-            <div style={{ flexDirection: 'row', display: 'flex' }}>
+            <div style={{ flexDirection: 'row', display: 'flex', }}>
               {accountTypeArray.map((item, index) => {
                 return (
                   <div onClick={() => setSelectedAccountType(item)} key={index} className="alpha-signup-radio_view_image_top_view">
