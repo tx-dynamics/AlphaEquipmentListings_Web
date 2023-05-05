@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+
 import { arrowDownBlack, close, menu, searchWhite } from "../../../assets/icons";
 import { BlogView, DashboardCategoriesView, DashboardSparePartView, Footer, NavBar } from "../../../components";
 import './mainCategoryPage.css'
-import { diffBtwTwoDates } from "../../../helpingMethods";
 
 export default function MainCategoryPage() {
   const navigate = useNavigate()
@@ -132,57 +132,8 @@ export default function MainCategoryPage() {
 
   ]
 
-  const categoriesArray = [
-    {
-      id: 1,
-      title: 'Transport Truck',
-      count: '(1352)'
-    },
-    {
-      id: 2,
-      title: 'Agriculture',
-      count: '(1352)'
-    },
-    {
-      id: 3,
-      title: 'Agriculture',
-      count: '(1352)'
-    },
-    {
-      id: 4,
-      title: 'Construction',
-      count: '(1352)'
-    },
-    {
-      id: 5,
-      title: 'Lifting Material',
-      count: '(1352)'
-    },
-    {
-      id: 6,
-      title: 'Forestry Vehicles',
-      count: '(1352)'
-    },
-    {
-      id: 7,
-      title: 'Earth Moving',
-      count: '(1352)'
-    },
-    {
-      id: 8,
-      title: 'Agriculture',
-      count: '(1352)'
-    },
-    {
-      id: 9,
-      title: 'Forestry Vehicles',
-      count: '(1352)'
-    },
-
-  ]
 
   return (
-    console.log(state),
     <div className="alpha-home_page-main_container">
       <BlogView />
       <NavBar />

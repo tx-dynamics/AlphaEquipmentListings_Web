@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useSnackbar } from "react-simple-snackbar";
 import { useDispatch } from "react-redux";
@@ -37,7 +37,7 @@ export default function ProductDetailPage() {
       title: 'General Appearanceine',
       images: productData?.additionalImages,
       totalLength: productData?.additionalImages?.length,
-      extraData: true,
+      extraData: productData?.productType === 'Spare Part' ? false : true,
       show: true
     },
     {
@@ -46,7 +46,7 @@ export default function ProductDetailPage() {
       images: productData?.engineImages,
       totalLength: productData?.engineImages?.length,
       extraData: false,
-      show: state?.screen === 'spareparts' ? false : true
+      show: productData?.productType === 'Spare Part' ? false : true
 
     },
     {
@@ -55,7 +55,7 @@ export default function ProductDetailPage() {
       images: productData?.controlImages,
       totalLength: productData?.controlImages?.length,
       extraData: false,
-      show: state?.screen === 'spareparts' ? false : true
+      show: productData?.productType === 'Spare Part' ? false : true
 
     },
     {
@@ -64,7 +64,7 @@ export default function ProductDetailPage() {
       images: productData?.undercarrigeImages,
       totalLength: productData?.undercarrigeImages?.length,
       extraData: false,
-      show: state?.screen === 'spareparts' ? false : true
+      show: productData?.productType === 'Spare Part' ? false : true
 
     }
   ]
@@ -93,6 +93,16 @@ export default function ProductDetailPage() {
     else {
       showMessage('You cannot place bid below 0$')
     }
+  }
+
+  useEffect(() => {
+    if (productData === undefined) {
+      console.log('empty data')
+    }
+  }, [])
+
+  const onClickPay = () => {
+    productData?.rentOrSell === "Rent" ? setBookingModel(true) : setPaymentModel(true)
   }
 
   return (
@@ -135,7 +145,7 @@ export default function ProductDetailPage() {
                   <h5>{productData?.location?.address}</h5>
                 </div>
               </div>
-              {state?.screen !== 'spareparts' ?
+              {productData?.productType !== 'Spare Part' ?
                 <>
                   <>
                     <div className="alpha-detail_page-hours_view_divider" />
@@ -214,7 +224,7 @@ export default function ProductDetailPage() {
               )
             })}
           </div>
-          {state?.screen === 'auction' ?
+          {productData?.select === "Auction" ?
             <div className="alpha_detail_page_price_top_view">
               <div className="alpha_detail_page_price_view_header">
                 <div onClick={() => setBidView(!bidView)} className="alpha_detail_page_price_view_header_item_info" style={{ backgroundColor: !bidView ? '#F18805' : 'white' }}>
@@ -222,7 +232,7 @@ export default function ProductDetailPage() {
                     Item Info
                   </h2>
                 </div>
-                <div onClick={() => setBidView(!bidView)} className="alpha_detail_page_price_view_header_item_info" style={{ borderTopRightRadius: 5, borderTopLeftRadius: 0, backgroundColor: bidView ? '#F18805' : 'white' }}>
+                <div onClick={() => productData?.highestBid?.amount ? setBidView(!bidView) : showMessage('Bid Expired')} className="alpha_detail_page_price_view_header_item_info" style={{ borderTopRightRadius: 5, borderTopLeftRadius: 0, backgroundColor: bidView ? '#F18805' : 'white' }}>
                   <h2 className={bidView ? "alpha_detail_page_price_view_header_item_info_text" : "alpha_detail_page_price_view_header_item_info_text_two"}>
                     Bids ({productData?.bids?.length})
                   </h2>
@@ -234,10 +244,20 @@ export default function ProductDetailPage() {
                     <h2>Highest Bid</h2>
                     <img src={share} />
                   </div>
-                  <h1>${`${productData?.highestBid?.amount}`}</h1>
-                  <div onClick={() => onPressPlaceBid()} style={{ alignSelf: 'center', marginLeft: 20 }} className="alpha_detail_page_price_view_button_view">
-                    <h2>Place Bid</h2>
-                  </div>
+                  {productData?.highestBid?.amount ?
+                    <h1>${`${productData?.highestBid?.amount}`}</h1>
+                    :
+                    <h1>Bid expired</h1>
+
+                  }
+                  {productData?.highestBid?.amount ?
+                    <div onClick={() => onPressPlaceBid()} style={{ alignSelf: 'center', marginLeft: 20 }} className="alpha_detail_page_price_view_button_view">
+                      <h2>Place Bid</h2>
+                    </div>
+                    :
+                    <div style={{ marginTop: 10 }} />
+                  }
+
                   <div className="alpha_detail_page_price_view_box_close_date_view">
                     <img src={clock} />
                     <h5>Closes:<span style={{ fontWeight: 700 }}>{`${monthNames[endDate.getMonth()]} ${endDate.getDate()}, 12:00 AM`}</span></h5>
@@ -288,14 +308,14 @@ export default function ProductDetailPage() {
                 <h2>Item Info</h2>
               </div>
               <div className="alpha_detail_page_price_view_share_view">
-                <h2>{state?.screen === 'spareparts' ? 'Price' : 'Per day'}</h2>
+                <h2>{productData?.productType === 'Spare Part' ? 'Price' : 'Per day'}</h2>
                 <img style={{ cursor: 'pointer' }} src={share} />
               </div>
               <h1>${`${productData?.price}`}</h1>
-              <div onClick={() => state?.screen === 'rented' ? setBookingModel(true) : setPaymentModel(true)} className="alpha_detail_page_price_view_button_view">
-                <h2>{state?.screen === 'rented' ? 'Request For Rent' : 'Pay'}</h2>
+              <div onClick={() => onClickPay()} className="alpha_detail_page_price_view_button_view">
+                <h2>{productData?.rentOrSell === "Rent" ? 'Request For Rent' : 'Pay'}</h2>
               </div>
-              {state?.screen === 'rented' &&
+              {productData?.rentOrSell === "Rent" &&
                 <div className="alpha_detail_page_price_view_location_view">
                   <img src={pinLocation} />
                   <h4>Location:<span style={{ color: '#005B99' }}> {productData?.location?.address}</span></h4>

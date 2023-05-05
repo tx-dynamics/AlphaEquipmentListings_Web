@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   dashboardData: null,
+  activeUserId: ''
 };
 
 export const buyerDashboardSlice = createSlice({
@@ -11,11 +12,14 @@ export const buyerDashboardSlice = createSlice({
     dashboardData: (state, action) => {
       state.dashboardData = action.payload;
     },
+    activeUserId: (state, action) => {
+      state.activeUserId = action.payload;
+    },
 
   },
 });
 
-export const { dashboardData } =
+export const { dashboardData, activeUserId } =
   buyerDashboardSlice.actions;
 
 export default buyerDashboardSlice.reducer;

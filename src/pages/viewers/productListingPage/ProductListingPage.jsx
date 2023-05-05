@@ -49,7 +49,6 @@ export default function ProductListingPage() {
 
 
   return (
-    console.log(state),
     < div className="alpha-pro_list_page-main_container" >
       <BlogView />
       <NavBar />
@@ -101,7 +100,7 @@ export default function ProductListingPage() {
                 <img src={menu} onClick={() => setValue(0)} />
                 <h2>{state?.screen === 'auction' ? 'Auction' : `Products`}</h2>
               </div>
-              <h3>Showing {state?.data?.products?.length} results for</h3>
+              <h3>Showing results for</h3>
             </div>
             <div className="alpha-pro_list_page_divider" />
             {state?.screen == 'category' ?
