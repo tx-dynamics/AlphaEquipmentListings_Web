@@ -1,4 +1,4 @@
-export const BASE_URL = 'http://ec2-54-236-41-140.compute-1.amazonaws.com/'
+export const BASE_URL = 'https://api.equimentexchange.com/'
 export const IMAGE_BASE_URL = ''
 export const googleApiKey = 'AIzaSyD3BToDj_z_1ZLuhdDSURQplj3_9IgQSis'
 
