@@ -1,0 +1,34 @@
+{
+  "files": {
+    "main.css": "/static/css/main.3aef8435.css",
+    "main.js": "/static/js/main.ff46ff91.js",
+    "static/media/authImage.png": "/static/media/authImage.464240a1dbaac0338ca7.png",
+    "static/media/landingPageBanner.png": "/static/media/landingPageBanner.035e88f0bdfdc50cceee.png",
+    "static/media/dummyFour.png": "/static/media/dummyFour.649d01c439418452c85a.png",
+    "static/media/dummyTwo.png": "/static/media/dummyTwo.b90e7d3e8d8db580745e.png",
+    "static/media/dummyThree.png": "/static/media/dummyThree.b926801767494651ff11.png",
+    "static/media/Lato-Semibold.ttf": "/static/media/Lato-Semibold.4461d438f53d31c670c6.ttf",
+    "static/media/dummyOne.png": "/static/media/dummyOne.9f20f36661ef0164b02e.png",
+    "static/media/walletBg.png": "/static/media/walletBg.38a4806b5d66ca8c0ba4.png",
+    "static/media/shopBgImage.png": "/static/media/shopBgImage.52bf5bbcea50d28c6055.png",
+    "static/media/financingLogo.png": "/static/media/financingLogo.4bcf75ae3311f9437d7e.png",
+    "static/media/calculatorImage.png": "/static/media/calculatorImage.915ed01ef1bb5542e6a0.png",
+    "static/media/404.png": "/static/media/404.d30bb12abd3bbebd2594.png",
+    "static/media/Lato-Light.ttf": "/static/media/Lato-Light.c7400fcad9e48ca9043f.ttf",
+    "static/media/Lato-Regular.ttf": "/static/media/Lato-Regular.9d883d540ee2b4de8024.ttf",
+    "static/media/Lato-Bold.ttf": "/static/media/Lato-Bold.636be8de934918e38ed9.ttf",
+    "static/media/walletIcon.png": "/static/media/walletIcon.df37cb59ffb3e273bf16.png",
+    "static/media/user.png": "/static/media/user.e57b87b0fe320a996e27.png",
+    "static/media/financingOne.png": "/static/media/financingOne.a9af65f0f61e1d3d90b3.png",
+    "static/media/logo.png": "/static/media/logo.79353d438d152b7a3758.png",
+    "static/media/graphImage.png": "/static/media/graphImage.ed3dc9c97e258b08d230.png",
+    "static/media/logoutTwo.png": "/static/media/logoutTwo.a1698057c47b1dba1270.png",
+    "index.html": "/index.html",
+    "main.3aef8435.css.map": "/static/css/main.3aef8435.css.map",
+    "main.ff46ff91.js.map": "/static/js/main.ff46ff91.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3aef8435.css",
+    "static/js/main.ff46ff91.js"
+  ]
+}
