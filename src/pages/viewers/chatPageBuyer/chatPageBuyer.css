@@ -327,6 +327,21 @@
     width: 30rem;
 }
 
+.alpha_chat_empty_view {
+    display: flex;
+    justify-content: center;
+    margin-top: 5rem;
+}
+
+.alpha_chat_empty_view h1 {
+    font-family: lato;
+    font-weight: 400;
+    font-size: 2rem;
+    line-height: 2.4rem;
+    text-align: center;
+    color: black;
+}
+
 
 @media screen and (max-width:820px) {
     .alpha-chat_buyer-user_list-top_view {

@@ -1,12 +1,14 @@
 export const BASE_URL = 'https://api.equimentexchange.com/'
 export const IMAGE_BASE_URL = ''
-export const googleApiKey = 'AIzaSyD3BToDj_z_1ZLuhdDSURQplj3_9IgQSis'
+export const googleApiKey = 'AIzaSyAIfgWBooxQYHqpajAHOQCoaydZuJhOKQY'
 
 export const api = {
     login: 'user/login',
     signup: 'user/signup',
     sendAgainSignupOtp: 'user/sendOTP',
     verifyEmail: 'user/verify',
+    logout: 'user/logout',
+
     forgotPassword: 'user/forgotPassword',
     verifyForgotEmail: 'user/verifyOTPResetPassword',
     resetPassword: 'user/resetPassword',

@@ -5,7 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function PaymentModel(props) {
-    const [selectedpPaymentType, setSelectedPaymentType] = useState({ id: 0 })
+    const [selectedpPaymentType, setSelectedPaymentType] = useState({ id: 2 })
     const paymentTypesArray = [
         {
             id: 1,
@@ -22,21 +22,21 @@ export default function PaymentModel(props) {
             title: 'Financing',
             icon: finance
         },
-        {
-            id: 4,
-            title: 'Google pay',
-            icon: googlePay
-        },
-        {
-            id: 5,
-            title: 'Apple pay',
-            icon: applePay
-        },
-        {
-            id: 6,
-            title: 'Samsung',
-            icon: samsungPay
-        }
+        // {
+        //     id: 4,
+        //     title: 'Google pay',
+        //     icon: googlePay
+        // },
+        // {
+        //     id: 5,
+        //     title: 'Apple pay',
+        //     icon: applePay
+        // },
+        // {
+        //     id: 6,
+        //     title: 'Samsung',
+        //     icon: samsungPay
+        // }
     ]
     const paymentTypesArrayTwo = [
         {

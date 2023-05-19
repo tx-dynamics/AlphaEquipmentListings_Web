@@ -6,13 +6,15 @@ import { Slide } from 'react-slideshow-image';
 import 'react-slideshow-image/dist/styles.css';
 
 import { distance, images, hour, pinLocation, sNumber, share, plus, minus, clock, dotedTick } from "../../../assets/icons";
-import { BlogView, ConnectCardModel, Footer, NavBar, PaymentModel, OtpModel, BookingModel, ReviewModel, SubmitModel } from "../../../components";
+import { BlogView, ConnectCardModel, Footer, NavBar, PaymentModel, OtpModel, BookingModel, ReviewModel, SubmitModel, Loader } from "../../../components";
 import { activeTab } from "../../../redux/Slices/activeTabSlice";
-import { getDistanceFromLatLonInKm } from "../../../helpingMethods";
+import { diffBtwTwoDates, getDistanceFromLatLonInKm } from "../../../helpingMethods";
 import { store } from "../../../redux/store";
 import { snakbarOptions } from "../../../globalData";
 import './productDetailPage.css'
-
+import { bidData, cartData } from "../../../redux/Slices/cartSlice";
+import { api } from "../../../network/Environment";
+import { Method, callApi } from "../../../network/NetworkManger";
 export default function ProductDetailPage() {
   const navigate = useNavigate()
   const disPatch = useDispatch();
@@ -26,11 +28,23 @@ export default function ProductDetailPage() {
   const [successfullModel, setSuccessfullModel] = useState(false)
   const [otpModel, setOtpModel] = useState(false)
   const [bidValue, setBidValue] = useState(0)
+  const [selectedPrice, setSelectedPrice] = useState(0)
+  const [selectedDate1, setSelectedDate1] = useState()
+  const [selectedDate2, setSelectedDate2] = useState()
+  const [bidData, setBidData] = useState()
+  const [activeType, setActiveType] = useState('')
+  const [paymentType, setPaymentType] = useState()
+
+  const [cardDetail, setCardDetail] = useState()
+  const [isLoading, setIsLoading] = useState(false)
+  const user = store.getState().userData.userData
   const [showMessage, hideMessage] = useSnackbar(snakbarOptions)
   const [bidView, setBidView] = useState(false)
   const monthNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
   ];
+  const timeDiff = diffBtwTwoDates(new Date(), new Date(productData?.auctionEndDate)).includes('-')
+
   const featuresArray = [
     {
       id: 1,
@@ -78,20 +92,36 @@ export default function ProductDetailPage() {
   }
 
   const onPressPlaceBid = async () => {
-    setPaymentModel(true)
-    setBidView(!bidView)
-    if (bidValue > 0) {
-      const data = {
-        product: productData?._id,
-        amount: bidValue,
-        status: "pending"
-      };
-      console.log(data);
-      // disPatch(bidData(data))
-      // navigate(routes.deposit, { route: routes.placeBid })
+    if (!timeDiff) {
+      if (user) {
+        if (productData?.highestBid?.status !== 'accepted') {
+          if (bidValue > 0) {
+            disPatch(cartData(productData))
+            setBidView(!bidView)
+            const data = {
+              product: productData?._id,
+              amount: bidValue,
+              status: "pending"
+            };
+            setActiveType('auction')
+            setBidData(data)
+            setPaymentModel(true)
+          }
+          else {
+            showMessage('You cannot place bid below 0$')
+          }
+        }
+        else {
+          showMessage('You cannot bid this auction because this auction is sold out')
+
+        }
+      }
+      else {
+        showMessage('You are not login to perform this action')
+      }
     }
     else {
-      showMessage('You cannot place bid below 0$')
+      showMessage('Bid expired')
     }
   }
 
@@ -101,20 +131,177 @@ export default function ProductDetailPage() {
     }
   }, [])
 
-  const onClickPay = () => {
-    productData?.rentOrSell === "Rent" ? setBookingModel(true) : setPaymentModel(true)
+  const onClickPay = (type) => {
+    if (user === null) {
+      showMessage('Please login/signup first to perform this action')
+      return
+    }
+    else {
+      type === 1 ? setActiveType('rent') : setActiveType('buy')
+      disPatch(cartData(productData));
+      productData?.rentOrSell === "Rent" ? setBookingModel(true) : setPaymentModel(true)
+    }
   }
+
+
+  const onPressPayNow = async () => {
+    setReviewModel(false)
+    if (paymentType === 1) {
+      if (user?.balance >= (activeType === 'auction' ? bidData?.amount : selectedPrice)) {
+        sendOtp()
+      }
+      else {
+        showMessage("You don't have sufficient balance in your wallet")
+      }
+    }
+    else {
+      sendOtp()
+    }
+  };
+
+  const sendOtp = async () => {
+    try {
+      setIsLoading(true);
+      const endPoint = api.sendAgainSignupOtp
+      const data = {
+        email: store.getState().userData?.userData?.email,
+      };
+      await callApi(Method.POST, endPoint, data,
+        res => {
+          if (res?.status === 200) {
+            setIsLoading(false)
+            setOtpModel(true)
+          }
+          else {
+            setIsLoading(false)
+            showMessage(res?.message)
+          }
+        },
+        err => {
+          showMessage(err.message)
+          setIsLoading(false);
+        });
+    } catch (error) {
+      setIsLoading(false);
+      console.log(error);
+    }
+  }
+
+  const onPressConfirmOtp = async (otp) => {
+    setOtpModel(false)
+    try {
+      setIsLoading(true);
+      const endPoint = activeType === 'auction' ? api.bid : activeType === 'rent' ? api.rentedProduct : api.verifyEmail;
+
+      const biddata = {
+        otp: otp,
+        product: bidData?.product,
+        amount: bidData?.amount,
+        status: bidData?.status,
+        card: cardDetail
+      };
+      const biddataWallet = {
+        otp: otp,
+        product: bidData?.product,
+        amount: bidData?.amount,
+        status: bidData?.status,
+        wallet: true
+      };
+
+      const rentData = {
+        otp: otp,
+        device: {
+          id: localStorage.getItem('deviceId'),
+          deviceToken: 'xyz'
+        },
+        product: productData?._id,
+        duration: selectedDate2 - selectedDate1,
+        start: selectedDate1,
+        end: selectedDate2,
+        status: 'pending',
+        card: cardDetail
+      };
+      const rentDataWallet = {
+        otp: otp,
+        device: {
+          id: localStorage.getItem('deviceId'),
+          deviceToken: 'xyz'
+        },
+        product: productData?._id,
+        duration: selectedDate2 - selectedDate1,
+        start: selectedDate1,
+        end: selectedDate2,
+        status: 'pending',
+        wallet: true
+      };
+
+      const buyData = {
+        otp: otp,
+        device: {
+          id: localStorage.getItem('deviceId'),
+          deviceToken: 'xyz'
+        },
+        email: store.getState().userData?.userData?.email,
+        buyRequest: true,
+        product: productData?._id,
+        status: 'Pending',
+        card: cardDetail
+      };
+      const buyDataWallet = {
+        otp: otp,
+        device: {
+          id: localStorage.getItem('deviceId'),
+          deviceToken: 'xyz'
+        },
+        email: store.getState().userData?.userData?.email,
+        buyRequest: true,
+        product: productData?._id,
+        status: 'Pending',
+        wallet: true
+      };
+      const finalBidData = paymentType === 1 ? biddataWallet : biddata
+      const finalRentData = paymentType === 1 ? rentDataWallet : rentData
+      const finalBuyData = paymentType === 1 ? buyDataWallet : buyData
+
+      console.log(activeType === 'auction' ? finalBidData : activeType === 'rent' ? finalRentData : finalBuyData);
+      await callApi(Method.POST, endPoint, activeType === 'auction' ? finalBidData : activeType === 'rent' ? finalRentData : finalBuyData,
+        res => {
+          console.log(res);
+          if (res?.status === 200) {
+            setIsLoading(false)
+            setSuccessfullModel(true)
+          }
+          else {
+            setIsLoading(false)
+            showMessage(res?.message)
+            setOtpModel(true)
+
+          }
+        },
+        err => {
+          showMessage(err.message)
+          setIsLoading(false);
+          setOtpModel(true)
+        });
+    } catch (error) {
+      setIsLoading(false);
+      console.log(error);
+      setOtpModel(true)
+
+    }
+  };
 
   return (
     <div className="alpha-pro_list_page-main_container">
       <BlogView />
       <NavBar />
-      {bookingModel && <BookingModel onClickClose={() => setBookingModel(false)} onClick={() => [setPaymentModel(true), setBookingModel(false)]} />}
-      {paymentModel && <PaymentModel onClickClose={() => setPaymentModel(false)} onClick={(value) => value.id === 1 ? [setReviewModel(true), setPaymentModel(false)] : value.id === 2 ? [setConnectCard(true), setPaymentModel(false)] : value.id === 3 ? [setPaymentModel(false), [navigate('/financing', 'financing'), disPatch(activeTab('financing'))]] : [setReviewModel(true), setPaymentModel(false)]} />}
-      {reviewModel && <ReviewModel onClickClose={() => [setReviewModel(false)]} onClick={() => [setOtpModel(true), setReviewModel(false)]} />}
-      {connectCard && <ConnectCardModel onClick={() => [setReviewModel(true), setConnectCard(false)]} onClickClose={() => [setConnectCard(false)]} />}
-      {otpModel && <OtpModel onClick={() => [setSuccessfullModel(true), setOtpModel(false)]} onClickClose={() => [setOtpModel(false)]} />}
-      {successfullModel && <SubmitModel onClick={() => setSuccessfullModel(false)} icon={dotedTick} button title={'Congratulations!'} des={'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque mattis fringilla eros, sit amet auctor justo accumsan et.'} />}
+      <Loader loading={isLoading} />
+      {bookingModel && <BookingModel data={productData} onClickClose={() => setBookingModel(false)} onClick={(data) => [setSelectedPrice(data?.price), setSelectedDate1(data?.date1), setSelectedDate2(data?.date2), setPaymentModel(true), setBookingModel(false)]} />}
+      {paymentModel && <PaymentModel onClickClose={() => setPaymentModel(false)} onClick={(value) => [setPaymentType(value.id), value.id === 1 ? [setReviewModel(true), setPaymentModel(false)] : value.id === 2 ? [setConnectCard(true), setPaymentModel(false)] : value.id === 3 ? [setPaymentModel(false), [navigate('/financing', 'financing'), disPatch(cartData(productData)), disPatch(activeTab('financing'))]] : [setReviewModel(true), setPaymentModel(false)]]} />}
+      {reviewModel && <ReviewModel data={productData} price={activeType === 'auction' ? bidData?.amount : activeType === 'rent' ? selectedPrice : productData?.price} onClickClose={() => [setReviewModel(false)]} onClick={() => onPressPayNow()} />}
+      {connectCard && <ConnectCardModel onClick={(data) => [setCardDetail(data), setReviewModel(true), setConnectCard(false)]} onClickClose={() => [setConnectCard(false)]} />}
+      {otpModel && <OtpModel onClick={(data) => onPressConfirmOtp(data)} onClickClose={() => [setOtpModel(false)]} />}
+      {successfullModel && <SubmitModel onClick={() => [setSuccessfullModel(false), navigate('/')]} icon={dotedTick} button title={'Congratulations!'} des={'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque mattis fringilla eros, sit amet auctor justo accumsan et.'} />}
       {/* {successfullModel && <SubmitModel try onClick={() => setSuccessfullModel(false)} onClickTry={() => [setPaymentModel(true), setSuccessfullModel(false)]} icon={dotedCross} button title={'Opps !'} des={'Something went Wrong'} />} */}
       <div className="alpha_detail_page_container">
         <div className="alpha_image_slider_top_view">
@@ -232,7 +419,7 @@ export default function ProductDetailPage() {
                     Item Info
                   </h2>
                 </div>
-                <div onClick={() => productData?.highestBid?.amount ? setBidView(!bidView) : showMessage('Bid Expired')} className="alpha_detail_page_price_view_header_item_info" style={{ borderTopRightRadius: 5, borderTopLeftRadius: 0, backgroundColor: bidView ? '#F18805' : 'white' }}>
+                <div onClick={() => setBidView(!bidView)} className="alpha_detail_page_price_view_header_item_info" style={{ borderTopRightRadius: 5, borderTopLeftRadius: 0, backgroundColor: bidView ? '#F18805' : 'white' }}>
                   <h2 className={bidView ? "alpha_detail_page_price_view_header_item_info_text" : "alpha_detail_page_price_view_header_item_info_text_two"}>
                     Bids ({productData?.bids?.length})
                   </h2>
@@ -241,26 +428,21 @@ export default function ProductDetailPage() {
               {!bidView ?
                 <div>
                   <div className="alpha_detail_page_price_view_share_view">
-                    <h2>Highest Bid</h2>
+                    <h2>Base Amount</h2>
                     <img src={share} />
                   </div>
-                  {productData?.highestBid?.amount ?
-                    <h1>${`${productData?.highestBid?.amount}`}</h1>
-                    :
-                    <h1>Bid expired</h1>
+                  <h1>${`${productData?.price}`}</h1>
 
-                  }
-                  {productData?.highestBid?.amount ?
-                    <div onClick={() => onPressPlaceBid()} style={{ alignSelf: 'center', marginLeft: 20 }} className="alpha_detail_page_price_view_button_view">
-                      <h2>Place Bid</h2>
-                    </div>
-                    :
-                    <div style={{ marginTop: 10 }} />
-                  }
+                  {/* <h4 style={{ marginTop: 20 }}>Sold out to:{productData?.highestBid?.bidder?.name}</h4> */}
+
+                  <div onClick={() => onPressPlaceBid()} style={{ alignSelf: 'center', marginLeft: 20 }} className="alpha_detail_page_price_view_button_view">
+                    <h2>Place Bid</h2>
+                  </div>
+
 
                   <div className="alpha_detail_page_price_view_box_close_date_view">
                     <img src={clock} />
-                    <h5>Closes:<span style={{ fontWeight: 700 }}>{`${monthNames[endDate.getMonth()]} ${endDate.getDate()}, 12:00 AM`}</span></h5>
+                    <h5>Closes:<span style={{ fontWeight: 700 }}>{`${monthNames[endDate.getMonth()]} ${endDate.getDate()} ${endDate.getFullYear()}, 12:00 AM`}</span></h5>
                   </div>
                   <div className="alpha_detail_page_price_view_location_view">
                     <img src={pinLocation} />
@@ -272,17 +454,24 @@ export default function ProductDetailPage() {
                 :
                 <div>
                   <div className="alpha_detail_page_price_view_bid_list_view">
-                    {productData?.bids?.map((item, index) => {
-                      return (
-                        <div key={item.id} className="alpha_detail_page_price_view_bid_list_item_view">
-                          <div>
-                            <h2>{`$ ${item?.amount}` + `${index === 0 ? '  Highest Bid' : ''}`}</h2>
+                    {productData?.bids?.length > 0 ?
+
+                      (productData?.bids?.map((item, index) => {
+
+                        return (
+                          <div key={item.id} className="alpha_detail_page_price_view_bid_list_item_view">
+                            <div>
+                              <h2>{`$ ${item?.amount}` + `${index === 0 ? '  Highest Bid' : ''}`}</h2>
+                            </div>
                           </div>
-                        </div>
-                      )
-                    })}
+                        )
+                      }))
+                      :
+                      <h2>{`No bid found`}</h2>
+
+                    }
                   </div>
-                  <h3>Closes:<span style={{ fontWeight: 700 }}>{`${monthNames[endDate.getMonth()]} ${endDate.getDate()}, 12:00 AM`}</span> </h3>
+                  <h3>Closes:<span style={{ fontWeight: 700 }}>{`${monthNames[endDate.getMonth()]} ${endDate.getDate()} ${endDate.getFullYear()}, 12:00 AM`}</span> </h3>
                   <div className="alpha_detail_page_price_view_bid_list_price_large_view">
                     <h2>$</h2>
                     <h3>${bidValue}</h3>
@@ -312,7 +501,7 @@ export default function ProductDetailPage() {
                 <img style={{ cursor: 'pointer' }} src={share} />
               </div>
               <h1>${`${productData?.price}`}</h1>
-              <div onClick={() => onClickPay()} className="alpha_detail_page_price_view_button_view">
+              <div onClick={() => onClickPay(productData?.rentOrSell === "Rent" ? 1 : 2)} className="alpha_detail_page_price_view_button_view">
                 <h2>{productData?.rentOrSell === "Rent" ? 'Request For Rent' : 'Pay'}</h2>
               </div>
               {productData?.rentOrSell === "Rent" &&

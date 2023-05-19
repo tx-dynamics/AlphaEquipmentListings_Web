@@ -7,7 +7,7 @@ export default function PageNotFound() {
   return (
     <div className="alpha_page_not_found_container">
       <img src={notFound} />
-      <h1>The Page you are looking for doesn't exist</h1>
+      <h1>The page you are looking for doesn't exist or you are not login</h1>
     </div>
   );
 }

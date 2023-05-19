@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useSnackbar } from 'react-simple-snackbar'
-import { DeviceUUID } from 'device-uuid';
 
 import { apple, authImage, facebook, google, hide, logo, show } from "../../../assets/icons";
 import { Button, Loader, TextInput } from "../../../components";
@@ -43,7 +42,7 @@ export default function SignIn() {
         email: email,
         password: password,
         device: {
-          id: new DeviceUUID().get(),
+          id: localStorage.getItem('deviceId'),
           deviceToken: 'xyz'
         },
       };

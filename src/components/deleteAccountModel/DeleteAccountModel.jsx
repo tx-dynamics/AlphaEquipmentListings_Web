@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { crossCircleWhite, danger } from '../../assets/icons'
 import TextInputThree from '../textInputThree/TextInputThree'
 import TextInputTwo from '../textInputTwo/TextInputTwo'
 import './deleteAccountModel.css'
 
 export default function DeleteAccountModel(props) {
+    const [password, setPassword] = useState('')
 
     return (
         <div className="alpha-financing-model_top_view">
@@ -35,12 +36,12 @@ export default function DeleteAccountModel(props) {
                 </div>
 
                 <div className='alpha-card_modal_inputs_view'>
-                    <TextInputTwo title={'Password'} placeholder={'Enter your password'}></TextInputTwo>
+                    <TextInputTwo onChange={(e) => setPassword(e.target.value)} title={'Password'} placeholder={'Enter your password'}></TextInputTwo>
                 </div>
                 <div className='alpha-card_modal_inputs_view_two'>
-                    <TextInputThree title={'Password'} placeholder={'Enter your password'}></TextInputThree>
+                    <TextInputThree onChange={(e) => setPassword(e.target.value)} title={'Password'} placeholder={'Enter your password'}></TextInputThree>
                 </div>
-                <div onClick={props.onClick} style={{ backgroundColor: '#DD0004' }} className='alpha-payment_model_button_view'>
+                <div onClick={() => password?.length >= 8 && props.onClick(password)} style={{ backgroundColor: '#DD0004' }} className='alpha-payment_model_button_view'>
                     <h5>Delete my Account</h5>
                 </div>
             </div>

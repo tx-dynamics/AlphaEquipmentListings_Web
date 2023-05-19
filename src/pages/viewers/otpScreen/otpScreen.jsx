@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { DeviceUUID } from 'device-uuid';
 import { useLocation, useNavigate } from "react-router-dom";
 import { useSnackbar } from "react-simple-snackbar";
 import { useDispatch } from "react-redux";
@@ -28,7 +27,7 @@ export default function OtpScreen() {
       const data = {
         otp: otp,
         device: {
-          id: new DeviceUUID().get(),
+          id: localStorage.getItem('deviceId'),
           deviceToken: 'xyz'
         },
         email: state.email,

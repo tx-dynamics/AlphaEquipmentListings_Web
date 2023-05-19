@@ -21,8 +21,9 @@ const Navigation = () => {
       <Route path="/productdetailpage" element={<Viewers.ProductDetailPage />} />
       <Route path="/calculator" element={<Viewers.Calculator />} />
       <Route path="/financing" element={<Viewers.Financing />} />
-      <Route path="/profile" element={<Viewers.Profile />} />
+
       <Route path="/wallet" element={<Viewers.Wallet />} />
+      <Route path="/profile" element={<Viewers.Profile />} />
       <Route path="/faqs" element={<Viewers.Faqs />} />
       <Route path="/blogpage" element={<Viewers.BlogPage />} />
       <Route path="/blogdetailpage" element={<Viewers.BlogDetailPage />} />

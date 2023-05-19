@@ -4,10 +4,15 @@ import { useNavigate } from 'react-router-dom'
 import { copyRightText, globe, footerFacebook, footerInsta, footerTwitter, arrowDown } from '../../assets/icons'
 import './footer.css'
 import { activeTab } from '../../redux/Slices/activeTabSlice'
+import { store } from '../../redux/store'
+import { useSnackbar } from 'react-simple-snackbar'
+import { snakbarOptions } from '../../globalData'
 
 export default function Footer() {
     const navigate = useNavigate()
     const disPatch = useDispatch();
+    const user = store.getState().userData.userData
+    const [showMessage, hideMessage] = useSnackbar(snakbarOptions)
 
     const onClick = (type, value) => {
         disPatch(activeTab(value))
@@ -21,7 +26,7 @@ export default function Footer() {
                     <h3>About Alpha Equipment Listings</h3>
                     <h3 onClick={() => onClick('/blogpage', 'blogpage')}>Blog</h3>
                     <h3 onClick={() => onClick('/profile', 'profile')}>Profile</h3>
-                    <h3 onClick={() => onClick('/wallet', 'wallet')}>Wallet</h3>
+                    <h3 onClick={() => user ? onClick('/wallet', 'wallet') : showMessage('Please login first to perform this action')}>Wallet</h3>
 
                 </div>
                 <div className="alpha_footer_row_view">

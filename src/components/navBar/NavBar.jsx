@@ -8,6 +8,8 @@ import { accessToken, refreshToken, userData } from '../../redux/Slices/userData
 import { store } from '../../redux/store';
 import { useSnackbar } from 'react-simple-snackbar';
 import { snakbarOptions } from '../../globalData';
+import { api } from '../../network/Environment';
+import { Method, callApi } from '../../network/NetworkManger';
 
 export default function NavBar() {
     const disPatch = useDispatch();
@@ -24,8 +26,34 @@ export default function NavBar() {
         navigate(type, { state: { screen: value, data: data } })
     }
 
-    const logout = () => {
-        disPatch(userData(null))
+    const logout = async () => {
+        try {
+            const endPoint = api.logout
+            const data = {
+                device: {
+                    id: localStorage.getItem('deviceId'),
+                    deviceToken: 'xyz'
+                },
+            }
+            await callApi(Method.POST, endPoint, data,
+                res => {
+                    if (res?.status === 200) {
+                        navigate('/', { replace: true })
+                        disPatch(userData(null));
+                        disPatch(accessToken(''));
+                        disPatch(refreshToken(''));
+                    }
+                    else {
+                        showMessage(res?.message)
+
+                    }
+                },
+                err => {
+                    showMessage(err.message)
+                });
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     return (

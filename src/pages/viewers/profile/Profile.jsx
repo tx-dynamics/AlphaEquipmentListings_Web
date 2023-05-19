@@ -2,15 +2,16 @@ import React, { useState } from "react";
 import { useSnackbar } from "react-simple-snackbar";
 import { useDispatch } from "react-redux";
 
-import { changePassword, crossCircleWhite, deleteIcon, dotedTick } from "../../../assets/icons";
+import { changePassword, crossCircleWhite, deleteIcon, dotedTick, dummyFour, show } from "../../../assets/icons";
 import { BlogView, CreatePasswordModel, DeleteAccountModel, Footer, Loader, NavBar, OtpModel, SubmitModel, TextInputTwo } from "../../../components";
 import { store } from "../../../redux/store";
 import { api } from "../../../network/Environment";
 import { Method, callApi } from "../../../network/NetworkManger";
 import { snakbarOptions } from "../../../globalData";
-import { userData } from "../../../redux/Slices/userDataSlice";
+import { accessToken, refreshToken, userData } from "../../../redux/Slices/userDataSlice";
 import ChangePasswordModel from "../../../components/changePasswordModel/ChangePasswordModel";
 import './profile.css'
+import { upload, uploadAwsImage } from "../../../helpingMethods";
 
 export default function Profile() {
   const dispatch = useDispatch();
@@ -25,6 +26,8 @@ export default function Profile() {
   const [submitModel, setSubmitModel] = useState(false)
   const [deleteAccountModel, setDeleteAccountModel] = useState(false)
   const [otpModel, setOtpModel] = useState(false)
+  const [oldPassword, setOldPassword] = useState('')
+
   const actiopArray = [
     {
       id: 1,
@@ -40,33 +43,15 @@ export default function Profile() {
     }
   ]
 
-  const uploadImage = () => {
-    document.getElementById("selectFile").click();
-  };
-
-  const onChange = (file) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-      setImage(reader.result);
-    };
-  };
-  // const uploadImageToAws = async (data) => {
-  //   // setIsLoading(true);
-
-  //   uploadAwsImage(image)
-
-  // }
-
   const updateProfile = async (imagePath) => {
-    if (name.length > 0 || phoneNumber.length > 0) {
+    if (name.length > 0 || phoneNumber.length > 0 || imagePath?.length > 0) {
       try {
         setIsLoading(true);
         const endPoint = api.updateProfile;
         const data = {}
-        // if (image !== '') {
-        //   data.image = image
-        // }
+        if (imagePath) {
+          data.image = imagePath
+        }
         if (name !== '') {
           data.name = name
         }
@@ -97,20 +82,114 @@ export default function Profile() {
       }
     }
     else {
-      showMessage('Please type name or number to update')
+      showMessage('Please type name, number or select image to update')
     }
   }
+
+  const updatePassword = async (pass) => {
+    setCreatePModel(false)
+    setIsLoading(true)
+    try {
+      const endPoint = api.updatePassword;
+      const data = {
+        currentPassword: oldPassword,
+        password: pass,
+        updatePassword: pass
+      };
+      await callApi(Method.PATCH, endPoint, data,
+        res => {
+          if (res?.status === 200) {
+            setIsLoading(false)
+            showMessage(res?.message)
+            setSubmitModel(true)
+
+          }
+          else {
+            setIsLoading(false)
+            showMessage(res?.message)
+          }
+        },
+        err => {
+          showMessage(err.message)
+          setIsLoading(false);
+        });
+    } catch (error) {
+      setIsLoading(false);
+      console.log(error);
+    }
+  }
+
+  const deleteMyAccount = async (pass) => {
+    setDeleteAccountModel(false)
+    setIsLoading(true)
+    try {
+      const endPoint = api.sendOtpVerifyPassword;
+      const data = {
+        password: pass,
+
+      };
+      await callApi(Method.PATCH, endPoint, data,
+        res => {
+          if (res?.status === 200) {
+            setIsLoading(false)
+            setOtpModel(true)
+          }
+          else {
+            setIsLoading(false)
+            showMessage(res?.message)
+          }
+        },
+        err => {
+          console.log(err);
+          showMessage(err.message)
+          setIsLoading(false);
+        });
+    } catch (error) {
+      setIsLoading(false);
+      console.log(error);
+    }
+  }
+
+  const verifyDeleteOtp = async (otp) => {
+    setOtpModel(false)
+    try {
+      setIsLoading(true);
+      const endPoint = api.verifyDeleteMe + `?otp=${otp}`;
+      await callApi(Method.DELETE, endPoint, null,
+        res => {
+          console.log(res);
+          if (res?.status === 200) {
+            setIsLoading(false)
+            dispatch(userData(null));
+            dispatch(accessToken(''));
+            dispatch(refreshToken(''));
+          }
+          else {
+            setOtpModel(true)
+            setIsLoading(false)
+            showMessage(res?.message)
+          }
+        },
+        err => {
+          showMessage(err.message)
+          setIsLoading(false);
+        });
+    } catch (error) {
+      setIsLoading(false);
+      console.log(error);
+    }
+  };
 
   return (
     <div className="alpha-home_page-main_container">
       <BlogView />
       <NavBar />
       <Loader loading={isLoading} />
-      {changePModel && <ChangePasswordModel onClick={() => [setCreatePModel(true), setChangePModel(false)]} onClickClose={() => setChangePModel(false)} />}
-      {createPModel && <CreatePasswordModel onClick={() => [setSubmitModel(true), setCreatePModel(false)]} onClickClose={() => setCreatePModel(false)} />}
+      {changePModel && <ChangePasswordModel onClick={(data) => [setOldPassword(data), setCreatePModel(true), setChangePModel(false)]} onClickClose={() => setChangePModel(false)} />}
+      {createPModel && <CreatePasswordModel onClick={(data) => updatePassword(data)} onClickClose={() => setCreatePModel(false)} />}
       {submitModel && <SubmitModel title={'password Updated'} des={'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque mattis fringilla eros, sit amet auctor justo accumsan et.'} icon={dotedTick} onClick={() => setSubmitModel(false)} />}
-      {deleteAccountModel && <DeleteAccountModel onClick={() => [setOtpModel(true), setDeleteAccountModel(false)]} onClickClose={() => setDeleteAccountModel(false)} />}
-      {otpModel && <OtpModel onClick={() => setOtpModel(false)} onClickClose={() => setOtpModel(false)} />}
+      {deleteAccountModel && <DeleteAccountModel onClick={(data) => deleteMyAccount(data)} onClickClose={() => setDeleteAccountModel(false)} />}
+      {otpModel && <OtpModel onClick={(data) => verifyDeleteOtp(data)} onClickClose={() => setOtpModel(false)} />}
 
       <div className="alpha_detail_page_container">
         <div className="alpha-profile_outer_container">
@@ -130,13 +209,13 @@ export default function Profile() {
               <h2>Profile Picture<span style={{ color: '#FF0000' }}> *</span></h2>
               <div className="alpha-profile_picture_view">
                 <div className="alpha-profile_image_image">
-                  <img src={image === '' ? user?.image && user?.image : image} alt={''} />
+                  <img src={user?.image} alt={''} />
                 </div>
                 <div className="alpha-profile_add_image">
-                  <img onClick={() => uploadImage()} src={crossCircleWhite} />
+                  <img onClick={() => document.getElementById("upload-profile").click()} src={crossCircleWhite} />
                   <input
-                    onChange={(e) => onChange(e.target.files[0])}
-                    id="selectFile"
+                    onChange={upload(url => updateProfile(url), setIsLoading)}
+                    id='upload-profile'
                     type={"file"}
                     style={{ display: "none" }}
                   />

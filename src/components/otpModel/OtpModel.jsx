@@ -30,7 +30,7 @@ export default function OtpModel(props) {
                         containerStyle="alpha-otp_modal-otp_container"
                     />
                 </div>
-                <div onClick={props.onClick} className='alpha-payment_model_button_view'>
+                <div onClick={() => otp.length >= 4 && props.onClick(otp)} className='alpha-payment_model_button_view'>
                     <h5>Confirm</h5>
                 </div>
             </div>

@@ -1,9 +1,9 @@
 import React from 'react'
-import { crossCircleWhite, dummyFour } from '../../assets/icons'
-import TextInputThree from '../textInputThree/TextInputThree'
+import { crossCircleWhite } from '../../assets/icons'
 import './reviewModel.css'
 
 export default function ReviewModel(props) {
+    const { data, price } = props
     return (
         <div className="alpha-financing-model_top_view">
             <div className='alpha-payment_model_top_view'>
@@ -15,9 +15,9 @@ export default function ReviewModel(props) {
                 <div className='alpha-review_model-summary_top_view'>
                     <h2>Summary</h2>
                     <div className='alpha-review_model_product_info_view'>
-                        <img src={dummyFour} />
+                        <img src={data?.images[0]} />
                         <div>
-                            <h5>2018 Prinoth Panther T67 Crawler Carrier</h5>
+                            <h5>{data?.productName}</h5>
                             <h6>Lorem ipsum dolor sit amet conse ctetur adipiscing elit</h6>
                         </div>
                     </div>
@@ -30,7 +30,7 @@ export default function ReviewModel(props) {
                 <div className='alpha-booking_model_amount_view'>
                     <div className='alpha-booking_model_per_day_view'>
                         <h2>Amount</h2>
-                        <h3>$ 20</h3>
+                        <h3>$ {price}</h3>
                     </div>
                     <div className='alpha-booking_model_per_day_view'>
                         <h2>Other Charges</h2>
@@ -39,7 +39,7 @@ export default function ReviewModel(props) {
                     <div className='alpha-booking_model_divider' />
                     <div className='alpha-booking_model_per_day_view'>
                         <h4>Total</h4>
-                        <h5>$ 24</h5>
+                        <h5>$ {price}</h5>
                     </div>
                 </div>
                 <div onClick={props.onClick} className='alpha-payment_model_button_view'>

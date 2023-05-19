@@ -74,45 +74,29 @@ export const formatAMPM = (date) => {
 }
 
 
-export const uploadAwsImage = file => {
-    // let token = store.getState().userData.accessToken;
-    // var myHeaders = new Headers();
-    // myHeaders.append("Authorization", token);
-    // console.log(myHeaders);
-    // return
+export const upload = (cb, loader) => evt => {
+    const files = evt.target.files
+    const file = files[0]
+    loader(true)
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MmU1YWQ5Y2ZjN2JlZjE3ZjFkOTkxNCIsImlhdCI6MTY4MTEyMDU0NCwiZXhwIjoxNjg4ODk2NTQ0fQ.MwVbniYhtKpSyleEJwCJ_z6GKP9wlg4JEszWOIbOTsU");
 
     var formdata = new FormData();
-    formdata.append("file", file,);
+    formdata.append("file", file);
 
     var requestOptions = {
         method: 'POST',
+        headers: myHeaders,
         body: formdata,
         redirect: 'follow'
     };
 
-    fetch("http://ec2-18-189-194-242.us-east-2.compute.amazonaws.com/user/upload", requestOptions)
-        .then(response => response.text())
-        .then(result => console.log(result, '------'))
+    fetch("https://bd2mxvi3ra.us-east-2.awsapprunner.com/upload", requestOptions)
+        .then(response => response.json())
+        .then(data => {
+            loader(false)
+            const url = data.url
+            cb(url)
+        })
         .catch(error => console.log('error', error));
-
-    // var formdata = new FormData();
-    // formdata.append("file", file);
-    // var requestOptions = {
-    //     method: 'POST',
-    //     // headers: myHeaders,
-    //     body: formdata,
-    //     redirect: 'follow'
-    // };
-    // console.log(requestOptions.body);
-    // return
-
-    // return
-    // fetch("http://ec2-18-189-194-242.us-east-2.compute.amazonaws.com/user/upload", requestOptions)
-    //     .then(response => response.json())
-    //     .then(data => {
-    //         const url = data.data.url
-    //         console.log(url, '-0-0-0-')
-    //         // cb(url)
-    //     })
-    //     .catch(error => console.log('error', error));
 }

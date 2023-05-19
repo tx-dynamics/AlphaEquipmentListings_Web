@@ -38,6 +38,14 @@ export const callApi = async (
     let token = store.getState().userData.accessToken ?? false;
     let refreshToken = store.getState().userData.refreshToken ?? false;
     let url = BASE_URL + endPoint
+    let deviceId = localStorage.getItem('deviceId')
+    if (!deviceId) {
+        let id = new DeviceUUID().get()
+        localStorage.setItem('deviceId', id)
+        deviceId = id
+    }
+
+
     if (multipart) {
         defaultHeaders['Content-Type'] = 'multipart/form-data';
     } else {
@@ -70,10 +78,11 @@ export const callApi = async (
                 headers: defaultHeaders,
                 body: JSON.stringify({
                     device: {
-                        id: new DeviceUUID().get()
+                        id: deviceId
                     },
                 }),
             };
+
             await fetch(`${BASE_URL}user/refresh/${refreshToken}`, fetchObject)
                 .then(async res => {
                     let resJson = await res.json();

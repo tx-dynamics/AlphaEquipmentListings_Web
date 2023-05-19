@@ -5,7 +5,24 @@ import TextInputTwo from '../textInputTwo/TextInputTwo'
 import './cashWithdrawModel.css'
 
 export default function CashWithdrawModel(props) {
+    const [name, setName] = useState('')
+    const [accountNumber, setAccountNumber] = useState('')
+    const [branchNumber, setBranchNumber] = useState('')
+    const [amount, setAmount] = useState('')
 
+    const disableValue = name !== '' && accountNumber !== '' && amount !== '' && branchNumber !== ''
+
+
+    const onClickWithdrawel = () => {
+        const accountData = {
+            accountName: name,
+            accountNumber: accountNumber,
+            branchNumber: branchNumber,
+            amount: amount
+        }
+        disableValue &&
+            props.onClick(accountData)
+    }
     return (
         <div className="alpha-financing-model_top_view">
             <div className='alpha-payment_model_top_view'>
@@ -14,19 +31,20 @@ export default function CashWithdrawModel(props) {
                     <h2>Cash Withdrawal</h2>
                     <img onClick={props.onClickClose} src={crossCircleWhite} />
                 </div>
-                <div className='alpha-payment_model_payment_title_view'>
-                    <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pretium orci vel ante posuere, et pharetra magna consectetur.</h3>
+                <div className='alpha-card_modal_inputs_view' >
+                    <TextInputTwo onChange={(e) => setName(e.target.value)} title={'Account Holder Name'} placeholder={'Enter account holder name'}></TextInputTwo>
+                    <TextInputTwo onChange={(e) => setAccountNumber(e.target.value)} title={'Account Number'} placeholder={'Enter your account number'}></TextInputTwo>
+                    <TextInputTwo onChange={(e) => setBranchNumber(e.target.value)} title={'Branch Number'} placeholder={'Enter your branch number'}></TextInputTwo>
+                    <TextInputTwo onChange={(e) => setAmount(e.target.value)} title={'Amount'} placeholder={'Enter amount'}></TextInputTwo>
                 </div>
-                <div className='alpha-card_modal_inputs_view'>
-                    <TextInputTwo title={'Bank'} placeholder={'Enter your bank name'}></TextInputTwo>
-                    <TextInputTwo title={'Account Number'} placeholder={'Enter your account number'}></TextInputTwo>
-                </div>
-                <div className='alpha-card_modal_inputs_view_two'>
-                    <TextInputThree title={'Bank'} placeholder={'Enter your bank name'}></TextInputThree>
-                    <TextInputThree title={'Account Number'} placeholder={'Enter your account number'}></TextInputThree>
+                <div className='alpha-card_modal_inputs_view_two' style={{ marginTop: 20 }}>
+                    <TextInputTwo onChange={(e) => setName(e.target.value)} title={'Account Holder Name'} placeholder={'Enter account holder name'}></TextInputTwo>
+                    <TextInputTwo onChange={(e) => setAccountNumber(e.target.value)} title={'Account Number'} placeholder={'Enter your account number'}></TextInputTwo>
+                    <TextInputTwo onChange={(e) => setBranchNumber(e.target.value)} title={'Branch Number'} placeholder={'Enter your branch number'}></TextInputTwo>
+                    <TextInputTwo onChange={(e) => setAmount(e.target.value)} title={'Amount'} placeholder={'Enter amount'}></TextInputTwo>
                 </div>
 
-                <div onClick={props.onClick} className='alpha-payment_model_button_view'>
+                <div onClick={() => onClickWithdrawel()} className='alpha-payment_model_button_view'>
                     <h5>Withdrawal</h5>
                 </div>
             </div>
