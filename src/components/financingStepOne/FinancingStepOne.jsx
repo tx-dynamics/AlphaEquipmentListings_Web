@@ -1,239 +1,75 @@
 import React, { useState } from 'react'
+import { GooglePlaceInput, TextInputTwo } from '../'
+import { useSnackbar } from 'react-simple-snackbar'
+import { snakbarOptions } from '../../globalData'
 import { financingLogo } from '../../assets/icons'
-import { TextInputTwo } from '../'
 import './financingStepOne.css'
 
 export default function FinancingStepOne(props) {
-    const [selectedPlanToPurchaseValue, setSelectedPlanToPurchaseValue] = useState({ id: 0 })
-    const [selectedPlanToPurchaseTwoValue, setSelectedPlanToPurchaseTwoValue] = useState({ id: 0 })
-    const [selectedWithInDayReturnValue, setSelectedWithInDayReturnValue] = useState({ id: 0 })
-    const [selectedAgeOfEquipmentValue, setSelectedAgeOfEquipmentValue] = useState({ id: 0 })
-    const planToPurchaseArray = [
-        {
-            id: 1,
-            value: 'Lorem ipsum dolor sit amet'
-        },
-        {
-            id: 2,
-            value: 'Donec pretium orci'
-        },
-        {
-            id: 3,
-            value: 'Ut convallis sit amet nisl'
-        },
-        {
-            id: 4,
-            value: 'Sed et condimentum'
-        }
-    ]
-    const planToPurchaseTwoArray = [
-        {
-            id: 1,
-            value: 'Lorem ipsum dolor sit amet'
-        },
-        {
-            id: 2,
-            value: 'Donec pretium orci'
-        },
-        {
-            id: 3,
-            value: 'Ut convallis sit amet nisl'
-        },
-        {
-            id: 4,
-            value: 'Sed et condimentum'
-        }
-    ]
-    const withInDayReturnArray = [
-        {
-            id: 1,
-            value: 'Yes'
-        },
-        {
-            id: 2,
-            value: 'No'
-        },
+    const { value } = props
+    const [location, setLocation] = useState({ address: value?.location?.address ? value?.location?.address : '' })
+    const [name, setName] = useState(value?.name ? value?.name : '')
+    const [email, setEmail] = useState(value?.email ? value?.email : '')
+    const [number, setNumber] = useState(value?.number ? value?.number : '')
+    const [businessId, setBusinessId] = useState(value?.businessId ? value?.businessId : '')
+    const [dob, setDob] = useState('')
+    const [date, setDate] = useState(value?.dob?.date ? value?.dob?.date : '')
+    const buttonValue = name.length > 0 && email.length > 0 && number.length > 0 && location?.address.length > 0 && date !== '' && businessId.length > 0
+    const [showMessage, hideMessage] = useSnackbar(snakbarOptions)
 
-    ]
-    const ageOfEquipmentArray = [
-        {
-            id: 1,
-            value: 'New'
-        },
-        {
-            id: 2,
-            value: '1-3 years'
-        },
-        {
-            id: 3,
-            value: '4-6 years'
-        },
-        {
-            id: 4,
-            value: '7-10 years'
-        },
-        {
-            id: 5,
-            value: '11-14 years'
-        },
-        {
-            id: 6,
-            value: '16+ years'
+    const onClickNext = () => {
+        const data = {
+            name: name,
+            email: email,
+            location: location,
+            number: number,
+            dob: { date: date, timeStamp: dob },
+            businessId: businessId
         }
-    ]
-    const [equipmentCategoryDropdown, setEquipmentCategoryDropdown] = useState(false)
-    const [equipmentCategoryValue, setEquipmentCategoryValue] = useState('')
-    const equipmentCategoryArray = [
-        {
-            id: 1,
-            title: 'Transport Truck',
-        },
-        {
-            id: 2,
-            title: 'Earth Moving',
-        },
-        {
-            id: 3,
-            title: 'Lifting Material',
-        },
-        {
-            id: 4,
-            title: 'Other'
-        }
-    ]
-    const [typeOfEquipmentDropdown, setTypeOfEquipmentDropdown] = useState(false)
-    const [typeOfEquipmentValue, setTypeOfEquipmentValue] = useState('')
-    const typeOfEquipmentArray = [
-        {
-            id: 1,
-            title: 'Transport Truck',
-        },
-        {
-            id: 2,
-            title: 'Earth Moving',
-        },
-        {
-            id: 3,
-            title: 'Lifting Material',
-        },
-        {
-            id: 4,
-            title: 'Other'
-        }
-    ]
-    const [auctionDropdown, setAuctionDropdown] = useState(false)
-    const [auctionValue, setAuctionValue] = useState('')
-    const auctionArray = [
-        {
-            id: 1,
-            title: 'Transport Truck',
-        },
-        {
-            id: 2,
-            title: 'Earth Moving',
-        },
-        {
-            id: 3,
-            title: 'Lifting Material',
-        },
-        {
-            id: 4,
-            title: 'Other'
-        }
-    ]
-
+        buttonValue ? props.onClickNext(data) : showMessage('Please fill all the fields')
+    }
     return (
         <div>
             <div className="alpha-financing-finance_step_one_top_view">
                 <div className="alpha-financing-finance_step_one_view">
-                    <h1>Tell us about your equipment needs</h1>
-                    <div className="alpha-financing-radia_view_top_view">
-                        <h2>How do you plan to purchase?</h2>
-                        {planToPurchaseArray.map((item, index) => {
-                            return (
-                                <div onClick={() => setSelectedPlanToPurchaseValue(item)} key={index} className="alpha-financing-radia_view_image_top_view">
-                                    <div style={{ backgroundColor: item.id === selectedPlanToPurchaseValue.id ? '#F18805' : 'transparent' }} />
-                                    <h3>
-                                        {item.value}
-                                    </h3>
-                                </div>
-                            )
-                        })}
-                    </div>
-                    <div className="alpha-financing-radia_view_top_view">
-                        <h2>How do you plan to purchase?</h2>
-                        {planToPurchaseTwoArray.map((item, index) => {
-                            return (
-                                <div onClick={() => setSelectedPlanToPurchaseTwoValue(item)} key={index} className="alpha-financing-radia_view_image_top_view">
-                                    <div style={{ backgroundColor: item.id === selectedPlanToPurchaseTwoValue.id ? '#F18805' : 'transparent' }} />
-                                    <h3>
-                                        {item.value}
-                                    </h3>
-                                </div>
-                            )
-                        })}
-                    </div>
+                    <h1>Tell us about your personal information</h1>
                     <div className='alpha-financing-step_one_inputs_top_view'>
                         <TextInputTwo
+                            onChange={(e) => setName(e.target.value)}
                             style={{ paddingBottom: 4 }}
-                            dropDownStyle={{ width: 340, left: 0 }}
-                            disabled
-                            selectedValue={(item) => [setEquipmentCategoryValue(item.title), setEquipmentCategoryDropdown(false)]}
-                            value={equipmentCategoryValue}
-                            onClickDropDown={() => setEquipmentCategoryDropdown(!equipmentCategoryDropdown)}
-                            dropDownArray={equipmentCategoryArray}
-                            dropDownValue={equipmentCategoryDropdown}
-                            type={'dropdown'}
-                            title={'Equipment Categorie'}
-                            placeholder={'Select categorie'} />
+                            value={name}
+                            title={'Legal Business Name'}
+                            placeholder={'Enter business name'} />
+                        <GooglePlaceInput
+                            onChange={(e) => setLocation(e)}
+                            value={location?.address}
+                            title={'Location'}
+                            placeholder={'Enter your location'} />
                         <TextInputTwo
-                            dropDownStyle={{ width: 340, left: 0 }}
-                            disabled
-                            selectedValue={(item) => [setTypeOfEquipmentValue(item.title), setTypeOfEquipmentDropdown(false)]}
-                            value={typeOfEquipmentValue}
-                            onClickDropDown={() => setTypeOfEquipmentDropdown(!typeOfEquipmentDropdown)}
-                            dropDownArray={typeOfEquipmentArray}
-                            dropDownValue={typeOfEquipmentDropdown}
-                            type={'dropdown'}
+                            onChange={(e) => setEmail(e.target.value)}
+                            style={{ paddingBottom: 4 }}
+                            value={email}
+                            title={'Email'}
+                            placeholder={'Enter email'} />
+                        <TextInputTwo
+                            onChange={(e) => setNumber(e.target.value)}
+                            style={{ paddingBottom: 4 }}
+                            value={number}
+                            title={'Phone Number'}
+                            placeholder={'Enter phone number'} />
+                        <TextInputTwo
+                            value={date}
+                            onChange={(e) => [setDate(e.target.value), setDob(new Date(e.target.value).getTime())]}
+                            inputStyle={{ paddingBottom: 4, flex: 1, }}
+                            type={'date'}
                             title={'Type of equipment'}
                             placeholder={'Select equipment type'} />
                         <TextInputTwo
-                            dropDownStyle={{ width: 340, left: 0 }}
-                            disabled
-                            selectedValue={(item) => [setAuctionValue(item.title), setAuctionDropdown(false)]}
-                            value={auctionValue}
-                            onClickDropDown={() => setAuctionDropdown(!auctionDropdown)}
-                            dropDownArray={auctionArray}
-                            dropDownValue={auctionDropdown}
-                            type={'dropdown'}
-                            title={'What auction do you plan to purchase at?'}
-                            placeholder={'Select auction'} />
-                    </div>
-                    <div className="alpha-financing-radia_view_top_view">
-                        <h2>Do you need equipment within 15 days?</h2>
-                        {withInDayReturnArray.map((item, index) => {
-                            return (
-                                <div onClick={() => setSelectedWithInDayReturnValue(item)} key={index} className="alpha-financing-radia_view_image_top_view">
-                                    <div style={{ backgroundColor: item.id === selectedWithInDayReturnValue.id ? '#F18805' : 'transparent' }} />
-                                    <h3>
-                                        {item.value}
-                                    </h3>
-                                </div>
-                            )
-                        })}
-                    </div>
-                    <div className="alpha-financing-radia_view_top_view">
-                        <h2>Approximate Age of Equipment</h2>
-                        {ageOfEquipmentArray.map((item, index) => {
-                            return (
-                                <div onClick={() => setSelectedAgeOfEquipmentValue(item)} key={index} className="alpha-financing-radia_view_image_top_view">
-                                    <div style={{ backgroundColor: item.id === selectedAgeOfEquipmentValue.id ? '#F18805' : 'transparent' }} />
-                                    <h3>
-                                        {item.value}
-                                    </h3>
-                                </div>
-                            )
-                        })}
+                            onChange={(e) => setBusinessId(e.target.value)}
+                            style={{ paddingBottom: 4 }}
+                            value={businessId}
+                            title={'Socail Security Number or Business Tax ID  Number'}
+                            placeholder={'Enter SSN or Business id'} />
                     </div>
                 </div>
                 <div className="alpha-financing-finance_step_one_image_view">
@@ -241,7 +77,7 @@ export default function FinancingStepOne(props) {
                 </div>
             </div>
             <div className='alpha-financing-finance_step_one_button'>
-                <div onClick={() => props.onClickNext()}>
+                <div onClick={() => onClickNext()}>
                     <h2>NEXT</h2>
                 </div>
             </div>

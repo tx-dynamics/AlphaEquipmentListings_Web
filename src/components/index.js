@@ -37,4 +37,5 @@ export { default as FinancingStepFourAdmin } from './financingStepFourAdmin/Fina
 export { default as CashWithdrawModel } from './cashWithdrawModel/CashWithdrawModel'
 export { default as Loader } from './loader/Loader'
 export { default as TopUpModel } from './topUpModel/TopUpModel'
+export { default as GooglePlaceInput } from './googlePlaceInput/GooglePlaceInput'
 

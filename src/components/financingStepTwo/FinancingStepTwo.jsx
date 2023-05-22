@@ -1,196 +1,112 @@
 import React, { useState } from 'react'
 import { TextInputTwo } from '../'
-import './financingStepTwo.css'
 import { financingLogo } from '../../assets/icons'
+import { api } from '../../network/Environment'
+import { Method, callApi } from '../../network/NetworkManger'
+import { useSnackbar } from 'react-simple-snackbar'
+import { snakbarOptions } from '../../globalData'
+import './financingStepTwo.css'
 
 export default function FinancingStepTwo(props) {
-    const [selectedBusinessStructureValue, setSelectedBusinessStructureValue] = useState({ id: 0 })
-    const [selectedForestryTypeValue, setSelectedForestryTypeValue] = useState({ id: 0 })
-    const [selectedNumberofOwnersValue, setSelectedNumberofOwnersValue] = useState({ id: 0 })
-    const [selectedReleatedCompanyValue, setSelectedReleatedCompanyValue] = useState({ id: 0 })
-    const [selectedAnnualGrossRevenueValue, setSelectedAnnualGrossRevenueValue] = useState({ id: 0 })
-    const businessStructureArray = [
-        {
-            id: 1,
-            value: 'Cooperative'
-        },
-        {
-            id: 2,
-            value: 'Corporation'
-        },
-        {
-            id: 3,
-            value: 'Partnership'
-        },
-        {
-            id: 4,
-            value: 'S-Corp'
-        },
-        {
-            id: 5,
-            value: 'Solo Proprietorship'
-        }
-    ]
-    const forestryTypeArray = [
-        {
-            id: 1,
-            value: 'Logging'
-        },
-        {
-            id: 2,
-            value: 'Transportation'
-        },
-        {
-            id: 3,
-            value: 'Road building'
-        },
-        {
-            id: 4,
-            value: 'Stump to Dump Contracting'
-        },
-        {
-            id: 5,
-            value: 'Other'
-        },
-    ]
-    const numberofOwnersArray = [
-        {
-            id: 1,
-            value: '1'
-        },
-        {
-            id: 2,
-            value: '2'
-        },
-        {
-            id: 3,
-            value: '3'
-        },
-        {
-            id: 4,
-            value: 'More'
-        },
+    const { value } = props
+    const [downPayment, setDownPayment] = useState(value?.downPayment ? value?.downPayment : '')
+    const [searchedProduct, setSearchedProduct] = useState([])
+    const [showMessage, hideMessage] = useSnackbar(snakbarOptions)
+    const [selectedValue, setSelectedValue] = useState({ price: value?.price ? value?.price : '', productName: value?.productName ? value?.productName : '' })
+    const [dropdownShow, setDropdownShow] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
+    const [backEvent, setBackEvent] = useState(false)
 
-    ]
-    const releatedCompanyArray = [
-        {
-            id: 1,
-            value: 'Yes'
-        },
-        {
-            id: 2,
-            value: 'No'
-        },
-    ]
-    const annualGrossRevenueArray = [
-        {
-            id: 1,
-            value: 'Under 250,000'
-        },
-        {
-            id: 2,
-            value: '250,000 - 500,000'
-        },
-        {
-            id: 3,
-            value: '500,000 - 1,000,000'
-        },
-        {
-            id: 4,
-            value: '5,000,000 - 10,000,000'
-        },
-        {
-            id: 5,
-            value: 'Over 10,000,000'
-        },
-    ]
+    const onPressNext = () => {
+        const data = {
+            productId: selectedValue?._id,
+            price: selectedValue?.price,
+            productName: selectedValue?.productName,
+            downPayment: downPayment,
+        }
+        selectedValue?.productName ? props.onClickNext(data) : showMessage('Please select product')
+    }
+
+    const getSearchProduct = async (text) => {
+        setIsLoading(true)
+        try {
+            const endPoint = api.buyerDashboard + `?search=${text}`;
+            await callApi(Method.GET, endPoint, null,
+                res => {
+                    if (res?.status === 200) {
+                        setSearchedProduct(res?.data?.products)
+                        setDropdownShow(res?.data?.products?.length > 0 ? true : false)
+                        setIsLoading(false)
+
+                    }
+                    else {
+                        showMessage(res?.message)
+                        setIsLoading(false)
+                    }
+                },
+                err => {
+                    showMessage(err.message)
+                    setIsLoading(false)
+                });
+        } catch (error) {
+            console.log(error);
+            setIsLoading(false)
+        }
+    }
+
+    const applyDebounce = (fun, d) => {
+        // setSelectedValue({})
+        let timer;
+        return (text) => {
+            clearTimeout(timer)
+            timer = setTimeout(() => {
+                text?.length > 0 ?
+                    fun(text)
+                    :
+                    setDropdownShow(false)
+            }, d);
+        }
+    }
+    const searchMainFun = applyDebounce(getSearchProduct, 500)
+
 
     return (
         <div>
             <div className="alpha-financing-finance_step_one_top_view">
                 <div className="alpha-financing-finance_step_one_view">
-                    <h1>Tell us about your equipment needs</h1>
-                    <div className="alpha-financing-radia_view_top_view">
-                        <h2>Business Structure</h2>
-                        {businessStructureArray.map((item, index) => {
-                            return (
-                                <div onClick={() => setSelectedBusinessStructureValue(item)} key={index} className="alpha-financing-radia_view_image_top_view">
-                                    <div style={{ backgroundColor: item.id === selectedBusinessStructureValue.id ? '#F18805' : 'transparent' }} />
-                                    <h3>
-                                        {item.value}
-                                    </h3>
-                                </div>
-                            )
-                        })}
-                    </div>
-                    <div className="alpha-financing-radia_view_top_view">
-                        <h2>Forestry Type</h2>
-                        {forestryTypeArray.map((item, index) => {
-                            return (
-                                <div onClick={() => setSelectedForestryTypeValue(item)} key={index} className="alpha-financing-radia_view_image_top_view">
-                                    <div style={{ backgroundColor: item.id === selectedForestryTypeValue.id ? '#F18805' : 'transparent' }} />
-                                    <h3>
-                                        {item.value}
-                                    </h3>
-                                </div>
-                            )
-                        })}
-                    </div>
+                    <h1>Tell us about your equipment Information</h1>
                     <div className='alpha-financing-step_one_inputs_top_view'>
                         <TextInputTwo
                             style={{ paddingBottom: 4 }}
-                            title={'Number of Employees'}
-                            placeholder={'Enter number of employees'} />
+                            title={'Equipment Name'}
+                            onChange={(e) => searchMainFun(e.target.value)}
+                            placeholder={'Search equipment'}
+                            dropDownValue={dropdownShow}
+                            dropDownArray={searchedProduct.length > 0 ? searchedProduct : []}
+                            dropDownStyle={{ width: '100%', left: 0 }}
+                            api={true}
+                            selectedValue={(item) => [setSelectedValue(item), setDropdownShow(false)]}
+                            value={selectedValue?.productName}
+                            loader={isLoading}
+                            onKeyDown={() => [setDropdownShow(false), setSelectedValue({})]}
+                        />
+
                         <TextInputTwo
                             style={{ paddingBottom: 4 }}
-                            title={'Year of Established'}
-                            placeholder={'Enter year of established '} />
-                    </div>
-                    <div className="alpha-financing-radia_view_top_view">
-                        <h2>Number of Owners</h2>
-                        {numberofOwnersArray.map((item, index) => {
-                            return (
-                                <div onClick={() => setSelectedNumberofOwnersValue(item)} key={index} className="alpha-financing-radia_view_image_top_view">
-                                    <div style={{ backgroundColor: item.id === selectedNumberofOwnersValue.id ? '#F18805' : 'transparent' }} />
-                                    <h3>
-                                        {item.value}
-                                    </h3>
-                                </div>
-                            )
-                        })}
-                    </div>
-                    <div className="alpha-financing-radia_view_top_view">
-                        <h2>Any Related company that can provide a corporate guaranty?</h2>
-                        {releatedCompanyArray.map((item, index) => {
-                            return (
-                                <div onClick={() => setSelectedReleatedCompanyValue(item)} key={index} className="alpha-financing-radia_view_image_top_view">
-                                    <div style={{ backgroundColor: item.id === selectedReleatedCompanyValue.id ? '#F18805' : 'transparent' }} />
-                                    <h3>
-                                        {item.value}
-                                    </h3>
-                                </div>
-                            )
-                        })}
-                    </div>
-                    <div className='alpha-financing-step_one_inputs_top_view'>
+                            title={'Purchase Price'}
+                            placeholder={'purchase price'}
+                            value={selectedValue?.price}
+                            disabled
+                        />
                         <TextInputTwo
                             style={{ paddingBottom: 4 }}
-                            title={'Financial Year end'}
-                            placeholder={'Enter year of established '} />
+                            title={'Down Payment (if any)'}
+                            placeholder={'Enter down payment'}
+                            value={downPayment}
+                            onChange={(e) => setDownPayment(e.target.value)}
+                        />
                     </div>
-                    <div className="alpha-financing-radia_view_top_view">
-                        <h2>Annual Gross revenue</h2>
-                        {annualGrossRevenueArray.map((item, index) => {
-                            return (
-                                <div onClick={() => setSelectedAnnualGrossRevenueValue(item)} key={index} className="alpha-financing-radia_view_image_top_view">
-                                    <div style={{ backgroundColor: item.id === selectedAnnualGrossRevenueValue.id ? '#F18805' : 'transparent' }} />
-                                    <h3>
-                                        {item.value}
-                                    </h3>
-                                </div>
-                            )
-                        })}
-                    </div>
+
                 </div>
                 <div className="alpha-financing-finance_step_one_image_view">
                     <img src={financingLogo} />
@@ -200,7 +116,7 @@ export default function FinancingStepTwo(props) {
                 <div className='alpha-financing-finance_step_two_back_button' onClick={() => props.onClickBack()}>
                     <h2>BACK</h2>
                 </div>
-                <div className='alpha-financing-finance_step_two_next_button' onClick={() => props.onClickNext()}>
+                <div className='alpha-financing-finance_step_two_next_button' onClick={() => onPressNext()}>
                     <h2>NEXT</h2>
                 </div>
             </div>

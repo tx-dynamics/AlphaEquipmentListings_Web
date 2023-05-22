@@ -2,72 +2,44 @@ import React, { useState } from 'react'
 import { TextInputTwo } from '../'
 import './financingStepFour.css'
 import { financingLogo } from '../../assets/icons'
+import { useSnackbar } from 'react-simple-snackbar'
+import { snakbarOptions } from '../../globalData'
 
 export default function FinancingStepFour(props) {
-    const [sameAsBilling, setSameAsBilling] = useState(false)
-    const [countryDropdown, setCountryDropdown] = useState(false)
-    const [countryValue, setCountryValue] = useState('')
-    const countryArray = [
-        {
-            id: 1,
-            title: 'Transport Truck',
-        },
-        {
-            id: 2,
-            title: 'Earth Moving',
-        },
-        {
-            id: 3,
-            title: 'Lifting Material',
-        },
-        {
-            id: 4,
-            title: 'Other'
+    const { value } = props
+    const [reason, setReason] = useState(value?.reason ? value?.reason : '')
+    const [otherInfo, setOtherInfo] = useState(value?.otherInfo ? value?.otherInfo : '')
+    const [showMessage, hideMessage] = useSnackbar(snakbarOptions)
+    const buttonValue = reason.length > 0 && otherInfo.length > 0
+
+    const onPressNext = () => {
+        const data = {
+            reason: reason,
+            otherInfo: otherInfo
         }
-    ]
+        buttonValue ? props.onClickNext(data) : showMessage('Please fill all fields')
+    }
 
     return (
         <div>
             <div className="alpha-financing-finance_step_one_top_view">
                 <div className="alpha-financing-finance_step_one_view">
-                    <h1>Tell us about your equipment needs</h1>
+                    <h1>Tell us about your additional information</h1>
                     <div className='alpha-financing-step_one_inputs_top_view'>
                         <TextInputTwo
+                            value={reason}
+                            onChange={(e) => setReason(e.target.value)}
                             style={{ paddingBottom: 4 }}
-                            dropDownStyle={{ width: 340, left: 0 }}
-                            disabled
-                            selectedValue={(item) => [setCountryValue(item.title), setCountryDropdown(false)]}
-                            value={countryValue}
-                            onClickDropDown={() => setCountryDropdown(!countryDropdown)}
-                            dropDownArray={countryArray}
-                            dropDownValue={countryDropdown}
-                            type={'dropdown'}
-                            title={'Country'}
-                            placeholder={'Select your country'} />
+                            title={'Reason for Financing'}
+                            placeholder={'Enter reason for financing'} />
                         <TextInputTwo
+                            value={otherInfo}
+                            onChange={(e) => setOtherInfo(e.target.value)}
                             style={{ paddingBottom: 4 }}
-                            title={'Business Name'}
-                            placeholder={'Enter business  name of guarantor'} />
-                        <TextInputTwo
-                            style={{ paddingBottom: 4 }}
-                            title={'Address line 1'}
-                            placeholder={'Enter your address'} />
-                        <TextInputTwo
-                            style={{ paddingBottom: 4 }}
-                            title={'Address line 2'}
-                            placeholder={'Enter your address'} />
-                        <TextInputTwo
-                            style={{ paddingBottom: 4 }}
-                            title={'City'}
-                            placeholder={'Enter your city'} />
-                        <TextInputTwo
-                            style={{ paddingBottom: 4 }}
-                            title={'Phone number'}
-                            placeholder={'123 4545643'} />
+                            title={'Any pther information relevant to the loan application'}
+                            placeholder={'Other info'} />
                     </div>
-                    <div className='alpha-financing-finance_step_four_des_view'>
-                        <h3>Sed et condimentum nibh, et tempor lacus. Pellentesque consectetur luctus ornare. Vestibulum sed maximus urna. Etiam faucibus purus et ipsum venenatis, vel consectetur lacus placerat. Praesent consectetur erat ligula, ac fringilla ante elementum nec.</h3>
-                    </div>
+
                 </div>
                 <div className="alpha-financing-finance_step_one_image_view">
                     <img src={financingLogo} />
@@ -77,7 +49,7 @@ export default function FinancingStepFour(props) {
                 <div className='alpha-financing-finance_step_two_back_button' onClick={() => props.onClickBack()}>
                     <h2>BACK</h2>
                 </div>
-                <div className='alpha-financing-finance_step_two_next_button' onClick={() => props.onClickNext()}>
+                <div className='alpha-financing-finance_step_two_next_button' onClick={() => onPressNext()}>
                     <h2>NEXT</h2>
                 </div>
             </div>

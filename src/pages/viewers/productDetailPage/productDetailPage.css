@@ -18,7 +18,7 @@
 .each-slide-effect img {
     height: 100%;
     width: 552px;
-    object-fit: cover;
+    object-fit: fill;
 }
 
 .alpha_detail_page_data_top_container {

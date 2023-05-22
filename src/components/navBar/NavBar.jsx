@@ -11,7 +11,8 @@ import { snakbarOptions } from '../../globalData';
 import { api } from '../../network/Environment';
 import { Method, callApi } from '../../network/NetworkManger';
 
-export default function NavBar() {
+export default function NavBar(props) {
+
     const disPatch = useDispatch();
     const data = useSelector((data) => data.activeTab.value,);
     const user = useSelector((data) => data.userData.userData);
@@ -65,8 +66,8 @@ export default function NavBar() {
                 <div className="alpha-navbar-search_top_view">
                     <div className="alpha-navbar-search_filter_view">
                         <div className="alpha-navbar_search_view">
-                            <input placeholder='Search over 85,523 items in inventory' />
-                            <div>
+                            <input onKeyDown={props?.onKeyDown} onChange={(e) => props?.onChange(e.target.value)} placeholder='Search here' />
+                            <div onClick={props.onClickSearch}>
                                 <h3>Search</h3>
                             </div>
                         </div>
@@ -152,8 +153,8 @@ export default function NavBar() {
                     }
 
                     <div className='alpha-navbar-menu_search_view'>
-                        <input placeholder='Search your query' />
-                        <img src={search} />
+                        <input onKeyDown={props?.onKeyDown} onChange={(e) => props?.onChange(e.target.value)} placeholder='Search your query' />
+                        <img onClick={() => [setMarginLeft(-300), props.onClickSearch()]} src={search} />
                     </div>
                     {/* <h3 style={{ color: data === 'category' ? '#F18805' : ' #303030' }} onClick={() => dashboardData?.categories?.length > 0 ? onClick('/productlistingpage', 'category', dashboardData?.categories) : showMessage('No categories found')}>Category</h3> */}
                     <h3 style={{ color: data === 'auction' ? '#F18805' : ' #303030' }} onClick={() => dashboardData?.productsForAuction?.length > 0 ? onClick('/productlistingpage', 'auction', dashboardData?.productsForAuction) : showMessage('No auctions found')}>Auction</h3>

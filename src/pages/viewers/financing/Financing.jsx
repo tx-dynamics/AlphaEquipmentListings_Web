@@ -1,70 +1,60 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { check, completed, dotedTick, emptyCircle, financingFive, financingFour, financingOne, financingThree, financingTwo, inprogress, unCheck } from "../../../assets/icons";
-import { BlogView, FinancingStepFive, FinancingStepFour, FinancingStepOne, FinancingStepThree, FinancingStepTwo, Footer, NavBar, SubmitModel, TextInput, TextInputTwo } from "../../../components";
+import { BlogView, FinancingStepFive, FinancingStepFour, FinancingStepOne, FinancingStepThree, FinancingStepTwo, Footer, Loader, NavBar, SubmitModel, TextInput, TextInputTwo } from "../../../components";
 import './financing.css'
+import { api } from "../../../network/Environment";
+import { Method, callApi } from "../../../network/NetworkManger";
+import { useSnackbar } from "react-simple-snackbar";
+import { snakbarOptions } from "../../../globalData";
 
 export default function Financing() {
   const navigate = useNavigate()
   const [activeIndex, setActiveIndex] = useState(0)
   const [showModel, setShowModel] = useState(false)
   const [terms, setTerms] = useState(false)
-  const [showSteps, setShowSteps] = useState(false)
+  const [showSteps, setShowSteps] = useState(true)
   const [showDropdown, setShowDropdown] = useState(false)
-  const [businessLocated, setBusinessLocated] = useState('')
-  const businessLocatedArray = [
-    {
-      id: 1,
-      title: 'Pakistan',
-    },
-    {
-      id: 2,
-      title: 'Australia',
-    },
-    {
-      id: 3,
-      title: 'Canada',
-    },
-    {
-      id: 4,
-      title: 'Other'
-    }
-  ]
+  const [personalInfoData, setPersonalInfoData] = useState({})
+  const [equipmentoData, setEquipmentoData] = useState({})
+  const [financialInfo, setFinancialInfo] = useState({})
+  const [additionalData, setAdditionalData] = useState({})
+  const [showMessage, hideMessage] = useSnackbar(snakbarOptions)
+  const [productsArray, setProductsArray] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
+
   const [financStepsArray, setFinanceArray] = useState([
     {
       id: 0,
       status: 'inprogress',
-      title: 'Equipment Needs'
+      title: 'Personal Information'
     },
     {
       id: 1,
       status: 'empty',
-      title: 'Equipment Needs'
+      title: 'Equipment Information'
     },
     {
       id: 2,
       status: 'empty',
-      title: 'Equipment Needs'
+      title: 'Financial Information'
     },
     {
       id: 3,
       status: 'empty',
-      title: 'Equipment Needs'
+      title: 'Additional Information'
     },
-    {
-      id: 4,
-      status: 'empty',
-      title: 'Equipment Needs'
-    }
+
   ])
 
-  const next = () => {
+  const next = (data) => {
     const body = document.querySelector('#steps');
     body.scrollIntoView({
       behavior: 'smooth'
     }, 500)
-    if (activeIndex === 4) {
-      setShowModel(true)
+    if (activeIndex === 3) {
+      submitRequestForFinance(data)
+      // setShowModel(true)
     }
     else {
       const array = [...financStepsArray]
@@ -90,14 +80,62 @@ export default function Financing() {
   const onComplete = () => {
     setActiveIndex(0)
     setShowModel(false)
-    navigate('/homepage')
+    navigate('/')
   }
+
+  const submitRequestForFinance = async (value) => {
+    setIsLoading(true)
+    try {
+      const endPoint = api.finance;
+      const data = {
+        name: personalInfoData?.name,
+        address: personalInfoData?.location,
+        phoneNumber: personalInfoData?.number,
+        email: personalInfoData?.email,
+        dob: personalInfoData?.dob?.timeStamp,
+        id: equipmentoData?.productId,
+        purchasePrice: equipmentoData?.price,
+        downPayment: equipmentoData?.downPayment,
+        monthlyIncome: financialInfo?.income,
+        employmentStatus: financialInfo?.status,
+        employerName: financialInfo?.name,
+        empoloyerContact: financialInfo?.number,
+        creditScore: financialInfo?.cardScore,
+        bankAccountInformation: financialInfo?.bankNumber,
+        additionalInfo: value?.otherInfo,
+        reasonForFinancing: value?.reason
+      };
+      // console.log(data);
+      await callApi(Method.POST, endPoint, data,
+        res => {
+          if (res?.status === 200) {
+            setIsLoading(false)
+            setShowModel(true)
+          }
+          else {
+            setIsLoading(false)
+            showMessage(res?.message)
+          }
+        },
+        err => {
+          showMessage(err.message)
+          setIsLoading(false);
+          console.log(err)
+
+        });
+    } catch (error) {
+      setIsLoading(false);
+      console.log(error);
+    }
+  }
+
 
 
   return (
     <div className="alpha-financing-main_container">
       <BlogView />
       <NavBar />
+      <Loader loading={isLoading} />
       <div className="alpha_detail_page_container">
         <div className="alpha-financing-top_container">
           <div className="alpha-financing-detail_container">
@@ -142,7 +180,7 @@ export default function Financing() {
           {!showSteps ?
             <div>
               <div className="alpha-financing-inputs_top_view">
-                <div>
+                {/* <div>
                   <TextInputTwo
                     disabled
                     selectedValue={(item) => [setBusinessLocated(item.title), setShowDropdown(false)]}
@@ -153,7 +191,7 @@ export default function Financing() {
                     type={'dropdown'}
                     title={'Where is your business located?'}
                     placeholder={'Select Country'} />
-                </div>
+                </div> */}
                 <div>
                   <TextInputTwo
                     title={'Amount Requird'}
@@ -210,25 +248,20 @@ export default function Financing() {
                 <p>{financStepsArray[activeIndex].title}</p>
               </div>
               {activeIndex === 0 ?
-                <FinancingStepOne onClickNext={() => next()} />
+                <FinancingStepOne value={personalInfoData} onClickNext={(data) => [setPersonalInfoData(data), next()]} />
                 :
                 activeIndex === 1 ?
-                  <FinancingStepTwo onClickBack={() => back()} onClickNext={() => next()} />
+                  <FinancingStepTwo value={equipmentoData} onClickNext={(data) => [setEquipmentoData(data), next()]} onClickBack={() => back()} />
                   :
                   activeIndex === 2 ?
-                    <FinancingStepThree onClickBack={() => back()} onClickNext={() => next()} />
+                    <FinancingStepThree value={financialInfo} onClickNext={(data) => [setFinancialInfo(data), next()]} onClickBack={() => back()} />
                     :
-                    activeIndex === 3 ?
-                      <FinancingStepFour onClickBack={() => back()} onClickNext={() => next()} />
-                      :
-                      <FinancingStepFive onClickBack={() => back()} onClickNext={() => next()} />
+                    <FinancingStepFour value={additionalData} onClickNext={(data) => [setAdditionalData(data), next(data)]} onClickBack={() => back()} />
               }
 
             </div>
           }
-
         </div>
-
         <Footer />
       </div>
       {showModel && <SubmitModel icon={dotedTick} title={'Application SUBMITTED'} des={'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque mattis fringilla eros, sit amet auctor justo accumsan et.'} onClick={() => onComplete()} />}
