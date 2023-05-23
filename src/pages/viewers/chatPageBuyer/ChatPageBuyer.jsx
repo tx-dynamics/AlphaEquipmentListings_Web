@@ -7,6 +7,8 @@ import { BlogView, Footer, Loader, NavBar } from "../../../components";
 import './chatPageBuyer.css'
 import { BASE_URL } from "../../../network/Environment";
 import { store } from "../../../redux/store";
+import Picker from '@emoji-mart/react'
+import data from '@emoji-mart/data'
 
 const socket = socketIO(BASE_URL);
 
@@ -17,14 +19,20 @@ export default function ChatPageBuyer() {
   const [inboxesData, setInboxesData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [drawerValue, setDrawerValue] = useState(-500)
+  const [emojiArray, setEmojiArray] = useState([])
+
   const [selectedChat, setSelectedChat] = useState({
     id: 1,
     messagesArray: [],
   });
+  const [showEmoji, setShowEmoji] = useState(false);
+
 
 
   useEffect(() => {
     if (!userData._id) return;
+    setIsLoading(true);
+
     socket.emit("user-enter", { userId: userData._id });
     socket.emit("get-inboxes", { userId: userData._id });
 
@@ -37,7 +45,6 @@ export default function ChatPageBuyer() {
         const messagesArray = data.data.messages.map((message) => {
           return {
             ...message,
-            type: message.sender == userData._id ? "sender" : "receiver",
           };
         });
 
@@ -56,6 +63,8 @@ export default function ChatPageBuyer() {
         });
 
         setSelectedChat(newinboxes[0]);
+        setIsLoading(false);
+
         first = false;
       });
 
@@ -76,39 +85,80 @@ export default function ChatPageBuyer() {
       to: selectedChat.id,
       message,
       messageType: "text",
-      messageTime: Date.now(),
+      messageTime: new Date(),
     });
-    socket.emit("get-messages", {
-      userId: user._id,
-      inbox: selectedChat.id,
-    });
-    setInboxesData([...inboxesData.map(chat => {
-      return {
-        ...chat, messagesArray: [...chat.messagesArray, {
-          createdAt: new Date().toISOString(),
-          message: message,
-          messageTime: new Date().toISOString(),
-          receiver: selectedChat.id,
-          seen: false,
-          sender: user._id,
-          type: "receiver",
-          updatedAt: "2023-05-05T12:34:36.748Z",
-          _id: `${Math.round(Math.random() * 10000)}`
-        }]
-      }
-    })]);
+    // socket.emit("get-messages", {
+    //   userId: user._id,
+    //   inbox: selectedChat.id,
+    // });
+    // setInboxesData([...inboxesData.map(chat => {
+    //   return {
+    //     ...chat, messagesArray: [...chat.messagesArray, {
+    //       createdAt: new Date().toISOString(),
+    //       message: message,
+    //       messageTime: new Date().toISOString(),
+    //       receiver: selectedChat.id,
+    //       seen: false,
+    //       sender: user._id,
+    //       type: "receiver",
+    //       updatedAt: "2023-05-05T12:34:36.748Z",
+    //       _id: `${Math.round(Math.random() * 10000)}`
+    //     }]
+    //   }
+    // })]);
     setMessage("");
+    setEmojiArray([])
+    setShowEmoji(false)
+  }
+
+  const getOtherUserMessages = (otherUser) => {
+    setIsLoading(true);
+    socket.emit("get-messages", {
+      userId: userData._id,
+      inbox: otherUser.id,
+    });
+    socket.on("messages", (res) => {
+      const mapRes = inboxesData.map((chat) =>
+        chat.id == otherUser.id
+          ? {
+            ...chat,
+            messagesArray: res.data.messages.map((message) => {
+              return {
+                ...message,
+
+              };
+            }),
+          }
+          : chat
+      );
+      const singleChat = inboxesData.filter(
+        (chat) => (chat = chat.id == otherUser.id)
+      )[0];
+      singleChat.messagesArray = res.data.messages;
+      setInboxesData(mapRes);
+      setSelectedChat(singleChat);
+      setIsLoading(false);
+
+    });
+  }
+
+
+  const selectEmoji = (e) => {
+    const arr = [...emojiArray]
+    const data = e.native
+    arr.push(data)
+    setEmojiArray(arr)
+    const messageObj = message
+    setMessage(messageObj + arr.join('').toString())
   }
 
   return (
     <div className="alpha-home_page-main_container">
       <BlogView onClickSubscription={() => navigate('/subscriptionpage')} />
-
       <NavBar />
       <Loader loading={isLoading} />
       <div className="alpha-home_page-container">
         <div className="alpha-blogpage_container">
-
           <div className="alpha-chat_buyer_top_container">
             <div className="alpha-chat_buyer-user_list-top_view">
               <div className="alpha-chat_buyer-user_list_view">
@@ -121,7 +171,7 @@ export default function ChatPageBuyer() {
                     (inboxesData?.map((item) => {
                       return (
                         <div key={item.id}>
-                          <div className="alpha_chat_buyer_user_list_item_view">
+                          <div onClick={() => getOtherUserMessages(item)} className="alpha_chat_buyer_user_list_item_view">
                             <div className="alpha_chat_buyer_user_list_item_image_view">
                               <img src={item?.image} />
                               {item.online &&
@@ -214,9 +264,9 @@ export default function ChatPageBuyer() {
                     {selectedChat?.messagesArray?.map((item) => {
                       const finalTime = new Date(item?.createdAt)
                       return (
-                        item.type === 'sender' ?
-                          <div key={item.id} className="alpha_chat_buyer-chat_detail_message_view_one">
-                            <img src={item?.images} />
+                        item?.sender?._id !== userData?._id ?
+                          <div key={item?.receiver?._id} className="alpha_chat_buyer-chat_detail_message_view_one">
+                            <img src={selectedChat?.image} />
                             <div>
                               <h2>{item.message}</h2>
                               <h3>{finalTime.getHours()}:{finalTime.getMinutes()}</h3>
@@ -226,35 +276,47 @@ export default function ChatPageBuyer() {
                           <div key={item.id} className="alpha_chat_buyer-chat_detail_message_view_two">
                             <div>
                               <h2>{item.message}</h2>
-                              <h3>{item.date}</h3>
+                              <h3>{finalTime.getHours()}:{finalTime.getMinutes()}</h3>
                             </div>
-                            <img src={item.image} />
+                            <img src={item?.sender?.image} />
                           </div>
                       )
-                    })}
+                    }).reverse()}
                   </div>
                   <div className="alpha_chat_buyer_chat_detail_send_area_top_view">
                     <div className="alpha_chat_buyer_send_area_circle_view">
                       <img src={document} />
                     </div>
-                    <div className="alpha_chat_buyer_send_area_circle_view">
+                    <div onClick={() => setShowEmoji(!showEmoji)} className="alpha_chat_buyer_send_area_circle_view">
                       <img src={emoji} />
                     </div>
+
+
                     <div className="alpha_chat_buyer_chat_detail_input_top_view">
-                      <input value={message} onChange={(e) => setMessage(e.target.value)} placeholder="Type your message here" />
+                      <input onKeyDown={ev => {
+                        if (ev.key === "Enter") sendMessage()
+                      }} value={message} onChange={(e) => setMessage(e.target.value)} placeholder="Type your message here" />
                     </div>
                     <div onClick={() => sendMessage()} className="alpha_chat_buyer_send_area_circle_view">
                       <img src={send} />
                     </div>
                   </div>
+
                 </>
                 :
                 <div className="alpha_chat_empty_view">
                   <h1>Sorry we couldn't find anything</h1>
                 </div>
               }
+              {/* {showEmoji &&
+                <span style={{ position: 'absolute', bottom: 0, right: 50 }} >
+                  <Picker perLine={7} data={data} onEmojiSelect={(e) => selectEmoji(e)} />
+               </span>
+               } */}
             </div>
+
           </div>
+
         </div>
         <Footer />
       </div>
