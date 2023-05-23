@@ -1,0 +1,224 @@
+.alpha-subscription_page_top_container {
+    padding-top: 5rem;
+    padding-left: 9rem;
+    padding-right: 9rem;
+    padding-bottom: 4rem;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(255, 255, 255);
+}
+
+.alpha-subscription_page_top_container h1 {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 2.4rem;
+    line-height: 3.4rem;
+    text-transform: capitalize;
+    color: #000000;
+    text-align: center;
+}
+
+.alpha-subscription_page_top_container h2 {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.8rem;
+    line-height: 2.2rem;
+    color: #000000;
+    text-align: center;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+}
+
+.alpha-subscription_page_item_top_view {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+
+}
+
+.alpha-subscription_page_item_view {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    width: 35rem;
+    height: 45rem;
+    border: 1px solid #034F75;
+    border-radius: 10px;
+    align-items: center;
+    padding: 2.4rem;
+    cursor: pointer;
+    margin-bottom: 2rem;
+
+}
+
+.alpha-subscription_page_item_type_view {
+    display: flex;
+    width: 14.4rem;
+    height: 4.2rem;
+    border: 1px solid #034F75;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.alpha-subscription_page_item_type_view h3 {
+    font-family: 'Lato';
+    font-weight: 500;
+    font-size: 2.4rem;
+    line-height: 2.6rem;
+    color: #034F75;
+}
+
+.alpha-subscription_page_top_container h4 {
+    font-family: 'Lato';
+    font-weight: 600;
+    font-size: 6rem;
+    line-height: 9rem;
+    color: #F18805;
+    padding-top: 1rem;
+}
+
+.alpha-subscription_page_top_container h5 {
+    font-family: 'Lato';
+    font-weight: 600;
+    font-size: 1.6rem;
+    line-height: 1.9rem;
+    color: #81A7BA;
+    padding-bottom: 2.2rem;
+}
+
+.alpha-subscription_page_item_point_view {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    align-self: flex-start;
+    padding-bottom: 1.2rem;
+}
+
+.alpha-subscription_page_item_point_view img {
+    width: 2rem;
+    height: 2rem;
+    object-fit: contain;
+    margin-right: 2.2rem;
+    padding-top: 0.3rem;
+}
+
+.alpha-subscription_page_top_container h6 {
+    font-family: 'Lato';
+    font-weight: 400;
+    font-size: 1.5rem;
+    line-height: 1.8rem;
+}
+
+@media screen and (max-width: 880px) {
+    .alpha-subscription_page_item_top_view {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .alpha-subscription_page_top_container {
+        padding-top: 2rem;
+        padding-left: 5rem;
+        padding-right: 5rem;
+        padding-bottom: 2rem;
+
+    }
+
+    .alpha-subscription_page_top_container h1 {
+        font-size: 2rem;
+        line-height: 3rem;
+    }
+
+    .alpha-subscription_page_top_container h2 {
+        font-size: 1.4rem;
+        line-height: 1.8rem;
+    }
+
+    .alpha-subscription_page_item_view {
+        width: 28rem;
+        height: 35rem;
+    }
+
+    .alpha-subscription_page_item_type_view {
+        width: 12rem;
+        height: 3rem;
+    }
+
+    .alpha-subscription_page_item_type_view h3 {
+        font-size: 1.6rem;
+        line-height: 1.8rem;
+    }
+
+    .alpha-subscription_page_top_container h4 {
+
+        font-size: 4rem;
+        line-height: 5rem;
+    }
+
+    .alpha-subscription_page_top_container h5 {
+
+        font-size: 1.2rem;
+        line-height: 1.5rem;
+    }
+
+    .alpha-subscription_page_item_point_view img {
+        width: 1.5rem;
+        height: 1.5rem;
+        object-fit: contain;
+        margin-right: 1.5rem;
+    }
+
+    .alpha-subscription_page_top_container h6 {
+        font-size: 1.2rem;
+        line-height: 1.6rem;
+    }
+
+}
+
+@media screen and (max-width: 500px) {
+    .alpha-subscription_page_top_container {
+        padding-left: 3rem;
+        padding-right: 3rem;
+
+    }
+
+    .alpha-subscription_page_top_container h1 {
+        font-size: 1.8rem;
+        line-height: 2rem;
+    }
+
+    .alpha-subscription_page_top_container h2 {
+        font-size: 1.2rem;
+        line-height: 1.6rem;
+    }
+
+    .alpha-subscription_page_item_view {
+        width: 25rem;
+        height: 36rem;
+    }
+
+    .alpha-subscription_page_item_type_view {
+        width: 10rem;
+        height: 2.5rem;
+    }
+
+    .alpha-subscription_page_item_type_view h3 {
+        font-size: 1.4rem;
+        line-height: 1.6rem;
+    }
+
+    .alpha-subscription_page_top_container h4 {
+
+        font-size: 3rem;
+        line-height: 4rem;
+    }
+
+
+}

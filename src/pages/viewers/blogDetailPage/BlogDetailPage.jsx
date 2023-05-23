@@ -38,7 +38,8 @@ export default function BlogDetailPage() {
 
   return (
     <div className="alpha-home_page-main_container">
-      <BlogView />
+      <BlogView onClickSubscription={() => navigate('/subscriptionpage')} />
+
       <NavBar />
       <div className="alpha-home_page-container">
         <div className="alpha-blogpage_container">

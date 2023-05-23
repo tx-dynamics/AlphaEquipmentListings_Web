@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { calculatorImage, distance, dummyFour } from "../../../assets/icons";
 import { BlogView, Footer, NavBar, TextInput } from "../../../components";
 import './calculator.css'
+import { useNavigate } from "react-router-dom";
 
 export default function Calculator() {
+  const navigate = useNavigate()
   const [showcalculation, setShowCalculation] = useState(false)
   const [showDropdown, setShowDropdown] = useState(false)
   const [equipmentType, setEquipmentType] = useState('')
@@ -42,7 +44,8 @@ export default function Calculator() {
 
   return (
     <div className="alpha-calculator-main_container">
-      <BlogView />
+      <BlogView onClickSubscription={() => navigate('/subscriptionpage')} />
+
       <NavBar />
       <div className="alpha_detail_page_container">
         <div className="alpha_calculator_main_container">

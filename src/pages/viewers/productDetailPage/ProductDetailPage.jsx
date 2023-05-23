@@ -15,6 +15,7 @@ import './productDetailPage.css'
 import { bidData, cartData } from "../../../redux/Slices/cartSlice";
 import { api } from "../../../network/Environment";
 import { Method, callApi } from "../../../network/NetworkManger";
+import { subscriptionModel } from "../../../redux/Slices/userDataSlice";
 export default function ProductDetailPage() {
   const navigate = useNavigate()
   const disPatch = useDispatch();
@@ -92,37 +93,43 @@ export default function ProductDetailPage() {
   }
 
   const onPressPlaceBid = async () => {
-    if (!timeDiff) {
-      if (user) {
-        if (productData?.highestBid?.status !== 'accepted') {
-          if (bidValue > 0) {
-            disPatch(cartData(productData))
-            setBidView(!bidView)
-            const data = {
-              product: productData?._id,
-              amount: bidValue,
-              status: "pending"
-            };
-            setActiveType('auction')
-            setBidData(data)
-            setPaymentModel(true)
+    if (store.getState().userData.userData?.subscriptionType === 'BASIC') {
+      showMessage(`You subscription is ${store.getState().userData.userData?.subscriptionType}. Please upgrade.`)
+    }
+    else {
+      if (!timeDiff) {
+        if (user) {
+          if (productData?.highestBid?.status !== 'accepted') {
+            if (bidValue > 0) {
+              disPatch(cartData(productData))
+              setBidView(!bidView)
+              const data = {
+                product: productData?._id,
+                amount: bidValue,
+                status: "pending"
+              };
+              setActiveType('auction')
+              setBidData(data)
+              setPaymentModel(true)
+            }
+            else {
+              showMessage('You cannot place bid below 0$')
+            }
           }
           else {
-            showMessage('You cannot place bid below 0$')
+            showMessage('You cannot bid this auction because this auction is sold out')
+
           }
         }
         else {
-          showMessage('You cannot bid this auction because this auction is sold out')
-
+          showMessage('You are not login to perform this action')
         }
       }
       else {
-        showMessage('You are not login to perform this action')
+        showMessage('Bid expired')
       }
     }
-    else {
-      showMessage('Bid expired')
-    }
+
   }
 
   useEffect(() => {
@@ -263,7 +270,6 @@ export default function ProductDetailPage() {
       const finalRentData = paymentType === 1 ? rentDataWallet : rentData
       const finalBuyData = paymentType === 1 ? buyDataWallet : buyData
 
-      console.log(activeType === 'auction' ? finalBidData : activeType === 'rent' ? finalRentData : finalBuyData);
       await callApi(Method.POST, endPoint, activeType === 'auction' ? finalBidData : activeType === 'rent' ? finalRentData : finalBuyData,
         res => {
           console.log(res);
@@ -293,7 +299,8 @@ export default function ProductDetailPage() {
 
   return (
     <div className="alpha-pro_list_page-main_container">
-      <BlogView />
+      <BlogView onClickSubscription={() => navigate('/subscriptionpage')} />
+
       <NavBar />
       <Loader loading={isLoading} />
       {bookingModel && <BookingModel data={productData} onClickClose={() => setBookingModel(false)} onClick={(data) => [setSelectedPrice(data?.price), setSelectedDate1(data?.date1), setSelectedDate2(data?.date2), setPaymentModel(true), setBookingModel(false)]} />}

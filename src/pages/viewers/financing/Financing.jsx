@@ -133,7 +133,8 @@ export default function Financing() {
 
   return (
     <div className="alpha-financing-main_container">
-      <BlogView />
+      <BlogView onClickSubscription={() => navigate('/subscriptionpage')} />
+
       <NavBar />
       <Loader loading={isLoading} />
       <div className="alpha_detail_page_container">

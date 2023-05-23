@@ -6,7 +6,8 @@ const initialState = {
   refreshToken: '',
   subscription: {},
   fcmToken: '',
-  userLocation: {}
+  userLocation: {},
+  subscriptionModel: false
 };
 
 export const userDataSlice = createSlice({
@@ -31,10 +32,13 @@ export const userDataSlice = createSlice({
     userLocation: (state, action) => {
       state.userLocation = action.payload;
     },
+    subscriptionModel: (state, action) => {
+      state.subscriptionModel = action.payload;
+    },
   },
 });
 
-export const { userData, accessToken, refreshToken, subscription, fcmToken, userLocation } =
+export const { userData, accessToken, refreshToken, subscription, fcmToken, userLocation, subscriptionModel } =
   userDataSlice.actions;
 
 export default userDataSlice.reducer;

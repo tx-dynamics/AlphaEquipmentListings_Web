@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { addBlack, minusBlack } from "../../../assets/icons";
 import { BlogView, Footer, NavBar, } from "../../../components";
 import './faqs.css'
+import { useNavigate } from "react-router-dom";
 
 export default function Faqs() {
+  const navigate = useNavigate()
   const [generalTopicArray, setGeneralTopicArray] = useState([
     {
       id: 1,
@@ -123,7 +125,8 @@ export default function Faqs() {
 
   return (
     <div className="alpha-home_page-main_container">
-      <BlogView />
+      <BlogView onClickSubscription={() => navigate('/subscriptionpage')} />
+
       <NavBar />
       <div className="alpha_detail_page_container">
         <div className="alpha-profile_outer_container">

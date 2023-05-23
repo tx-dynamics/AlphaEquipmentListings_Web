@@ -37,7 +37,7 @@ export default function ConnectCardModel(props) {
                     <h2>Enter Card Details</h2>
                     <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pretium orci vel ante posuere, et pharetra magna consectetur.</h3>
                 </div>
-                <div className='alpha-card_modal_inputs_view'>
+                <div className='alpha-card_modal_inputs_view_Card'>
                     <TextInputTwo onChange={(e) => setName(e.target.value)} title={'Card Name'} placeholder={'Enter your card name'}></TextInputTwo>
                     <TextInputTwo maxLength={16} onChange={(e) => setNumber(e.target.value)} title={'Card Number'} placeholder={'Enter your card number'}></TextInputTwo>
                     <div className='alpha-card_modal_date_input_top_view'>

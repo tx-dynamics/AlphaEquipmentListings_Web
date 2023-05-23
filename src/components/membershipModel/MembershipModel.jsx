@@ -3,7 +3,7 @@ import { allWeek, best, crossCircle, trusted } from '../../assets/icons'
 import './membershipModel.css'
 
 export default function MembershipModel(props) {
-    const [selectedCharges, setSelectedCharges] = useState({ id: 0 })
+    const [selectedCharges, setSelectedCharges] = useState({ id: 1 })
     const [adminSelectedCharges, setAdminSelectedCharges] = useState({ id: 0 })
     const [adminSelectedChargesTwo, setAdminSelectedChargesTwo] = useState({ id: 0 })
 
@@ -30,14 +30,14 @@ export default function MembershipModel(props) {
     const chargesArray = [
         {
             id: 1,
-            type: 'MONTHLY',
-            price: '$12/month',
+            type: 'Monthly',
+            price: `$${props?.price1}`,
             des: 'Cras eleifend purus quis orci aliquet, sit amet intum diam ultrices. Ut consequat et sap porta.'
         },
         {
             id: 2,
-            type: 'Free',
-            price: '$0/month',
+            type: 'Annual',
+            price: `$${props?.price2}`,
             des: 'Cras eleifend purus quis orci aliquet, sit amet intum diam ultrices. Ut consequat et sap porta.'
         },
 
@@ -84,7 +84,7 @@ export default function MembershipModel(props) {
                     <h2>Unlock Your Membership</h2>
                     <h3>Get access to biggest digital platform for heavy equipment or machinery.</h3>
                 </div>
-                {props.secondPlan ?
+                {/* {props.secondPlan ?
                     (adminChargesArrayTwo.map((item) => {
                         return (
                             <div style={{ backgroundColor: item.id === adminSelectedChargesTwo.id ? '#F18805' : '#FEF3E6' }} onClick={() => setAdminSelectedChargesTwo(item)} key={item.id} className='alpha-membership_charges_view'>
@@ -96,8 +96,8 @@ export default function MembershipModel(props) {
                             </div>
                         )
                     }))
-                    :
-                    (props.chargesView ?
+                    : */}
+                {/* (props.chargesView ?
                         (props?.admin ?
                             (adminChargesArray.map((item) => {
                                 return (
@@ -110,21 +110,21 @@ export default function MembershipModel(props) {
                                     </div>
                                 )
                             }))
-                            :
-                            (chargesArray.map((item) => {
-                                return (
-                                    <div style={{ backgroundColor: item.id === selectedCharges.id ? '#F18805' : '#FEF3E6' }} onClick={() => setSelectedCharges(item)} key={item.id} className='alpha-membership_charges_view'>
-                                        <h2 style={{ color: item.id === selectedCharges.id ? 'white' : '#F18805' }}>{item.type}</h2>
-                                        <div>
-                                            <h3>{item.price}</h3>
-                                            <h4>{item.des}.</h4>
-                                        </div>
-                                    </div>
-                                )
-                            }))
-                        )
-                        :
-                        (serviceArray.map((item) => {
+                            : */}
+                {chargesArray.map((item) => {
+                    return (
+                        <div style={{ backgroundColor: item.id === selectedCharges.id ? '#F18805' : '#FEF3E6' }} onClick={() => setSelectedCharges(item)} key={item.id} className='alpha-membership_charges_view'>
+                            <h2 style={{ color: item.id === selectedCharges.id ? 'white' : '#F18805' }}>{item.type}</h2>
+                            <div>
+                                <h3>{item.price}</h3>
+                                <h4>{item.des}.</h4>
+                            </div>
+                        </div>
+                    )
+                })}
+                {/* ) */}
+                {/* : */}
+                {/* (serviceArray.map((item) => {
                             return (
                                 <div key={item.id} className='alpha-membership_services_view'>
                                     <img src={item.icon} alt={''} />
@@ -134,11 +134,11 @@ export default function MembershipModel(props) {
                                     </div>
                                 </div>
                             )
-                        }))
-                    )
-                }
+                        })) */}
+                {/* ) */}
+                {/* } */}
 
-                <div onClick={props.onClick} className='alpha-membership_button_view'>
+                <div onClick={() => props.onClick(selectedCharges.id)} className='alpha-membership_button_view'>
                     <h5 >CONTINUE</h5>
                 </div>
             </div>

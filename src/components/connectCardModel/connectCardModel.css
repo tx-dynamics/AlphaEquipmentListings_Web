@@ -1,4 +1,4 @@
-.alpha-card_modal_inputs_view {
+.alpha-card_modal_inputs_view_Card {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -12,6 +12,7 @@
   width: 85%;
 }
 
+
 @media screen and (max-width:600px) {
   .alpha-card_modal_date_input_top_view {
     align-items: flex-start;
@@ -19,7 +20,7 @@
     margin-left: 0rem;
   }
 
-  .alpha-card_modal_inputs_view {
+  .alpha-card_modal_inputs_view_Card {
     align-items: flex-start;
     margin-left: 3rem;
   }

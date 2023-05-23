@@ -28,6 +28,7 @@ const Navigation = () => {
       <Route path="/blogpage" element={<Viewers.BlogPage />} />
       <Route path="/blogdetailpage" element={<Viewers.BlogDetailPage />} />
       <Route path="/chatpagebuyer" element={<Viewers.ChatPageBuyer />} />
+      <Route path="/subscriptionpage" element={<Viewers.SubscriptionPage />} />
 
       <Route path="/shop" element={<PrivateRoute><Admin.Shop /></PrivateRoute>} />
       <Route path="/myshop" element={<PrivateRoute><Admin.MyShop /></PrivateRoute>} />

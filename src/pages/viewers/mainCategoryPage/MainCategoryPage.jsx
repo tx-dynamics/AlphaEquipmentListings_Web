@@ -135,7 +135,8 @@ export default function MainCategoryPage() {
 
   return (
     <div className="alpha-home_page-main_container">
-      <BlogView />
+      <BlogView onClickSubscription={() => navigate('/subscriptionpage')} />
+
       <NavBar />
       <div className="alpha-home_page-container">
         <div className="alpha-main_cat_page_top_container">

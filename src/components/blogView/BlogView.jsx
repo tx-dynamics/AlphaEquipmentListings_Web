@@ -5,7 +5,8 @@ import { mail, phone } from '../../assets/icons'
 import './blogView.css'
 import { activeTab } from '../../redux/Slices/activeTabSlice';
 
-export default function BlogView() {
+export default function BlogView(props) {
+
     const disPatch = useDispatch();
     const navigate = useNavigate();
 
@@ -27,7 +28,7 @@ export default function BlogView() {
                 </div>
             </div>
             <div className="alpha_contact_us_view">
-                <p>Subscription</p>
+                <p onClick={props.onClickSubscription}>Subscription</p>
                 <p onClick={() => onClick('/blogpage', 'blogpage')}>Blog</p>
                 <p>Contact us</p>
             </div>

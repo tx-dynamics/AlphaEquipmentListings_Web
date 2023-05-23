@@ -12,8 +12,10 @@ import { accessToken, refreshToken, userData } from "../../../redux/Slices/userD
 import ChangePasswordModel from "../../../components/changePasswordModel/ChangePasswordModel";
 import './profile.css'
 import { upload, uploadAwsImage } from "../../../helpingMethods";
+import { useNavigate } from "react-router-dom";
 
 export default function Profile() {
+  const navigate = useNavigate()
   const dispatch = useDispatch();
   const user = store.getState().userData.userData
   const [isLoading, setIsLoading] = useState(false)
@@ -182,7 +184,8 @@ export default function Profile() {
 
   return (
     <div className="alpha-home_page-main_container">
-      <BlogView />
+      <BlogView onClickSubscription={() => navigate('/subscriptionpage')} />
+
       <NavBar />
       <Loader loading={isLoading} />
       {changePModel && <ChangePasswordModel onClick={(data) => [setOldPassword(data), setCreatePModel(true), setChangePModel(false)]} onClickClose={() => setChangePModel(false)} />}

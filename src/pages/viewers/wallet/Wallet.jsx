@@ -9,8 +9,10 @@ import { api } from "../../../network/Environment";
 import { Method, callApi } from "../../../network/NetworkManger";
 import { userData } from "../../../redux/Slices/userDataSlice";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export default function Wallet() {
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   const user = store.getState().userData.userData
   const [showMessage, hideMessage] = useSnackbar(snakbarOptions)
@@ -172,7 +174,8 @@ export default function Wallet() {
 
   return (
     <div className="alpha-home_page-main_container">
-      <BlogView />
+      <BlogView onClickSubscription={() => navigate('/subscriptionpage')} />
+
       <NavBar />
       <Loader loading={isLoading} />
       {connectCardModel && <TopUpModel onClick={(data) => [setTopUpData(data), verifyTopUpDetail()]} onClickClose={() => setConnectCardModel(false)} />}
