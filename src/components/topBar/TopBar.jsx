@@ -4,13 +4,24 @@ import { useNavigate } from 'react-router-dom';
 import { drawerIcon, dummyFour, notificationTheme, arrowDownGrey, crossCircle, dashboard, dashboardTheme, logo, logout, messageIcon, messagerTheme, orderStatus, orderStatusTheme, paymentHistory, paymentHistoryTheme, profile, request, requestTheme, shop, shopTheme, walletDark, walletTheme, profileTheme } from "../../assets/icons";
 import { activeTab } from '../../redux/Slices/activeTabSlice'
 import './topBar.css'
+import { store } from '../../redux/store';
+import { api } from '../../network/Environment';
+import { Method, callApi } from '../../network/NetworkManger';
+import { accessToken, refreshToken, userData } from '../../redux/Slices/userDataSlice';
+import { useSnackbar } from 'react-simple-snackbar';
+import { snakbarOptions } from '../../globalData';
 
 export default function TopBar() {
     const navigate = useNavigate();
     const disPatch = useDispatch();
-
+    const date = new Date()
+    const monthNames = ["January", "Febuary", "March", "April", "May", "June",
+        "July", "Auguest", "September", "Octobar", "November", "December"
+    ];
+    const user = store.getState().userData.userData
     const [barValue, setBarValue] = useState(-500)
     const [showDropdowm, setShowDropdown] = useState(false)
+    const [showMessage, hideMessage] = useSnackbar(snakbarOptions)
     const sideBarItemsArray = [
         {
             id: 1,
@@ -95,6 +106,37 @@ export default function TopBar() {
         disPatch(activeTab(value))
         navigate(type, { state: { screen: value } })
     }
+
+    const logout = async () => {
+        try {
+            const endPoint = api.logout
+            const data = {
+                device: {
+                    id: localStorage.getItem('deviceId'),
+                    deviceToken: 'xyz'
+                },
+            }
+            await callApi(Method.POST, endPoint, data,
+                res => {
+                    if (res?.status === 200) {
+                        navigate('/', { replace: true })
+                        disPatch(userData(null));
+                        disPatch(accessToken(''));
+                        disPatch(refreshToken(''));
+                    }
+                    else {
+                        showMessage(res?.message)
+
+                    }
+                },
+                err => {
+                    showMessage(err.message)
+                });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
         <div >
             <div className='alpha-dashboard-top_bar_side_bar_view' style={{ left: barValue, }}>
@@ -140,7 +182,7 @@ export default function TopBar() {
                         </div>
                         <div className="alpha-side_bar-divider"></div>
                         <div className="alpha-side_bar_bottom_items_view">
-                            <div onClick={() => navigate('/', { replace: true })} className="alpha-side_bar-items_container"  >
+                            <div onClick={() => logout()} className="alpha-side_bar-items_container"  >
                                 <img src={logout} />
                                 <h2>Logout</h2>
                             </div>
@@ -152,8 +194,8 @@ export default function TopBar() {
                 <div className="alpha-dashboard-top_bar_drawer_view">
                     <img onClick={() => setBarValue(0)} src={drawerIcon} />
                     <div className="alpha-dashboard-top_bar_title_view">
-                        <h2>Welcome, Robert</h2>
-                        <h3>1 October  2022 | 11:59 AM GMT</h3>
+                        <h2>Welcome, {user?.name}</h2>
+                        <h3>{`${date.getDate()} ${monthNames[date.getMonth()]} ${date.getFullYear()}`}</h3>
                     </div>
                 </div>
 
@@ -161,9 +203,9 @@ export default function TopBar() {
                     <div className="alpha-dashboard-top_bar_notification_view">
                         <img src={notificationTheme} />
                     </div>
-                    <h4>Robert</h4>
+                    <h4>{user?.name}</h4>
                     <div className="alpha-dashboard-top_bar_profile_view">
-                        <img src={dummyFour} />
+                        <img src={user?.image} />
                     </div>
                 </div>
             </div>

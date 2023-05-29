@@ -1,53 +1,24 @@
 import React, { useEffect } from "react";
 import { trendUp } from "../../../assets/icons";
-import { SideBar, TopBar } from "../../../components";
+import { Loader, SideBar, TopBar } from "../../../components";
 import './dashboard.css'
 import ReactApexChart from 'react-apexcharts'
 import { Line, Circle } from "rc-progress";
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom'
+import { api } from "../../../network/Environment";
+import { Method, callApi } from "../../../network/NetworkManger";
+import { store } from "../../../redux/store";
+import { useSnackbar } from "react-simple-snackbar";
+import { snakbarOptions } from "../../../globalData";
+
 export default function Dashboard() {
   const navigate = useNavigate()
   const [rangeValue, setRangeValue] = useState(undefined)
-  const paymentHistoryArray = [
-    {
-      id: 1,
-      buyerName: 'Aadam Gabriel',
-      productName: '2016 Wacker Neuson RD12A Double Drum Roller',
-      sale: 'Machine',
-      date: '20-11-2022',
-      payment: '200$',
-      method: 'Wallet',
-    },
-    {
-      id: 2,
-      buyerName: 'Aadam Gabriel',
-      productName: 'Carry Deck Crane TS20',
-      sale: 'Machine',
-      date: '20-11-2022',
-      payment: '200$',
-      method: 'Wallet',
-    },
-    {
-      id: 3,
-      buyerName: 'Aadam Gabriel',
-      productName: 'Break Kits Truck TS20',
-      sale: 'Machine',
-      date: '20-11-2022',
-      payment: '200$',
-      method: '-',
-    },
-    {
-      id: 4,
-      buyerName: 'Aadam Gabriel',
-      productName: '2016 Wacker Neuson RD12A Double Drum Roller',
-      sale: 'Machine',
-      date: '20-11-2022',
-      payment: '200$',
-      method: 'Wallet',
-    },
+  const [isLoading, setIsLoading] = useState(false)
+  const [showMessage, hideMessage] = useSnackbar(snakbarOptions)
+  const [orderArray, setOrderArray] = useState([])
 
-  ]
   const progressBarArray = [
     {
       id: 1,
@@ -151,27 +122,6 @@ export default function Dashboard() {
     data: [33, 35, 31, 36, 32, 33, 32, 33, 35, 31, 36, 32, 33, 32, 33, 35, 31, 36, 32, 33, 32, 33, 35, 31, 36, 32, 33, 32, 33, 35, 31, 36, 32, 33,]
   }]
 
-  // var mianGraphSeries = [{
-  //   name: 'series1',
-  //   data: [
-  //     {
-  //       y: new Date('2018-02-12').getTime(), x: 32
-  //     },
-  //     { y: new Date('2018-02-12').getTime(), x: 35 },
-  //     { y: new Date('2018-02-12').getTime(), x: 32 },
-  //     { y: new Date('2018-02-12').getTime(), x: 32 },
-  //     { y: new Date('2018-02-12').getTime(), x: 32 },
-  //     { y: new Date('2018-02-12').getTime(), x: 32 },
-  //     { y: new Date('2018-02-12').getTime(), x: 32 },
-  //     { y: new Date('2018-02-12').getTime(), x: 32 },
-  //     { y: new Date('2018-02-12').getTime(), x: 32 },
-  //     { y: new Date('2018-02-12').getTime(), x: 32 },
-  //     { y: new Date('2018-02-12').getTime(), x: 32 },
-  //     { y: new Date('2018-02-12').getTime(), x: 32 },
-  //     { y: new Date('2018-02-12').getTime(), x: 32 },
-
-  //   ]
-  // }]
   var mainGraphOptions = {
     chart: {
       type: 'area',
@@ -219,11 +169,41 @@ export default function Dashboard() {
     },
   }
 
+  useEffect(() => {
+    getDashboardData();
+  }, []);
+
+  const getDashboardData = async () => {
+    setIsLoading(true)
+    try {
+      const endPoint = api.sellerDashboard + `?search=`;
+      await callApi(Method.GET, endPoint, null,
+        res => {
+          if (res?.status === 200) {
+            setIsLoading(false)
+            setOrderArray(res?.data?.orders)
+          }
+          else {
+            setIsLoading(false)
+            showMessage(res?.message)
+          }
+        },
+        err => {
+          showMessage(err.message)
+          setIsLoading(false);
+        });
+    } catch (error) {
+      setIsLoading(false);
+      console.log(error);
+    }
+  }
+
 
 
   return (
     <div className="alpha-dashboard-main_container">
       <SideBar />
+      <Loader loading={isLoading} />
       <div className="alpha-dashboard-top_bar_main_container">
         <TopBar />
         <div className="alpha-dashboard-container">
@@ -308,7 +288,7 @@ export default function Dashboard() {
           </div>
           <div className="alpha-dashboard_payment_history_top_view">
             <p>Payment History</p>
-            {paymentHistoryArray.length > 0 ?
+            {orderArray?.length > 0 ?
               <div className="alpha_payment_history_table_view" style={{ overflowX: 'hidden' }}>
                 <table>
                   <thead>
@@ -323,22 +303,20 @@ export default function Dashboard() {
                     </tr>
                   </thead>
                   <tbody >
-
-                    {paymentHistoryArray.map((item) => {
+                    {orderArray?.map((item, index) => {
+                      const date = new Date(item?.createdAt)
                       return (
-                        <tr key={item.id}>
-                          <td data-label={'Buyer Name'} className='alpha_payment_history_padding_left'>{item.buyerName}</td>
-                          <td data-label={'Product Name'}>{item.productName}</td>
-                          <td data-label={'Sale'}>{item.sale}</td>
-                          <td data-label={'Date'} >{item.date}</td>
-                          <td data-label={'Payment'} >{item.payment}</td>
-                          <td data-label={'Method'} >{item.method}</td>
-
+                        <tr key={index}>
+                          <td data-label={'Buyer Name'} className='alpha_payment_history_padding_left'>{item?.requester?.name}</td>
+                          <td data-label={'Product Name'}>{item?.product?.productName}</td>
+                          <td data-label={'Sale'}>{item?.product?.productType}</td>
+                          <td data-label={'Date'} >{date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear()}</td>
+                          <td data-label={'Payment'} >${item?.product?.price}</td>
+                          <td data-label={'Method'} >{item?.wallet ? 'Wallet' : 'Card'}</td>
                         </tr>
                       )
                     })}
                   </tbody>
-
                 </table>
               </div>
               :
@@ -347,7 +325,6 @@ export default function Dashboard() {
               </div>
             }
           </div>
-
         </div>
       </div>
     </div>

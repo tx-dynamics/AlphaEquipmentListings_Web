@@ -2,17 +2,33 @@ import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { changePassword, crossCircleWhite, deleteIcon, dotedTick, user } from "../../../assets/icons";
-import { ChangePasswordModel, CreatePasswordModel, DeleteAccountModel, OtpModel, SideBar, SubmitModel, TextInputTwo, TopBar } from "../../../components";
+import { ChangePasswordModel, CreatePasswordModel, DeleteAccountModel, Loader, OtpModel, SideBar, SubmitModel, TextInputTwo, TopBar } from "../../../components";
 import './profileAdmin.css'
+import { useDispatch } from "react-redux";
+import { store } from "../../../redux/store";
+import { useSnackbar } from "react-simple-snackbar";
+import { snakbarOptions } from "../../../globalData";
+import { api } from "../../../network/Environment";
+import { Method, callApi } from "../../../network/NetworkManger";
+import { accessToken, refreshToken, userData } from "../../../redux/Slices/userDataSlice";
+import { upload } from "../../../helpingMethods";
+
 export default function ProfileAdmin() {
   const navigate = useNavigate()
-  const [editMode, setEditMode] = useState(false)
+  const dispatch = useDispatch();
+  const user = store.getState().userData.userData
+  const [isLoading, setIsLoading] = useState(false)
+  const [showMessage, hideMessage] = useSnackbar(snakbarOptions)
+  const [image, setImage] = useState("");
+  const [name, setName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [changePModel, setChangePModel] = useState(false)
   const [createPModel, setCreatePModel] = useState(false)
   const [submitModel, setSubmitModel] = useState(false)
   const [deleteAccountModel, setDeleteAccountModel] = useState(false)
   const [otpModel, setOtpModel] = useState(false)
-  const [image, setImage] = useState("");
+  const [oldPassword, setOldPassword] = useState('')
+
   const actiopArray = [
     {
       id: 1,
@@ -27,33 +43,163 @@ export default function ProfileAdmin() {
       icon: deleteIcon
     }
   ]
-  const uploadImage = () => {
-    document.getElementById("selectFile").click();
+
+  const updateProfile = async (imagePath) => {
+    if (name.length > 0 || phoneNumber.length > 0 || imagePath?.length > 0) {
+      try {
+        setIsLoading(true);
+        const endPoint = api.updateProfile;
+        const data = {}
+        if (imagePath) {
+          data.image = imagePath
+        }
+        if (name !== '') {
+          data.name = name
+        }
+        if (phoneNumber !== '') {
+          data.number = phoneNumber
+        }
+
+        await callApi(Method.PATCH, endPoint, data,
+          res => {
+            if (res?.status === 200) {
+              dispatch(userData(res.data?.user));
+              setIsLoading(false)
+              showMessage(res?.message)
+            }
+            else {
+              setIsLoading(false)
+              showMessage(res?.message)
+            }
+          },
+          err => {
+            console.log(err);
+            showMessage(err.message)
+            setIsLoading(false);
+          });
+      } catch (error) {
+        setIsLoading(false);
+        console.log(error);
+      }
+    }
+    else {
+      showMessage('Please type name, number or select image to update')
+    }
+  }
+
+  const updatePassword = async (pass) => {
+    setCreatePModel(false)
+    setIsLoading(true)
+    try {
+      const endPoint = api.updatePassword;
+      const data = {
+        currentPassword: oldPassword,
+        password: pass,
+        updatePassword: pass
+      };
+      await callApi(Method.PATCH, endPoint, data,
+        res => {
+          if (res?.status === 200) {
+            setIsLoading(false)
+            showMessage(res?.message)
+            // setSubmitModel(true)
+            dispatch(userData(null));
+            dispatch(accessToken(''));
+            dispatch(refreshToken(''));
+          }
+          else {
+            setIsLoading(false)
+            showMessage(res?.message)
+          }
+        },
+        err => {
+          showMessage(err.message)
+          setIsLoading(false);
+        });
+    } catch (error) {
+      setIsLoading(false);
+      console.log(error);
+    }
+  }
+
+  const deleteMyAccount = async (pass) => {
+    setDeleteAccountModel(false)
+    setIsLoading(true)
+    try {
+      const endPoint = api.sendOtpVerifyPassword;
+      const data = {
+        password: pass,
+
+      };
+      await callApi(Method.PATCH, endPoint, data,
+        res => {
+          if (res?.status === 200) {
+            setIsLoading(false)
+            setOtpModel(true)
+          }
+          else {
+            setIsLoading(false)
+            showMessage(res?.message)
+          }
+        },
+        err => {
+          console.log(err);
+          showMessage(err.message)
+          setIsLoading(false);
+        });
+    } catch (error) {
+      setIsLoading(false);
+      console.log(error);
+    }
+  }
+
+  const verifyDeleteOtp = async (otp) => {
+    setOtpModel(false)
+    try {
+      setIsLoading(true);
+      const endPoint = api.verifyDeleteMe + `?otp=${otp}`;
+      await callApi(Method.DELETE, endPoint, null,
+        res => {
+          console.log(res);
+          if (res?.status === 200) {
+            setIsLoading(false)
+            dispatch(userData(null));
+            dispatch(accessToken(''));
+            dispatch(refreshToken(''));
+          }
+          else {
+            setOtpModel(true)
+            setIsLoading(false)
+            showMessage(res?.message)
+          }
+        },
+        err => {
+          showMessage(err.message)
+          setIsLoading(false);
+        });
+    } catch (error) {
+      setIsLoading(false);
+      console.log(error);
+    }
   };
 
-  const onChange = (file) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-      setImage(reader.result);
-    };
-  };
 
   return (
     <div className="alpha-dashboard-main_container">
       <SideBar />
-      {changePModel && <ChangePasswordModel onClick={() => [setCreatePModel(true), setChangePModel(false)]} onClickClose={() => setChangePModel(false)} />}
-      {createPModel && <CreatePasswordModel onClick={() => [setSubmitModel(true), setCreatePModel(false)]} onClickClose={() => setCreatePModel(false)} />}
+      <Loader loading={isLoading} />
+      {changePModel && <ChangePasswordModel onClick={(data) => [setOldPassword(data), setCreatePModel(true), setChangePModel(false)]} onClickClose={() => setChangePModel(false)} />}
+      {createPModel && <CreatePasswordModel onClick={(data) => updatePassword(data)} onClickClose={() => setCreatePModel(false)} />}
       {submitModel && <SubmitModel title={'password Updated'} des={'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque mattis fringilla eros, sit amet auctor justo accumsan et.'} icon={dotedTick} onClick={() => setSubmitModel(false)} />}
-      {deleteAccountModel && <DeleteAccountModel onClick={() => [setOtpModel(true), setDeleteAccountModel(false)]} onClickClose={() => setDeleteAccountModel(false)} />}
-      {otpModel && <OtpModel onClick={() => setOtpModel(false)} onClickClose={() => setOtpModel(false)} />}
+      {deleteAccountModel && <DeleteAccountModel onClick={(data) => deleteMyAccount(data)} onClickClose={() => setDeleteAccountModel(false)} />}
+      {otpModel && <OtpModel onClick={(data) => verifyDeleteOtp(data)} onClickClose={() => setOtpModel(false)} />}
       <div className="alpha-dashboard-top_bar_main_container">
         <TopBar />
         <div className="alpha-shop-container">
           <div className="alpha-shop-title_view">
             <h1>Profile Setting</h1>
-            <div onClick={() => setEditMode(true)} className="alpha_save_button_view">
-              <h4>Edit</h4>
+            <div onClick={() => updateProfile()} className="alpha_save_button_view">
+              <h4>Save</h4>
             </div>
           </div>
           <div className="alpha-shop_dividers_top_view">
@@ -67,13 +213,13 @@ export default function ProfileAdmin() {
               <h2>Profile Picture</h2>
               <div style={{ paddingLeft: 60, marginBottom: 20 }} className="alpha-profile_picture_view">
                 <div className="alpha-profile_image_image">
-                  <img src={image === "" ? user : image} alt={''} />
+                  <img src={user?.image} alt={''} />
                 </div>
                 <div className="alpha-profile_add_image">
-                  <img onClick={() => uploadImage()} src={crossCircleWhite} />
+                  <img onClick={() => document.getElementById("upload-profile").click()} src={crossCircleWhite} />
                   <input
-                    onChange={(e) => onChange(e.target.files[0])}
-                    id="selectFile"
+                    onChange={upload(url => updateProfile(url), setIsLoading)}
+                    id='upload-profile'
                     type={"file"}
                     style={{ display: "none" }}
                   />
@@ -82,37 +228,32 @@ export default function ProfileAdmin() {
             </div>
             <div className="alpha-profile_inputs_top_view">
               <div>
-                <TextInputTwo title={'Name'} placeholder={'Enter your name'} />
+                <TextInputTwo onChange={(e) => setName(e.target.value)} title={'Name'} placeholder={user?.name} />
               </div>
               <div>
-                <TextInputTwo title={'Email'} placeholder={'Enter your email'} />
+                <TextInputTwo disabled={true} title={'Email'} placeholder={user?.email} />
               </div>
               <div>
-                <TextInputTwo title={'Phone Number'} placeholder={'Enter your phone number'} />
+                <TextInputTwo onChange={(e) => setPhoneNumber(e.target.value)} title={'Phone number'} placeholder={user?.number} />
               </div>
             </div>
           </div>
-          {!editMode ?
-            <div className="alpha-profile-actios_top_view">
-              {actiopArray.map((item) => {
-                return (
-                  <div onClick={() => item.id === 1 ? setChangePModel(true) : setDeleteAccountModel(true)} key={item.id} className="alpha-profile-actios_view">
-                    <img src={item.icon} />
-                    <div>
-                      <h2>{item.title}</h2>
-                      <h3>{item.des}</h3>
-                    </div>
+          <div className="alpha-profile-actios_top_view">
+            {actiopArray.map((item) => {
+              return (
+                <div onClick={() => item.id === 1 ? setChangePModel(true) : setDeleteAccountModel(true)} key={item.id} className="alpha-profile-actios_view">
+                  <img src={item.icon} />
+                  <div>
+                    <h2>{item.title}</h2>
+                    <h3>{item.des}</h3>
                   </div>
-                )
-              })}
-            </div>
-            :
-            <div className="alpha_admin_profile_save_button">
-              <div onClick={() => setEditMode(false)}>
-                <h2>Save</h2>
-              </div>
-            </div>
-          }
+                </div>
+              )
+            })}
+          </div>
+
+
+
 
         </div>
         <div style={{ marginBottom: 5 }} />

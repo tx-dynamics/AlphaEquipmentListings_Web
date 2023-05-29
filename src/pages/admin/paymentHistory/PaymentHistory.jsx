@@ -1,85 +1,49 @@
-import React from "react";
-import { SearchViewTwo, SideBar, TopBar } from "../../../components";
+import React, { useEffect, useState } from "react";
+import { Loader, SearchViewTwo, SideBar, TopBar } from "../../../components";
 import './paymentHistory.css'
+import { useSnackbar } from "react-simple-snackbar";
+import { snakbarOptions } from "../../../globalData";
+import { api } from "../../../network/Environment";
+import { Method, callApi } from "../../../network/NetworkManger";
+
 export default function PaymentHistory() {
-  const paymentHistoryArray = [
-    {
-      id: 1,
-      buyerName: 'Aadam Gabriel',
-      productName: '2016 Wacker Neuson RD12A Double Drum Roller',
-      sale: 'Machine',
-      date: '20-11-2022',
-      payment: '200$',
-      method: 'Wallet',
-    },
-    {
-      id: 2,
-      buyerName: 'Robert',
-      productName: 'Break Kits Truck TS20',
-      sale: 'Machine',
-      date: '20-11-2022',
-      payment: '200$',
-      method: '-',
-    },
-    {
-      id: 3,
-      buyerName: 'Downey Gabriel',
-      productName: 'Carry Deck Crane TS20',
-      sale: 'Spare Parts',
-      date: '20-11-2022',
-      payment: '200$',
-      method: 'Wallet',
-    },
-    {
-      id: 4,
-      buyerName: 'Aadam Gabriel',
-      productName: 'Gantry Cranes & Lifts',
-      sale: 'Machine',
-      date: '20-11-2022',
-      payment: '4000$',
-      method: 'Wallet',
-    },
-    {
-      id: 5,
-      buyerName: 'Downey Gabriel',
-      productName: 'Carry Deck Crane TS20',
-      sale: 'Machine',
-      date: '20-11-2022',
-      payment: '200$',
-      method: '-',
-    },
-    {
-      id: 6,
-      buyerName: 'Robert',
-      productName: 'Gantry Cranes & Lifts',
-      sale: 'Spare Parts',
-      date: '20-11-2022',
-      payment: '4000$',
-      method: 'Wallet',
-    },
-    {
-      id: 7,
-      buyerName: 'Aadam Gabriel',
-      productName: 'Carry Deck Crane TS20',
-      sale: 'Machine',
-      date: '20-11-2022',
-      payment: '200$',
-      method: 'Wallet',
-    },
-    {
-      id: 8,
-      buyerName: 'Downey Gabriel',
-      productName: 'Gantry Cranes & Lifts',
-      sale: 'Spare Parts',
-      date: '19-11-2022',
-      payment: '4000$',
-      method: '-',
-    },
-  ]
+  const [isLoading, setIsLoading] = useState(false)
+  const [showMessage, hideMessage] = useSnackbar(snakbarOptions)
+  const [orderArray, setOrderArray] = useState([])
+
+  useEffect(() => {
+    getPaymentHistory();
+  }, []);
+
+  const getPaymentHistory = async () => {
+    setIsLoading(true)
+    try {
+      const endPoint = api.sellerDashboard + `?search=`;
+      await callApi(Method.GET, endPoint, null,
+        res => {
+          if (res?.status === 200) {
+            setIsLoading(false)
+            setOrderArray(res?.data?.orders)
+          }
+          else {
+            setIsLoading(false)
+            showMessage(res?.message)
+          }
+        },
+        err => {
+          showMessage(err.message)
+          setIsLoading(false);
+        });
+    } catch (error) {
+      setIsLoading(false);
+      console.log(error);
+    }
+  }
 
   return (
     <div className="alpha-dashboard-main_container">
       <SideBar />
+      <Loader loading={isLoading} />
       <div className="alpha-dashboard-top_bar_main_container">
         <TopBar />
         <div className="alpha-shop-container">
@@ -94,7 +58,7 @@ export default function PaymentHistory() {
             <div className="alpha-shop_divider_three" />
           </div>
 
-          {paymentHistoryArray.length > 0 ?
+          {orderArray?.length > 0 ?
             <div className="alpha_payment_history_table_view" style={{ overflowX: 'hidden' }}>
               <table>
                 <thead>
@@ -109,20 +73,20 @@ export default function PaymentHistory() {
                 </thead>
                 <tbody >
 
-                  {paymentHistoryArray.map((item) => {
+                  {orderArray?.map((item, index) => {
+                    const date = new Date(item?.createdAt)
                     return (
-                      <tr key={item.id}>
-                        <td data-label={'Buyer Name'} className="alpha_payment_history_padding_left" >{item.buyerName}</td>
-                        <td data-label={'Product Name'} className={'alpha_my_shop_title_style'}>{item.productName}</td>
-                        <td data-label={'Sale'}>{item.sale}</td>
-                        <td data-label={'Date'} >{item.date}</td>
-                        <td data-label={'Payment'} >{item.payment}</td>
-                        <td data-label={'Method'} >{item.method}</td>
+                      <tr key={index}>
+                        <td data-label={'Buyer Name'} className="alpha_payment_history_padding_left" >{item?.requester?.name}</td>
+                        <td data-label={'Product Name'} className={'alpha_my_shop_title_style'}>{item?.product?.productName}</td>
+                        <td data-label={'Sale'}>{item?.product?.productType}</td>
+                        <td data-label={'Date'} >{date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear()}</td>
+                        <td data-label={'Payment'} >${item?.product?.price}</td>
+                        <td data-label={'Method'} >{item?.wallet ? 'Wallet' : 'Card'}</td>
                       </tr>
                     )
                   })}
                 </tbody>
-
               </table>
             </div>
             :

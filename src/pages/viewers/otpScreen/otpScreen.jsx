@@ -11,6 +11,7 @@ import { Method, callApi } from "../../../network/NetworkManger";
 import { snakbarOptions } from "../../../globalData";
 import { accessToken, refreshToken, userData } from "../../../redux/Slices/userDataSlice";
 import './otpScreen.css'
+import { activeTab } from "../../../redux/Slices/activeTabSlice";
 
 export default function OtpScreen() {
   const navigate = useNavigate();
@@ -50,6 +51,8 @@ export default function OtpScreen() {
               dispatch(accessToken(res?.data?.token));
               dispatch(refreshToken(res?.data?.refreshToken));
               showMessage(res?.message)
+              res?.data?.user?.accountType === 'seller' && dispatch(activeTab('dashboard'))
+
               res?.data?.user?.accountType === 'seller' ?
                 navigate('/dashboard', { replace: true })
                 :

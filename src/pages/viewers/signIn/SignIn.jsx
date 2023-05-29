@@ -10,6 +10,7 @@ import { accessToken, refreshToken, userData } from "../../../redux/Slices/userD
 import { Method, callApi } from "../../../network/NetworkManger";
 import { snakbarOptions } from '../../../globalData'
 import "./signIn.css";
+import { activeTab } from "../../../redux/Slices/activeTabSlice";
 
 export default function SignIn() {
   const navigate = useNavigate();
@@ -54,6 +55,7 @@ export default function SignIn() {
             dispatch(userData(res.data?.user));
             dispatch(accessToken(res?.data?.token));
             dispatch(refreshToken(res?.data?.refreshToken));
+            res?.data?.user?.accountType === 'seller' && dispatch(activeTab('dashboard'))
             res?.data?.user?.accountType === 'seller' ?
               navigate('/dashboard', { replace: true })
               :

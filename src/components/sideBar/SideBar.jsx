@@ -4,12 +4,20 @@ import { arrowDownGrey, dashboard, dashboardTheme, logo, logout, messageIcon, me
 import './sideBar.css'
 import { useDispatch, useSelector } from "react-redux";
 import { activeTab } from '../../redux/Slices/activeTabSlice'
-import { userData } from '../../redux/Slices/userDataSlice';
+import { accessToken, refreshToken, userData } from '../../redux/Slices/userDataSlice';
+import { api } from '../../network/Environment';
+import { Method, callApi } from '../../network/NetworkManger';
+import { useSnackbar } from 'react-simple-snackbar';
+import { snakbarOptions } from '../../globalData';
+import Loader from '../loader/Loader';
 
 export default function SideBar(props) {
     const disPatch = useDispatch();
     const [showDropdown, setShowDropdown] = useState(true)
     const data = useSelector((data) => data.activeTab.value,);
+    const [showMessage, hideMessage] = useSnackbar(snakbarOptions)
+    const [isLoading, setIsLoading] = useState(false)
+
     const navigate = useNavigate();
     const onClick = (type, value) => {
         disPatch(activeTab(value))
@@ -96,8 +104,44 @@ export default function SideBar(props) {
         }
     ]
 
+    const onClickLogout = async () => {
+        setIsLoading(true)
+        try {
+            const endPoint = api.logout
+            const data = {
+                device: {
+                    id: localStorage.getItem('deviceId'),
+                    deviceToken: 'xyz'
+                },
+            }
+            await callApi(Method.POST, endPoint, data,
+                res => {
+                    if (res?.status === 200) {
+                        setIsLoading(false)
+                        disPatch(userData(null));
+                        disPatch(accessToken(''));
+                        disPatch(refreshToken(''));
+                        navigate('/', { replace: true })
+                    }
+                    else {
+                        showMessage(res?.message)
+                        setIsLoading(true)
+                    }
+                },
+                err => {
+                    showMessage(err.message)
+                    setIsLoading(true)
+
+                });
+        } catch (error) {
+            console.log(error);
+            setIsLoading(true)
+        }
+    }
+
     return (
         <div className="alpha-side_bar_container" >
+            <Loader loading={isLoading} />
             <div className="alpha-side_bar_top_container">
                 <div className="alpha-side_bar-logo_container">
                     <img src={logo} />
@@ -137,7 +181,7 @@ export default function SideBar(props) {
                 </div>
                 <div className="alpha-side_bar-divider"></div>
                 <div className="alpha-side_bar_bottom_items_view">
-                    <div onClick={() => disPatch(userData(null))} className="alpha-side_bar-items_container"  >
+                    <div onClick={() => onClickLogout()} className="alpha-side_bar-items_container"  >
                         <img src={logout} />
                         <h2>Logout</h2>
                     </div>
