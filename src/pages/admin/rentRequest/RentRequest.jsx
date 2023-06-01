@@ -1,71 +1,52 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { SearchViewTwo, SideBar, TopBar } from "../../../components";
+import { useSnackbar } from "react-simple-snackbar";
+
+import { Loader, SearchViewTwo, SideBar, TopBar } from "../../../components";
+import { snakbarOptions } from "../../../globalData";
+import { api } from "../../../network/Environment";
+import { Method, callApi } from "../../../network/NetworkManger";
 import './rentRequest.css'
+
 export default function RentRequest() {
   const navigate = useNavigate()
-  const rentRequestArray = [
-    {
-      id: 1,
-      Product: '2016 Wacker Neuson RD12A',
-      Rent: '200$',
-      Request: '2',
-      Action: 'View',
-    },
-    {
-      id: 2,
-      Product: 'Carry Deck Crane TS20',
-      Rent: '700$',
-      Request: '2',
-      Action: 'View',
-    },
-    {
-      id: 3,
-      Product: 'Jumbos',
-      Rent: '200$',
-      Request: '2',
-      Action: 'View',
-    },
-    {
-      id: 4,
-      Product: '2008 Euclid R40 Haul Truck',
-      Rent: '200$',
-      Request: '1',
-      Action: 'View',
-    },
-    {
-      id: 5,
-      Product: 'Gantry Cranes & Lifts',
-      Rent: '700$',
-      Request: '2',
-      Action: 'View',
-    },
-    {
-      id: 6,
-      Product: 'Jumbos',
-      Rent: '200$',
-      Request: '1',
-      Action: 'View',
-    },
-    {
-      id: 7,
-      Product: 'Carry Deck Crane TS20',
-      Rent: '200$',
-      Request: '1',
-      Action: 'View',
-    },
-    {
-      id: 8,
-      Product: 'Gantry Cranes & Lifts',
-      Rent: '700$',
-      Request: '2',
-      Action: 'View',
-    },
-  ]
+  const [isLoading, setIsLoading] = useState(false)
+  const [showMessage, hideMessage] = useSnackbar(snakbarOptions)
+  const [rentArray, setRentArray] = useState([])
+
+  useEffect(() => {
+    getRequestsDetail();
+  }, []);
+
+  const getRequestsDetail = async () => {
+    setIsLoading(true)
+    try {
+      const endPoint = api.sellerDashboard + `?search=`;
+      await callApi(Method.GET, endPoint, null,
+        res => {
+          if (res?.status === 200) {
+            setIsLoading(false)
+            setRentArray(res?.data?.rentRequests)
+          }
+          else {
+            setIsLoading(false)
+            showMessage(res?.message)
+          }
+        },
+        err => {
+          showMessage(err.message)
+          setIsLoading(false);
+        });
+    } catch (error) {
+      setIsLoading(false);
+      console.log(error);
+    }
+  }
 
   return (
     <div className="alpha-dashboard-main_container">
       <SideBar />
+      <Loader loading={isLoading} />
       <div className="alpha-dashboard-top_bar_main_container">
         <TopBar />
         <div className="alpha-shop-container">
@@ -79,7 +60,7 @@ export default function RentRequest() {
             <div className="alpha-shop_divider_two" />
             <div className="alpha-shop_divider_three" />
           </div>
-          {rentRequestArray.length > 0 ?
+          {rentArray?.length > 0 ?
             <div className="alpha_payment_history_table_view" style={{ overflowX: 'hidden' }}>
               <table>
                 <thead>
@@ -92,19 +73,18 @@ export default function RentRequest() {
                   </tr>
                 </thead>
                 <tbody >
-                  {rentRequestArray.map((item) => {
+                  {rentArray?.map((item, index) => {
                     return (
-                      <tr key={item.id}>
-                        <td data-label={''} style={{ paddingLeft: 20, }}>-{item.id}</td>
-                        <td data-label={'Product'} className={'alpha_rent_req_title_style'}   >{item.Product}</td>
-                        <td data-label={'Rent/Day'} >{item.Rent}</td>
-                        <td data-label={'Request'}  >{item.Request}</td>
-                        <td style={{ color: '#4482FF', cursor: 'pointer' }} onClick={() => navigate('/rentrequestdetail')} data-label={'Action'} >{item.Action}</td>
+                      <tr key={index}>
+                        <td data-label={''} style={{ paddingLeft: 20, }}>-{index + 1}</td>
+                        <td data-label={'Product'} className={'alpha_rent_req_title_style'}   >{item?.product?.productName}</td>
+                        <td data-label={'Rent/Day'} >${item?.product?.price}</td>
+                        <td data-label={'Request'}  >1</td>
+                        <td style={{ color: '#4482FF', cursor: 'pointer' }} onClick={() => navigate('/rentrequestdetail', { state: { data: item } })} data-label={'Action'} >View</td>
                       </tr>
                     )
                   })}
                 </tbody>
-
               </table>
             </div>
             :

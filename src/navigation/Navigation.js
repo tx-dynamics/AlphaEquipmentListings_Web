@@ -41,6 +41,7 @@ const Navigation = () => {
       <Route path="/buyrequestdetail" element={<PrivateRoute><Admin.BuyRequestDetail /></PrivateRoute>} />
       <Route path="/auctionrequestdetail" element={<PrivateRoute><Admin.AuctionRequestDetail /></PrivateRoute>} />
       <Route path="/addproduct" element={<PrivateRoute><Admin.AddProduct /></PrivateRoute>} />
+      <Route path="/editproduct" element={<PrivateRoute><Admin.EditProduct /></PrivateRoute>} />
       <Route path="/profileadmin" element={<PrivateRoute><Admin.ProfileAdmin /></PrivateRoute>} />
       <Route path="/chatadmin" element={<PrivateRoute><Admin.ChatAdmin /></PrivateRoute>} />
       <Route path="/walletadmin" element={<PrivateRoute><Admin.WalletAdmin /></PrivateRoute>} />

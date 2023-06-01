@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Loader, SearchViewTwo, SideBar, TopBar } from "../../../components";
-import './paymentHistory.css'
 import { useSnackbar } from "react-simple-snackbar";
+
+import { Loader, SearchViewTwo, SideBar, TopBar } from "../../../components";
 import { snakbarOptions } from "../../../globalData";
 import { api } from "../../../network/Environment";
 import { Method, callApi } from "../../../network/NetworkManger";
+import './paymentHistory.css'
 
 export default function PaymentHistory() {
   const [isLoading, setIsLoading] = useState(false)
@@ -57,7 +58,6 @@ export default function PaymentHistory() {
             <div className="alpha-shop_divider_two" />
             <div className="alpha-shop_divider_three" />
           </div>
-
           {orderArray?.length > 0 ?
             <div className="alpha_payment_history_table_view" style={{ overflowX: 'hidden' }}>
               <table>
@@ -72,7 +72,6 @@ export default function PaymentHistory() {
                   </tr>
                 </thead>
                 <tbody >
-
                   {orderArray?.map((item, index) => {
                     const date = new Date(item?.createdAt)
                     return (

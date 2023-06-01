@@ -1,25 +1,22 @@
-import React from "react";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { changePassword, crossCircleWhite, deleteIcon, dotedTick, user } from "../../../assets/icons";
-import { ChangePasswordModel, CreatePasswordModel, DeleteAccountModel, Loader, OtpModel, SideBar, SubmitModel, TextInputTwo, TopBar } from "../../../components";
-import './profileAdmin.css'
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { store } from "../../../redux/store";
 import { useSnackbar } from "react-simple-snackbar";
+
+import { changePassword, crossCircleWhite, deleteIcon, dotedTick } from "../../../assets/icons";
+import { ChangePasswordModel, CreatePasswordModel, DeleteAccountModel, Loader, OtpModel, SideBar, SubmitModel, TextInputTwo, TopBar } from "../../../components";
+import { store } from "../../../redux/store";
 import { snakbarOptions } from "../../../globalData";
 import { api } from "../../../network/Environment";
 import { Method, callApi } from "../../../network/NetworkManger";
 import { accessToken, refreshToken, userData } from "../../../redux/Slices/userDataSlice";
 import { upload } from "../../../helpingMethods";
+import './profileAdmin.css'
 
 export default function ProfileAdmin() {
-  const navigate = useNavigate()
   const dispatch = useDispatch();
   const user = store.getState().userData.userData
   const [isLoading, setIsLoading] = useState(false)
   const [showMessage, hideMessage] = useSnackbar(snakbarOptions)
-  const [image, setImage] = useState("");
   const [name, setName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [changePModel, setChangePModel] = useState(false)
@@ -28,7 +25,6 @@ export default function ProfileAdmin() {
   const [deleteAccountModel, setDeleteAccountModel] = useState(false)
   const [otpModel, setOtpModel] = useState(false)
   const [oldPassword, setOldPassword] = useState('')
-
   const actiopArray = [
     {
       id: 1,
@@ -59,7 +55,6 @@ export default function ProfileAdmin() {
         if (phoneNumber !== '') {
           data.number = phoneNumber
         }
-
         await callApi(Method.PATCH, endPoint, data,
           res => {
             if (res?.status === 200) {
@@ -102,7 +97,6 @@ export default function ProfileAdmin() {
           if (res?.status === 200) {
             setIsLoading(false)
             showMessage(res?.message)
-            // setSubmitModel(true)
             dispatch(userData(null));
             dispatch(accessToken(''));
             dispatch(refreshToken(''));
@@ -129,7 +123,6 @@ export default function ProfileAdmin() {
       const endPoint = api.sendOtpVerifyPassword;
       const data = {
         password: pass,
-
       };
       await callApi(Method.PATCH, endPoint, data,
         res => {
@@ -183,7 +176,6 @@ export default function ProfileAdmin() {
     }
   };
 
-
   return (
     <div className="alpha-dashboard-main_container">
       <SideBar />
@@ -207,7 +199,6 @@ export default function ProfileAdmin() {
             <div className="alpha-profile_divider_two" />
             <div className="alpha-shop_divider_three" />
           </div>
-
           <div>
             <div className="alpha-profile_picture_top_view" style={{ paddingLeft: 40, paddingTop: 20 }}>
               <h2>Profile Picture</h2>
@@ -251,10 +242,6 @@ export default function ProfileAdmin() {
               )
             })}
           </div>
-
-
-
-
         </div>
         <div style={{ marginBottom: 5 }} />
       </div>

@@ -1,19 +1,20 @@
-import React, { useEffect } from "react";
-import { trendUp } from "../../../assets/icons";
-import { Loader, SideBar, TopBar } from "../../../components";
-import './dashboard.css'
+import React, { useEffect, useState } from "react";
 import ReactApexChart from 'react-apexcharts'
 import { Line, Circle } from "rc-progress";
-import { useState } from "react";
-import { useNavigate } from 'react-router-dom'
+import { useSnackbar } from "react-simple-snackbar";
+
+import { trendUp } from "../../../assets/icons";
+import { Loader, SideBar, TopBar } from "../../../components";
 import { api } from "../../../network/Environment";
 import { Method, callApi } from "../../../network/NetworkManger";
 import { store } from "../../../redux/store";
-import { useSnackbar } from "react-simple-snackbar";
 import { snakbarOptions } from "../../../globalData";
+import './dashboard.css'
+import { useDispatch } from "react-redux";
+import { activeTab } from "../../../redux/Slices/activeTabSlice";
 
 export default function Dashboard() {
-  const navigate = useNavigate()
+  const dispatch = useDispatch()
   const [rangeValue, setRangeValue] = useState(undefined)
   const [isLoading, setIsLoading] = useState(false)
   const [showMessage, hideMessage] = useSnackbar(snakbarOptions)
@@ -170,6 +171,7 @@ export default function Dashboard() {
   }
 
   useEffect(() => {
+    dispatch(activeTab('dashboard'))
     getDashboardData();
   }, []);
 
@@ -198,8 +200,6 @@ export default function Dashboard() {
     }
   }
 
-
-
   return (
     <div className="alpha-dashboard-main_container">
       <SideBar />
@@ -210,7 +210,6 @@ export default function Dashboard() {
           <div className="alpha-dashboard-top_title_view">
             <h1>Dashboard</h1>
           </div>
-
           <div className="alpha-dashboard-mini_graphs_top_view">
             <div className="alpha-dashboard-mini_graph_view">
               <div className="alpha-dashboard-avrg_revenue_view">
@@ -222,7 +221,6 @@ export default function Dashboard() {
                     <h3>20%</h3>
                   </div>
                   <h3>$20,452</h3>
-
                 </div>
               </div>
               <div className="alpha-dashboard-mini_graphs-chart_view">
@@ -250,7 +248,6 @@ export default function Dashboard() {
               <div className="alpha-dashboard-mini_graphs-chart_view">
                 <div style={{ width: 80, height: 80 }}>
                   <Circle style={{ transform: 'rotate(20deg)' }} percent={75} strokeWidth={25} trailWidth={25} strokeLinecap={'butt'} strokeColor="#F29A2E" trailColor="#E4E8EF" />
-
                 </div>
               </div>
             </div>
@@ -299,7 +296,6 @@ export default function Dashboard() {
                       <th scope="col">Date</th>
                       <th scope="col">Payment</th>
                       <th scope="col">Method</th>
-
                     </tr>
                   </thead>
                   <tbody >

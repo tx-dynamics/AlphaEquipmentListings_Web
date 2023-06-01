@@ -10,6 +10,7 @@ import { Method, callApi } from '../../network/NetworkManger';
 import { useSnackbar } from 'react-simple-snackbar';
 import { snakbarOptions } from '../../globalData';
 import Loader from '../loader/Loader';
+import { store } from '../../redux/store';
 
 export default function SideBar(props) {
     const disPatch = useDispatch();
@@ -40,7 +41,7 @@ export default function SideBar(props) {
             id: 2,
             title: 'Shop',
             value: 'shop',
-            route: '/shop',
+            route: store.getState().userData?.userData?.storeName ? '/myshop' : '/shop',
             value2: '',
             value3: '',
             iconOne: shop,

@@ -1,69 +1,50 @@
-import React from "react";
-import { SearchViewTwo, SideBar, TopBar } from "../../../components";
+import React, { useEffect, useState } from "react";
+import { useSnackbar } from "react-simple-snackbar";
+
+import { Loader, SearchViewTwo, SideBar, TopBar } from "../../../components";
+import { snakbarOptions } from "../../../globalData";
+import { api } from "../../../network/Environment";
+import { Method, callApi } from "../../../network/NetworkManger";
 import './orderStatus.css'
+
 export default function OrderStatus() {
-  const orderStatusArray = [
-    {
-      id: 1,
-      buyerName: 'Aadam Gabriel',
-      productName: '2016 Wacker Neuson RD12A Double Drum Roller',
-      state: 'Pending',
-      date: '20-11-2022',
-    },
-    {
-      id: 2,
-      buyerName: 'Robert',
-      productName: 'Break Kits Truck TS20',
-      state: 'Completed',
-      date: '20-11-2022',
-    },
-    {
-      id: 3,
-      buyerName: 'Downey Gabriel',
-      productName: 'Carry Deck Crane TS20',
-      state: 'Pending',
-      date: '20-11-2022',
-    },
-    {
-      id: 4,
-      buyerName: 'Aadam Gabriel',
-      productName: 'Gantry Cranes & Lifts',
-      state: 'Pending',
-      date: '20-11-2022',
-    },
-    {
-      id: 5,
-      buyerName: 'Downey Gabriel',
-      productName: 'Carry Deck Crane TS20',
-      state: 'Completed',
-      date: '20-11-2022',
-    },
-    {
-      id: 6,
-      buyerName: 'Robert',
-      productName: 'Gantry Cranes & Lifts',
-      state: 'Completed',
-      date: '20-11-2022',
-    },
-    {
-      id: 7,
-      buyerName: 'Aadam Gabriel',
-      productName: 'Carry Deck Crane TS20',
-      state: 'Pending',
-      date: '20-11-2022',
-    },
-    {
-      id: 8,
-      buyerName: 'Downey Gabriel',
-      productName: 'Gantry Cranes & Lifts',
-      state: 'Pending',
-      date: '20-11-2022',
-    },
-  ]
+  const [isLoading, setIsLoading] = useState(false)
+  const [showMessage, hideMessage] = useSnackbar(snakbarOptions)
+  const [orderArray, setOrderArray] = useState([])
+
+  useEffect(() => {
+    getOrderStatus();
+  }, []);
+
+  const getOrderStatus = async () => {
+    setIsLoading(true)
+    try {
+      const endPoint = api.sellerDashboard + `?search=`;
+      await callApi(Method.GET, endPoint, null,
+        res => {
+          if (res?.status === 200) {
+            setIsLoading(false)
+            setOrderArray(res?.data?.orders)
+          }
+          else {
+            setIsLoading(false)
+            showMessage(res?.message)
+          }
+        },
+        err => {
+          showMessage(err.message)
+          setIsLoading(false);
+        });
+    } catch (error) {
+      setIsLoading(false);
+      console.log(error);
+    }
+  }
 
   return (
     <div className="alpha-dashboard-main_container">
       <SideBar />
+      <Loader loading={isLoading} />
       <div className="alpha-dashboard-top_bar_main_container">
         <TopBar />
         <div className="alpha-shop-container">
@@ -77,8 +58,7 @@ export default function OrderStatus() {
             <div className="alpha-shop_divider_two" />
             <div className="alpha-shop_divider_three" />
           </div>
-
-          {orderStatusArray.length > 0 ?
+          {orderArray?.length > 0 ?
             <div className="alpha_payment_history_table_view" style={{ overflowX: 'hidden' }}>
               <table>
                 <thead>
@@ -90,19 +70,18 @@ export default function OrderStatus() {
                   </tr>
                 </thead>
                 <tbody >
-
-                  {orderStatusArray.map((item) => {
+                  {orderArray?.map((item, index) => {
+                    const date = new Date(item?.createdAt)
                     return (
-                      <tr key={item.id}>
-                        <td data-label={'Buyer Name'} className="alpha_payment_history_padding_left" >{item.buyerName}</td>
-                        <td data-label={'Product Name'} className={'alpha_my_shop_title_style'}>{item.productName}</td>
-                        <td data-label={'State'} style={{ color: item.state === 'Completed' ? '#00AD50' : '#D20000' }}>{item.state}</td>
-                        <td data-label={'Date'} >{item.date}</td>
+                      <tr key={index}>
+                        <td data-label={'Buyer Name'} className="alpha_payment_history_padding_left" >{item?.requester?.name}</td>
+                        <td data-label={'Product Name'} className={'alpha_my_shop_title_style'}>{item?.product?.productName}</td>
+                        <td data-label={'State'} style={{ color: item?.status === 'Complete' ? '#00AD50' : '#D20000' }}>{item?.status === 'Complete' ? 'Completed' : 'Pending'}</td>
+                        <td data-label={'Date'} >{date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear()}</td>
                       </tr>
                     )
                   })}
                 </tbody>
-
               </table>
             </div>
             :

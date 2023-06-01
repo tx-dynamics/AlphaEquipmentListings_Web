@@ -1,92 +1,27 @@
-import React from "react";
-import { useState } from "react";
-import { CashWithdrawModel, Loader, OtpModel, SideBar, SubmitModel, TopBar } from "../../../components";
-import './walletAdmin.css'
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useSnackbar } from "react-simple-snackbar";
+
 import { api } from "../../../network/Environment";
 import { Method, callApi } from "../../../network/NetworkManger";
-import { useSnackbar } from "react-simple-snackbar";
 import { snakbarOptions } from "../../../globalData";
 import { dotedTick } from "../../../assets/icons";
 import { store } from "../../../redux/store";
-import { useDispatch } from "react-redux";
 import { userData } from "../../../redux/Slices/userDataSlice";
+import { CashWithdrawModel, Loader, OtpModel, SideBar, SubmitModel, TopBar } from "../../../components";
+import './walletAdmin.css'
 
 export default function WalletAdmin() {
   const dispatch = useDispatch()
-  const [showModel, setShowModel] = useState(false)
-  const [isLoading, setIsLoading] = React.useState(false)
-  const [transactionHistory, setTransactionHistory] = React.useState([])
-  const [balance, setBalance] = React.useState(0)
-  const [showMessage, hideMessage] = useSnackbar(snakbarOptions)
   const user = store.getState().userData.userData
-
+  const [isLoading, setIsLoading] = useState(false)
+  const [transactionHistory, setTransactionHistory] = useState([])
+  const [balance, setBalance] = useState(0)
+  const [showMessage, hideMessage] = useSnackbar(snakbarOptions)
   const [withdrawModel, setWithdrawModel] = useState(false)
-  const [connectCardModel, setConnectCardModel] = useState(false);
-  const [cardActive, setCardActive] = useState(false);
   const [accountData, setAccountData] = useState()
   const [otpModel, setOtpModel] = useState(false)
   const [successfullModel, setSuccessfullModel] = useState(false)
-  const [topupData, setTopUpData] = useState()
-  const [typeWithdrawel, setTypeWithdrawel] = useState(true)
-
-  const walletHistoryArray = [
-    {
-      id: 1,
-      userName: 'Aadam Gabriel',
-      amount: '200$',
-      day: '20-11-2022',
-      accountNumber: '78265376523635',
-    },
-    {
-      id: 2,
-      userName: 'Aadam Gabriel',
-      amount: '200$',
-      day: '20-11-2022',
-      accountNumber: '78265376523635',
-    },
-    {
-      id: 3,
-      userName: 'Aadam Gabriel',
-      amount: '200$',
-      day: '20-11-2022',
-      accountNumber: '78265376523635',
-    },
-    {
-      id: 4,
-      userName: 'Aadam Gabriel',
-      amount: '200$',
-      day: '20-11-2022',
-      accountNumber: '78265376523635',
-    },
-    {
-      id: 5,
-      userName: 'Aadam Gabriel',
-      amount: '200$',
-      day: '20-11-2022',
-      accountNumber: '78265376523635',
-    },
-    {
-      id: 6,
-      userName: 'Aadam Gabriel',
-      amount: '200$',
-      day: '20-11-2022',
-      accountNumber: '78265376523635',
-    },
-    {
-      id: 7,
-      userName: 'Aadam Gabriel',
-      amount: '200$',
-      day: '20-11-2022',
-      accountNumber: '78265376523635',
-    },
-    {
-      id: 8,
-      userName: 'Aadam Gabriel',
-      amount: '200$',
-      day: '20-11-2022',
-      accountNumber: '78265376523635',
-    },
-  ]
 
   React.useEffect(() => {
     getWalletDetail()
@@ -200,7 +135,6 @@ export default function WalletAdmin() {
       {withdrawModel && <CashWithdrawModel onClick={(data) => [setAccountData(data), verifyDetail(data)]} onClickClose={() => setWithdrawModel(false)} />}
       {otpModel && <OtpModel onClick={(data) => onPressConfirmOtp(data)} onClickClose={() => [setOtpModel(false)]} />}
       {successfullModel && <SubmitModel onClick={() => [getWalletDetail(), setSuccessfullModel(false)]} icon={dotedTick} button title={'Congratulations!'} des={'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque mattis fringilla eros, sit amet auctor justo accumsan et.'} />}
-
       <div className="alpha-dashboard-top_bar_main_container">
         <TopBar />
         <div className="alpha-shop-container">
@@ -229,7 +163,6 @@ export default function WalletAdmin() {
                     </tr>
                   </thead>
                   <tbody >
-
                     {transactionHistory?.map((item, index) => {
                       const date = new Date(item?.createdAt)
                       return (
@@ -247,7 +180,6 @@ export default function WalletAdmin() {
                       )
                     })}
                   </tbody>
-
                 </table>
               </div>
               :

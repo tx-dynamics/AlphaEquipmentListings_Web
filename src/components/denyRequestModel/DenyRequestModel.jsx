@@ -11,7 +11,7 @@ export default function DenyRequestModel(props) {
                     <img onClick={props.onClickClose} src={crossCircle} alt={''} />
                 </div>
                 <div className="alpha-membership_title_view">
-                    <h2>Deny Request for Rent</h2>
+                    <h2>Deny Request</h2>
                 </div>
                 <div className='alpha-deny_req_model_des'>
                     <h3>To Deny Request you have to give reason for that</h3>

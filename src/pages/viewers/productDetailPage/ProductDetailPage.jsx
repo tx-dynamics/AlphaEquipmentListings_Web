@@ -298,6 +298,7 @@ export default function ProductDetailPage() {
   };
 
   return (
+    console.log(productData, '3131'),
     <div className="alpha-pro_list_page-main_container">
       <BlogView onClickSubscription={() => navigate('/subscriptionpage')} />
 

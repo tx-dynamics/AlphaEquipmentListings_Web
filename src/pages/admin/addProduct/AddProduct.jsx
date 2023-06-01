@@ -1,16 +1,33 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { completed, dotedTick, emptyCircle, inprogress } from "../../../assets/icons";
-import { FinancingStepFourAdmin, FinancingStepOneAdmin, FinancingStepThreeAdmin, FinancingStepTwoAdmin, SideBar, SubmitModel, TopBar } from "../../../components";
+import { FinancingStepFourAdmin, FinancingStepOneAdmin, FinancingStepThreeAdmin, FinancingStepTwoAdmin, Loader, SideBar, SubmitModel, TopBar } from "../../../components";
 import './addProduct.css'
+import { upload, uploadTwo } from "../../../helpingMethods";
+import { api } from "../../../network/Environment";
+import { Method, callApi } from "../../../network/NetworkManger";
+import { useSnackbar } from "react-simple-snackbar";
+import { snakbarOptions } from "../../../globalData";
 export default function AddProduct() {
   const navigate = useNavigate()
   const { state } = useLocation();
-
-  const [successfullModel, setSuccessfullModel] = useState(false)
+  const [isModel, setIsModel] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const [activeIndex, setActiveIndex] = useState(0)
-  const [selectedProductType, setSelectedProductType] = useState()
-  const [addProductArray, setAddProductArray] = useState([
+  const [showModel, setShowModel] = useState(false)
+  const [pageOneData, setPageOneData] = useState()
+  const [pageTwoData, setPageTwoData] = useState()
+  const [pageThreeData, setPageThreeData] = useState()
+  const [pageFourData, setPageFourData] = useState()
+  const [eqImages, setEqImages] = useState([])
+  const [additionalImages, setAdditionalImages] = useState([])
+  const [serialNumberImages, setSerialNumberImages] = useState([])
+  const [controlStationImages, setCntrolStationImages] = useState([])
+  const [engineImages, setEngineImages] = useState([])
+  const [chassisImages, setChassisImages] = useState([])
+  const [undercarriageImage, setUndercarriageImage] = useState([])
+  const [showMessage, hideMessage] = useSnackbar(snakbarOptions)
+  const [addProductStepsArray, setAddProductStepsArray] = useState([
     {
       id: 0,
       status: 'inprogress',
@@ -29,22 +46,27 @@ export default function AddProduct() {
     {
       id: 3,
       status: 'empty',
-      title: 'Control Station (optional)'
+      title: 'Control Station'
     },
   ])
-  const next = () => {
+
+  const next = (data) => {
     const body = document.querySelector('#steps');
     body.scrollIntoView({
       behavior: 'smooth'
     }, 500)
+
     if (activeIndex === 3) {
-      setSuccessfullModel(true)
+      pageOneData?.productType.title === 'Machine' ?
+        uploadMachineImages(data)
+        :
+        uploadSparePartsImages()
     }
     else {
-      const array = [...addProductArray]
+      const array = [...addProductStepsArray]
       array[activeIndex].status = 'completed'
       array[activeIndex + 1].status = 'inprogress'
-      setAddProductArray(array)
+      setAddProductStepsArray(array)
       setActiveIndex(activeIndex + 1)
     }
   }
@@ -54,33 +76,193 @@ export default function AddProduct() {
     body.scrollIntoView({
       behavior: 'smooth'
     }, 500)
-    const array = [...addProductArray]
+    const array = [...addProductStepsArray]
     array[activeIndex].status = 'empty'
     array[activeIndex - 1].status = 'inprogress'
-    setAddProductArray(array)
+    setAddProductStepsArray(array)
     setActiveIndex(activeIndex - 1)
   }
 
-  const onComplete = () => {
-    const array = [...addProductArray]
-    for (var i = 0; i < array.length; i++) {
-      if (i === 0) {
-        array[i].status = 'inprogress'
-
+  useEffect(() => {
+    if (eqImages.length > 0 && additionalImages.length > 0) {
+      if (pageOneData?.productType.title === 'Spare Part') {
+        addsparePartToStore()
       }
-      else {
-        array[i].status = 'empty'
 
+    }
+  }, [eqImages, additionalImages])
+
+  // useEffect(() => {
+  //     if (isFocused) {
+  //         store.getState().userData.userData.subscriptionType === 'PRO' ? setIsModel(false) : setIsModel(true)
+  //     }
+  // }, [isFocused])
+
+  useEffect(() => {
+    if (eqImages.length > 0 && additionalImages.length > 0 && serialNumberImages.length > 0 && controlStationImages.length > 0 && engineImages.length > 0 && chassisImages.length > 0 && undercarriageImage.length > 0) {
+      if (pageOneData?.productType.title === 'Machine') {
+        addMachineToStore()
       }
     }
-    setAddProductArray(array)
-    setActiveIndex(0)
-    setSuccessfullModel(false)
+  }, [additionalImages, eqImages, controlStationImages, serialNumberImages, engineImages, chassisImages, undercarriageImage])
+
+  const uploadSparePartsImages = async () => {
+    var pageTwoImagesOfEq = [...pageTwoData?.imagesFiles]
+    var pageThreeAddionalImages = [...pageThreeData?.additionalFileImages]
+    setIsLoading(true);
+    await forLoop(pageTwoImagesOfEq, 1)
+    await forLoop(pageThreeAddionalImages, 2)
   }
+
+  const addsparePartToStore = async () => {
+
+    try {
+      const endPoint = api.product;
+      const data = {
+        productType: pageOneData?.productType?.title,
+        equipmentType: pageOneData?.equipmentType?.title,
+        usage: pageOneData?.usage,
+        price: pageOneData?.startingPrice,
+        productName: pageOneData?.name,
+        displayTitle: pageOneData?.displayTitle,
+        location: pageTwoData?.location,
+        stock: pageTwoData?.stock,
+        features: pageTwoData?.features,
+        catelougeNote: pageTwoData?.catelougeNote,
+        equipmentType2: pageTwoData?.equipmentType2,
+        images: eqImages,
+        additionalImages: additionalImages,
+        message: pageFourData?.message
+      };
+      // setIsLoading(false)
+      console.log(data, '2122');
+      // return
+      await callApi(Method.POST, endPoint, data,
+        res => {
+          console.log(res, '5555555');
+
+          if (res?.status === 200) {
+            setIsLoading(false)
+            setIsModel(true)
+          }
+          else {
+            setIsLoading(false)
+            showMessage(res?.message)
+          }
+        },
+        err => {
+          showMessage(err.message)
+          setIsLoading(false);
+        });
+    } catch (error) {
+      setIsLoading(false);
+      console.log(error);
+    }
+  }
+
+  const uploadMachineImages = async (data) => {
+    var pageTwoImagesOfEq = [...pageTwoData?.imagesFiles]
+    var pageThreeAddionalImages = [...pageThreeData?.additionalFileImages]
+    var pageThreeSerialNumberImage = [...pageThreeData?.serialNumberFileImage]
+    var pageFourControlSessionImage = [...data.controlFileImages]
+    var pageFourEngineImage = [...data?.engineFileImages]
+    var pageFourChassisImage = [...data?.chassisFileImages]
+    var pageFourUndercarriageImage = [...data?.undercarrigeFileImages]
+    setIsLoading(true);
+    await forLoop(pageTwoImagesOfEq, 1)
+    await forLoop(pageThreeAddionalImages, 2)
+    await forLoop(pageThreeSerialNumberImage, 3)
+    await forLoop(pageFourControlSessionImage, 4)
+    await forLoop(pageFourEngineImage, 5)
+    await forLoop(pageFourChassisImage, 6)
+    await forLoop(pageFourUndercarriageImage, 7)
+  }
+
+  const forLoop = async (arr, type) => {
+    const array = []
+    let numIterationsComplete = 0;
+    const totalIterations = arr.length;
+    for (var i = 0; i < totalIterations; i++) {
+      var data = arr[i]
+      numIterationsComplete++;
+      uploadTwo(data, (url) => {
+        array.push(url)
+        if (numIterationsComplete === totalIterations) {
+          type === 1 ? setEqImages(array) :
+            type === 2 ? setAdditionalImages(array) :
+              type === 3 ? setSerialNumberImages(array) :
+                type === 4 ? setCntrolStationImages(array) :
+                  type === 5 ? setEngineImages(array) :
+                    type === 6 ? setChassisImages(array) :
+                      setUndercarriageImage(array)
+        }
+      })
+    }
+  }
+
+  const addMachineToStore = async () => {
+    try {
+      const endPoint = api.product;
+      const data = {
+        productType: pageOneData?.productType?.title,
+        equipmentType: pageOneData?.equipmentType?.title,
+        select: pageOneData?.select?.title,
+        category: pageOneData?.category,
+        subCategory: pageOneData?.subCategory,
+        rentOrSell: pageOneData?.rentOrSell?.title ? pageOneData?.rentOrSell?.title : '',
+        price: pageOneData?.startingPrice,
+        productName: pageOneData?.name,
+        usage: pageOneData?.usage,
+        Mileage: pageOneData?.Mileage,
+        auctionStartDate: pageOneData?.auctionStartDate ? pageOneData?.auctionStartDate : '',
+        auctionEndDate: pageOneData?.auctionEndDate ? pageOneData?.auctionEndDate : '',
+        location: pageTwoData?.location,
+        features: pageTwoData?.features,
+        stock: pageTwoData?.stock,
+        catelougeNote: pageTwoData?.catelougeNote,
+        equipmentType2: pageTwoData?.equipmentType2,
+        images: eqImages,
+        equipmentModel: pageTwoData?.equipmentModel,
+        serialNumber: pageThreeData?.serialNumber,
+        serialNumberImage: serialNumberImages[0],
+        odometer: pageThreeData?.odometer,
+        additionalImages: additionalImages,
+        controlImages: controlStationImages,
+        engineImages: engineImages,
+        chassisImages: chassisImages,
+        undercarrigeImages: undercarriageImage
+      };
+      console.log(data, '----');
+      await callApi(Method.POST, endPoint, data,
+        res => {
+          console.log(res, '22222');
+
+          if (res?.status === 200) {
+            setIsLoading(false)
+            setIsModel(true)
+          }
+          else {
+            setIsLoading(false)
+            showMessage(res?.message)
+          }
+        },
+        err => {
+          showMessage(err.message)
+          setIsLoading(false);
+          console.log(err)
+
+        });
+    } catch (error) {
+      setIsLoading(false);
+      console.log(error);
+    }
+  }
+
   return (
     <div className="alpha-dashboard-main_container">
       <SideBar />
-      {successfullModel && <SubmitModel onClick={() => onComplete()} icon={dotedTick} title={state?.screen === 'add' ? 'added successfully' : 'Updated successfully'} />}
+      <Loader loading={isLoading} />
+      {isModel && <SubmitModel onClick={() => navigate(-1)} icon={dotedTick} title={'added successfully'} />}
 
       <div className="alpha-dashboard-top_bar_main_container">
         <TopBar />
@@ -102,11 +284,11 @@ export default function AddProduct() {
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pretium orci vel ante posuere, et pharetra magna consectetur.</p>
           </div>
           <div id={'steps'} className="alpha_add_product_steps_count_view">
-            {addProductArray.map((item, index) => {
+            {addProductStepsArray.map((item, index) => {
               return (
                 <div key={index} className="alpha-add_product-steps">
                   <img src={item.status === 'inprogress' ? inprogress : item.status === 'completed' ? completed : emptyCircle} />
-                  {addProductArray.length === index + 1 ?
+                  {addProductStepsArray.length === index + 1 ?
                     null
                     :
                     <div style={{ borderBottomColor: item.status === 'completed' ? '#F18805' : '#D1D5DB' }} />
@@ -116,19 +298,19 @@ export default function AddProduct() {
             })}
           </div>
           <div className="alpha_add_product_steps_des_view">
-            <h5>{addProductArray[activeIndex].title}<span style={{ fontWeight: 300, color: '#898989' }}>{activeIndex === 0 && ' (optional)'}</span></h5>
+            <h5>{addProductStepsArray[activeIndex].title}</h5>
           </div>
-          <div className={activeIndex === 2 && selectedProductType === 2 ? "alpha_custom_style_for_add_product" : ''}>
+          <div className={"alpha_custom_style_for_add_product"}>
             {activeIndex === 0 ?
-              <FinancingStepOneAdmin onClickNext={(id) => [setSelectedProductType(id), next()]} />
+              <FinancingStepOneAdmin pageData={pageOneData} onClickNext={(data) => [setPageOneData(data), next(data)]} />
               :
               activeIndex === 1 ?
-                <FinancingStepTwoAdmin type={selectedProductType} onClickBack={() => back()} onClickNext={() => next()} />
+                <FinancingStepTwoAdmin pageData={pageTwoData} selectedProductType={pageOneData?.productType?.title} onClickBack={() => back()} onClickNext={(data) => [setPageTwoData(data), next(data)]} />
                 :
                 activeIndex === 2 ?
-                  <FinancingStepThreeAdmin type={selectedProductType} onClickBack={() => back()} onClickNext={() => next()} />
+                  <FinancingStepThreeAdmin pageData={pageThreeData} selectedProductType={pageOneData?.productType?.title} onClickBack={() => back()} onClickNext={(data) => [setPageThreeData(data), next(data)]} />
                   :
-                  <FinancingStepFourAdmin type={selectedProductType} onClickBack={() => back()} onClickNext={() => next()} />
+                  <FinancingStepFourAdmin pageData={pageFourData} selectedProductType={pageOneData?.productType?.title} onClickBack={() => back()} onClickNext={(data) => [setPageFourData(data), next(data)]} />
             }
           </div>
         </div>

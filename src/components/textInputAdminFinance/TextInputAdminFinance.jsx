@@ -8,7 +8,7 @@ const TextInputAdminFinance = (props) => {
             <p>{props.title}</p>
             <div className='alpha-input_admin_container_input' style={props.inputStyle}>
                 {props.textArea ?
-                    <textarea placeholder={props.placeholder} />
+                    <textarea onChange={props.onChange} value={props.value} placeholder={props.placeholder} />
                     :
                     <>
                         <input disabled={props.disabled} style={props.inputStyle} onKeyPress={props.onKeyPress} onChange={props.onChange} value={props.value} type={props.type} placeholder={props.placeholder} />

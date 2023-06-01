@@ -1,92 +1,57 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { SearchViewTwo, SideBar, TopBar } from "../../../components";
+import { useSnackbar } from "react-simple-snackbar";
+
+import { Loader, SearchViewTwo, SideBar, TopBar } from "../../../components";
+import { snakbarOptions } from "../../../globalData";
+import { api } from "../../../network/Environment";
+import { Method, callApi } from "../../../network/NetworkManger";
 import './auctionRequest.css'
+
 export default function AuctionRequest() {
   const navigate = useNavigate()
-  const auctionArray = [
-    {
-      id: 1,
-      Product: '2016 Wacker Neuson RD12A',
-      TotalBid: '12',
-      HighestBid: '2300$',
-      BidType: 'Auto Sell',
-      LastDate: '25-11-2022',
-      Action: 'View',
-    },
-    {
-      id: 2,
-      Product: '2016 Wacker Neuson RD12A',
-      TotalBid: '12',
-      HighestBid: '2300$',
-      BidType: 'Auto Sell',
-      LastDate: '25-11-2022',
-      Action: 'View',
-    },
-    {
-      id: 3,
-      Product: '2016 Wacker Neuson RD12A',
-      TotalBid: '12',
-      HighestBid: '2300$',
-      BidType: 'Auto Sell',
-      LastDate: '25-11-2022',
-      Action: 'View',
-    },
-    {
-      id: 4,
-      Product: '2016 Wacker Neuson RD12A',
-      TotalBid: '12',
-      HighestBid: '2300$',
-      BidType: 'Auto Sell',
-      LastDate: '25-11-2022',
-      Action: 'View',
-    },
-    {
-      id: 5,
-      Product: '2016 Wacker Neuson RD12A',
-      TotalBid: '12',
-      HighestBid: '2300$',
-      BidType: 'Auto Sell',
-      LastDate: '25-11-2022',
-      Action: 'View',
-    },
-    {
-      id: 6,
-      Product: '2016 Wacker Neuson RD12A',
-      TotalBid: '12',
-      HighestBid: '2300$',
-      BidType: 'Auto Sell',
-      LastDate: '25-11-2022',
-      Action: 'View',
-    },
-    {
-      id: 7,
-      Product: '2016 Wacker Neuson RD12A',
-      TotalBid: '12',
-      HighestBid: '2300$',
-      BidType: 'Auto Sell',
-      LastDate: '25-11-2022',
-      Action: 'View',
-    },
-    {
-      id: 8,
-      Product: '2016 Wacker Neuson RD12A',
-      TotalBid: '12',
-      HighestBid: '2300$',
-      BidType: 'Auto Sell',
-      LastDate: '25-11-2022',
-      Action: 'View',
-    },
-  ]
+  const [isLoading, setIsLoading] = useState(false)
+  const [showMessage, hideMessage] = useSnackbar(snakbarOptions)
+  const [auctionArray, setAuctionArray] = useState([])
+
+  useEffect(() => {
+    getRequestsDetail();
+  }, []);
+
+  const getRequestsDetail = async () => {
+    setIsLoading(true)
+    try {
+      const endPoint = api.sellerDashboard + `?search=`;
+      await callApi(Method.GET, endPoint, null,
+        res => {
+          if (res?.status === 200) {
+            setIsLoading(false)
+            setAuctionArray(res?.data?.productsForAuction)
+          }
+          else {
+            setIsLoading(false)
+            showMessage(res?.message)
+          }
+        },
+        err => {
+          showMessage(err.message)
+          setIsLoading(false);
+        });
+    } catch (error) {
+      setIsLoading(false);
+      console.log(error);
+    }
+  }
 
   return (
     <div className="alpha-dashboard-main_container">
       <SideBar />
+      <Loader loading={isLoading} />
       <div className="alpha-dashboard-top_bar_main_container">
         <TopBar />
         <div className="alpha-shop-container">
           <div className="alpha-shop-title_view">
-            <h1>Auction</h1>
+            <h1>Auction Request</h1>
             <SearchViewTwo />
             <div />
           </div>
@@ -95,7 +60,6 @@ export default function AuctionRequest() {
             <div className="alpha-shop_divider_two" />
             <div className="alpha-shop_divider_three" />
           </div>
-
           {auctionArray.length > 0 ?
             <div className="alpha_payment_history_table_view" style={{ overflowX: 'hidden' }}>
               <table>
@@ -111,21 +75,21 @@ export default function AuctionRequest() {
                   </tr>
                 </thead>
                 <tbody >
-                  {auctionArray.map((item) => {
+                  {auctionArray?.map((item, index) => {
+                    const date = new Date(item?.auctionEndDate)
                     return (
-                      <tr key={item.id}>
-                        <td data-label={''} style={{ paddingLeft: 20, }}>-{item.id}</td>
-                        <td data-label={'Product'} className={'alpha_rent_req_title_style'}>{item.Product}</td>
-                        <td data-label={'Total Bid'} >{item.TotalBid}</td>
-                        <td data-label={'Highest Bid'} >{item.HighestBid}</td>
-                        <td data-label={'Bid Type'} >{item.BidType}</td>
-                        <td data-label={'Last Date'}  >{item.LastDate}</td>
-                        <td onClick={() => navigate('/auctionrequestdetail')} style={{ color: '#4482FF', cursor: 'pointer' }} data-label={'Action'} >{item.Action}</td>
+                      <tr key={index}>
+                        <td data-label={''} style={{ paddingLeft: 20, }}>-{index + 1}</td>
+                        <td data-label={'Product'} className={'alpha_rent_req_title_style'}>{item?.productName}</td>
+                        <td data-label={'Total Bid'} >{item?.bids?.length}</td>
+                        <td data-label={'Highest Bid'} >${item?.highestBid?.amount ? item?.highestBid?.amount : 0}</td>
+                        <td data-label={'Bid Type'} >Manual Sell</td>
+                        <td data-label={'Last Date'}  >{date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear()}</td>
+                        <td onClick={() => navigate('/auctionrequestdetail', { state: { data: item } })} style={{ color: '#4482FF', cursor: 'pointer' }} data-label={'Action'} >View</td>
                       </tr>
                     )
                   })}
                 </tbody>
-
               </table>
             </div>
             :

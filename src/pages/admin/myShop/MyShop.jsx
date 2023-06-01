@@ -1,121 +1,59 @@
-import React from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { DeleteProductModel, MembershipModel, PaymentModel, SearchView, SideBar, TopBar } from "../../../components";
+import { useSnackbar } from "react-simple-snackbar";
+
+import { Loader, SearchView, SideBar, TopBar } from "../../../components";
+import { api } from "../../../network/Environment";
+import { Method, callApi } from "../../../network/NetworkManger";
+import { snakbarOptions } from "../../../globalData";
 import './myShop.css'
+
 export default function MyShop() {
   const navigate = useNavigate()
-  const [showDeleteModel, setShowDeleteModel] = useState(false)
-  const [membershipModel, setMembershipModel] = useState(true)
-  const [chargesView, setChargesView] = useState(false)
-  const [secondPlan, setSecondPlan] = useState(false)
-  const [paymentModel, setPaymentModel] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+  const [storeProducts, setStoreProducts] = useState([])
+  const [showMessage, hideMessage] = useSnackbar(snakbarOptions)
 
-  const [selectedId, setSelectedId] = useState({ id: 0 })
-  const [myProductsArray, setMyProductArray] = useState([
-    {
-      id: 1,
-      title: '2016 Wacker Neuson RD12A Double Drum Roller',
-      condition: 'New',
-      inStock: 3,
-      price: '200$',
-      type: 'Machine',
-    },
-    {
-      id: 2,
-      title: 'Carry Deck Crane TS20',
-      condition: 'Used',
-      inStock: 3,
-      price: '-',
-      type: 'Machine',
-    },
-    {
-      id: 3,
-      title: 'Break Kits Truck TS20',
-      condition: 'New',
-      inStock: 3,
-      price: '200$',
-      type: 'Spare Parts',
-    },
-    {
-      id: 4,
-      title: '2016 Wacker Neuson RD12A Double Drum Roller',
-      condition: 'Used',
-      inStock: 3,
-      price: '200$',
-      type: 'Machine',
-    },
-    {
-      id: 5,
-      title: 'Gantry Cranes & Lifts',
-      condition: 'Used',
-      inStock: 3,
-      price: '-',
-      type: 'Machine',
-    },
-    {
-      id: 6,
-      title: 'Wheel Hub Seal Kits Truck',
-      condition: 'New',
-      inStock: 3,
-      price: '200$',
-      type: 'Spare Parts',
-    },
-    {
-      id: 7,
-      title: 'Carry Deck Crane TS20',
-      condition: 'Used',
-      inStock: 3,
-      price: '200$',
-      type: 'Machine',
-    },
-    {
-      id: 8,
-      title: 'Gantry Cranes & Lifts',
-      condition: 'New',
-      inStock: 3,
-      price: '200$',
-      type: 'Machine',
-    },
+  useEffect(() => {
+    getStoreProducts();
+  }, []);
 
-    {
-      id: 9,
-      title: 'Break Kits Truck TS20',
-      condition: 'New',
-      inStock: 3,
-      price: '-',
-      type: 'Spare Parts',
-    },
-    {
-      id: 10,
-      title: 'Wheel Hub Seal Kits Truck ',
-      condition: 'New',
-      inStock: 3,
-      price: '200$',
-      type: 'Spare Parts',
-    },
-  ])
-
-  const deleteProduct = () => {
-    const array = [...myProductsArray]
-    let remove = array.filter((item) => item.id !== selectedId.id)
-    setMyProductArray(remove)
-    setShowDeleteModel(false)
+  const getStoreProducts = async () => {
+    setIsLoading(true)
+    try {
+      const endPoint = api.product;
+      await callApi(Method.GET, endPoint, null,
+        res => {
+          if (res?.status === 200) {
+            setIsLoading(false)
+            setStoreProducts(res?.data?.products)
+          }
+          else {
+            setIsLoading(false)
+            showMessage(res?.message)
+          }
+        },
+        err => {
+          showMessage(err.message)
+          setIsLoading(false);
+        });
+    } catch (error) {
+      setIsLoading(false);
+      console.log(error);
+    }
   }
 
   return (
     <div className="alpha-dashboard-main_container">
       <SideBar />
-      {paymentModel && <PaymentModel admin onClick={() => setPaymentModel(false)} onClickClose={() => setPaymentModel(false)} />}
-      {membershipModel && <MembershipModel admin={true} secondPlan={secondPlan} chargesView={chargesView} onClick={() => [secondPlan ? [setMembershipModel(false), setPaymentModel(true)] : chargesView ? setSecondPlan(true) : setChargesView(!chargesView)]} onClickClose={() => setMembershipModel(false)} />}
-      {showDeleteModel && <DeleteProductModel onClick={() => deleteProduct()} onClickCancel={() => [setSelectedId({ id: 0 }), setShowDeleteModel(false)]} />}
+      <Loader loading={isLoading} />
       <div className="alpha-dashboard-top_bar_main_container">
         <TopBar />
         <div className="alpha-shop-container">
           <div className="alpha-shop-title_view">
             <h1>Your Shop</h1>
             <SearchView />
-            <div onClick={() => navigate('/addproduct', { state: { screen: 'add' } })} className="alpha_my_Shop-add_product_button_view">
+            <div onClick={() => navigate('/addproduct')} className="alpha_my_Shop-add_product_button_view">
               <h5>+ Add Product</h5>
             </div>
           </div>
@@ -124,8 +62,7 @@ export default function MyShop() {
             <div className="alpha-shop_divider_two" />
             <div className="alpha-shop_divider_three" />
           </div>
-
-          {myProductsArray.length > 0 ?
+          {storeProducts.length > 0 ?
             <div className="alpha_my_shop_table_view" style={{ overflowX: 'hidden' }}>
               <table>
                 <thead>
@@ -140,30 +77,30 @@ export default function MyShop() {
                   </tr>
                 </thead>
                 <tbody >
-
-                  {myProductsArray.map((item) => {
+                  {storeProducts.map((item, index) => {
                     return (
                       <tr>
-                        <td data-label={''} >-{item.id}</td>
-                        <td data-label={'Name'} className={'alpha_my_shop_title_style'}>{item.title}</td>
+                        <td data-label={''} >-{index + 1}</td>
+                        <td data-label={'Name'} className={'alpha_my_shop_title_style'}>{item?.productName}</td>
                         <td data-label={'Condition'}> <div className="alpha-my_shop-table_data_new_view">
-                          <h6>{item.condition}</h6>
+                          <h6>{item?.equipmentType}</h6>
                         </div>
                         </td>
-                        <td data-label={'In Stock'} >{item.inStock}</td>
-                        <td data-label={'Price'} >{item.price}</td>
-                        <td data-label={'Type'} >{item.type}</td>
+                        <td data-label={'In Stock'} >{item?.stock}</td>
+                        <td data-label={'Price'} >${item?.price}</td>
+                        <td data-label={'Type'} >{item?.productType}</td>
                         <td data-label={'Action'}><div className="alpha-my_shop-table_data_edit_view">
-                          <h5 onClick={() => navigate('/addproduct', { state: { screen: 'edit' } })}>Edit</h5>
+                          <h5 onClick={() => navigate('/editproduct', { state: { data: item } })}
+                          >Edit</h5>
                           <h5
-                            onClick={() => [setShowDeleteModel(true), setSelectedId(item)]}>
+                          //onClick={() => [setShowDeleteModel(true)]}
+                          >
                             Delete</h5>
                         </div></td>
                       </tr>
                     )
                   })}
                 </tbody>
-
               </table>
             </div>
             :

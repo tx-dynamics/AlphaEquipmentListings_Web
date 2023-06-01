@@ -1,5 +1,9 @@
+import moment from "moment";
 import { dummyFour } from "../assets/icons";
 import { store } from "../redux/store";
+const AWS = require('aws-sdk');
+const s3 = new AWS.S3({ region: 'us-east-2' });
+
 
 export const combineDateAndTime = (date, time) => {
     const mins = ("0" + time.getMinutes()).slice(-2);
@@ -80,9 +84,49 @@ export const upload = (cb, loader) => evt => {
     loader(true)
     var myHeaders = new Headers();
     myHeaders.append("Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MmU1YWQ5Y2ZjN2JlZjE3ZjFkOTkxNCIsImlhdCI6MTY4MTEyMDU0NCwiZXhwIjoxNjg4ODk2NTQ0fQ.MwVbniYhtKpSyleEJwCJ_z6GKP9wlg4JEszWOIbOTsU");
-
+    const data = {
+        region: 'us-east-2',
+        accessKeyId: 'AKIASZQZ2QP4ZJHAHNS5',
+        secretAccessKey: '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',
+        Bucket: "alpha-equipment-bucket",
+        signatureVersion: 'v4',
+    }
     var formdata = new FormData();
     formdata.append("file", file);
+    formdata.append("data", JSON.stringify(data));
+
+    var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: formdata,
+        redirect: 'follow'
+    };
+    fetch("http://ec2-18-189-194-242.us-east-2.compute.amazonaws.com/user/upload", requestOptions)
+        .then(response => response.json())
+        .then(data => {
+            loader(false)
+            const url = data?.data?.url
+            console.log(url, '11111111', file);
+            cb(url)
+        })
+        .catch(error => console.log('error', error));
+}
+export const uploadTwo = (data, cb) => {
+    const file = data
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MmU1YWQ5Y2ZjN2JlZjE3ZjFkOTkxNCIsImlhdCI6MTY4MTEyMDU0NCwiZXhwIjoxNjg4ODk2NTQ0fQ.MwVbniYhtKpSyleEJwCJ_z6GKP9wlg4JEszWOIbOTsU");
+
+    const value = {
+        region: 'us-east-2',
+        accessKeyId: 'AKIASZQZ2QP4ZJHAHNS5',
+        secretAccessKey: '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',
+        Bucket: "alpha-equipment-bucket",
+        signatureVersion: 'v4',
+    }
+    var formdata = new FormData();
+    formdata.append("file", file);
+    formdata.append("data", JSON.stringify(value));
+
 
     var requestOptions = {
         method: 'POST',
@@ -91,12 +135,33 @@ export const upload = (cb, loader) => evt => {
         redirect: 'follow'
     };
 
-    fetch("https://bd2mxvi3ra.us-east-2.awsapprunner.com/upload", requestOptions)
+    fetch("http://ec2-18-189-194-242.us-east-2.compute.amazonaws.com/user/upload", requestOptions)
         .then(response => response.json())
         .then(data => {
-            loader(false)
-            const url = data.url
+            const url = data?.data?.url
             cb(url)
         })
         .catch(error => console.log('error', error));
+
 }
+
+// export const uploadFilesToS3 = async (files) => {
+//     const uploadPromises = files.map((file, index) => {
+//         const params = {
+//             Bucket: 'alpha-equipment-bucket',
+//             accessKeyId: 'AKIASZQZ2QP4ZJHAHNS5',
+//             secretAccessKey: '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',
+//             Key: `file-${index}.jpg`, // Provide a unique key for each file
+//             Body: file,
+//         };
+
+//         return s3.upload(params).promise();
+//     });
+
+//     try {
+//         const uploadResults = await Promise.all(uploadPromises);
+//         console.log('Upload successful:', uploadResults);
+//     } catch (error) {
+//         console.error('Error uploading files:', error);
+//     }
+// };

@@ -1,151 +1,30 @@
 import React, { useEffect, useState } from "react";
-import { dummyFour, dummyOne, dummyThree, emoji, send, dummyTwo, user, document } from "../../../assets/icons";
-import { Loader, SideBar, TopBar } from "../../../components";
-import './chatAdmin.css'
-import { useNavigate } from "react-router-dom";
-import { store } from "../../../redux/store";
 import socketIO from "socket.io-client";
+
+import { emoji, send, document } from "../../../assets/icons";
+import { Loader, SideBar, TopBar } from "../../../components";
+import { store } from "../../../redux/store";
 import { BASE_URL } from "../../../network/Environment";
+import './chatAdmin.css'
 const socket = socketIO(BASE_URL);
 
 export default function ChatAdmin() {
-  const [drawerValue, setDrawerValue] = useState(-500)
-  const navigate = useNavigate()
-  const [message, setMessage] = useState("");
   const userData = store.getState().userData.userData
+  const [drawerValue, setDrawerValue] = useState(-500)
+  const [message, setMessage] = useState("");
   const [inboxesData, setInboxesData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-
   const [selectedChat, setSelectedChat] = useState({
     id: 1,
     messagesArray: [],
   });
-  const userListArray = [
-    {
-      id: 1,
-      image: dummyOne,
-      name: 'Aadam Gabriel',
-      lastMessage: 'Thanks',
-      date: '04:22 PM',
-      counter: 0,
-      online: true
-    },
-    {
-      id: 2,
-      image: dummyTwo,
-      name: 'Robert',
-      lastMessage: 'Yeah Sure!',
-      date: '04:22 PM',
-      counter: 0,
-      online: false
-
-    },
-    {
-      id: 3,
-      image: dummyThree,
-      name: 'Downey',
-      lastMessage: 'Yeah Sure!',
-      date: '04:22 PM',
-      counter: 12,
-      online: true
-
-    },
-    {
-      id: 4,
-      image: user,
-      name: 'Robert',
-      lastMessage: 'Yeah Sure!',
-      date: '04:22 PM',
-      counter: 0,
-      online: false
-
-    },
-    {
-      id: 5,
-      image: dummyOne,
-      name: 'Downey',
-      lastMessage: 'Thanks',
-      date: '04:22 PM',
-      counter: 0,
-      online: false
-
-    },
-    {
-      id: 6,
-      image: dummyThree,
-      name: 'Aadam Gabriel',
-      lastMessage: 'Yeah Sure!',
-      date: '04:22 PM',
-      counter: 0,
-      online: false
-
-    },
-    {
-      id: 7,
-      image: dummyFour,
-      name: 'Robert',
-      lastMessage: 'Yeah Sure!',
-      date: '04:22 PM',
-      counter: 0,
-      online: false
-
-    },
-    {
-      id: 8,
-      image: dummyOne,
-      name: 'Downey',
-      lastMessage: 'Thanks',
-      date: '04:22 PM',
-      counter: 0,
-      online: false
-
-    },
-    {
-      id: 9,
-      image: dummyOne,
-      name: 'Aadam Gabriel',
-      lastMessage: 'Thanks',
-      date: '04:22 PM',
-      counter: 0,
-      online: false
-
-    },
-
-  ]
-  const userChatArray = [
-    {
-      id: 1,
-      image: dummyFour,
-      message: 'Welcome',
-      date: '11:25 AM',
-      userType: 'sender'
-    },
-    {
-      id: 2,
-      image: dummyFour,
-      message: '?',
-      date: '11:25 AM',
-      userType: 'sender'
-    },
-    {
-      id: 3,
-      image: dummyThree,
-      message: 'Thanks',
-      date: '11:25 AM',
-      userType: 'receiver'
-    }
-  ]
-
 
   useEffect(() => {
     if (!userData._id) return;
     setIsLoading(true);
-
     socket.emit("user-enter", { userId: userData._id });
     socket.emit("get-inboxes", { userId: userData._id });
-
     let first = true;
-
     socket.on("inboxes", (data) => {
       const inboxes = data.data.inboxes;
       socket.emit("get-messages", { userId: userData._id, inbox: inboxes[0].id });
@@ -155,7 +34,6 @@ export default function ChatAdmin() {
             ...message,
           };
         });
-
         const newinboxes = inboxes.map((inbox) => {
           return {
             id: inbox.id,
@@ -169,13 +47,10 @@ export default function ChatAdmin() {
         newinboxes.forEach((inbox) => {
           if (inbox.id == selectedChat.id) setSelectedChat(inbox);
         });
-
         setSelectedChat(newinboxes[0]);
         setIsLoading(false);
-
         first = false;
       });
-
       return () => {
         socket.removeAllListeners("inboxes");
         socket.removeAllListeners("messages");
@@ -184,8 +59,6 @@ export default function ChatAdmin() {
     return () =>
       socket.emit('user-leave', { "userId": userData._id });
   }, [userData]);
-
-
 
   const sendMessage = () => {
     socket.emit("send-message", {
@@ -226,7 +99,6 @@ export default function ChatAdmin() {
       setInboxesData(mapRes);
       setSelectedChat(singleChat);
       setIsLoading(false);
-
     });
   }
 
@@ -278,12 +150,10 @@ export default function ChatAdmin() {
                       <h1>No inboxes found</h1>
                     </div>
                   }
-
                 </div>
               </div>
               <div className="alpha_chat_buyer_divider" />
             </div>
-
             <div className="alpha_chat_buyer_chat_detail_top_view">
               <div className="alpha_chat_buyer_drawer_view" style={{ left: drawerValue }}>
                 <div className="alpha-chat_buyer-user_list-top_view_drawer">
@@ -326,7 +196,6 @@ export default function ChatAdmin() {
                           <h1>No inboxes found</h1>
                         </div>
                       }
-
                     </div>
                   </div>
                   <div className="alpha_chat_buyer_divider" />
@@ -379,7 +248,6 @@ export default function ChatAdmin() {
                       <img src={send} />
                     </div>
                   </div>
-
                 </>
                 :
                 <div className="alpha_chat_empty_view">
