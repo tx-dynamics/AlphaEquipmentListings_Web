@@ -134,12 +134,8 @@ export default function AddProduct() {
         additionalImages: additionalImages,
         message: pageFourData?.message
       };
-      // setIsLoading(false)
-      console.log(data, '2122');
-      // return
       await callApi(Method.POST, endPoint, data,
         res => {
-          console.log(res, '5555555');
 
           if (res?.status === 200) {
             setIsLoading(false)
@@ -230,9 +226,11 @@ export default function AddProduct() {
         controlImages: controlStationImages,
         engineImages: engineImages,
         chassisImages: chassisImages,
-        undercarrigeImages: undercarriageImage
+        undercarrigeImages: undercarriageImage,
+        startDate: pageOneData?.startDate,
+        startTime: pageOneData?.startTime,
+        selectedEndDate: pageOneData?.selectedEndDate
       };
-      console.log(data, '----');
       await callApi(Method.POST, endPoint, data,
         res => {
           console.log(res, '22222');

@@ -56,7 +56,7 @@ export default function WalletAdmin() {
 
   const verifyDetail = async (data) => {
     setWithdrawModel(false)
-    if (data?.amount < user?.balance) {
+    if (parseInt(data?.amount) <= balance) {
       try {
         setIsLoading(true);
         const endPoint = api.sendAgainSignupOtp
@@ -165,6 +165,7 @@ export default function WalletAdmin() {
                   <tbody >
                     {transactionHistory?.map((item, index) => {
                       const date = new Date(item?.createdAt)
+                      // console.log(item);
                       return (
                         <tr key={index}>
                           <td data-label={'Id'} className="alpha_payment_history_padding_left alpha_wallet_id_style" >{index + 1}-</td>

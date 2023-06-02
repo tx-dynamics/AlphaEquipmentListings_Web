@@ -142,7 +142,7 @@ export default function FinancingStepTwoAdmin(props) {
                         type={"file"}
                         style={{ display: "none" }}
                     />
-                    <img onClick={() => document.getElementById("selectFile").click()} src={addImage} className={'alpha_finance_steps_admin_add_image'} alt={''} />
+                    <img onClick={() => type === 'edit' ? null : document.getElementById("selectFile").click()} src={addImage} className={'alpha_finance_steps_admin_add_image'} alt={''} />
                     {images.map((image) => {
                         return (
                             <img src={image} className={'alpha_finance_steps_admin_image'} alt={''} />

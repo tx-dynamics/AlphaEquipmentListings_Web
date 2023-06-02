@@ -6,6 +6,8 @@ import { Loader, SideBar, TopBar } from "../../../components";
 import { store } from "../../../redux/store";
 import { BASE_URL } from "../../../network/Environment";
 import './chatAdmin.css'
+import { useSnackbar } from "react-simple-snackbar";
+import { snakbarOptions } from "../../../globalData";
 const socket = socketIO(BASE_URL);
 
 export default function ChatAdmin() {
@@ -13,6 +15,7 @@ export default function ChatAdmin() {
   const [drawerValue, setDrawerValue] = useState(-500)
   const [message, setMessage] = useState("");
   const [inboxesData, setInboxesData] = useState([]);
+  const [showMessage, hideMessage] = useSnackbar(snakbarOptions)
   const [isLoading, setIsLoading] = useState(false);
   const [selectedChat, setSelectedChat] = useState({
     id: 1,
@@ -27,30 +30,37 @@ export default function ChatAdmin() {
     let first = true;
     socket.on("inboxes", (data) => {
       const inboxes = data.data.inboxes;
-      socket.emit("get-messages", { userId: userData._id, inbox: inboxes[0].id });
-      socket.on("messages", (data) => {
-        const messagesArray = data.data.messages.map((message) => {
-          return {
-            ...message,
-          };
+      if (inboxes?.length > 0) {
+        socket.emit("get-messages", { userId: userData._id, inbox: inboxes[0].id });
+        socket.on("messages", (data) => {
+          const messagesArray = data.data.messages.map((message) => {
+            return {
+              ...message,
+            };
+          });
+          const newinboxes = inboxes.map((inbox) => {
+            return {
+              id: inbox.id,
+              title: inbox.name,
+              message: inbox.lastMessage,
+              image: inbox.image,
+              messagesArray,
+            };
+          });
+          setInboxesData(newinboxes);
+          newinboxes.forEach((inbox) => {
+            if (inbox.id == selectedChat.id) setSelectedChat(inbox);
+          });
+          setSelectedChat(newinboxes[0]);
+          setIsLoading(false);
+          first = false;
         });
-        const newinboxes = inboxes.map((inbox) => {
-          return {
-            id: inbox.id,
-            title: inbox.name,
-            message: inbox.lastMessage,
-            image: inbox.image,
-            messagesArray,
-          };
-        });
-        setInboxesData(newinboxes);
-        newinboxes.forEach((inbox) => {
-          if (inbox.id == selectedChat.id) setSelectedChat(inbox);
-        });
-        setSelectedChat(newinboxes[0]);
+      }
+      else {
         setIsLoading(false);
-        first = false;
-      });
+        showMessage('No data found')
+      }
+
       return () => {
         socket.removeAllListeners("inboxes");
         socket.removeAllListeners("messages");
@@ -130,7 +140,7 @@ export default function ChatAdmin() {
                             </div>
                             <div className="alpha_chat_buyer_user_list_item_name_view">
                               <h2>{item.title}</h2>
-                              <h3>Message: {item.message}</h3>
+                              <h3>Message: {item.message === 'Hidden Message' ? '' : item?.message}</h3>
                             </div>
                             <div className="alpha_chat_buyer_user_list_item_time_view">
                               <h4>{item.date}</h4>
@@ -212,21 +222,27 @@ export default function ChatAdmin() {
                       const finalTime = new Date(item?.createdAt)
                       return (
                         item?.sender?._id !== userData?._id ?
-                          <div key={index} className="alpha_chat_buyer-chat_detail_message_view_one">
-                            <img src={selectedChat?.image} />
-                            <div>
-                              <h2>{item.message}</h2>
-                              <h3>{finalTime.getHours()}:{finalTime.getMinutes()}</h3>
+                          (item.type !== 'hidden' &&
+                            <div key={index} className="alpha_chat_buyer-chat_detail_message_view_one">
+                              <img src={selectedChat?.image} />
+                              <div>
+                                <h2>{item.message}</h2>
+                                <h3>{finalTime.getHours()}:{finalTime.getMinutes()}</h3>
+                              </div>
                             </div>
-                          </div>
+                          )
+
                           :
-                          <div key={item.id} className="alpha_chat_buyer-chat_detail_message_view_two">
-                            <div>
-                              <h2>{item.message}</h2>
-                              <h3>{finalTime.getHours()}:{finalTime.getMinutes()}</h3>
+                          (item.type !== 'hidden' &&
+                            <div key={item.id} className="alpha_chat_buyer-chat_detail_message_view_two">
+                              <div>
+                                <h2>{item.message}</h2>
+                                <h3>{finalTime.getHours()}:{finalTime.getMinutes()}</h3>
+                              </div>
+                              <img src={item?.sender?.image} />
                             </div>
-                            <img src={item?.sender?.image} />
-                          </div>
+                          )
+
                       )
                     }).reverse()}
                   </div>

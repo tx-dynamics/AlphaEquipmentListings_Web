@@ -51,8 +51,8 @@ export default function AuctionRequest() {
         <TopBar />
         <div className="alpha-shop-container">
           <div className="alpha-shop-title_view">
-            <h1>Auction Request</h1>
-            <SearchViewTwo />
+            <h1>Auction</h1>
+            {/* <SearchViewTwo /> */}
             <div />
           </div>
           <div className="alpha-shop_dividers_top_view">

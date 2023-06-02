@@ -147,6 +147,7 @@ export default function ProfileAdmin() {
   }
 
   const verifyDeleteOtp = async (otp) => {
+    console.log(otp);
     setOtpModel(false)
     try {
       setIsLoading(true);

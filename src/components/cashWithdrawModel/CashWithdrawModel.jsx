@@ -3,6 +3,7 @@ import { crossCircleWhite } from '../../assets/icons'
 import TextInputThree from '../textInputThree/TextInputThree'
 import TextInputTwo from '../textInputTwo/TextInputTwo'
 import './cashWithdrawModel.css'
+import { store } from '../../redux/store'
 
 export default function CashWithdrawModel(props) {
     const [name, setName] = useState('')

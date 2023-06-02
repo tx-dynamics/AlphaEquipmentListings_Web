@@ -43,46 +43,135 @@ export default function EditProduct() {
   ])
 
   const next = (data) => {
-    // const body = document.querySelector('#steps');
-    // body.scrollIntoView({
-    //   behavior: 'smooth'
-    // }, 500)
+    const body = document.querySelector('#steps');
+    body.scrollIntoView({
+      behavior: 'smooth'
+    }, 500)
 
-    // if (activeIndex === 3) {
-    //   pageOneData?.productType.title === 'Machine' ?
-    //     null
-    //     :
-    //     null
-    // }
-    // else {
-    //   const array = [...addProductStepsArray]
-    //   array[activeIndex].status = 'completed'
-    //   array[activeIndex + 1].status = 'inprogress'
-    //   setAddProductStepsArray(array)
-    //   setActiveIndex(activeIndex + 1)
-    // }
+    if (activeIndex === 3) {
+      pageOneData?.productType.title === 'Machine' ?
+        addMachineToStore(data)
+        :
+        addsparePartToStore(data)
+    }
+    else {
+      const array = [...addProductStepsArray]
+      array[activeIndex].status = 'completed'
+      array[activeIndex + 1].status = 'inprogress'
+      setAddProductStepsArray(array)
+      setActiveIndex(activeIndex + 1)
+    }
   }
 
   const back = () => {
-    // const body = document.querySelector('#steps');
-    // body.scrollIntoView({
-    //   behavior: 'smooth'
-    // }, 500)
-    // const array = [...addProductStepsArray]
-    // array[activeIndex].status = 'empty'
-    // array[activeIndex - 1].status = 'inprogress'
-    // setAddProductStepsArray(array)
-    // setActiveIndex(activeIndex - 1)
+    const body = document.querySelector('#steps');
+    body.scrollIntoView({
+      behavior: 'smooth'
+    }, 500)
+    const array = [...addProductStepsArray]
+    array[activeIndex].status = 'empty'
+    array[activeIndex - 1].status = 'inprogress'
+    setAddProductStepsArray(array)
+    setActiveIndex(activeIndex - 1)
   }
 
 
+  const addsparePartToStore = async (value) => {
+    setIsLoading(true)
+    try {
+      const endPoint = api.product + `/${state?.data?._id}`;
+      const data = {
+        productType: pageOneData?.productType?.title,
+        equipmentType: pageOneData?.equipmentType?.title,
+        select: pageOneData?.select?.title,
+        price: pageOneData?.startingPrice,
+        productName: pageOneData?.name,
+        displayTitle: pageOneData?.displayTitle,
+        location: pageTwoData?.location,
+        stock: pageTwoData?.stock,
+        features: pageTwoData?.features,
+        catelougeNote: pageTwoData?.catelougeNote,
+        equipmentType2: pageTwoData?.equipmentType2,
+        message: value?.message
+      };
+      // console.log(data);
+      // return
+      await callApi(Method.PATCH, endPoint, data,
+        res => {
+          if (res?.status === 200) {
+            setIsLoading(false)
+            setIsModel(true)
+          }
+          else {
+            setIsLoading(false)
+            showMessage(res?.message)
+          }
+        },
+        err => {
+          showMessage(err.message)
+          setIsLoading(false);
+        });
+    } catch (error) {
+      setIsLoading(false);
+      console.log(error);
+    }
+  }
+
+  const addMachineToStore = async (data) => {
+    setIsLoading(true)
+    try {
+      const endPoint = api.product + `/${state?.data?._id}`;
+      const data = {
+        productType: pageOneData?.productType?.title,
+        equipmentType: pageOneData?.equipmentType?.title,
+        select: pageOneData?.select?.title,
+        catogory: pageOneData?.category,
+        subCategory: pageOneData?.subCategory,
+        rentOrSell: pageOneData?.rentOrSell?.title ? pageOneData?.rentOrSell?.title : '',
+        price: pageOneData?.startingPrice,
+        productName: pageOneData?.name,
+        usage: pageOneData?.usage,
+        Mileage: pageOneData?.Mileage,
+        auctionStartDate: pageOneData?.auctionStartDate ? pageOneData?.auctionStartDate : '',
+        auctionEndDate: pageOneData?.auctionEndDate ? pageOneData?.auctionEndDate : '',
+        location: pageTwoData?.location,
+        features: pageTwoData?.features,
+        stock: pageTwoData?.stock,
+        catelougeNote: pageTwoData?.catelougeNote,
+        equipmentType2: pageTwoData?.equipmentType2,
+        equipmentModel: pageTwoData?.equipmentModel,
+        serialNumber: pageThreeData?.serialNumber,
+        odometer: pageThreeData?.odometer,
+      };
+      await callApi(Method.PATCH, endPoint, data,
+        res => {
+          if (res?.status === 200) {
+            setIsLoading(false)
+            setIsModel(true)
+          }
+          else {
+            setIsLoading(false)
+            showMessage(res?.message)
+          }
+        },
+        err => {
+          showMessage(err.message)
+          setIsLoading(false);
+          console.log(err)
+
+        });
+    } catch (error) {
+      setIsLoading(false);
+      console.log(error);
+    }
+  }
+
 
   return (
-    console.log(state.data),
     <div className="alpha-dashboard-main_container">
       <SideBar />
       <Loader loading={isLoading} />
-      {isModel && <SubmitModel onClick={() => navigate(-1)} icon={dotedTick} title={'added successfully'} />}
+      {isModel && <SubmitModel onClick={() => navigate(-1)} icon={dotedTick} title={'updated successfully'} />}
 
       <div className="alpha-dashboard-top_bar_main_container">
         <TopBar />

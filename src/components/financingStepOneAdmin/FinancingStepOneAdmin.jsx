@@ -22,7 +22,6 @@ export default function FinancingStepOneAdmin(props) {
     const [subcategoryArray, setSubCategoryArray] = useState([])
     const [selectedSubCategory, setSelectedSubCategory] = useState({ title: pageData?.subCategory ? pageData?.subCategory : '' })
     const [subCategoryDropDown, setSubCategoryDropDown] = useState(false)
-
     const [selectedProductType, setSelectedProductType] = useState({ title: pageData?.productType?.title ? pageData?.productType?.title : pageData?.productType ? pageData?.productType : 'Machine' })
     const selectedProductTypeArray = [
         {

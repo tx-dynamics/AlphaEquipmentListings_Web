@@ -65,6 +65,29 @@ export const timeAgoDiff = (date1, date2) => {
     var finalInput = `${daysDifference > 1 ? daysDifference + 'd' : ''} ${hoursDifference > 23 ? hoursDifference + 'h' : ''} ${minutesDifference > 1 && minutesDifference}m ago`
     return finalInput
 }
+export const timeAgoDiffTwo = (date) => {
+    const seconds = Math.floor((new Date() - date) / 1000);
+
+    // Define time intervals in seconds
+    const intervals = {
+        year: 31536000,
+        month: 2592000,
+        week: 604800,
+        day: 86400,
+        hour: 3600,
+        minute: 60,
+    };
+
+    // Iterate through the intervals to find the largest unit
+    for (let interval in intervals) {
+        if (seconds >= intervals[interval]) {
+            const count = Math.floor(seconds / intervals[interval]);
+            return count === 1 ? `${count} ${interval} ago` : `${count} ${interval}s ago`;
+        }
+    }
+
+    return 'Just now';
+}
 
 export const formatAMPM = (date) => {
     var hours = date.getHours();

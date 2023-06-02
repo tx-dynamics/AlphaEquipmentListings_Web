@@ -55,6 +55,7 @@ export default function AuctionRequestDetail() {
   }
 
   return (
+    console.log(findStatus),
     <div className="alpha-dashboard-main_container">
       <SideBar />
       <Loader loading={isLoading} />

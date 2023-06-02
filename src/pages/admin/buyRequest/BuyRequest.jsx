@@ -52,7 +52,7 @@ export default function BuyRequest() {
         <div className="alpha-shop-container">
           <div className="alpha-shop-title_view">
             <h1>Buy Request</h1>
-            <SearchViewTwo />
+            {/* <SearchViewTwo /> */}
             <div />
           </div>
           <div className="alpha-shop_dividers_top_view">

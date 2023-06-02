@@ -52,7 +52,7 @@ export default function RentRequest() {
         <div className="alpha-shop-container">
           <div className="alpha-shop-title_view">
             <h1>Rent Request</h1>
-            <SearchViewTwo />
+            {/* <SearchViewTwo /> */}
             <div />
           </div>
           <div className="alpha-shop_dividers_top_view">

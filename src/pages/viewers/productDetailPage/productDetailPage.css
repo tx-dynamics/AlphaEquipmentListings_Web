@@ -620,6 +620,12 @@
     color: #3F3F3F;
 }
 
+.alpha_chat_icon_detail {
+    width: 5rem;
+    height: 5rem;
+    object-fit: contain;
+}
+
 @media screen and (max-width: 1314px) {
     .alpha_detail_page_price_top_view h1 {
         font-size: 30px;
@@ -849,6 +855,11 @@
 
     .alpha_detail_page_price_top_view {
         margin-bottom: 3rem;
+    }
+
+    .alpha_chat_icon_detail {
+        width: 3rem;
+        height: 3rem;
     }
 }
 

@@ -146,7 +146,7 @@ export default function HomePage() {
                   return (
                     <DashboardAuctionView item={item} onClick={() => onClick('/productdetailpage', 'auction', item)} type={1} index={index} />
                   )
-                }))
+                }).slice(0, 6))
                 :
                 <div className="alpha_home_page_no_data">
                   <h2>No auctions found</h2>
@@ -168,7 +168,7 @@ export default function HomePage() {
                   return (
                     <DashboardCategoriesView type={1} onClick={() => onClick('/maincategorypage', 'category', item)} item={item} index={index} />
                   )
-                }))
+                }).slice(0, 8))
                 :
                 <div className="alpha_home_page_no_data">
                   <h3>No categories found</h3>
@@ -191,7 +191,7 @@ export default function HomePage() {
                   return (
                     <DashboardSparePartView item={item} onClick={() => onClick('/productdetailpage', 'spareparts', item)} index={index} />
                   )
-                }))
+                }).slice(0, 15))
                 :
                 <div className="alpha_home_page_no_data">
                   <h3>No spare parts found</h3>
@@ -214,7 +214,7 @@ export default function HomePage() {
                   return (
                     <DashboardAuctionView item={item} onClick={() => onClick('/productdetailpage', 'rented', item)} type={2} index={index} />
                   )
-                }))
+                }).slice(0, 6))
                 :
                 <div className="alpha_home_page_no_data">
                   <h2>No rentable machinary found</h2>

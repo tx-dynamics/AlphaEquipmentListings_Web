@@ -52,7 +52,7 @@ export default function MyShop() {
         <div className="alpha-shop-container">
           <div className="alpha-shop-title_view">
             <h1>Your Shop</h1>
-            <SearchView />
+            {/* <SearchView /> */}
             <div onClick={() => navigate('/addproduct')} className="alpha_my_Shop-add_product_button_view">
               <h5>+ Add Product</h5>
             </div>

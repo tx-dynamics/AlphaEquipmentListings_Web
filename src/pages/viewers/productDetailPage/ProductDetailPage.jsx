@@ -4,8 +4,9 @@ import { useSnackbar } from "react-simple-snackbar";
 import { useDispatch } from "react-redux";
 import { Slide } from 'react-slideshow-image';
 import 'react-slideshow-image/dist/styles.css';
+import socketIO from "socket.io-client";
 
-import { distance, images, hour, pinLocation, sNumber, share, plus, minus, clock, dotedTick } from "../../../assets/icons";
+import { distance, images, hour, pinLocation, sNumber, share, plus, minus, clock, dotedTick, chat } from "../../../assets/icons";
 import { BlogView, ConnectCardModel, Footer, NavBar, PaymentModel, OtpModel, BookingModel, ReviewModel, SubmitModel, Loader } from "../../../components";
 import { activeTab } from "../../../redux/Slices/activeTabSlice";
 import { diffBtwTwoDates, getDistanceFromLatLonInKm } from "../../../helpingMethods";
@@ -13,9 +14,10 @@ import { store } from "../../../redux/store";
 import { snakbarOptions } from "../../../globalData";
 import './productDetailPage.css'
 import { bidData, cartData } from "../../../redux/Slices/cartSlice";
-import { api } from "../../../network/Environment";
+import { BASE_URL, api } from "../../../network/Environment";
 import { Method, callApi } from "../../../network/NetworkManger";
 import { subscriptionModel } from "../../../redux/Slices/userDataSlice";
+const socket = socketIO(BASE_URL);
 export default function ProductDetailPage() {
   const navigate = useNavigate()
   const disPatch = useDispatch();
@@ -35,6 +37,7 @@ export default function ProductDetailPage() {
   const [bidData, setBidData] = useState()
   const [activeType, setActiveType] = useState('')
   const [paymentType, setPaymentType] = useState()
+  const [message, setMessage] = useState("Hidden Message");
 
   const [cardDetail, setCardDetail] = useState()
   const [isLoading, setIsLoading] = useState(false)
@@ -297,8 +300,24 @@ export default function ProductDetailPage() {
     }
   };
 
+  const sendHiddenMessage = () => {
+    setIsLoading(true)
+    // return
+    console.log('asdfasf');
+    socket.emit("send-message", {
+      userId: user._id,
+      to: productData?.user?.id,
+      message,
+      messageType: "hidden",
+      messageTime: new Date(),
+    });
+    setTimeout(() => {
+      setIsLoading(false)
+      navigate('/chatpagebuyer', { state: { data: productData?.user } })
+    }, 1000);
+  }
+
   return (
-    console.log(productData, '3131'),
     <div className="alpha-pro_list_page-main_container">
       <BlogView onClickSubscription={() => navigate('/subscriptionpage')} />
 
@@ -325,7 +344,11 @@ export default function ProductDetailPage() {
         </div>
         <div className="alpha_detail_page_data_top_container">
           <div className="alpha_detail_page_data_container">
-            <h1>{productData?.productName}</h1>
+            <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
+              <h1>{productData?.productName}</h1>
+              <img onClick={() => sendHiddenMessage()} src={chat} className="alpha_chat_icon_detail" />
+            </div>
+
             <div className="alpha-detail_page-location_data_view">
               <div className="alpha-detail_page-location_view">
                 <div className="alpha-detail_page-location_icon_view">
