@@ -319,7 +319,7 @@ export default function ProductDetailPage() {
 
   return (
     <div className="alpha-pro_list_page-main_container">
-      <BlogView onClickSubscription={() => navigate('/subscriptionpage')} />
+      <BlogView />
 
       <NavBar />
       <Loader loading={isLoading} />

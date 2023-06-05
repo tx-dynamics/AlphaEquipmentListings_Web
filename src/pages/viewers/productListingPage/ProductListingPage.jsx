@@ -50,7 +50,7 @@ export default function ProductListingPage() {
 
   return (
     < div className="alpha-pro_list_page-main_container" >
-      <BlogView onClickSubscription={() => navigate('/subscriptionpage')} />
+      <BlogView />
 
       <NavBar />
       <div className="alpha-home_page-container">

@@ -44,7 +44,7 @@ export default function Calculator() {
 
   return (
     <div className="alpha-calculator-main_container">
-      <BlogView onClickSubscription={() => navigate('/subscriptionpage')} />
+      <BlogView />
 
       <NavBar />
       <div className="alpha_detail_page_container">
@@ -76,6 +76,9 @@ export default function Calculator() {
             </div>
             <div>
               <TextInput inputStyle={{ width: 193 }} title={'Mileage'} placeholder={'Enter mileage'} />
+            </div>
+            <div>
+              <TextInput inputStyle={{ width: 193 }} title={'Meter'} placeholder={'Enter meter'} />
             </div>
           </div>
           <div className="alpha-calculator-buttion_view">

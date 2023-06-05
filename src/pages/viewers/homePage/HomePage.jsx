@@ -123,7 +123,7 @@ export default function HomePage() {
 
   return (
     <div className="alpha-home_page-main_container">
-      <BlogView onClickSubscription={() => navigate('/subscriptionpage')} />
+      <BlogView />
       <NavBar onKeyDown={() => setIsSearch(false)} onClickSearch={() => searchProduct()} onChange={(e) => setSearchText(e)} />
       <Loader loading={isLoading} />
       {otpModel && <OtpModel onClick={() => setOtpModel(false)} onClickClose={() => [setOtpModel(false)]} />}

@@ -1,10 +1,17 @@
 import moment from "moment";
 import { dummyFour } from "../assets/icons";
 import { store } from "../redux/store";
-const AWS = require('aws-sdk');
-const s3 = new AWS.S3({ region: 'us-east-2' });
+// const AWS = require('aws-sdk');
+import { Buffer } from "buffer";
+import AWS from 'aws-sdk'
 
+AWS.config.update({
+    accessKeyId: 'AKIASZQZ2QP4ZJHAHNS5',
+    secretAccessKey: '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',
+    region: 'us-east-2'
+});
 
+const S3 = new AWS.S3();
 export const combineDateAndTime = (date, time) => {
     const mins = ("0" + time.getMinutes()).slice(-2);
     const hours = ("0" + time.getHours()).slice(-2);
@@ -100,72 +107,47 @@ export const formatAMPM = (date) => {
     return strTime
 }
 
-
+const uploadImageOnS3 = async (src) => {
+    return new Promise((resolve, reject) => {
+        try {
+            console.log("Hi!")
+            const reader = new FileReader();
+            reader.onload = async () => {
+                console.log("Hiello!")
+                const params = {
+                    Bucket: 'drivebuddyz',
+                    Key: `${10000 + Math.round(Math.random() * 10000)}.png`,
+                    Body: new Buffer(reader.result.replace(/^data:image\/\w+;base64,/, ""), 'base64'),
+                };
+                let res = await S3.upload(params).promise();
+                console.log(res);
+                return resolve(res.Location)
+            }
+            reader.onerror = (e) => console.log("OOPS!", e)
+            reader.readAsDataURL(src)
+        } catch (error) {
+            console.error('Error uploading to S3:', error);
+            reject(error)
+        }
+    })
+}
 export const upload = (cb, loader) => evt => {
     const files = evt.target.files
     const file = files[0]
     loader(true)
-    var myHeaders = new Headers();
-    myHeaders.append("Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MmU1YWQ5Y2ZjN2JlZjE3ZjFkOTkxNCIsImlhdCI6MTY4MTEyMDU0NCwiZXhwIjoxNjg4ODk2NTQ0fQ.MwVbniYhtKpSyleEJwCJ_z6GKP9wlg4JEszWOIbOTsU");
-    const data = {
-        region: 'us-east-2',
-        accessKeyId: 'AKIASZQZ2QP4ZJHAHNS5',
-        secretAccessKey: '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',
-        Bucket: "alpha-equipment-bucket",
-        signatureVersion: 'v4',
-    }
-    var formdata = new FormData();
-    formdata.append("file", file);
-    formdata.append("data", JSON.stringify(data));
-
-    var requestOptions = {
-        method: 'POST',
-        headers: myHeaders,
-        body: formdata,
-        redirect: 'follow'
-    };
-    fetch("http://ec2-18-189-194-242.us-east-2.compute.amazonaws.com/user/upload", requestOptions)
-        .then(response => response.json())
-        .then(data => {
-            loader(false)
-            const url = data?.data?.url
-            console.log(url, '11111111', file);
-            cb(url)
-        })
+    uploadImageOnS3(file).then(url => {
+        loader(false)
+        cb(url)
+    })
         .catch(error => console.log('error', error));
 }
 export const uploadTwo = (data, cb) => {
     const file = data
-    var myHeaders = new Headers();
-    myHeaders.append("Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MmU1YWQ5Y2ZjN2JlZjE3ZjFkOTkxNCIsImlhdCI6MTY4MTEyMDU0NCwiZXhwIjoxNjg4ODk2NTQ0fQ.MwVbniYhtKpSyleEJwCJ_z6GKP9wlg4JEszWOIbOTsU");
-
-    const value = {
-        region: 'us-east-2',
-        accessKeyId: 'AKIASZQZ2QP4ZJHAHNS5',
-        secretAccessKey: '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',
-        Bucket: "alpha-equipment-bucket",
-        signatureVersion: 'v4',
-    }
-    var formdata = new FormData();
-    formdata.append("file", file);
-    formdata.append("data", JSON.stringify(value));
-
-
-    var requestOptions = {
-        method: 'POST',
-        headers: myHeaders,
-        body: formdata,
-        redirect: 'follow'
-    };
-
-    fetch("http://ec2-18-189-194-242.us-east-2.compute.amazonaws.com/user/upload", requestOptions)
-        .then(response => response.json())
-        .then(data => {
-            const url = data?.data?.url
+    uploadImageOnS3(file)
+        .then(url => {
             cb(url)
         })
         .catch(error => console.log('error', error));
-
 }
 
 // export const uploadFilesToS3 = async (files) => {

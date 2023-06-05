@@ -8,6 +8,7 @@ import { api } from "../../../network/Environment";
 import { Method, callApi } from "../../../network/NetworkManger";
 import { useSnackbar } from "react-simple-snackbar";
 import { snakbarOptions } from "../../../globalData";
+import { store } from "../../../redux/store";
 export default function AddProduct() {
   const navigate = useNavigate()
   const { state } = useLocation();
@@ -92,11 +93,6 @@ export default function AddProduct() {
     }
   }, [eqImages, additionalImages])
 
-  // useEffect(() => {
-  //     if (isFocused) {
-  //         store.getState().userData.userData.subscriptionType === 'PRO' ? setIsModel(false) : setIsModel(true)
-  //     }
-  // }, [isFocused])
 
   useEffect(() => {
     if (eqImages.length > 0 && additionalImages.length > 0 && serialNumberImages.length > 0 && controlStationImages.length > 0 && engineImages.length > 0 && chassisImages.length > 0 && undercarriageImage.length > 0) {
@@ -134,9 +130,12 @@ export default function AddProduct() {
         additionalImages: additionalImages,
         message: pageFourData?.message
       };
+      // console.log(data);
+      // setIsLoading(false)
+      // return
       await callApi(Method.POST, endPoint, data,
         res => {
-
+          console.log(res, '----');
           if (res?.status === 200) {
             setIsLoading(false)
             setIsModel(true)

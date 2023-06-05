@@ -125,7 +125,7 @@ export default function Faqs() {
 
   return (
     <div className="alpha-home_page-main_container">
-      <BlogView onClickSubscription={() => navigate('/subscriptionpage')} />
+      <BlogView />
 
       <NavBar />
       <div className="alpha_detail_page_container">

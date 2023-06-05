@@ -184,7 +184,7 @@ export default function Profile() {
 
   return (
     <div className="alpha-home_page-main_container">
-      <BlogView onClickSubscription={() => navigate('/subscriptionpage')} />
+      <BlogView />
 
       <NavBar />
       <Loader loading={isLoading} />

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { drawerIcon, dummyFour, notificationTheme, arrowDownGrey, crossCircle, dashboard, dashboardTheme, logo, logout, messageIcon, messagerTheme, orderStatus, orderStatusTheme, paymentHistory, paymentHistoryTheme, profile, request, requestTheme, shop, shopTheme, walletDark, walletTheme, profileTheme } from "../../assets/icons";
+import { drawerIcon, dummyFour, notificationTheme, arrowDownGrey, crossCircle, dashboard, dashboardTheme, logo, logout, messageIcon, messagerTheme, orderStatus, orderStatusTheme, paymentHistory, paymentHistoryTheme, profile, request, requestTheme, shop, shopTheme, walletDark, walletTheme, profileTheme, subscriptionIcon } from "../../assets/icons";
 import { activeTab } from '../../redux/Slices/activeTabSlice'
 import './topBar.css'
 import { store } from '../../redux/store';
@@ -198,10 +198,9 @@ export default function TopBar() {
                         <h3>{`${date.getDate()} ${monthNames[date.getMonth()]} ${date.getFullYear()}`}</h3>
                     </div>
                 </div>
-
                 <div className="alpha-dashboard-top_bar_profile_top_view">
-                    <div className="alpha-dashboard-top_bar_notification_view">
-                        <img src={notificationTheme} />
+                    <div onClick={() => [disPatch(activeTab('subscription')), navigate('/subscriptionadmin')]} className="alpha-dashboard-top_bar_notification_view">
+                        <img style={{ cursor: 'pointer' }} src={subscriptionIcon} />
                     </div>
                     <h4>{user?.name}</h4>
                     <div className="alpha-dashboard-top_bar_profile_view">

@@ -21,8 +21,20 @@ export default function SideBar(props) {
 
     const navigate = useNavigate();
     const onClick = (type, value) => {
-        disPatch(activeTab(value))
-        navigate(type, { state: { screen: value } })
+        if (value === 'shop') {
+            if (store.getState().userData.userData.subscriptionType === 'PRO') {
+                disPatch(activeTab(value))
+                navigate(type, { state: { screen: value } })
+            }
+            else {
+                showMessage(`Your subscription is ${store.getState().userData.userData.subscriptionType}. Please upgrade your subscription to achieve this feature`)
+            }
+        }
+        else {
+
+            disPatch(activeTab(value))
+            navigate(type, { state: { screen: value } })
+        }
     }
 
     const sideBarItemsArray = [

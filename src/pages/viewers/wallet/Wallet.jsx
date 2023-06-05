@@ -174,7 +174,7 @@ export default function Wallet() {
 
   return (
     <div className="alpha-home_page-main_container">
-      <BlogView onClickSubscription={() => navigate('/subscriptionpage')} />
+      <BlogView />
 
       <NavBar />
       <Loader loading={isLoading} />

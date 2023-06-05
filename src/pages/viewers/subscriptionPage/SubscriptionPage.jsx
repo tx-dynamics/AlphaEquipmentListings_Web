@@ -135,7 +135,7 @@ export default function SubscriptionPage() {
   };
   return (
     < div className="alpha-pro_list_page-main_container" >
-      <BlogView onClickSubscription={() => navigate('/subscriptionpage')} />
+      <BlogView />
       <Loader loading={isLoading} />
       <NavBar />
       {connectCard && <ConnectCardModel onClick={(data) => sendOtp(data)} onClickClose={() => [setConnectCard(false)]} />}

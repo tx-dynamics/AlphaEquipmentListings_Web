@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.74b0f10f.css",
-    "main.js": "/static/js/main.6540c525.js",
+    "main.css": "/static/css/main.68924b6a.css",
+    "main.js": "/static/js/main.6cf94564.js",
     "static/media/authImage.png": "/static/media/authImage.464240a1dbaac0338ca7.png",
     "static/media/landingPageBanner.png": "/static/media/landingPageBanner.035e88f0bdfdc50cceee.png",
     "static/media/dummyFour.png": "/static/media/dummyFour.649d01c439418452c85a.png",
@@ -21,14 +21,15 @@
     "static/media/user.png": "/static/media/user.e57b87b0fe320a996e27.png",
     "static/media/financingOne.png": "/static/media/financingOne.a9af65f0f61e1d3d90b3.png",
     "static/media/logo.png": "/static/media/logo.79353d438d152b7a3758.png",
+    "static/media/subscriptionIcon.png": "/static/media/subscriptionIcon.699d100e5c0df7eef99f.png",
     "static/media/graphImage.png": "/static/media/graphImage.ed3dc9c97e258b08d230.png",
     "static/media/logoutTwo.png": "/static/media/logoutTwo.a1698057c47b1dba1270.png",
     "index.html": "/index.html",
-    "main.74b0f10f.css.map": "/static/css/main.74b0f10f.css.map",
-    "main.6540c525.js.map": "/static/js/main.6540c525.js.map"
+    "main.68924b6a.css.map": "/static/css/main.68924b6a.css.map",
+    "main.6cf94564.js.map": "/static/js/main.6cf94564.js.map"
   },
   "entrypoints": [
-    "static/css/main.74b0f10f.css",
-    "static/js/main.6540c525.js"
+    "static/css/main.68924b6a.css",
+    "static/js/main.6cf94564.js"
   ]
 }

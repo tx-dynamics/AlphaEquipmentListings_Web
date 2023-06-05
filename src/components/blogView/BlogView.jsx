@@ -4,11 +4,16 @@ import { useNavigate } from 'react-router-dom';
 import { mail, phone } from '../../assets/icons'
 import './blogView.css'
 import { activeTab } from '../../redux/Slices/activeTabSlice';
+import { useSnackbar } from 'react-simple-snackbar';
+import { snakbarOptions } from '../../globalData';
+import { store } from '../../redux/store';
 
 export default function BlogView(props) {
 
     const disPatch = useDispatch();
     const navigate = useNavigate();
+    const [showMessage, hideMessage] = useSnackbar(snakbarOptions)
+    const user = store.getState().userData.userData
 
     const onClick = (type, value) => {
         disPatch(activeTab(value))
@@ -28,7 +33,7 @@ export default function BlogView(props) {
                 </div>
             </div>
             <div className="alpha_contact_us_view">
-                <p onClick={props.onClickSubscription}>Subscription</p>
+                <p onClick={() => user ? navigate('/subscriptionpage') : showMessage('You are not login')}>Subscription</p>
                 <p onClick={() => onClick('/blogpage', 'blogpage')}>Blog</p>
                 <p>Contact us</p>
             </div>

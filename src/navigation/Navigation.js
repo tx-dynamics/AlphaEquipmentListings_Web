@@ -46,6 +46,8 @@ const Navigation = () => {
       <Route path="/chatadmin" element={<PrivateRoute><Admin.ChatAdmin /></PrivateRoute>} />
       <Route path="/walletadmin" element={<PrivateRoute><Admin.WalletAdmin /></PrivateRoute>} />
       <Route path="/dashboard" element={<PrivateRoute><Admin.Dashboard /></PrivateRoute>} />
+      <Route path="/subscriptionadmin" element={<PrivateRoute><Admin.SubscriptionAdmin /></PrivateRoute>} />
+
       <Route path="*" element={<Viewers.PageNotFound />} />
     </Routes>
   );
