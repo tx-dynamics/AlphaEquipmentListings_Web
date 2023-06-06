@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { dummyFour, dummyOne, dummyTwo, graphImage } from '../../../assets/icons'
-import { BlogView, Footer, NavBar } from "../../../components";
+import { BlogView, Footer, Loader, NavBar } from "../../../components";
 import './blogDetailPage.css'
 import CustomeInput from "./customInput";
 
 export default function BlogDetailPage() {
   const navigate = useNavigate()
+  const [isLoading, setIsLoading] = useState(false)
 
   const recentArray = [
     {
@@ -39,8 +40,8 @@ export default function BlogDetailPage() {
   return (
     <div className="alpha-home_page-main_container">
       <BlogView />
-
-      <NavBar />
+      <Loader loading={isLoading} />
+      <NavBar loaderValue={(data) => setIsLoading(data)} />
       <div className="alpha-home_page-container">
         <div className="alpha-blogpage_container">
           <div className="alpha-blogpage_top_image_view">

@@ -137,7 +137,7 @@ export default function SubscriptionPage() {
     < div className="alpha-pro_list_page-main_container" >
       <BlogView />
       <Loader loading={isLoading} />
-      <NavBar />
+      <NavBar loaderValue={(data) => setIsLoading(data)} />
       {connectCard && <ConnectCardModel onClick={(data) => sendOtp(data)} onClickClose={() => [setConnectCard(false)]} />}
       {otpModel && <OtpModel onClick={(data) => onPressConfirmOtp(data)} onClickClose={() => [setOtpModel(false)]} />}
       {showModel && <MembershipModel onClick={(data) => onPressContinue(data)} onClickClose={() => setShowModel(false)} price1={selectedPlan?.pricing?.monthly} price2={selectedPlan?.pricing?.yearly} />}

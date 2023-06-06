@@ -124,7 +124,7 @@ export default function HomePage() {
   return (
     <div className="alpha-home_page-main_container">
       <BlogView />
-      <NavBar onKeyDown={() => setIsSearch(false)} onClickSearch={() => searchProduct()} onChange={(e) => setSearchText(e)} />
+      <NavBar loaderValue={(data) => setIsLoading(data)} onKeyDown={() => setIsSearch(false)} onClickSearch={() => searchProduct()} onChange={(e) => setSearchText(e)} />
       <Loader loading={isLoading} />
       {otpModel && <OtpModel onClick={() => setOtpModel(false)} onClickClose={() => [setOtpModel(false)]} />}
       {connectCard && <ConnectCardModel onClick={() => [setOtpModel(true), setConnectCard(false)]} onClickClose={() => [setConnectCard(false)]} />}

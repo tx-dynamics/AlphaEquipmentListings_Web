@@ -10,6 +10,7 @@ import { useSnackbar } from 'react-simple-snackbar';
 import { snakbarOptions } from '../../globalData';
 import { api } from '../../network/Environment';
 import { Method, callApi } from '../../network/NetworkManger';
+import Loader from '../loader/Loader';
 
 export default function NavBar(props) {
 
@@ -28,6 +29,7 @@ export default function NavBar(props) {
     }
 
     const logout = async () => {
+        props.loaderValue(true)
         try {
             const endPoint = api.logout
             const data = {
@@ -40,6 +42,7 @@ export default function NavBar(props) {
                 res => {
                     if (res?.status === 200) {
                         navigate('/', { replace: true })
+                        props.loaderValue(false)
                         disPatch(userData(null));
                         disPatch(accessToken(''));
                         disPatch(refreshToken(''));
@@ -59,6 +62,7 @@ export default function NavBar(props) {
 
     return (
         <div className="alpha-navbar-main_container">
+            <Loader />
             <div className="alpha-navbar-logo_view">
                 <img onClick={() => onClick('/', '')} src={logo} alt={'logo'} />
             </div>

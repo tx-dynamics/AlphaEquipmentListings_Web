@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { addBlack, minusBlack } from "../../../assets/icons";
-import { BlogView, Footer, NavBar, } from "../../../components";
+import { BlogView, Footer, Loader, NavBar, } from "../../../components";
 import './faqs.css'
 import { useNavigate } from "react-router-dom";
 
 export default function Faqs() {
   const navigate = useNavigate()
+  const [isLoading, setIsLoading] = useState(false);
   const [generalTopicArray, setGeneralTopicArray] = useState([
     {
       id: 1,
@@ -126,8 +127,9 @@ export default function Faqs() {
   return (
     <div className="alpha-home_page-main_container">
       <BlogView />
+      <Loader loading={isLoading} />
 
-      <NavBar />
+      <NavBar loaderValue={(data) => setIsLoading(data)} />
       <div className="alpha_detail_page_container">
         <div className="alpha-profile_outer_container">
           <div className="alpha-faqs_top_container">

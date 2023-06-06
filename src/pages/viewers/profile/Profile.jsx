@@ -186,7 +186,7 @@ export default function Profile() {
     <div className="alpha-home_page-main_container">
       <BlogView />
 
-      <NavBar />
+      <NavBar loaderValue={(data) => setIsLoading(data)} />
       <Loader loading={isLoading} />
       {changePModel && <ChangePasswordModel onClick={(data) => [setOldPassword(data), setCreatePModel(true), setChangePModel(false)]} onClickClose={() => setChangePModel(false)} />}
       {createPModel && <CreatePasswordModel onClick={(data) => updatePassword(data)} onClickClose={() => setCreatePModel(false)} />}

@@ -11,7 +11,7 @@ import { accessToken, refreshToken, userData } from '../../redux/Slices/userData
 import { useSnackbar } from 'react-simple-snackbar';
 import { snakbarOptions } from '../../globalData';
 
-export default function TopBar() {
+export default function TopBar(props) {
     const navigate = useNavigate();
     const disPatch = useDispatch();
     const date = new Date()
@@ -107,7 +107,7 @@ export default function TopBar() {
         navigate(type, { state: { screen: value } })
     }
 
-    const logout = async () => {
+    const onClicklogout = async () => {
         try {
             const endPoint = api.logout
             const data = {
@@ -182,7 +182,7 @@ export default function TopBar() {
                         </div>
                         <div className="alpha-side_bar-divider"></div>
                         <div className="alpha-side_bar_bottom_items_view">
-                            <div onClick={() => logout()} className="alpha-side_bar-items_container"  >
+                            <div onClick={() => onClicklogout()} className="alpha-side_bar-items_container"  >
                                 <img src={logout} />
                                 <h2>Logout</h2>
                             </div>

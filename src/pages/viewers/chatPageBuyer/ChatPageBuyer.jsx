@@ -144,7 +144,7 @@ export default function ChatPageBuyer() {
   return (
     <div className="alpha-home_page-main_container">
       <BlogView />
-      <NavBar />
+      <NavBar loaderValue={(data) => setIsLoading(data)} />
       <Loader loading={isLoading} />
       <div className="alpha-home_page-container">
         <div className="alpha-blogpage_container">

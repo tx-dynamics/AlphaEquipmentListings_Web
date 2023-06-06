@@ -321,7 +321,7 @@ export default function ProductDetailPage() {
     <div className="alpha-pro_list_page-main_container">
       <BlogView />
 
-      <NavBar />
+      <NavBar loaderValue={(data) => setIsLoading(data)} />
       <Loader loading={isLoading} />
       {bookingModel && <BookingModel data={productData} onClickClose={() => setBookingModel(false)} onClick={(data) => [setSelectedPrice(data?.price), setSelectedDate1(data?.date1), setSelectedDate2(data?.date2), setPaymentModel(true), setBookingModel(false)]} />}
       {paymentModel && <PaymentModel onClickClose={() => setPaymentModel(false)} onClick={(value) => [setPaymentType(value.id), value.id === 1 ? [setReviewModel(true), setPaymentModel(false)] : value.id === 2 ? [setConnectCard(true), setPaymentModel(false)] : value.id === 3 ? [setPaymentModel(false), [navigate('/financing', 'financing'), disPatch(cartData(productData)), disPatch(activeTab('financing'))]] : [setReviewModel(true), setPaymentModel(false)]]} />}
@@ -466,7 +466,7 @@ export default function ProductDetailPage() {
 
                   {/* <h4 style={{ marginTop: 20 }}>Sold out to:{productData?.highestBid?.bidder?.name}</h4> */}
 
-                  <div onClick={() => onPressPlaceBid()} style={{ alignSelf: 'center', marginLeft: 20 }} className="alpha_detail_page_price_view_button_view">
+                  <div onClick={() => onPressPlaceBid()} style={{ alignSelf: 'center', marginLeft: 20 }} className={productData?.highestBid?.status === 'accepted' ? "alpha_detail_page_price_view_button_view_disable" : "alpha_detail_page_price_view_button_view"}>
                     <h2>Place Bid</h2>
                   </div>
 

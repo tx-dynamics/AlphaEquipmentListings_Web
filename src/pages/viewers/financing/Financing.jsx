@@ -135,7 +135,7 @@ export default function Financing() {
     <div className="alpha-financing-main_container">
       <BlogView />
 
-      <NavBar />
+      <NavBar loaderValue={(data) => setIsLoading(data)} />
       <Loader loading={isLoading} />
       <div className="alpha_detail_page_container">
         <div className="alpha-financing-top_container">

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { arrowDown, arrowDownBlack, close, distance, drawerIcon, dummyFour, menu, search, searchWhite } from "../../../assets/icons";
-import { BlogView, DashboardCategoriesView, Footer, NavBar } from "../../../components";
+import { BlogView, DashboardCategoriesView, Footer, Loader, NavBar } from "../../../components";
 import './productListingPage.css'
 import { diffBtwTwoDates, getDistanceFromLatLonInKm } from "../../../helpingMethods";
 import { store } from "../../../redux/store";
@@ -10,6 +10,7 @@ export default function ProductListingPage() {
   const navigate = useNavigate()
   const [value, setValue] = useState(-1000)
   const { state } = useLocation();
+  const [isLoading, setIsLoading] = useState(false)
 
   const filterItemArray = [
     {
@@ -51,8 +52,9 @@ export default function ProductListingPage() {
   return (
     < div className="alpha-pro_list_page-main_container" >
       <BlogView />
+      <Loader loading={isLoading} />
 
-      <NavBar />
+      <NavBar loaderValue={(data) => setIsLoading(data)} />
       <div className="alpha-home_page-container">
         <div className="alpha-pro_list_page_top_container">
           <div className={"alpha-pro_list_page_filter_top_view"}>

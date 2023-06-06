@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { calculatorImage, distance, dummyFour } from "../../../assets/icons";
-import { BlogView, Footer, NavBar, TextInput } from "../../../components";
+import { BlogView, Footer, Loader, NavBar, TextInput } from "../../../components";
 import './calculator.css'
 import { useNavigate } from "react-router-dom";
 
@@ -8,6 +8,7 @@ export default function Calculator() {
   const navigate = useNavigate()
   const [showcalculation, setShowCalculation] = useState(false)
   const [showDropdown, setShowDropdown] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const [equipmentType, setEquipmentType] = useState('')
   const equipmentTypeArray = [
     {
@@ -45,8 +46,9 @@ export default function Calculator() {
   return (
     <div className="alpha-calculator-main_container">
       <BlogView />
+      <Loader loading={isLoading} />
 
-      <NavBar />
+      <NavBar loaderValue={(data) => setIsLoading(data)} />
       <div className="alpha_detail_page_container">
         <div className="alpha_calculator_main_container">
           <h1>Equipment Value Estimator</h1>

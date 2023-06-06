@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { arrowDownBlack, close, menu, searchWhite } from "../../../assets/icons";
-import { BlogView, DashboardCategoriesView, DashboardSparePartView, Footer, NavBar } from "../../../components";
+import { BlogView, DashboardCategoriesView, DashboardSparePartView, Footer, Loader, NavBar } from "../../../components";
 import './mainCategoryPage.css'
 
 export default function MainCategoryPage() {
   const navigate = useNavigate()
   const { state } = useLocation()
+  const [isLoading, setIsLoading] = useState(false)
   const [value, setValue] = useState(-1000)
   const filterItemArray = [
     {
@@ -136,8 +137,8 @@ export default function MainCategoryPage() {
   return (
     <div className="alpha-home_page-main_container">
       <BlogView />
-
-      <NavBar />
+      <Loader loading={isLoading} />
+      <NavBar loaderValue={(data) => setIsLoading(data)} />
       <div className="alpha-home_page-container">
         <div className="alpha-main_cat_page_top_container">
           {state?.screen === 'spareparts' ?

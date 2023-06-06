@@ -176,7 +176,7 @@ export default function Wallet() {
     <div className="alpha-home_page-main_container">
       <BlogView />
 
-      <NavBar />
+      <NavBar loaderValue={(data) => setIsLoading(data)} />
       <Loader loading={isLoading} />
       {connectCardModel && <TopUpModel onClick={(data) => [setTopUpData(data), verifyTopUpDetail()]} onClickClose={() => setConnectCardModel(false)} />}
       {withdrawModel && <CashWithdrawModel onClick={(data) => [setAccountData(data), verifyDetail(data)]} onClickClose={() => setWithdrawModel(false)} />}
