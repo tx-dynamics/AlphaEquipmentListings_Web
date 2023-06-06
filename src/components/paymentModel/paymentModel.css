@@ -118,6 +118,21 @@
   align-self: center;
 }
 
+.alpha-payment_model_button_view_disable {
+  display: flex;
+  width: 72%;
+  height: 4.8rem;
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+  align-items: center;
+  justify-content: center;
+  background: #DFDFDF;
+  border-radius: 1rem;
+  cursor: pointer;
+  align-self: center;
+}
+
+.alpha-payment_model_button_view_disable,
 .alpha-payment_model_button_view h5 {
   font-family: lato;
   font-weight: 600;

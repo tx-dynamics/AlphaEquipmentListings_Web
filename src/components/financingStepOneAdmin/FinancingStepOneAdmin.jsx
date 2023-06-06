@@ -233,7 +233,7 @@ export default function FinancingStepOneAdmin(props) {
                             disabled
                             selectedValue={(data) => [setSubCategoryDropDown(false), setSelectedSubCategory(data)]}
                             value={selectedSubCategory?.title}
-                            onClickDropDown={() => type === 'edit' ? null : setSubCategoryDropDown(!categoryDropdown)}
+                            onClickDropDown={() => selectedCategory?.categoryName ? type === 'edit' ? null : setSubCategoryDropDown(!categoryDropdown) : null}
                             dropDownArray={subcategoryArray.length > 0 && subcategoryArray}
                             dropDownValue={subCategoryDropDown}
                             type={'dropdown'}

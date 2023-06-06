@@ -150,6 +150,7 @@ export const uploadTwo = (data, cb) => {
         .catch(error => console.log('error', error));
 }
 
+
 // export const uploadFilesToS3 = async (files) => {
 //     const uploadPromises = files.map((file, index) => {
 //         const params = {

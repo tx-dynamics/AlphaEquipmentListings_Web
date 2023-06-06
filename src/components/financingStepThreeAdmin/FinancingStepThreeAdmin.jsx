@@ -25,7 +25,7 @@ export default function FinancingStepThreeAdmin(props) {
         const machine = {
             serialNumber: serialNumber,
             serialNumberImage: [serialNumberImage],
-            serialNumberFileImage: [serialNumberFileImage],
+            serialNumberFileImage: serialNumberFileImage,
             odometer: odometer,
             additionalImages: additionalImages,
             additionalFileImages: additionalFileImages,

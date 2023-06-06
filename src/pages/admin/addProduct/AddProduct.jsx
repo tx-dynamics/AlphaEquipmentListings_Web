@@ -163,6 +163,8 @@ export default function AddProduct() {
     var pageFourEngineImage = [...data?.engineFileImages]
     var pageFourChassisImage = [...data?.chassisFileImages]
     var pageFourUndercarriageImage = [...data?.undercarrigeFileImages]
+    console.log(pageTwoImagesOfEq, pageThreeAddionalImages, pageThreeSerialNumberImage, pageFourControlSessionImage, pageFourEngineImage, pageFourChassisImage, pageFourUndercarriageImage);
+    // return
     setIsLoading(true);
     await forLoop(pageTwoImagesOfEq, 1)
     await forLoop(pageThreeAddionalImages, 2)

@@ -126,7 +126,7 @@ export default function OtpScreen() {
           />
         </div>
         <div className='alpha-otp_screen-button_view'>
-          <Button onClick={() => onClickVerify()}>VERIFY</Button>
+          <Button disable={otp.length > 3 ? false : true} onClick={() => onClickVerify()}>VERIFY</Button>
         </div>
         <div className="alpha-otp_screen-send_again_view">
           <h3 onClick={() => sendAgain()}>

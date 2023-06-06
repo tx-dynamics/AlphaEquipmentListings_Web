@@ -1,6 +1,7 @@
 {
   "name": "alpha-equipment-listings",
   "version": "0.1.0",
+  "homepage": "https://equimentexchange.com/",
   "private": true,
   "dependencies": {
     "@emoji-mart/data": "^1.1.2",

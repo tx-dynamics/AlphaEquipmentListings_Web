@@ -23,14 +23,14 @@ export default function BlogView(props) {
     return (
         <div className="alpha-blog_view">
             <div className="alpha_phone_email_view">
-                <div>
+                <div style={{ cursor: 'pointer' }} onClick={() => [showMessage('Phone number copied'), navigator.clipboard.writeText('+1 940 257 2957')]}>
                     <img src={phone} alt='phone' />
                     <p>+1 940 257 2957</p>
                 </div>
-                <div>
+                <a style={{ flexDirection: 'row', display: 'flex', alignItems: 'center' }} href="mailto:alphaequipmentlistings@listings.com">
                     <img src={mail} alt='mail' />
                     <p>alphaequipmentlistings@listings.com</p>
-                </div>
+                </a>
             </div>
             <div className="alpha_contact_us_view">
                 <p onClick={() => user ? navigate('/subscriptionpage') : showMessage('You are not login')}>Subscription</p>

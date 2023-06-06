@@ -26,6 +26,11 @@ const TextInputTwo = (props) => {
                 }
 
             </div>
+            {props?.errorText ?
+                <h5>{props?.errorText}</h5>
+                :
+                null
+            }
         </div>
     )
 }

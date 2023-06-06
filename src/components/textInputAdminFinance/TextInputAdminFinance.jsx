@@ -6,7 +6,7 @@ const TextInputAdminFinance = (props) => {
     return (
         <div className='alpha-input_admin_container' >
             <p>{props.title}</p>
-            <div className='alpha-input_admin_container_input' style={props.inputStyle}>
+            <div onClick={() => props.type === 'dropdown' ? props.onClickDropDown() : null} className='alpha-input_admin_container_input' style={props.inputStyle}>
                 {props.textArea ?
                     <textarea onChange={props.onChange} value={props.value} placeholder={props.placeholder} />
                     :

@@ -67,7 +67,7 @@ export default function SignUp() {
         res => {
           if (res?.status === 200) {
             setIsLoading(false)
-            showMessage('User successfully registered')
+            showMessage('Otp has been send to your email')
             navigate('/otpscreen', { state: { screen: 'signup', email: email } })
           }
           else {
