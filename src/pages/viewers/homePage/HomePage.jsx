@@ -38,7 +38,6 @@ export default function HomePage() {
 
   useEffect(() => {
     dispatch(activeTab(''))
-    getDashboardData();
     getCurrentLocation()
     const user = store.getState().userData.userData
     user?.accountType === 'seller' && dispatch(userData(null))
@@ -49,6 +48,7 @@ export default function HomePage() {
       navigator.geolocation.getCurrentPosition(function (position) {
         let location = { lat: position?.coords?.latitude, long: position?.coords?.longitude }
         dispatch(userLocation(location))
+        getDashboardData();
       });
 
     } else {
