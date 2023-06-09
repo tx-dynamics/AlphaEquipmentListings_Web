@@ -62,7 +62,7 @@ export default function FinancingStepOne(props) {
                             onChange={(e) => [setDate(e.target.value), setDob(new Date(e.target.value).getTime())]}
                             inputStyle={{ paddingBottom: 4, flex: 1, }}
                             type={'date'}
-                            title={'Type of equipment'}
+                            title={'Date of Birth'}
                             placeholder={'Select equipment type'} />
                         <TextInputTwo
                             onChange={(e) => setBusinessId(e.target.value)}

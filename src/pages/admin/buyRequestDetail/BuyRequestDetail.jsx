@@ -90,7 +90,7 @@ export default function BuyRequestDetail() {
               </thead>
               <tbody >
                 <tr>
-                  <td data-label={''} className={'alpha-rent_request_detail_product_id_width'}>-{1}</td>
+                  <td data-label={''} className={'alpha-rent_request_detail_product_id_width'}>{1}-</td>
                   <td data-label={'User Name'} className={'alpha_my_shop_title_style'}>{item?.requester?.name}</td>
                   <td data-label={'Action'}><div className="alpha-my_shop-table_data_edit_view">
                     <h5 onClick={() => onPress(item?._id, 2)}>Confirm</h5>

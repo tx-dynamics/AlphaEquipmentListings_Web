@@ -103,7 +103,9 @@ export default function Profile() {
           if (res?.status === 200) {
             setIsLoading(false)
             showMessage(res?.message)
-            setSubmitModel(true)
+            dispatch(userData(null));
+            dispatch(accessToken(''));
+            dispatch(refreshToken(''));
 
           }
           else {

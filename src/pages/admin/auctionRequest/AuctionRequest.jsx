@@ -79,7 +79,7 @@ export default function AuctionRequest() {
                     const date = new Date(item?.auctionEndDate)
                     return (
                       <tr key={index}>
-                        <td data-label={''} style={{ paddingLeft: 20, }}>-{index + 1}</td>
+                        <td data-label={''} style={{ paddingLeft: 20, }}>{index + 1}-</td>
                         <td data-label={'Product'} className={'alpha_rent_req_title_style'}>{item?.productName}</td>
                         <td data-label={'Total Bid'} >{item?.bids?.length}</td>
                         <td data-label={'Highest Bid'} >${item?.highestBid?.amount ? item?.highestBid?.amount : 0}</td>

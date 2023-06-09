@@ -99,7 +99,7 @@ export default function RentRequestDetail() {
               </thead>
               <tbody >
                 <tr>
-                  <td data-label={''} className={'alpha-rent_request_detail_product_id_width'}>-{1}</td>
+                  <td data-label={''} className={'alpha-rent_request_detail_product_id_width'}>{1}-</td>
                   <td data-label={'User Name'} className={'alpha_my_shop_title_style'}>{item?.requester?.name}</td>
                   <td data-label={'Days'}>{diffBtwTwoDatesOnlyDays(startDate, endDate)}</td>
                   <td data-label={'Total Rent'} >${item?.product?.price * diffBtwTwoDatesOnlyDays(startDate, endDate)}</td>

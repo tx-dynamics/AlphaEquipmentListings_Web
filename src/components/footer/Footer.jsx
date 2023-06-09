@@ -25,7 +25,7 @@ export default function Footer() {
                     <h2>COMPANY</h2>
                     <h3 onClick={() => user ? navigate('/subscriptionpage') : showMessage('You are not login')}>Subscription</h3>
                     <h3 onClick={() => onClick('/blogpage', 'blogpage')}>Blog</h3>
-                    <h3 onClick={() => onClick('/profile', 'profile')}>Profile</h3>
+                    <h3 onClick={() => user ? onClick('/profile', 'profile') : showMessage('You are not login')}>Profile</h3>
                     <h3 onClick={() => user ? onClick('/wallet', 'wallet') : showMessage('Please login first to perform this action')}>Wallet</h3>
 
                 </div>

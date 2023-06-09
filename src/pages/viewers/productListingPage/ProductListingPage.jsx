@@ -103,7 +103,7 @@ export default function ProductListingPage() {
                 <img src={menu} onClick={() => setValue(0)} />
                 <h2>{state?.screen === 'auction' ? 'Auction' : `Products`}</h2>
               </div>
-              <h3>Showing results for</h3>
+              <h3>Showing results for {state?.screen == 'category' ? state?.data?.products?.length : state?.data?.length} out of {state?.screen == 'category' ? state?.data?.products?.length : state?.data?.length}</h3>
             </div>
             <div className="alpha-pro_list_page_divider" />
             {state?.screen == 'category' ?
@@ -134,7 +134,7 @@ export default function ProductListingPage() {
                             (timeDiff ?
                               <h6><span style={{ fontWeight: 700 }}>Autcion Expired</span></h6>
                               :
-                              <h6>Highest Bid:<span style={{ fontWeight: 700 }}> ${item?.highestBid?.amount} </span></h6>
+                              <h6>Highest Bid:<span style={{ fontWeight: 700 }}> ${item?.highestBid?.amount ? item?.highestBid?.amount : 0} </span></h6>
 
                             )
                           }
@@ -173,7 +173,7 @@ export default function ProductListingPage() {
                             (timeDiff ?
                               <h6><span style={{ fontWeight: 700 }}>Autcion Expired</span></h6>
                               :
-                              <h6>Highest Bid:<span style={{ fontWeight: 700 }}> ${item?.highestBid?.amount} </span></h6>
+                              <h6>Highest Bid:<span style={{ fontWeight: 700 }}> ${item?.highestBid?.amount ? item?.highestBid?.amount : 0} </span></h6>
 
                             )
                           }

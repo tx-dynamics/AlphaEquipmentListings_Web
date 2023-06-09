@@ -75,9 +75,9 @@ export default function NavBar(props) {
                                 <h3>Search</h3>
                             </div>
                         </div>
-                        <div className="aplha-navbar-filter_view">
+                        {/* <div className="aplha-navbar-filter_view">
                             <img src={filterIcon} alt={'filterIcon'} />
-                        </div>
+                        </div> */}
                     </div>
                     {user ?
                         <div className="alpha-navbar-profile_top_view">

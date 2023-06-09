@@ -168,7 +168,7 @@ export default function SubscriptionPage() {
               }))
             }
           </div>
-          <div className="alpha-calculator-buttion_view">
+          <div className={selectedPlan?.type ? 'alpha-calculator-buttion_view' : 'alpha-calculator-buttion_view_disable'}>
             <div onClick={() => selectedPlan?.type ? setShowModel(true) : showMessage('Please choose plan first')}>
               <h3>Continue</h3>
             </div>

@@ -76,7 +76,7 @@ export default function BuyRequest() {
                   {sellArray?.map((item, index) => {
                     return (
                       <tr key={index}>
-                        <td data-label={''} style={{ paddingLeft: 20, }}>-{index + 1}</td>
+                        <td data-label={''} style={{ paddingLeft: 20, }}>{index + 1}-</td>
                         <td data-label={'Product'} className={'alpha_buy_req_title_style'}  >{item?.product?.productName}</td>
                         <td data-label={'Price'} >${item?.product?.price}</td>
                         <td data-label={'Request'}  >1</td>

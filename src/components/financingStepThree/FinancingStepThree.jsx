@@ -51,7 +51,7 @@ export default function FinancingStepThree(props) {
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                             style={{ paddingBottom: 4 }}
-                            title={'Emploer Name'}
+                            title={'Employer Name'}
                             placeholder={'Enter name'} />
                         <TextInputTwo
                             value={number}
@@ -60,6 +60,7 @@ export default function FinancingStepThree(props) {
                             title={'Contact Information'}
                             placeholder={'Enter contact information'} />
                         <TextInputTwo
+                            type="number"
                             value={cardScore}
                             onChange={(e) => setCardScore(e.target.value)}
                             style={{ paddingBottom: 4 }}

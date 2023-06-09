@@ -27,14 +27,14 @@ export default function CreatePasswordModel(props) {
                     <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pretium orci vel ante posuere, et pharetra magna consectetur.</h3>
                 </div>
                 <div className='alpha-card_modal_inputs_view'>
-                    <TextInputTwo onChange={(e) => setNewPassword(e.target.value)} title={'Password'} placeholder={'Enter your password'}></TextInputTwo>
-                    <TextInputTwo onChange={(e) => setConfirmPassword(e.target.value)} title={'Confirm Password'} placeholder={'Enter your password'}></TextInputTwo>
+                    <TextInputTwo errorText={passwordValue} onChange={(e) => setNewPassword(e.target.value)} title={'Password'} placeholder={'Enter your password'}></TextInputTwo>
+                    <TextInputTwo errorText={confirmPasswordValue} onChange={(e) => setConfirmPassword(e.target.value)} title={'Confirm Password'} placeholder={'Enter your password'}></TextInputTwo>
                 </div>
                 <div className='alpha-card_modal_inputs_view_two'>
                     <TextInputThree onChange={(e) => setNewPassword(e.target.value)} title={'Password'} placeholder={'Enter your password'}></TextInputThree>
                     <TextInputThree onChange={(e) => setConfirmPassword(e.target.value)} title={'Confirm Password'} placeholder={'Enter your password'}></TextInputThree>
                 </div>
-                <div onClick={() => onClickConfirm()} className='alpha-payment_model_button_view'>
+                <div onClick={() => onClickConfirm()} className={disableValue ? 'alpha-payment_model_button_view' : 'alpha-payment_model_button_view_disable'}>
                     <h5>Confirm</h5>
                 </div>
             </div>

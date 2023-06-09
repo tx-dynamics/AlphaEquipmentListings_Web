@@ -105,7 +105,7 @@ export default function AuctionRequestDetail() {
                   {item?.bids?.map((value, index) => {
                     return (
                       <tr key={index}>
-                        <td data-label={''} className={'alpha-rent_request_detail_product_id_width'}>-{index + 1}</td>
+                        <td data-label={''} className={'alpha-rent_request_detail_product_id_width'}>{index + 1}-</td>
                         <td data-label={'User Name'} className={'alpha_my_shop_title_style'}>{value?.bidder?.name}</td>
                         <td data-label={'Bid Price'}>${value?.amount}</td>
                         <td data-label={'Action'}><div className="alpha-my_shop-table_data_edit_view">

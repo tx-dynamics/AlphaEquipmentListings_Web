@@ -252,6 +252,7 @@ export default function FinancingStepOneAdmin(props) {
                         </div>
                         <div className='alpha_margin_right'>
                             <TextInputAdminFinance
+                                type={'number'}
                                 onChange={(e) => setStartingPrice(e.target.value)}
                                 value={startingPrice.toString()}
                                 title={selectedAuctionType.title === 'Fix price' ? 'Price' : 'Starting Price'}
@@ -278,6 +279,7 @@ export default function FinancingStepOneAdmin(props) {
                             <TextInputAdminFinance
                                 onChange={(e) => setStartingPrice(e.target.value)}
                                 title={'Price'}
+                                type={'number'}
                                 value={startingPrice.toString()}
                                 placeholder={'Enter price'} />
                         </div>
@@ -320,6 +322,7 @@ export default function FinancingStepOneAdmin(props) {
                 {selectedProductType.title === 'Machine' &&
                     <div className='alpha_margin_right'>
                         <TextInputAdminFinance
+                            type={'number'}
                             onChange={(e) => setMileage(e.target.value)}
                             title={'Mileage'}
                             value={Mileage}

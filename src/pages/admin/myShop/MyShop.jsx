@@ -80,7 +80,7 @@ export default function MyShop() {
                   {storeProducts.map((item, index) => {
                     return (
                       <tr>
-                        <td data-label={''} >-{index + 1}</td>
+                        <td data-label={''} >{index + 1}-</td>
                         <td data-label={'Name'} className={'alpha_my_shop_title_style'}>{item?.productName}</td>
                         <td data-label={'Condition'}> <div className="alpha-my_shop-table_data_new_view">
                           <h6>{item?.equipmentType}</h6>

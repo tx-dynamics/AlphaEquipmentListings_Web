@@ -4,11 +4,17 @@ import * as Viewers from "../pages/viewers";
 import * as Admin from "../pages/admin";
 import { store } from "../redux/store";
 import PrivateRoute from "./protected-route";
+import { useSelector } from "react-redux";
 
 // import * as Admin from "../pages/admin";
 
 const Navigation = () => {
+  const user = useSelector((data) => data.userData.userData);
+
+
+
   return (
+    console.log(user?.storeName, '1111111'),
     <Routes>
       <Route path="/" element={<Viewers.HomePage />} />
       <Route path="/signin" element={<Viewers.SignIn />} />
@@ -29,9 +35,13 @@ const Navigation = () => {
       <Route path="/blogdetailpage" element={<Viewers.BlogDetailPage />} />
       <Route path="/chatpagebuyer" element={<Viewers.ChatPageBuyer />} />
       <Route path="/subscriptionpage" element={<Viewers.SubscriptionPage />} />
+      {user?.storeName ?
+        <Route path="/myshop" element={<PrivateRoute><Admin.MyShop /></PrivateRoute>} />
+        :
+        <Route path="/shop" element={<PrivateRoute><Admin.Shop /></PrivateRoute>} />
 
-      <Route path="/shop" element={<PrivateRoute><Admin.Shop /></PrivateRoute>} />
-      <Route path="/myshop" element={<PrivateRoute><Admin.MyShop /></PrivateRoute>} />
+      }
+
       <Route path="/paymenthistory" element={<PrivateRoute><Admin.PaymentHistory /></PrivateRoute>} />
       <Route path="/orderstatus" element={<PrivateRoute><Admin.OrderStatus /></PrivateRoute>} />
       <Route path="/rentrequest" element={<PrivateRoute><Admin.RentRequest /></PrivateRoute>} />
