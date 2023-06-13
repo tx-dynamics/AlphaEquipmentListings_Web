@@ -99,23 +99,28 @@ export default function HomePage() {
     setIsLoading(true)
     try {
       const endPoint = api.buyerDashboard + `?search=${searchText}`;
+      console.log(endPoint, 'end point');
       await callApi(Method.GET, endPoint, null,
         res => {
           if (res?.status === 200) {
+            console.log('workinggggg');
             setIsLoading(false)
             setIsSearch(true)
             setSearchedProduct(res?.data?.products)
           }
           else {
+            console.log('not working');
             setIsLoading(false)
             showMessage(res?.message)
           }
         },
         err => {
+          console.log('not working');
           showMessage(err.message)
           setIsLoading(false);
         });
     } catch (error) {
+      console.log('not working');
       setIsLoading(false);
       console.log(error);
     }
