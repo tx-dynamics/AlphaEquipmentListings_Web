@@ -19,7 +19,7 @@ export default function SubscriptionAdmin() {
   const [isLoading, setIsLoading] = useState(false)
   const [plans, setPlans] = useState([])
   const [showMessage, hideMessage] = useSnackbar(snakbarOptions)
-  const [selectedPlan, setSelectedPlan] = useState({ type: store.getState().userData.userData.subscriptionType })
+  const [selectedPlan, setSelectedPlan] = useState({})
   const [showModel, setShowModel] = useState(false)
   const [connectCard, setConnectCard] = useState(false)
   const [otpModel, setOtpModel] = useState(false)
@@ -173,7 +173,7 @@ export default function SubscriptionAdmin() {
                   }))
                 }
               </div>
-              <div className="alpha-calculator-buttion_view">
+              <div className={selectedPlan?.type ? 'alpha-calculator-buttion_view' : 'alpha-calculator-buttion_view_disable'}>
                 <div onClick={() => selectedPlan?.type ? setShowModel(true) : showMessage('Please choose plan first')}>
                   <h3>Continue</h3>
                 </div>

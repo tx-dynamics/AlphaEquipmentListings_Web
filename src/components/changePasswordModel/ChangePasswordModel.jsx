@@ -24,7 +24,7 @@ export default function ChangePasswordModel(props) {
                 <div className='alpha-card_modal_inputs_view_two'>
                     <TextInputThree onChange={(e) => setOldPassword(e.target.value)} title={'Password'} placeholder={'Enter your password'}></TextInputThree>
                 </div>
-                <div onClick={() => oldPassword.length >= 8 && props.onClick(oldPassword)} className='alpha-payment_model_button_view'>
+                <div onClick={() => oldPassword.length >= 8 && props.onClick(oldPassword)} className={oldPassword.length >= 8 ? 'alpha-payment_model_button_view' : 'alpha-payment_model_button_view_disable'}>
                     <h5>Confirm</h5>
                 </div>
             </div>

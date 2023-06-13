@@ -55,6 +55,7 @@ export default function FinancingStepOne(props) {
                             onChange={(e) => setNumber(e.target.value)}
                             style={{ paddingBottom: 4 }}
                             value={number}
+                            type="number"
                             title={'Phone Number'}
                             placeholder={'Enter phone number'} />
                         <TextInputTwo

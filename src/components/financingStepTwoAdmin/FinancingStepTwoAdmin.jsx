@@ -96,6 +96,7 @@ export default function FinancingStepTwoAdmin(props) {
                 </div>
                 <div className='alpha_margin_right'>
                     <TextInputAdminFinance
+                        type="number"
                         value={stock.toString()}
                         onChange={(e) => setStock(e.target.value)}
                         title={'Stock Available:'}

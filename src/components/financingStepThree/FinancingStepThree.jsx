@@ -36,6 +36,7 @@ export default function FinancingStepThree(props) {
                     <h1>Tell us about your financial information</h1>
                     <div className='alpha-financing-step_one_inputs_top_view'>
                         <TextInputTwo
+                            type="number"
                             value={income}
                             onChange={(e) => setIncome(e.target.value)}
                             style={{ paddingBottom: 4 }}

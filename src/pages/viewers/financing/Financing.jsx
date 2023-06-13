@@ -176,7 +176,7 @@ export default function Financing() {
 
           <div className="alpha-financing-steps_title_view">
             <h2>Heavy Equipment Financing</h2>
-            <h3>Apply for up to 100% financing with $0 down payment. Financing Services Approed customers may have deposit waived.</h3>
+            <h3>Apply for up to 100% financing with $0 down payment. Financing Services Approved customers may have deposit waived.</h3>
           </div>
           {!showSteps ?
             <div>

@@ -179,8 +179,11 @@ export default function Dashboard() {
     setIsLoading(true)
     try {
       const endPoint = api.sellerDashboard + `?search=`;
+      console.log('------');
+
       await callApi(Method.GET, endPoint, null,
         res => {
+          console.log(res, '------');
           if (res?.status === 200) {
             setIsLoading(false)
             setOrderArray(res?.data?.orders)

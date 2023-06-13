@@ -99,6 +99,7 @@ export default function FinancingStepTwo(props) {
                             disabled
                         />
                         <TextInputTwo
+                            type="number"
                             style={{ paddingBottom: 4 }}
                             title={'Down Payment (if any)'}
                             placeholder={'Enter down payment'}

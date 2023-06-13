@@ -17,7 +17,7 @@ export default function SubscriptionPage() {
   const [isLoading, setIsLoading] = useState(false)
   const [plans, setPlans] = useState([])
   const [showMessage, hideMessage] = useSnackbar(snakbarOptions)
-  const [selectedPlan, setSelectedPlan] = useState({ type: store.getState().userData.userData.subscriptionType })
+  const [selectedPlan, setSelectedPlan] = useState({})
   const [showModel, setShowModel] = useState(false)
   const [connectCard, setConnectCard] = useState(false)
   const [otpModel, setOtpModel] = useState(false)
