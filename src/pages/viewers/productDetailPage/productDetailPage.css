@@ -248,6 +248,10 @@
     /* margin-bottom: 3rem; */
 }
 
+.alpha-detail_page-features_images_view::-webkit-scrollbar {
+    display: none;
+}
+
 .alpha-detail_page-features_images_view img {
     width: 124px;
     height: 95px;
