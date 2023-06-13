@@ -103,13 +103,11 @@ export default function HomePage() {
       await callApi(Method.GET, endPoint, null,
         res => {
           if (res?.status === 200) {
-            console.log('workinggggg');
             setIsLoading(false)
             setIsSearch(true)
             setSearchedProduct(res?.data?.products)
           }
           else {
-            console.log('not working');
             setIsLoading(false)
             showMessage(res?.message)
           }
@@ -120,7 +118,6 @@ export default function HomePage() {
           setIsLoading(false);
         });
     } catch (error) {
-      console.log('not working');
       setIsLoading(false);
       console.log(error);
     }

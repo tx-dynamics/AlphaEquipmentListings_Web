@@ -70,7 +70,7 @@ export default function NavBar(props) {
                 <div className="alpha-navbar-search_top_view">
                     <div className="alpha-navbar-search_filter_view">
                         <div className="alpha-navbar_search_view">
-                            <input onKeyDown={props?.onKeyDown} onChange={(e) => window.location.href === 'http://localhost:3000/' || window.location.href === 'https://equimentexchange.com/' ? props?.onChange(e.target.value) : null} placeholder='Search here' />
+                            <input onKeyDown={props?.onKeyDown} onChange={(e) => window.location.href === 'http://localhost:3000/' || window.location.href === 'https://main.dnhcesxmuk1gb.amplifyapp.com/' ? props?.onChange(e.target.value) : null} placeholder='Search here' />
                             <div onClick={props.onClickSearch}>
                                 <h3>Search</h3>
                             </div>
@@ -157,7 +157,7 @@ export default function NavBar(props) {
                     }
 
                     <div className='alpha-navbar-menu_search_view'>
-                        <input onKeyDown={props?.onKeyDown} onChange={(e) => window.location.href === 'http://localhost:3000/' || window.location.href === 'https://equimentexchange.com/' ? props?.onChange(e.target.value) : null} placeholder='Search your query' />
+                        <input onKeyDown={props?.onKeyDown} onChange={(e) => window.location.href === 'http://localhost:3000/' || window.location.href === 'https://main.dnhcesxmuk1gb.amplifyapp.com/' ? props?.onChange(e.target.value) : null} placeholder='Search your query' />
                         <img onClick={() => [setMarginLeft(-300), props.onClickSearch()]} src={search} />
                     </div>
                     {/* <h3 style={{ color: data === 'category' ? '#F18805' : ' #303030' }} onClick={() => dashboardData?.categories?.length > 0 ? onClick('/productlistingpage', 'category', dashboardData?.categories) : showMessage('No categories found')}>Category</h3> */}
