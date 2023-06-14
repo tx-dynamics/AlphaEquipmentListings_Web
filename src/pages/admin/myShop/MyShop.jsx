@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSnackbar } from "react-simple-snackbar";
 
-import { Loader, SearchView, SideBar, TopBar } from "../../../components";
+import { DeleteProductModel, Loader, SearchView, SideBar, TopBar } from "../../../components";
 import { api } from "../../../network/Environment";
 import { Method, callApi } from "../../../network/NetworkManger";
 import { snakbarOptions } from "../../../globalData";
@@ -12,6 +12,8 @@ export default function MyShop() {
   const navigate = useNavigate()
   const [isLoading, setIsLoading] = useState(false)
   const [storeProducts, setStoreProducts] = useState([])
+  const [showDeleteModel, setShowDeleteModel] = useState(false)
+  const [deleteProduct, setDeleteProduct] = useState()
   const [showMessage, hideMessage] = useSnackbar(snakbarOptions)
 
   useEffect(() => {
@@ -43,9 +45,36 @@ export default function MyShop() {
     }
   }
 
+  const onclickDeleteProduct = async () => {
+    setShowDeleteModel(false)
+    setIsLoading(true)
+    try {
+      const endPoint = api.product + `/${deleteProduct?._id}`;
+      await callApi(Method.DELETE, endPoint, null,
+        res => {
+          console.log(res);
+          if (res?.status === 200) {
+            getStoreProducts()
+          }
+          else {
+            setIsLoading(false)
+            showMessage(res?.message)
+          }
+        },
+        err => {
+          showMessage(err.message)
+          setIsLoading(false);
+        });
+    } catch (error) {
+      setIsLoading(false);
+      console.log(error);
+    }
+  }
+
   return (
     <div className="alpha-dashboard-main_container">
       <SideBar />
+      {showDeleteModel && <DeleteProductModel onClickCancel={() => setShowDeleteModel(false)} onClick={() => onclickDeleteProduct()} />}
       <Loader loading={isLoading} />
       <div className="alpha-dashboard-top_bar_main_container">
         <TopBar />
@@ -92,9 +121,7 @@ export default function MyShop() {
                         <td data-label={'Action'}><div className="alpha-my_shop-table_data_edit_view">
                           <h5 onClick={() => navigate('/editproduct', { state: { data: item } })}
                           >Edit</h5>
-                          <h5
-                          //onClick={() => [setShowDeleteModel(true)]}
-                          >
+                          <h5 onClick={() => [setDeleteProduct(item), setShowDeleteModel(true)]}>
                             Delete</h5>
                         </div></td>
                       </tr>

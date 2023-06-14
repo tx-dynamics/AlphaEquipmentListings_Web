@@ -8,6 +8,7 @@ export const api = {
     sendAgainSignupOtp: 'user/sendOTP',
     verifyEmail: 'user/verify',
     logout: 'user/logout',
+    verifyOtp: 'user/verifyOTPGeneric',
 
     forgotPassword: 'user/forgotPassword',
     verifyForgotEmail: 'user/verifyOTPResetPassword',
@@ -35,6 +36,7 @@ export const api = {
     getWallet: 'wallet',
     withdrawalWallet: 'withdraw',
     topupWallet: 'topup',
-    notification: 'notification'
+    notification: 'notification',
+
 
 }

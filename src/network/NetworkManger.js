@@ -82,11 +82,9 @@ export const callApi = async (
                     },
                 }),
             };
-            console.log('11111111111');
             await fetch(`${BASE_URL}user/refresh/${refreshToken}`, fetchObject)
                 .then(async res => {
                     let resJson = await res.json();
-                    console.log(resJson, '22222222222');
 
                     store.dispatch(accessToken(resJson.data.accessToken));
                     callApi(

@@ -24,7 +24,7 @@ export default function OrderStatus() {
         res => {
           if (res?.status === 200) {
             setIsLoading(false)
-            setOrderArray(res?.data?.orders)
+            setOrderArray(res?.data?.allOrders)
           }
           else {
             setIsLoading(false)
@@ -72,11 +72,12 @@ export default function OrderStatus() {
                 <tbody >
                   {orderArray?.map((item, index) => {
                     const date = new Date(item?.createdAt)
+                    console.log(item);
                     return (
                       <tr key={index}>
                         <td data-label={'Buyer Name'} className="alpha_payment_history_padding_left" >{item?.requester?.name}</td>
                         <td data-label={'Product Name'} className={'alpha_my_shop_title_style'}>{item?.product?.productName}</td>
-                        <td data-label={'State'} style={{ color: item?.status === 'Complete' ? '#00AD50' : '#D20000' }}>{item?.status === 'Complete' ? 'Completed' : 'Pending'}</td>
+                        <td data-label={'State'} style={{ color: item?.status === 'accepted' || item?.status === "Complete" ? '#00AD50' : '#D20000' }}>{item?.status === 'accepted' || item?.status === "Complete" ? 'Accepted' : 'Pending'}</td>
                         <td data-label={'Date'} >{date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear()}</td>
                       </tr>
                     )

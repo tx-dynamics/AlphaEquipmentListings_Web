@@ -320,7 +320,6 @@ export default function ProductDetailPage() {
   return (
     <div className="alpha-pro_list_page-main_container">
       <BlogView />
-
       <NavBar loaderValue={(data) => setIsLoading(data)} />
       <Loader loading={isLoading} />
       {bookingModel && <BookingModel data={productData} onClickClose={() => setBookingModel(false)} onClick={(data) => [setSelectedPrice(data?.price), setSelectedDate1(data?.date1), setSelectedDate2(data?.date2), setPaymentModel(true), setBookingModel(false)]} />}
@@ -469,8 +468,7 @@ export default function ProductDetailPage() {
                   <div onClick={() => onPressPlaceBid()} style={{ alignSelf: 'center', marginLeft: 20 }} className={productData?.highestBid?.status === 'accepted' ? "alpha_detail_page_price_view_button_view_disable" : "alpha_detail_page_price_view_button_view"}>
                     <h2>Place Bid</h2>
                   </div>
-
-
+                  {productData?.highestBid?.status === 'accepted' && <p>Sold out to: {productData?.highestBid?.bidder?.name}</p>}
                   <div className="alpha_detail_page_price_view_box_close_date_view">
                     <img src={clock} />
                     <h5>Closes:<span style={{ fontWeight: 700 }}>{`${monthNames[endDate.getMonth()]} ${endDate.getDate()} ${endDate.getFullYear()}, 12:00 AM`}</span></h5>
@@ -515,7 +513,7 @@ export default function ProductDetailPage() {
                       <img src={plus} />
                     </div>
                   </div>
-                  <div onClick={() => onPressPlaceBid()} className="alpha_detail_page_price_view_bid_list_button">
+                  <div onClick={() => onPressPlaceBid()} className="alpha_detail_page_price_view_bid_list_button_disable">
                     <h2 >Place Bid</h2>
                   </div>
                 </div>
@@ -532,7 +530,7 @@ export default function ProductDetailPage() {
                 <img style={{ cursor: 'pointer' }} src={share} />
               </div>
               <h1>${`${productData?.price}`}</h1>
-              <div onClick={() => onClickPay(productData?.rentOrSell === "Rent" ? 1 : 2)} className="alpha_detail_page_price_view_button_view">
+              <div onClick={() => onClickPay(productData?.rentOrSell === "Rent" ? 1 : 2)} className={productData?.highestBid?.status === 'accepted' ? "alpha_detail_page_price_view_button_view" : "alpha_detail_page_price_view_button_view_disable"}>
                 <h2>{productData?.rentOrSell === "Rent" ? 'Request For Rent' : 'Pay'}</h2>
               </div>
               {productData?.rentOrSell === "Rent" &&

@@ -17,7 +17,7 @@ export default function SubscriptionPage() {
   const [isLoading, setIsLoading] = useState(false)
   const [plans, setPlans] = useState([])
   const [showMessage, hideMessage] = useSnackbar(snakbarOptions)
-  const [selectedPlan, setSelectedPlan] = useState({})
+  const [selectedPlan, setSelectedPlan] = useState(store.getState().userData.userData?.subscriptionObject)
   const [showModel, setShowModel] = useState(false)
   const [connectCard, setConnectCard] = useState(false)
   const [otpModel, setOtpModel] = useState(false)
@@ -62,14 +62,12 @@ export default function SubscriptionPage() {
       navigate('/', { replace: true })
     }
     else {
-      setConnectCard(true)
+      sendOtp()
     }
   }
 
 
   const sendOtp = async (data) => {
-    setCardDetail(data)
-    setConnectCard(false)
     try {
       setIsLoading(true);
       const endPoint = api.sendAgainSignupOtp
@@ -101,20 +99,15 @@ export default function SubscriptionPage() {
     setOtpModel(false)
     try {
       setIsLoading(true);
-      const endPoint = api.subscription;
+      const endPoint = api.verifyOtp;
       const data = {
         otp: otp,
-        subscriptionType: selectedPlan?.type?.toUpperCase(),
-        yearly: selectedType === 2 ? true : false,
-        card: cardDetail
       };
       await callApi(Method.POST, endPoint, data,
         res => {
           if (res?.status === 200) {
             setIsLoading(false)
-            disPatch(userData(res.data?.user));
-            showMessage('Subscriptions subscribe successfully')
-            navigate('/', { replace: true })
+            setConnectCard(true)
           }
           else {
             setOtpModel(true)
@@ -124,6 +117,41 @@ export default function SubscriptionPage() {
         },
         err => {
           setOtpModel(true)
+          showMessage(err.message)
+          setIsLoading(false);
+        });
+    } catch (error) {
+      setIsLoading(false);
+      console.log(error);
+    }
+  };
+  const onPressConnect = async (value) => {
+    setConnectCard(false)
+    try {
+      setIsLoading(true);
+      const endPoint = api.subscription;
+      const data = {
+        subscriptionType: selectedPlan?.type?.toUpperCase(),
+        yearly: selectedType === 2 ? true : false,
+        card: value
+      };
+      console.log(data);
+      await callApi(Method.POST, endPoint, data,
+        res => {
+          if (res?.status === 200) {
+            setIsLoading(false)
+            disPatch(userData(res.data?.user));
+            showMessage('Subscriptions subscribe successfully')
+            navigate('/', { replace: true })
+          }
+          else {
+            setConnectCard(true)
+            setIsLoading(false)
+            showMessage(res?.message)
+          }
+        },
+        err => {
+          setConnectCard(true)
 
           showMessage(err.message)
           setIsLoading(false);
@@ -138,7 +166,7 @@ export default function SubscriptionPage() {
       <BlogView />
       <Loader loading={isLoading} />
       <NavBar loaderValue={(data) => setIsLoading(data)} />
-      {connectCard && <ConnectCardModel onClick={(data) => sendOtp(data)} onClickClose={() => [setConnectCard(false)]} />}
+      {connectCard && <ConnectCardModel onClick={(data) => onPressConnect(data)} onClickClose={() => [setConnectCard(false)]} />}
       {otpModel && <OtpModel onClick={(data) => onPressConfirmOtp(data)} onClickClose={() => [setOtpModel(false)]} />}
       {showModel && <MembershipModel onClick={(data) => onPressContinue(data)} onClickClose={() => setShowModel(false)} price1={selectedPlan?.pricing?.monthly} price2={selectedPlan?.pricing?.yearly} />}
       <div className="alpha-home_page-container">

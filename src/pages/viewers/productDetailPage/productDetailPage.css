@@ -591,6 +591,20 @@
     height: 22px;
 }
 
+.alpha_detail_page_price_view_bid_list_button_disable {
+    display: flex;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    align-items: center;
+    justify-content: center;
+    background: #DFDFDF;
+    height: 48px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
 .alpha_detail_page_price_view_bid_list_button {
     display: flex;
     margin-left: 20px;
@@ -605,6 +619,7 @@
     cursor: pointer;
 }
 
+.alpha_detail_page_price_view_bid_list_button_disable,
 .alpha_detail_page_price_view_bid_list_button h2 {
     font-family: lato;
     font-weight: 700;
@@ -688,6 +703,7 @@
         line-height: 22px;
     }
 
+    .alpha_detail_page_price_view_bid_list_button_disable,
     .alpha_detail_page_price_view_bid_list_button h2 {
         font-size: 14px;
         line-height: 14px;

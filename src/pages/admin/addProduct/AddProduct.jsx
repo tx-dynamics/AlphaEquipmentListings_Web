@@ -135,7 +135,6 @@ export default function AddProduct() {
       // return
       await callApi(Method.POST, endPoint, data,
         res => {
-          console.log(res, '----');
           if (res?.status === 200) {
             setIsLoading(false)
             setIsModel(true)
@@ -234,7 +233,6 @@ export default function AddProduct() {
       };
       await callApi(Method.POST, endPoint, data,
         res => {
-          console.log(res, '22222');
 
           if (res?.status === 200) {
             setIsLoading(false)

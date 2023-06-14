@@ -14,7 +14,6 @@ const Navigation = () => {
 
 
   return (
-    console.log(user?.storeName, '1111111'),
     <Routes>
       <Route path="/" element={<Viewers.HomePage />} />
       <Route path="/signin" element={<Viewers.SignIn />} />
