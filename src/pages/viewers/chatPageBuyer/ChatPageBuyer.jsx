@@ -34,7 +34,7 @@ export default function ChatPageBuyer() {
 
 
   useEffect(() => {
-    if (!userData._id) return;
+    if (!userData?._id) return;
     setIsLoading(true);
     socket.emit("user-enter", { userId: userData._id });
     socket.emit("get-inboxes", { userId: userData._id });
@@ -75,6 +75,7 @@ export default function ChatPageBuyer() {
         showMessage('No data found')
       }
 
+
       return () => {
         socket.removeAllListeners("inboxes");
         socket.removeAllListeners("messages");
@@ -82,7 +83,7 @@ export default function ChatPageBuyer() {
     });
     return () =>
       socket.emit('user-leave', { "userId": userData._id });
-  }, [userData]);
+  }, []);
 
 
 
@@ -102,6 +103,8 @@ export default function ChatPageBuyer() {
 
   const getOtherUserMessages = (otherUser) => {
     setIsLoading(true);
+    console.log(otherUser.id, '2222');
+    socket.emit("listening-for-user", { userId: userData._id, to: otherUser.id })
     socket.emit("get-messages", {
       userId: userData._id,
       inbox: otherUser.id,
@@ -159,7 +162,7 @@ export default function ChatPageBuyer() {
                   {inboxesData?.length > 0 ?
                     (inboxesData?.map((item) => {
                       return (
-                        <div key={item.id}>
+                        <div key={item?.id}>
                           <div onClick={() => getOtherUserMessages(item)} className="alpha_chat_buyer_user_list_item_view">
                             <div className="alpha_chat_buyer_user_list_item_image_view">
                               <img src={item?.image} />
@@ -169,7 +172,7 @@ export default function ChatPageBuyer() {
                             </div>
                             <div className="alpha_chat_buyer_user_list_item_name_view">
                               <h2>{item.title}</h2>
-                              <h3>Message: {item.message === 'Hidden Message' ? '' : item?.message}</h3>
+                              {/* <h3 >Message: {item.message === 'Hidden Message' ? '' : item?.message}</h3> */}
                             </div>
                             <div className="alpha_chat_buyer_user_list_item_time_view">
                               <h4>{item.date}</h4>
@@ -252,13 +255,13 @@ export default function ChatPageBuyer() {
                   <div className="alpha_chat_buyer_divider_horizontal" />
                   <div className="alpha_chat_buyer_chat_detail_messages_view">
                     {selectedChat?.messagesArray?.map((item) => {
-
+                      console.log(item);
                       const finalTime = new Date(item?.createdAt)
                       return (
-                        item?.sender?._id !== userData?._id ?
+                        item?.sender !== userData?._id ?
                           (item.type !== 'hidden' &&
                             <div key={item?.receiver?._id} className="alpha_chat_buyer-chat_detail_message_view_one">
-                              <img src={selectedChat?.image} />
+                              {/* <img src={selectedChat?.image} /> */}
                               <div>
                                 <h2>{item.message}</h2>
                                 <h3>{finalTime.getHours()}:{finalTime.getMinutes()}</h3>
@@ -273,7 +276,7 @@ export default function ChatPageBuyer() {
                                 <h2>{item.message}</h2>
                                 <h3>{finalTime.getHours()}:{finalTime.getMinutes()}</h3>
                               </div>
-                              <img src={item?.sender?.image} />
+                              {/* <img src={item?.sender?.image} /> */}
                             </div>)
 
                       )

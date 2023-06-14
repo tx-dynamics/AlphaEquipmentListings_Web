@@ -84,6 +84,7 @@ export default function ChatAdmin() {
   const getOtherUserMessages = (otherUser) => {
     setSelectedChat(null)
     setIsLoading(true);
+    socket.emit("listening-for-user", { userId: userData._id, to: otherUser.id })
     socket.emit("get-messages", {
       userId: userData._id,
       inbox: otherUser.id,
@@ -140,7 +141,7 @@ export default function ChatAdmin() {
                             </div>
                             <div className="alpha_chat_buyer_user_list_item_name_view">
                               <h2>{item.title}</h2>
-                              <h3>Message: {item.message === 'Hidden Message' ? '' : item?.message}</h3>
+                              {/* <h3 id={item?.id}>Message: {item.message === 'Hidden Message' ? '' : item?.message}</h3> */}
                             </div>
                             <div className="alpha_chat_buyer_user_list_item_time_view">
                               <h4>{item.date}</h4>
@@ -221,10 +222,10 @@ export default function ChatAdmin() {
                     {selectedChat?.messagesArray?.map((item, index) => {
                       const finalTime = new Date(item?.createdAt)
                       return (
-                        item?.sender?._id !== userData?._id ?
+                        item?.sender !== userData?._id ?
                           (item.type !== 'hidden' &&
                             <div key={index} className="alpha_chat_buyer-chat_detail_message_view_one">
-                              <img src={selectedChat?.image} />
+                              {/* <img src={selectedChat?.image} /> */}
                               <div>
                                 <h2>{item.message}</h2>
                                 <h3>{finalTime.getHours()}:{finalTime.getMinutes()}</h3>
@@ -239,7 +240,7 @@ export default function ChatAdmin() {
                                 <h2>{item.message}</h2>
                                 <h3>{finalTime.getHours()}:{finalTime.getMinutes()}</h3>
                               </div>
-                              <img src={item?.sender?.image} />
+                              {/* <img src={item?.sender?.image} /> */}
                             </div>
                           )
 
