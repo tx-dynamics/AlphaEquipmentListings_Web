@@ -513,7 +513,7 @@ export default function ProductDetailPage() {
                       <img src={plus} />
                     </div>
                   </div>
-                  <div onClick={() => onPressPlaceBid()} className={productData?.highestBid?.status === 'accepted' ? "alpha_detail_page_price_view_button_view_disable" : "alpha_detail_page_price_view_button_view"}>
+                  <div onClick={() => onPressPlaceBid()} className={productData?.highestBid?.status === 'accepted' ? "alpha_detail_page_price_view_bid_list_button_disable" : "alpha_detail_page_price_view_bid_list_button"}>
                     <h2 >Place Bid</h2>
                   </div>
                 </div>
