@@ -530,7 +530,7 @@ export default function ProductDetailPage() {
                 <img style={{ cursor: 'pointer' }} src={share} />
               </div>
               <h1>${`${productData?.price}`}</h1>
-              <div onClick={() => onClickPay(productData?.rentOrSell === "Rent" ? 1 : 2)} className={productData?.highestBid?.status === 'accepted' ? "alpha_detail_page_price_view_button_view" : "alpha_detail_page_price_view_button_view_disable"}>
+              <div onClick={() => onClickPay(productData?.rentOrSell === "Rent" ? 1 : 2)} className={productData?.highestBid?.status === 'accepted' ? "alpha_detail_page_price_view_button_view_disable" : "alpha_detail_page_price_view_button_view"}>
                 <h2>{productData?.rentOrSell === "Rent" ? 'Request For Rent' : 'Pay'}</h2>
               </div>
               {productData?.rentOrSell === "Rent" &&
