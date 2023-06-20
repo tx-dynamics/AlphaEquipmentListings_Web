@@ -132,9 +132,17 @@ export default function HomePage() {
       {connectCard && <ConnectCardModel onClick={() => [setOtpModel(true), setConnectCard(false)]} onClickClose={() => [setConnectCard(false)]} />}
       {paymentModel && <PaymentModel onClickClose={() => setPaymentModel(false)} onClick={(value) => value.id === 1 ? [setPaymentModel(false), setOtpModel(true)] : value.id === 2 ? [setConnectCard(true), setPaymentModel(false)] : value.id === 3 ? [setPaymentModel(false), [navigate('/financing', 'financing'), dispatch(activeTab('financing'))]] : setPaymentModel(false)} />}
       {membershipModel && <MembershipModel chargesView={chargesView} onClickClose={() => setMembershipModel(false)} onClick={() => !chargesView ? setChargesView(true) : [setPaymentModel(true), setMembershipModel(false)]} />}
+
       {!isSearch ?
         <div className="alpha-home_page-container">
-          <img src={landingPageBanner} alt={'Banner'} />
+          <div className="alpha-home_page_banner_top_view">
+            <div>
+              <h1>Marketplace</h1>
+              <h2>Alpha Equipment Listings</h2>
+              <h3>Easy, convenient and secure</h3>
+              <h4>Buy equipment every day with the buying option of your choice, including competitive Buy Now prices, negotiate with our Make Offer option, or bid in one of our Reserve Auctions.</h4>
+            </div>
+          </div>
           <div className="alpha-home_page-auction_top_view_two">
             <div className="alpha-home_page-auction_heading_view">
               <h2>Auction</h2>
